@@ -5,7 +5,8 @@ from scripts import nodes_info, base, utils
 # node auto init
 class NodeGen:
     def __new__(cls, data):
-        node_name = data["img"]
+        node_name = data["node_name"]
+
         if node_name == "run":
             return control.NodeRun(data)
         if node_name == "stop":
@@ -173,7 +174,7 @@ def create_structure(n, w, limit=10**5):
 
         offset = 0
         ins = []
-        inputs_info = nodes_info.cleared_nodes[node.name]["inputs"]
+        inputs_info = nodes_info.nodes_info[node.name]["inputs"]
         for i in inputs_info:
             if i in one_connector:
                 ins.append(sum(node.inputs[offset:offset+1], []))
@@ -195,7 +196,7 @@ def create_structure(n, w, limit=10**5):
 
         offset = 0
         outs = []
-        outputs_info = nodes_info.cleared_nodes[node.name]["outputs"]
+        outputs_info = nodes_info.nodes_info[node.name]["outputs"]
         for i in outputs_info:
             if i in one_connector:
                 outs.append(sum(node.outputs[offset:offset + 1], []))

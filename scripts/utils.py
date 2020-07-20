@@ -17,6 +17,7 @@ class Char(str):
             raise ValueError
 
 
+# TODO: change function to class
 # number type (simple coercion)
 def number(v):
     try:

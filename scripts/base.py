@@ -16,7 +16,7 @@ class Node:
         self.id = data["id"]
         self.nodes[self.id] = self
 
-        self.name = data["img"]
+        self.name = data["node_name"]
         self.desc_value = data["value"]
 
         self.inputs = [[] for _ in range(len(data["inputs"]))]

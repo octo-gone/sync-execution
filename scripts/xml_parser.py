@@ -1,6 +1,6 @@
 import re
 import math
-from scripts.nodes_info import cleared_nodes, drawio_nodes
+from scripts.nodes_info import nodes_info
 
 # possible connectors variants
 small_connectors = ("int", "real", "obj", "char", "ctrl", "bool", "any", "number", "mult_s", "dir_mult_s")
@@ -93,11 +93,12 @@ def get_connectors(inout):
 
 
 # patterns for parsing
-node_pattern = r"<mxCell[^<]*?image=data:image/svg\+xml,[^;]*;.*?<\/mxCell>"
+node_pattern = r"<mxCell[^<]*?syncNodeName=.*?;.*?<\/mxCell>"
 wire_pattern = r"<mxCell[^<]*?source.*?target.*?<\/mxCell>"
 
 # patterns for node
 id_pattern = r"id=\"(?P<id>.*?)\""
+node_name_pattern = r"syncNodeName=(?P<node_name>.*?);"
 image_pattern = r"image=data:image/svg\+xml,(?P<img>.*?);"
 value_pattern = r"value=\"(?P<value>.*?)\""
 
@@ -136,23 +137,24 @@ def parse(file_path):
             "x": x_pattern,
             "y": y_pattern,
             "width": width_pattern,
-            "height": height_pattern
+            "height": height_pattern,
+            "node_name": node_name_pattern
         }
 
         for key in patterns.keys():
             res = re.search(patterns[key], node)
             if res:
                 patterns[key] = res.group(key)
-                if key == "img":
-                    patterns[key] = drawio_nodes[res.group(key)]
+                # if key == "img":
+                #     patterns[key] = drawio_nodes[res.group(key)]
             else:
                 patterns[key] = None
 
-        inputs = get_connectors(cleared_nodes[patterns["img"]]["inputs"])
-        outputs = get_connectors(cleared_nodes[patterns["img"]]["outputs"])
+        inputs = get_connectors(nodes_info[patterns["node_name"]]["inputs"])
+        outputs = get_connectors(nodes_info[patterns["node_name"]]["outputs"])
 
-        ratio = (1, max(get_ratio(cleared_nodes[patterns["img"]]["inputs"]),
-                        get_ratio(cleared_nodes[patterns["img"]]["outputs"])))
+        ratio = (1, max(get_ratio(nodes_info[patterns["node_name"]]["inputs"]),
+                        get_ratio(nodes_info[patterns["node_name"]]["outputs"])))
 
         inputs = list(map(lambda x: round(x/ratio[1], 5), inputs))
         outputs = list(map(lambda x: round(x/ratio[1], 5), outputs))
