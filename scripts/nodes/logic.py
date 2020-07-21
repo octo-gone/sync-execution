@@ -6,6 +6,9 @@ class NodeComparisonA(base.Node):
         super().__init__(data)
         self.op = op
 
+    def reset(self):
+        self.value = None
+
     def update(self):
         if not self.input_values:
             self.input_values = [None for _ in range(len(sum(self.inputs, [])))]
@@ -44,6 +47,11 @@ class NodeComparisonB(base.Node):
         self.a = None
         self.b = None
         self.op = op
+
+    def reset(self):
+        self.value = None
+        self.a = None
+        self.b = None
 
     def update(self):
         if len(sum(self.inputs, [])) != 2:
@@ -86,3 +94,6 @@ class NodeNot(base.Node):
     def activate(self, wire):
         self.value = bool(wire.value)
         return super().activate(wire)
+
+    def reset(self):
+        pass

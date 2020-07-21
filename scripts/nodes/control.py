@@ -15,17 +15,26 @@ class NodeRun(base.Node):
             self.active = True
             self.run = True
 
+    def reset(self):
+        pass
+
 
 class NodeStop(base.Node):
     def update(self):
         if self.active:
             raise StopSync("node 'stop' terminate program")
 
+    def reset(self):
+        pass
+
 
 class NodeWait(base.Node):
     def __init__(self, data):
         super().__init__(data)
         self.desc_value = "all" if not self.desc_value else self.desc_value
+        self.send_active = False
+
+    def reset(self):
         self.send_active = False
 
     def update(self):
@@ -79,10 +88,20 @@ class NodeDelay(base.Node):
                 return super().deactivate(wire)
         return False
 
+    def reset(self):
+        self.delay_counter = None
+        self.start = False
+
 
 class NodeTimer(base.Node):
     def __init__(self, data):
         super().__init__(data)
+        self.counter = 0
+        self.start = False
+        self.end = False
+        self.input_values = None
+
+    def reset(self):
         self.counter = 0
         self.start = False
         self.end = False
@@ -117,6 +136,9 @@ class NodeCtrl(base.Node):
         if self.active:
             self.value = None
 
+    def reset(self):
+        pass
+
 
 class NodeMerge(base.Node):
     def update(self):
@@ -133,3 +155,6 @@ class NodeMerge(base.Node):
         if self.value is not None:
             return super().deactivate(wire)
         return False
+
+    def reset(self):
+        self.value = None

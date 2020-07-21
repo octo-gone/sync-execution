@@ -9,6 +9,9 @@ class NodeIf(base.Node):
     def update(self):
         pass
 
+    def reset(self):
+        self.condition = None
+
     def deactivate(self, wire):
         if self.condition is not None:
             if wire in self.outputs[0] and self.condition:

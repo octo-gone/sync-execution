@@ -67,6 +67,8 @@ class NodeGen:
             return memory.NodeVar(data, str)
         if node_name == "array":
             return memory.NodeArray(data)
+        if node_name == "array gs":
+            return memory.NodeArrayGS(data)
 
         if node_name == "abs":
             return mathematics.NodeAbs(data)

@@ -43,8 +43,13 @@ class Node:
     def update(self):
         pass
 
+    @abstractmethod
+    def reset(self):
+        pass
+
     def post_update(self):
         if self.deactivation:
+            self.reset()
             self.active = False
 
     def activate(self, wire):

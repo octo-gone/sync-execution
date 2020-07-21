@@ -9,3 +9,6 @@ class NodeValueSwitch(base.Node):
     def activate(self, wire):
         self.value = wire.value
         return super().activate(wire)
+
+    def reset(self):
+        pass

@@ -29,8 +29,8 @@ nodes_info = {
     'array': {
         'inputs': ('obj', 'int'),
         'inputs_label': ('type', 'length'),
-        'outputs': (),
-        'outputs_label': (),
+        'outputs': ("ctrl", ),
+        'outputs_label': ("ctrl", ),
         'inner': 'Array',
         'label': 'array'
     },
@@ -401,16 +401,16 @@ nodes_info = {
     'map': {
         'inputs': ('obj', 'obj'),
         'inputs_label': ('key type', 'value type'),
-        'outputs': (),
-        'outputs_label': (),
+        'outputs': ("ctrl", ),
+        'outputs_label': ("ctrl", ),
         'inner': 'Map',
         'label': 'map'
     },
     'map erase': {
         'inputs': ('any', ),
         'inputs_label': ('key', ),
-        'outputs': (),
-        'outputs_label': (),
+        'outputs': ("ctrl", ),
+        'outputs_label': ("ctrl", ),
         'inner': 'Erase',
         'label': 'map erase'
     },

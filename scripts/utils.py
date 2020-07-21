@@ -1,4 +1,5 @@
 iteration = 0
+from math import pi
 
 
 class WrongTypeError(Exception):
@@ -7,6 +8,18 @@ class WrongTypeError(Exception):
 
 class InputsCountError(Exception):
     pass
+
+
+def get_values(label, check=False):
+    values = {
+        "$iteration": iteration,
+        "$pi": pi,
+        "$true": True,
+        "$false": False
+    }
+    if check:
+        return label in values
+    return values[label]
 
 
 # char type

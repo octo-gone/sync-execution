@@ -14,6 +14,9 @@ class NodeAbs(base.Node):
             self.value = wire.value
         return super().activate(wire)
 
+    def reset(self):
+        pass
+
 
 class NodeAdd(base.Node):
     def __init__(self, data, check_type=None):
@@ -44,6 +47,9 @@ class NodeAdd(base.Node):
             return super().deactivate(wire)
         return False
 
+    def reset(self):
+        self.value = None
+
 
 class NodeDec(base.Node):
     def update(self):
@@ -57,6 +63,9 @@ class NodeDec(base.Node):
         if wire.value is not None:
             self.value = utils.coercion(wire.value)
         return super().activate(wire)
+
+    def reset(self):
+        pass
 
 
 class NodeDivide(base.Node):
@@ -95,6 +104,11 @@ class NodeDivide(base.Node):
             return super().deactivate(wire)
         return False
 
+    def reset(self):
+        self.dividend = None
+        self.divider = None
+        self.value = None
+
 
 class NodeExp(base.Node):
     def __init__(self, data, coercion=False):
@@ -127,6 +141,11 @@ class NodeExp(base.Node):
             return super().deactivate(wire)
         return False
 
+    def reset(self):
+        self.base = None
+        self.exp = None
+        self.value = None
+
 
 class NodeInc(base.Node):
     def update(self):
@@ -140,6 +159,9 @@ class NodeInc(base.Node):
         if wire.value is not None:
             self.value = utils.coercion(wire.value)
         return super().activate(wire)
+
+    def reset(self):
+        pass
 
 
 class NodeInt(base.Node):
@@ -155,6 +177,9 @@ class NodeInt(base.Node):
             self.value = utils.coercion(wire.value)
         return super().activate(wire)
 
+    def reset(self):
+        pass
+
 
 class NodeInv(base.Node):
     def update(self):
@@ -169,11 +194,18 @@ class NodeInv(base.Node):
             self.value = utils.coercion(wire.value)
         return super().activate(wire)
 
+    def reset(self):
+        pass
+
 
 class NodeMult(base.Node):
     def __init__(self, data, check_type=None):
         super().__init__(data)
         self.check_type = check_type
+
+    def reset(self):
+        self.input_values = None
+        self.value = None
 
     def update(self):
         if not self.input_values:
@@ -212,6 +244,11 @@ class NodeRound(base.Node):
         self.v = None
         self.pres = None
 
+    def reset(self):
+        self.v = None
+        self.pres = None
+        self.value = None
+
     def update(self):
         if not len(self.inputs[1]):
             self.pres = 0
@@ -240,6 +277,11 @@ class NodeSub(base.Node):
         self.check_type = check_type
         self.minuend = None
         self.subtrahend = None
+
+    def reset(self):
+        self.minuend = None
+        self.subtrahend = None
+        self.value = None
 
     def update(self):
         if len(sum(self.inputs, [])) != 2:
