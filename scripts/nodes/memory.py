@@ -57,8 +57,6 @@ class NodeConst(base.Node):
 
 
 class NodeVar(base.Node):
-    variables = {}
-
     def __init__(self, data, check_type=None):
         super().__init__(data)
         self.check_type = check_type
@@ -67,45 +65,72 @@ class NodeVar(base.Node):
     def update(self):
         if self.active:
             if f"{self.desc_value}" not in self.variables:
-                raise NodeMemoryError(f"no variable names {self.desc_value}")
+                raise NodeMemoryError(f"no variable named '{self.desc_value}'")
+            if self.variables[f"{self.desc_value}"]["data"] != "var":
+                raise NodeMemoryError(f"wrong variable data '{self.variables[f'{self.desc_value}']['data']}'")
+            if self.variables[f"{self.desc_value}"]["type"] is not None:
+                if self.variables[f"{self.desc_value}"]["type"] != self.check_type:
+                    raise utils.WrongTypeError(f"variable type must be '{self.check_type}'")
             if self.check_type:
                 try:
-                    self.value = self.check_type(self.variables[f"{self.desc_value}"])
+                    value = self.variables[f"{self.desc_value}"]["value"]
+                    if self.variables[f"{self.desc_value}"]["type"]:
+                        value = self.variables[f"{self.desc_value}"]["type"](value)
+                    self.value = self.check_type(value)
                 except ValueError:
                     raise utils.WrongTypeError(f"type must be '{self.check_type}'")
             else:
-                self.value = utils.coercion(self.variables[f"{self.desc_value}"])
+                value = self.variables[f"{self.desc_value}"]["value"]
+                if self.variables[f"{self.desc_value}"]["type"]:
+                    value = self.variables[f"{self.desc_value}"]["type"](value)
+                self.value = utils.coercion(value)
 
     def prepare_value(self):
+        if f"{self.desc_value}" not in self.variables:
+            raise NodeMemoryError(f"no variable named {self.desc_value}")
+        if self.variables[f"{self.desc_value}"]["data"] != "var":
+            raise NodeMemoryError(f"wrong variable data '{self.variables[f'{self.desc_value}']['data']}'")
         if self.check_type:
             try:
-                self.value = self.check_type(self.variables[f"{self.desc_value}"])
+                value = self.variables[f"{self.desc_value}"]["value"]
+                if self.variables[f"{self.desc_value}"]["type"]:
+                    value = self.variables[f"{self.desc_value}"]["type"](value)
+                self.value = self.check_type(value)
             except ValueError:
                 raise utils.WrongTypeError(f"type must be '{self.check_type}'")
         else:
-            self.value = utils.coercion(self.variables[f"{self.desc_value}"])
+            value = self.variables[f"{self.desc_value}"]["value"]
+            if self.variables[f"{self.desc_value}"]["type"]:
+                value = self.variables[f"{self.desc_value}"]["type"](value)
+            self.value = utils.coercion(value)
 
     def activate(self, wire):
         if wire in self.inputs[0] and wire.value is not None:
             if self.check_type:
                 try:
-                    self.variables[f"{self.desc_value}"] = self.check_type(wire.value)
+                    self.variables[f"{self.desc_value}"] = {
+                        "data": "var",
+                        "type": self.check_type,
+                        "value": self.check_type(wire.value)
+                    }
                 except ValueError:
                     raise utils.WrongTypeError(f"type must be '{self.check_type}'")
             else:
-                self.variables[f"{self.desc_value}"] = utils.coercion(wire.value)
+                self.variables[f"{self.desc_value}"] = {
+                    "data": "var",
+                    "type": None,
+                    "value": utils.coercion(wire.value)
+                }
         return super().activate(wire)
 
 
 class NodeArray(base.Node):
-    variables = {}
     types = [int, utils.number, float, utils.Char]
 
     def __init__(self, data):
         super().__init__(data)
         self.array_type = None
         self.array_len = None
-        self.callable = True
 
     def update(self):
         if self.active:
@@ -117,15 +142,8 @@ class NodeArray(base.Node):
                     "type": self.array_type,
                     "values": [None for _ in range(self.array_len)]
                 }
-                # TODO: change array accessibility
-                self.value = self.variables[f"{self.desc_value}"]
             else:
                 self.call_all()
-
-    def prepare_value(self):
-        if f"{self.desc_value}" not in self.variables:
-            raise NodeMemoryError(f"no array named {self.desc_value}")
-        self.value = self.variables[f"{self.desc_value}"]
 
     def activate(self, wire):
         if wire in self.inputs[0]:
@@ -137,7 +155,3 @@ class NodeArray(base.Node):
             self.array_len = int(wire.value)
         return super().activate(wire)
 
-    def deactivate(self, wire):
-        if self.value is not None:
-            return super().deactivate(wire)
-        return False

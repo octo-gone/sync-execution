@@ -10,6 +10,7 @@ class NodeInputError(Exception):
 
 
 class Node:
+    variables = {}
     nodes = {}
 
     def __init__(self, data):

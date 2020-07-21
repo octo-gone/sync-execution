@@ -74,6 +74,7 @@ nodes_info = {
         'inputs_label': (),
         'outputs': ('dir_mult_s', ),
         'outputs_label': ('string', ),
+        'outputs_color': ('char', ),
         'inner': 'Const',
         'label': 'const string',
         'sync_name': 'const string'
@@ -83,6 +84,7 @@ nodes_info = {
         'inputs_label': ('ctrl', ),
         'outputs': ('dir_mult_s', ),
         'outputs_label': ('string', ),
+        'outputs_color': ('char', ),
         'inner': 'Const',
         'label': 'const string with ctrl',
         'sync_name': 'const string ctrl'
@@ -550,8 +552,10 @@ nodes_info = {
     'var string': {
         'inputs': ('dir_mult_s', ),
         'inputs_label': ('string', ),
+        'inputs_color': ('char', ),
         'outputs': ('dir_mult_s', ),
         'outputs_label': ('string', ),
+        'outputs_color': ('char', ),
         'inner': 'Var',
         'label': 'var string'
     },

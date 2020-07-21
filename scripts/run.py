@@ -39,6 +39,8 @@ class NodeGen:
             return memory.NodeConstCtrl(data, float)
         if node_name == "const char ctrl":
             return memory.NodeConstCtrl(data, utils.Char)
+        if node_name == "const string ctrl":
+            return memory.NodeConstCtrl(data, str)
         if node_name == "const":
             return memory.NodeConst(data)
         if node_name == "const int":
@@ -49,6 +51,8 @@ class NodeGen:
             return memory.NodeConst(data, float)
         if node_name == "const char":
             return memory.NodeConst(data, utils.Char)
+        if node_name == "const string":
+            return memory.NodeConst(data, str)
         if node_name == "var":
             return memory.NodeVar(data)
         if node_name == "var int":
@@ -59,31 +63,33 @@ class NodeGen:
             return memory.NodeVar(data, float)
         if node_name == "var char":
             return memory.NodeVar(data, utils.Char)
+        if node_name == "var string":
+            return memory.NodeVar(data, str)
         if node_name == "array":
             return memory.NodeArray(data)
 
         if node_name == "abs":
             return mathematics.NodeAbs(data)
         if node_name == "add":
-            return mathematics.NodeAdd(data)
-        if node_name == "add int":
-            return mathematics.NodeAdd(data, int)
-        if node_name == "add number":
             return mathematics.NodeAdd(data, utils.number)
-        if node_name == "add real":
-            return mathematics.NodeAdd(data, float)
+        # if node_name == "add int":
+        #     return mathematics.NodeAdd(data, int)
+        # if node_name == "add number":
+        #     return mathematics.NodeAdd(data, utils.number)
+        # if node_name == "add real":
+        #     return mathematics.NodeAdd(data, float)
         if node_name == "dec":
             return mathematics.NodeDec(data)
         if node_name == "div":
             return mathematics.NodeDivide(data, "div")
         if node_name == "divide":
-            return mathematics.NodeDivide(data, "divide")
-        if node_name == "divide number":
             return mathematics.NodeDivide(data, "divide", coercion=True)
+        # if node_name == "divide number":
+        #     return mathematics.NodeDivide(data, "divide", coercion=True)
         if node_name == "exp":
-            return mathematics.NodeExp(data)
-        if node_name == "exp number":
             return mathematics.NodeExp(data, True)
+        # if node_name == "exp number":
+        #     return mathematics.NodeExp(data, True)
         if node_name == "inc":
             return mathematics.NodeInc(data)
         if node_name == "int":
@@ -93,32 +99,32 @@ class NodeGen:
         if node_name == "mod":
             return mathematics.NodeDivide(data, "mod")
         if node_name == "mult":
-            return mathematics.NodeMult(data)
-        if node_name == "mult int":
-            return mathematics.NodeMult(data, int)
-        if node_name == "mult number":
             return mathematics.NodeMult(data, utils.number)
-        if node_name == "mult real":
-            return mathematics.NodeMult(data, float)
+        # if node_name == "mult int":
+        #     return mathematics.NodeMult(data, int)
+        # if node_name == "mult number":
+        #     return mathematics.NodeMult(data, utils.number)
+        # if node_name == "mult real":
+        #     return mathematics.NodeMult(data, float)
         if node_name == "round":
             return mathematics.NodeRound(data)
         if node_name == "sub":
-            return mathematics.NodeSub(data)
-        if node_name == "sub int":
-            return mathematics.NodeSub(data, int)
-        if node_name == "sub number":
             return mathematics.NodeSub(data, utils.number)
-        if node_name == "sub real":
-            return mathematics.NodeSub(data, float)
+        # if node_name == "sub int":
+        #     return mathematics.NodeSub(data, int)
+        # if node_name == "sub number":
+        #     return mathematics.NodeSub(data, utils.number)
+        # if node_name == "sub real":
+        #     return mathematics.NodeSub(data, float)
 
         if node_name == "and":
             return logic.NodeComparisonA(data, "and")
-        if node_name == "general and":
-            return logic.NodeComparisonA(data, "and")
+        # if node_name == "general and":
+        #     return logic.NodeComparisonA(data, "and")
         if node_name == "equal":
             return logic.NodeComparisonA(data, "equal")
-        if node_name == "general equal":
-            return logic.NodeComparisonA(data, "equal")
+        # if node_name == "general equal":
+        #     return logic.NodeComparisonA(data, "equal")
         if node_name == "greater":
             return logic.NodeComparisonB(data, "greater")
         if node_name == "greater or equal":
@@ -133,8 +139,8 @@ class NodeGen:
             return logic.NodeComparisonB(data, "not equal")
         if node_name == "or":
             return logic.NodeComparisonA(data, "or")
-        if node_name == "general or":
-            return logic.NodeComparisonA(data, "or")
+        # if node_name == "general or":
+        #     return logic.NodeComparisonA(data, "or")
         if node_name == "xor":
             return logic.NodeComparisonB(data, "xor")
 
