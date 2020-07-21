@@ -8,10 +8,10 @@ class NodePrintCtrl(base.Node):
             # print(self.desc_value, type(self.desc_value))
 
     def activate(self, wire):
-        if wire.value is not None:
-            if self.desc_value == "$iteration":
-                self.desc_value = utils.iteration
-            elif isinstance(wire.value, dict):
+        if self.desc_value == "$iteration":
+            self.desc_value = utils.iteration
+        elif wire.value is not None:
+            if isinstance(wire.value, dict):
                 if wire.value['data'] == "array":
                     print_values = "\n".join([f"{i}\t" + f"{[v]}"[1:-1] for i, v in enumerate(wire.value['values'])])
                     self.desc_value = "array\n" + print_values
@@ -27,10 +27,10 @@ class NodePrint(base.Node):
             print(self.desc_value)
 
     def activate(self, wire):
-        if wire.value is not None:
-            if self.desc_value == "$iteration":
-                self.desc_value = utils.iteration
-            elif isinstance(wire.value, dict):
+        if self.desc_value == "$iteration":
+            self.desc_value = utils.iteration
+        elif wire.value is not None:
+            if isinstance(wire.value, dict):
                 if wire.value['data'] == "array":
                     print_values = "\n".join([f"{i}\t" + f"{[v]}"[1:-1] for i, v in enumerate(wire.value['values'])])
                     self.desc_value = "array\n" + print_values
