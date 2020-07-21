@@ -1,5 +1,5 @@
 from scripts.nodes import memory, misc, inout, construction, logic, control, mathematics
-from scripts import nodes_info, base, utils
+from scripts import nodes_info, base, utils, exceptions
 
 
 # node auto init
@@ -151,6 +151,8 @@ class NodeGen:
 
         if node_name == "if":
             return construction.NodeIf(data)
+        if node_name == "foreach":
+            return construction.NodeForeach(data)
 
         return base.Node(data)
 
@@ -195,7 +197,7 @@ def create_structure(n, w, limit=10**5):
                 offset += 5
         for i, v in enumerate(ins):
             if inputs_info[i] in one_connection and len(v) > 1:
-                raise utils.InputsCountError(f"expected zero or one connection not {len(v)}")
+                raise exceptions.InputsCountError(f"expected zero or one connection not {len(v)}")
 
         node.inputs = ins
 
@@ -227,13 +229,16 @@ def create_structure(n, w, limit=10**5):
             for wire in base.Wire.wires:
                 wire.update_give()
             for node in base.Node.nodes.values():
+                if node.active:
+                    print(node.id, node.name)
                 node.update()
             for wire in base.Wire.wires:
                 wire.update_take()
             for node in base.Node.nodes.values():
                 node.post_update()
-        except control.StopSync:
+        except exceptions.StopSync:
             # TODO: upgrade error catch
+            print(base.Node.variables)
             run = False
         if utils.iteration >= limit:
             run = False

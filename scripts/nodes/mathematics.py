@@ -1,4 +1,5 @@
 from scripts import base, utils
+from scripts import exceptions
 
 
 class NodeAbs(base.Node):
@@ -7,7 +8,7 @@ class NodeAbs(base.Node):
             if isinstance(self.value, (int, float)):
                 self.value = abs(self.value)
             else:
-                raise utils.WrongTypeError("type must be number")
+                raise exceptions.WrongTypeError("type must be number")
 
     def activate(self, wire):
         if wire.value is not None:
@@ -37,7 +38,7 @@ class NodeAdd(base.Node):
             try:
                 self.input_values[sum(self.inputs, []).index(wire)] = self.check_type(wire.value)
             except ValueError:
-                raise utils.WrongTypeError(f"type must be '{self.check_type}'")
+                raise exceptions.WrongTypeError(f"type must be '{self.check_type}'")
         else:
             self.input_values[sum(self.inputs, []).index(wire)] = utils.coercion(wire.value)
         return super().activate(wire)
@@ -49,6 +50,7 @@ class NodeAdd(base.Node):
 
     def reset(self):
         self.value = None
+        self.input_values = None
 
 
 class NodeDec(base.Node):
@@ -57,7 +59,7 @@ class NodeDec(base.Node):
             if isinstance(self.value, (int, float)):
                 self.value = self.value - 1
             else:
-                raise utils.WrongTypeError("type must be number")
+                raise exceptions.WrongTypeError("type must be number")
 
     def activate(self, wire):
         if wire.value is not None:
@@ -78,7 +80,7 @@ class NodeDivide(base.Node):
 
     def update(self):
         if len(sum(self.inputs, [])) != 2:
-            raise utils.InputsCountError("wrong inputs count")
+            raise exceptions.InputsCountError("wrong inputs count")
         if self.active:
             if self.dividend is not None and self.divider is not None:
                 if self.op == "div":
@@ -119,7 +121,7 @@ class NodeExp(base.Node):
 
     def update(self):
         if len(sum(self.inputs, [])) != 2:
-            raise utils.InputsCountError("wrong inputs count")
+            raise exceptions.InputsCountError("wrong inputs count")
         if self.active:
             if self.base is not None and self.exp is not None:
                 if self.coercion:
@@ -153,7 +155,7 @@ class NodeInc(base.Node):
             if isinstance(self.value, (int, float)):
                 self.value = self.value + 1
             else:
-                raise utils.WrongTypeError("type must be number")
+                raise exceptions.WrongTypeError("type must be number")
 
     def activate(self, wire):
         if wire.value is not None:
@@ -170,7 +172,7 @@ class NodeInt(base.Node):
             if isinstance(self.value, (int, float)):
                 self.value = int(self.value)
             else:
-                raise utils.WrongTypeError("type must be number")
+                raise exceptions.WrongTypeError("type must be number")
 
     def activate(self, wire):
         if wire.value is not None:
@@ -187,7 +189,7 @@ class NodeInv(base.Node):
             if isinstance(self.value, (int, float)):
                 self.value = -self.value
             else:
-                raise utils.WrongTypeError("type must be number")
+                raise exceptions.WrongTypeError("type must be number")
 
     def activate(self, wire):
         if wire.value is not None:
@@ -211,7 +213,7 @@ class NodeMult(base.Node):
         if not self.input_values:
             self.input_values = [None for _ in range(len(sum(self.inputs, [])))]
         if not self.check_type and len(sum(self.inputs, [])) != 2:
-            raise utils.InputsCountError("wrong inputs count")
+            raise exceptions.InputsCountError("wrong inputs count")
         if self.active:
             if all(map(lambda x: x is not None, self.input_values)):
                 self.value = 1
@@ -227,7 +229,7 @@ class NodeMult(base.Node):
             try:
                 self.input_values[sum(self.inputs, []).index(wire)] = self.check_type(wire.value)
             except ValueError:
-                raise utils.WrongTypeError(f"type must be '{self.check_type}'")
+                raise exceptions.WrongTypeError(f"type must be '{self.check_type}'")
         else:
             self.input_values[sum(self.inputs, []).index(wire)] = utils.coercion(wire.value)
         return super().activate(wire)
@@ -253,7 +255,7 @@ class NodeRound(base.Node):
         if not len(self.inputs[1]):
             self.pres = 0
         if len(sum(self.inputs, [])) < 1:
-            raise utils.InputsCountError("wrong inputs count")
+            raise exceptions.InputsCountError("wrong inputs count")
         if self.active:
             if self.v is not None and self.pres is not None:
                 self.value = utils.coercion(round(self.v, self.pres))
@@ -285,7 +287,7 @@ class NodeSub(base.Node):
 
     def update(self):
         if len(sum(self.inputs, [])) != 2:
-            raise utils.InputsCountError("wrong inputs count")
+            raise exceptions.InputsCountError("wrong inputs count")
         if self.active:
             if self.minuend is not None and self.subtrahend is not None:
                 if self.check_type:

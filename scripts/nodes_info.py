@@ -283,10 +283,10 @@ nodes_info = {
         'label': 'for number'
     },
     'foreach': {
-        'inputs': ('mult', 'sep', 'ctrl'),
-        'inputs_label': ('mult', 'next', ),
-        'outputs': ('ctrl', 'sep', 'any', 'int'),
-        'outputs_label': ('end ctrl', 'value', 'iteration'),
+        'inputs': ('ctrl', 'mult_s', 'sep', 'ctrl'),
+        'inputs_label': ('ctrl', 'values', 'next', ),
+        'outputs': ('ctrl', 'sep', 'any'),
+        'outputs_label': ('end ctrl', 'value'),
         'inner': 'For',
         'label': 'foreach'
     },

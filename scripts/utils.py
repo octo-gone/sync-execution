@@ -1,13 +1,6 @@
-iteration = 0
 from math import pi
-
-
-class WrongTypeError(Exception):
-    pass
-
-
-class InputsCountError(Exception):
-    pass
+from scripts import exceptions
+iteration = 0
 
 
 def get_values(label, check=False):
@@ -15,7 +8,8 @@ def get_values(label, check=False):
         "$iteration": iteration,
         "$pi": pi,
         "$true": True,
-        "$false": False
+        "$false": False,
+        "$none": "",
     }
     if check:
         return label in values
@@ -40,7 +34,7 @@ def number(v):
         return v
     except ValueError:
         pass
-    raise WrongTypeError("type must be 'number'")
+    raise exceptions.WrongTypeError("type must be 'number'")
 
 
 # auto typecasting

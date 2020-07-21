@@ -1,8 +1,5 @@
 from scripts import base, utils
-
-
-class StopSync(Exception):
-    pass
+from scripts import exceptions
 
 
 class NodeRun(base.Node):
@@ -22,7 +19,7 @@ class NodeRun(base.Node):
 class NodeStop(base.Node):
     def update(self):
         if self.active:
-            raise StopSync("node 'stop' terminate program")
+            raise exceptions.StopSync("node 'stop' terminate program")
 
     def reset(self):
         pass
@@ -36,6 +33,7 @@ class NodeWait(base.Node):
 
     def reset(self):
         self.send_active = False
+        self.input_values = None
 
     def update(self):
         if not self.input_values:
@@ -47,6 +45,8 @@ class NodeWait(base.Node):
                 self.send_active = True
 
     def activate(self, wire):
+        if not self.input_values:
+            self.input_values = [None for _ in range(len(sum(self.inputs, [])))]
         self.input_values[sum(self.inputs, []).index(wire)] = wire.active_ctrl
         return super().activate(wire)
 
@@ -109,7 +109,7 @@ class NodeTimer(base.Node):
 
     def update(self):
         if len(self.inputs) != 2:
-            raise utils.InputsCountError("wrong inputs count")
+            raise exceptions.InputsCountError("wrong inputs count")
         if self.active:
             if self.start:
                 self.counter += 1
@@ -138,6 +138,11 @@ class NodeCtrl(base.Node):
 
     def reset(self):
         pass
+
+    def activate(self, wire):
+        if wire in self.inputs[0]:
+            self.value = None
+        return super().activate(wire)
 
 
 class NodeMerge(base.Node):

@@ -1,4 +1,5 @@
 from scripts import base, utils
+from scripts import exceptions
 
 
 class NodeComparisonA(base.Node):
@@ -55,7 +56,7 @@ class NodeComparisonB(base.Node):
 
     def update(self):
         if len(sum(self.inputs, [])) != 2:
-            raise utils.InputsCountError("wrong inputs count")
+            raise exceptions.InputsCountError("wrong inputs count")
         if self.active:
             if self.a is not None and self.b is not None:
                 if self.op == "greater":
