@@ -16,6 +16,7 @@ class Node:
     def __init__(self, data):
         self.id = data["id"]
         self.nodes[self.id] = self
+        self.raw_data = data
 
         self.name = data["node_name"]
         self.desc_value = data["value"]
@@ -89,6 +90,7 @@ class Wire:
 
     def __init__(self, data):
         self.wires.append(self)
+        self.raw_data = data
 
         if data["source"] in Node.nodes:
             self.source = Node.nodes[data["source"]]
@@ -144,9 +146,3 @@ class Wire:
             if wire.source == node and wire.exit_connector == output_num:
                 wires.append(wire)
         return wires
-
-
-class Plug:
-    def __init__(self, value):
-        self.active_ctrl = False
-        self.value = value
