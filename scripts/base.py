@@ -33,6 +33,7 @@ class Node:
         self.value = None
         self.active = False
         self.deactivation = False
+        self.activation = False
 
         self.callable = False
 
@@ -52,9 +53,13 @@ class Node:
         if self.deactivation:
             self.reset()
             self.active = False
+            self.deactivation = False
+        if self.activation:
+            self.active = True
+            self.activation = False
 
     def activate(self, wire):
-        self.active = True
+        self.activation = True
         return False
 
     def deactivate(self, wire):

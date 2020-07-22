@@ -45,7 +45,6 @@ class NodeForeach(base.Node):
         if not self.input_values:
             self.input_values = [None for _ in range(len(self.inputs[1]))]
         if self.active:
-
             if self.start_iter:
                 if self.next:
                     self.iteration += 1
@@ -68,9 +67,9 @@ class NodeForeach(base.Node):
                     self.next = True
                 else:
                     self.call_all()
-
-            print(self.iteration, self.start, self.start_iter, self.input_values, self.next)
-            input()
+            #
+            # print(self.iteration, self.start, self.start_iter, self.input_values, self.next)
+            # input()
 
     def reset(self):
         self.start = False
@@ -89,7 +88,8 @@ class NodeForeach(base.Node):
         if wire in self.inputs[2]:
             if not self.start:
                 raise exceptions.WrongInputError("next iteration impossible if iteration not started")
-            self.next = True
+            if self.iteration < len(self.input_values):
+                self.next = True
         return super().activate(wire)
 
     def post_update(self):
@@ -103,5 +103,6 @@ class NodeForeach(base.Node):
         if wire in self.outputs[1] and not self.end and self.next:
             self.value = self.input_values[self.iteration]
             self.deactivate_next = True
-            return True
+            if self.iteration < len(self.input_values):
+                return True
         return False

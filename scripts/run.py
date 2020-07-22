@@ -229,8 +229,8 @@ def create_structure(n, w, limit=10**5):
             for wire in base.Wire.wires:
                 wire.update_give()
             for node in base.Node.nodes.values():
-                if node.active:
-                    print(node.id, node.name)
+                # if node.active:
+                #     print(node.id, node.name)
                 node.update()
             for wire in base.Wire.wires:
                 wire.update_take()

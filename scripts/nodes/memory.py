@@ -208,7 +208,7 @@ class NodeArrayGS(base.Node):
 
     def update(self):
         if self.active:
-            print(self.index)
+            # print(self.index)
             if f"{self.desc_value}" not in self.variables:
                 raise exceptions.NodeMemoryError(f"no variable named '{self.desc_value}'")
             if len(self.inputs[1]) == 1 and self.set_value is None:
@@ -218,8 +218,7 @@ class NodeArrayGS(base.Node):
                     self.value = self.variables[f"{self.desc_value}"]["values"][self.index]
                     self.set_value = self.variables[f"{self.desc_value}"]["values"][self.index]
                 elif self.set_value is not None:
-
-                    print(self.set_value, self.value, self.index)
+                    # print(self.set_value, self.value, self.index)
                     value_type = self.variables[f"{self.desc_value}"]["type"]
                     self.variables[f"{self.desc_value}"]["values"][self.index] = value_type(self.set_value)
                     self.value = self.variables[f"{self.desc_value}"]["values"][self.index]
@@ -232,11 +231,9 @@ class NodeArrayGS(base.Node):
     def activate(self, wire):
 
         if wire in self.inputs[0]:
-            print(0, wire.value)
             self.index = int(wire.value)
 
         if wire in self.inputs[1]:
-            print(1, wire.value)
             self.set_value = wire.value
 
         return super().activate(wire)

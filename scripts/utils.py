@@ -1,5 +1,8 @@
 from math import pi
+from numbers import Real
 from scripts import exceptions
+
+
 iteration = 0
 
 
@@ -24,7 +27,99 @@ class Char(str):
             raise ValueError
 
 
-# TODO: change function to class
+class Number(Real):
+    def __round__(self, ndigits=None):
+        return Number(self.value.__round__(ndigits))
+
+    def __floordiv__(self, other):
+        return Number(self.value.__floordiv__(other))
+
+    def __rfloordiv__(self, other):
+        return Number(self.value.__rfloordiv__(other))
+
+    def __mod__(self, other):
+        return Number(self.value.__mod__(other))
+
+    def __rmod__(self, other):
+        return Number(self.value.__rmod__(other))
+
+    def __lt__(self, other) -> bool:
+        return self.value.__lt__(other)
+
+    def __le__(self, other) -> bool:
+        return self.value.__le__(other)
+
+    def __radd__(self, other):
+        return Number(self.value.__radd__(other))
+
+    def __neg__(self):
+        return Number(self.value.__neg__())
+
+    def __pos__(self):
+        return Number(self.value.__pos__())
+
+    def __mul__(self, other):
+        return Number(self.value.__mul__(other))
+
+    def __rmul__(self, other):
+        return Number(self.value.__rmul__(other))
+
+    def __div__(self, other):
+        return Number(self.value.__div__(other))
+
+    def __rdiv__(self, other):
+        return Number(self.value.__rdiv__(other))
+
+    def __truediv__(self, other):
+        return Number(self.value.__truediv__(other))
+
+    def __rtruediv__(self, other):
+        return Number(self.value.__rtruediv__(other))
+
+    def __pow__(self, exponent):
+        return Number(self.value.__pow__(exponent))
+
+    def __rpow__(self, base):
+        return Number(self.value.__rpow__(base))
+
+    def __hash__(self) -> int:
+        return hash(self.value)
+
+    def __float__(self) -> float:
+        return float(self.value)
+
+    def __init__(self, value):
+        self.value = self.number_coercion(value)
+
+    def __str__(self):
+        return str(self.number_coercion(self.value))
+
+    def __abs__(self):
+        return Number(self.value.__abs__())
+
+    def __add__(self, other):
+        return Number(self.value.__add__(other))
+
+    def __ceil__(self):
+        return Number(self.value.__ceil__())
+
+    def __eq__(self, other):
+        if type(other) is Number:
+            return self.value == other.value
+        return self.value.__eq__(other)
+
+    def __floor__(self):
+        return Number(self.value.__floor__())
+
+    def __trunc__(self):
+        return Number(self.value.__trunc__())
+
+    @staticmethod
+    def number_coercion(value):
+        if isinstance(coercion(value), (int, float)):
+            return coercion(value)
+        raise ValueError(f"invalid literal for Number: '{value}'")
+
 # number type (simple coercion)
 def number(v):
     try:
