@@ -1,15 +1,14 @@
-from math import pi
 from numbers import Real
-from scripts import exceptions
+import math
 
 
 iteration = 0
 
 
-def get_values(label, check=False):
+def program_values(label, check=False):
     values = {
         "$iteration": iteration,
-        "$pi": pi,
+        "$pi": math.pi,
         "$true": True,
         "$false": False,
         "$none": "",
@@ -23,8 +22,25 @@ def get_values(label, check=False):
 class Char(str):
     def __init__(self, _):
         super().__init__()
-        if len(self) != 1:
-            raise ValueError
+        if len(self) > 1:
+            raise ValueError(f"char most length is 1, not {len(self)}")
+
+
+# auto typecasting
+def coercion(value):
+    if value is not None:
+        if isinstance(value, bool):
+            return value
+        try:
+            value = float(value)
+            if value == int(value):
+                return int(value)
+            return value
+        except ValueError:
+            if len(value) == 1:
+                return Char(value)
+            return value
+    return None
 
 
 class Number(Real):
@@ -93,6 +109,9 @@ class Number(Real):
     def __float__(self) -> float:
         return float(self.value)
 
+    def __int__(self) -> int:
+        return int(self.value)
+
     def __init__(self, value):
         self.value = self.number_coercion(value)
 
@@ -143,31 +162,3 @@ class Number(Real):
         if isinstance(coercion(value), (int, float)):
             return round(coercion(value), 14)
         raise ValueError(f"invalid literal for Number: '{value}'")
-
-
-# number type (simple coercion)
-def number(v):
-    try:
-        v = float(v)
-        if v == int(v):
-            return int(v)
-        return v
-    except ValueError:
-        pass
-    raise exceptions.WrongTypeError("type must be 'number'")
-
-
-# auto typecasting
-def coercion(value):
-    if value is not None:
-        try:
-            value = float(value)
-            if value == int(value):
-                return int(value)
-            return value
-        except ValueError:
-            if len(value) == 1:
-                return Char(value)
-            return value
-    return None
-

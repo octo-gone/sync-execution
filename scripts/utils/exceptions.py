@@ -1,0 +1,4 @@
+
+
+class StopSync(Exception):
+    pass

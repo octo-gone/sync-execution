@@ -1,6 +1,7 @@
 import re
 import math
-from scripts.nodes_info import nodes_info
+from scripts.utils import nodes_v3 as nodes_info
+from xml.sax.saxutils import unescape
 
 # possible connectors variants
 small_connectors = ("int", "real", "obj", "char", "ctrl", "bool", "any", "number", "mult_s", "dir_mult_s")
@@ -124,7 +125,7 @@ def parse(file_path):
     :return: tuple (nodes, wires)
     """
     with open(file_path, "r") as file:
-        data = "".join(file.read().split("\n"))
+        data = unescape("".join(file.read().split("\n")))
 
     nodes = []
     wires = []
@@ -150,11 +151,11 @@ def parse(file_path):
             else:
                 patterns[key] = None
 
-        inputs = get_connectors(nodes_info[patterns["node_name"]]["inputs"])
-        outputs = get_connectors(nodes_info[patterns["node_name"]]["outputs"])
+        inputs = get_connectors(nodes_info.nodes_info[patterns["node_name"]]["inputs"])
+        outputs = get_connectors(nodes_info.nodes_info[patterns["node_name"]]["outputs"])
 
-        ratio = (1, max(get_ratio(nodes_info[patterns["node_name"]]["inputs"]),
-                        get_ratio(nodes_info[patterns["node_name"]]["outputs"])))
+        ratio = (1, max(get_ratio(nodes_info.nodes_info[patterns["node_name"]]["inputs"]),
+                        get_ratio(nodes_info.nodes_info[patterns["node_name"]]["outputs"])))
 
         inputs = list(map(lambda x: round(x/ratio[1], 5), inputs))
         outputs = list(map(lambda x: round(x/ratio[1], 5), outputs))

@@ -1,244 +1,158 @@
-from scripts import base, utils
-from scripts import exceptions
+from scripts.utils import utils
+from scripts.nodes import base
+from scripts.nodes.base import ACTIVE, WAITING, INACTIVE
 
-
-class NodeConstCtrl(base.Node):
-    def __init__(self, data, check_type=None):
-        super().__init__(data)
-        self.check_type = check_type
-        self.callable = True
-
-    def update(self):
-        if self.active:
-            if utils.get_values(self.desc_value, check=True):
-                self.desc_value = utils.get_values(self.desc_value)
-            if self.check_type:
-                try:
-                    self.value = self.check_type(self.desc_value)
-                except ValueError:
-                    raise exceptions.WrongTypeError(f"type must be '{self.check_type}'")
-            else:
-                self.value = utils.coercion(self.desc_value)
-
-    def reset(self):
-        pass
-
-    def prepare_value(self):
-        if self.desc_value == "$iteration":
-            self.value = utils.iteration
-        elif self.check_type:
-            try:
-                self.value = self.check_type(self.desc_value)
-            except ValueError:
-                raise exceptions.WrongTypeError(f"type must be '{self.check_type}'")
-        else:
-            self.value = utils.coercion(self.desc_value)
+value_types = {
+    "$int": int,
+    "$real": float,
+    "$bool": bool,
+    "$char": utils.Char,
+    "$number": utils.Number,
+    "$num": utils.Number,
+    "$string": str,
+    "$any": utils.coercion
+}
 
 
 class NodeConst(base.Node):
-    def __init__(self, data, check_type=None):
+    def update_active(self):
+        pass
+
+    def update_waiting(self):
+        pass
+
+    def __init__(self, data):
         super().__init__(data)
-        self.check_type = check_type
-        self.callable = True
+        self.value_type = None
+        for value_type in value_types.keys():
+            if self.desc_value.endswith(value_type):
+                self.value_type = value_types[value_type]
+                self.desc_value = self.desc_value[:-len(value_type)]
+                break
 
-    def update(self):
-        pass
-
-    def reset(self):
-        pass
-
-    def prepare_value(self):
-        if utils.get_values(self.desc_value, check=True):
-            self.desc_value = utils.get_values(self.desc_value)
-        if self.check_type:
-            try:
-                self.value = self.check_type(self.desc_value)
-            except ValueError:
-                raise exceptions.WrongTypeError(f"type must be '{self.check_type}'")
+    def update_inactive(self):
+        value = self.desc_value
+        if utils.program_values(value, True):
+            value = utils.program_values(value)
+        if self.value_type is not None:
+            self.output_values[0] = self.value_type(value)
         else:
-            self.value = utils.coercion(self.desc_value)
+            self.output_values[0] = utils.coercion(value)
+
+
+class NodeConstCtrl(NodeConst):
+    def update_waiting(self):
+        value = self.desc_value
+        if utils.program_values(value, True):
+            value = utils.program_values(value)
+        if self.value_type is not None:
+            self.output_values[0] = self.value_type(value)
+        else:
+            self.output_values[0] = utils.coercion(value)
+        self.state = ACTIVE
+
+    def update_active(self):
+        self.set_active(0)
+        self.state = INACTIVE
 
 
 class NodeVar(base.Node):
-    def __init__(self, data, check_type=None):
+    def __init__(self, data):
         super().__init__(data)
-        self.check_type = check_type
-        self.callable = True
+        self.value_type = None
+        for value_type in value_types.keys():
+            if self.desc_value.endswith(value_type):
+                self.value_type = value_types[value_type]
+                self.desc_value = self.desc_value[:self.desc_value.index("$")]
+                break
 
-    def update(self):
-        if self.active:
-            if len(self.outputs[0]) == 0:
-                self.active = False
-            if f"{self.desc_value}" not in self.variables:
-                raise exceptions.NodeMemoryError(f"no variable named '{self.desc_value}'")
-            if self.variables[f"{self.desc_value}"]["data"] != "var":
-                raise exceptions.NodeMemoryError(f"wrong variable data "
-                                                 f"'{self.variables[f'{self.desc_value}']['data']}'")
-            if self.variables[f"{self.desc_value}"]["type"] is not None:
-                if self.variables[f"{self.desc_value}"]["type"] != self.check_type:
-                    raise exceptions.WrongTypeError(f"variable type must be '{self.check_type}'")
-            if self.check_type:
-                try:
-                    value = self.variables[f"{self.desc_value}"]["value"]
-                    if self.variables[f"{self.desc_value}"]["type"]:
-                        value = self.variables[f"{self.desc_value}"]["type"](value)
-                    self.value = self.check_type(value)
-                except ValueError:
-                    raise exceptions.WrongTypeError(f"type must be '{self.check_type}'")
+    def update_inactive(self):
+        var_name = self.desc_value
+        if var_name in self.variables:
+            value = self.variables[var_name]
+            if self.value_type is not None:
+                self.output_values[0] = self.value_type(value)
             else:
-                value = self.variables[f"{self.desc_value}"]["value"]
-                if self.variables[f"{self.desc_value}"]["type"]:
-                    value = self.variables[f"{self.desc_value}"]["type"](value)
-                self.value = utils.coercion(value)
+                self.output_values[0] = utils.coercion(value)
 
-    def reset(self):
-        pass
-
-    def prepare_value(self):
-        if f"{self.desc_value}" not in self.variables:
-            raise exceptions.NodeMemoryError(f"no variable named {self.desc_value}")
-        if self.variables[f"{self.desc_value}"]["data"] != "var":
-            raise exceptions.NodeMemoryError(f"wrong variable data '{self.variables[f'{self.desc_value}']['data']}'")
-        if self.check_type:
-            try:
-                value = self.variables[f"{self.desc_value}"]["value"]
-                if self.variables[f"{self.desc_value}"]["type"]:
-                    value = self.variables[f"{self.desc_value}"]["type"](value)
-                self.value = self.check_type(value)
-            except ValueError:
-                raise exceptions.WrongTypeError(f"type must be '{self.check_type}'")
+    def update_waiting(self):
+        value = self.get_value(0)
+        if value is None:
+            var_name = self.desc_value
+            if var_name in self.variables:
+                value = self.variables[var_name]
+                if self.value_type is not None:
+                    self.output_values[0] = self.value_type(value)
+                else:
+                    self.output_values[0] = utils.coercion(value)
         else:
-            value = self.variables[f"{self.desc_value}"]["value"]
-            if self.variables[f"{self.desc_value}"]["type"]:
-                value = self.variables[f"{self.desc_value}"]["type"](value)
-            self.value = utils.coercion(value)
-
-    def activate(self, wire):
-        if wire in self.inputs[0] and wire.value is not None:
-            if self.check_type:
-                try:
-                    self.variables[f"{self.desc_value}"] = {
-                        "data": "var",
-                        "type": self.check_type,
-                        "value": self.check_type(wire.value)
-                    }
-                except ValueError:
-                    raise exceptions.WrongTypeError(f"type must be '{self.check_type}'")
+            var_name = self.desc_value
+            if self.value_type is not None:
+                value = self.value_type(value)
             else:
-                self.variables[f"{self.desc_value}"] = {
-                    "data": "var",
-                    "type": None,
-                    "value": utils.coercion(wire.value)
-                }
-        if wire in self.inputs[0] and wire.value is None:
-            if f"{self.desc_value}" not in self.variables:
-                raise exceptions.NodeMemoryError(f"no variable named {self.desc_value}")
-            self.value = self.variables[f"{self.desc_value}"]
-        return super().activate(wire)
+                value = utils.coercion(value)
+            self.variables[var_name] = value
+        self.state = ACTIVE
+
+    def update_active(self):
+        self.set_active(0)
+        self.state = INACTIVE
 
 
-class NodeArray(base.Node):
-    types = [int, utils.number, float, utils.Char]
-    default_values = {
-        int: 0,
-        utils.number: 0,
-        float: 0.0,
-        utils.Char: "",
-        str: "",
-        bool: False,
-    }
-
+class NodeVarGet(base.Node):
     def __init__(self, data):
         super().__init__(data)
-        self.array_type = None
-        self.array_len = None
-        self.default_value = None
+        self.value_type = None
+        for value_type in value_types.keys():
+            if self.desc_value.endswith(value_type):
+                self.value_type = value_types[value_type]
+                self.desc_value = self.desc_value[:self.desc_value.index("$")]
+                break
 
-    def reset(self):
-        self.array_type = None
-        self.array_len = None
-        self.default_value = None
-
-    def update(self):
-        if self.active:
-            if self.array_type is not None and self.array_len is not None:
-                self.variables[f"{self.desc_value}"] = {
-                    "data": "array",
-                    "name": f"{self.desc_value}",
-                    "len": self.array_len,
-                    "type": self.array_type,
-                    "values": [self.default_value for _ in range(self.array_len)]
-                }
+    def update_inactive(self):
+        var_name = self.desc_value
+        if var_name in self.variables:
+            value = self.variables[var_name]
+            if self.value_type is not None:
+                self.output_values[0] = self.value_type(value)
             else:
-                self.call_all()
+                self.output_values[0] = utils.coercion(value)
 
-    def activate(self, wire):
-        if wire in self.inputs[0]:
-            if wire.value not in self.types:
-                self.array_type = type(wire.value)
-                if self.array_type in self.types:
-                    self.default_value = self.default_values[type(wire.value)]
-                else:
-                    self.default_value = wire.value
+    def update_waiting(self):
+        var_name = self.desc_value
+        if var_name in self.variables:
+            value = self.variables[var_name]
+            if self.value_type is not None:
+                self.output_values[0] = self.value_type(value)
             else:
-                self.array_type = wire.value
-                self.default_value = self.default_values[wire.value]
-        if wire in self.inputs[1]:
-            self.array_len = int(wire.value)
-        return super().activate(wire)
+                self.output_values[0] = utils.coercion(value)
+        self.state = ACTIVE
 
-    def deactivate(self, wire):
-        if self.array_type is not None and self.array_len is not None:
-            return super().deactivate(wire)
-        return False
+    def update_active(self):
+        self.set_active(0)
+        self.state = INACTIVE
 
 
-class NodeArrayGS(base.Node):
+class NodeVarSet(base.Node):
     def __init__(self, data):
         super().__init__(data)
-        self.index = None
-        self.set_value = None
-        self.get_value = False
+        self.value_type = None
+        for value_type in value_types.keys():
+            if self.desc_value.endswith(value_type):
+                self.value_type = value_types[value_type]
+                self.desc_value = self.desc_value[:self.desc_value.index("$")]
+                break
 
-    def reset(self):
-        self.index = None
-        self.set_value = None
-        self.get_value = False
-        self.value = None
+    def update_waiting(self):
+        value = self.get_value(0)
+        var_name = self.desc_value
+        if self.value_type is not None:
+            value = self.value_type(value)
+        else:
+            value = utils.coercion(value)
+        self.variables[var_name] = value
+        self.state = ACTIVE
 
-    def update(self):
-        if self.active:
-            # print(self.index)
-            if f"{self.desc_value}" not in self.variables:
-                raise exceptions.NodeMemoryError(f"no variable named '{self.desc_value}'")
-            if len(self.inputs[1]) == 1 and self.set_value is None:
-                self.call_back(self.inputs[1][0])
-            if self.index is not None:
-                if len(self.inputs[1]) == 0:
-                    self.value = self.variables[f"{self.desc_value}"]["values"][self.index]
-                    self.set_value = self.variables[f"{self.desc_value}"]["values"][self.index]
-                elif self.set_value is not None:
-                    # print(self.set_value, self.value, self.index)
-                    value_type = self.variables[f"{self.desc_value}"]["type"]
-                    self.variables[f"{self.desc_value}"]["values"][self.index] = value_type(self.set_value)
-                    self.value = self.variables[f"{self.desc_value}"]["values"][self.index]
-            else:
-                if self.set_value is not None:
-                    self.call_back(self.inputs[0][0])
-                else:
-                    self.call_all()
-
-    def activate(self, wire):
-
-        if wire in self.inputs[0]:
-            self.index = int(wire.value)
-
-        if wire in self.inputs[1]:
-            self.set_value = wire.value
-
-        return super().activate(wire)
-
-    def deactivate(self, wire):
-        if (self.value is not None) or self.get_value:
-            return super().deactivate(wire)
-        return False
+    def update_active(self):
+        self.set_active(0)
+        self.state = INACTIVE

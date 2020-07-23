@@ -1,100 +1,46 @@
-from scripts import base, utils
-from scripts import exceptions
+from scripts.utils import utils
+from scripts.nodes import base
+from scripts.nodes.base import ACTIVE, WAITING, INACTIVE
 
 
-class NodeComparisonA(base.Node):
-    def __init__(self, data, op="and"):
+class NodeLogicA(base.Node):
+    def __init__(self, data):
         super().__init__(data)
-        self.op = op
+        self.variant = all if self.desc_value != "any" else any
 
-    def reset(self):
-        self.value = None
+    def update_active(self):
+        self.set_active(0)
+        self.state = INACTIVE
 
-    def update(self):
-        if not self.input_values:
-            self.input_values = [None for _ in range(len(sum(self.inputs, [])))]
-        if self.active:
-            if self.op == "and":
-                if all(map(lambda x: x is not None, self.input_values)):
-                    self.value = all(self.input_values)
-                else:
-                    self.call_all()
-            if self.op == "or":
-                if any(self.input_values):
-                    self.value = any(self.input_values)
-                elif all(map(lambda x: x is not None, self.input_values)):
-                    self.value = any(self.input_values)
-                else:
-                    self.call_all()
-            if self.op == "equal":
-                if all(map(lambda x: x is not None, self.input_values)):
-                    self.value = len(set(self.input_values)) == 1
-                else:
-                    self.call_all()
-
-    def activate(self, wire):
-        self.input_values[sum(self.inputs, []).index(wire)] = wire.value
-        return super().activate(wire)
-
-    def deactivate(self, wire):
-        if self.value is not None:
-            return super().deactivate(wire)
-        return False
+    def update_waiting(self):
+        if self.variant(map(lambda x: x is not None, self.get_value(0, True))):
+            if self.name == "and":
+                self.output_values[0] = all(self.get_value(0, True))
+            elif self.name == "or":
+                self.output_values[0] = any(self.get_value(0, True))
+            elif self.name == "equal":
+                self.output_values[0] = len(set(self.get_value(0, True))) == 1
+            self.state = ACTIVE
 
 
-class NodeComparisonB(base.Node):
-    def __init__(self, data, op="greater"):
-        super().__init__(data)
-        self.a = None
-        self.b = None
-        self.op = op
+class NodeLogicB(base.Node):
 
-    def reset(self):
-        self.value = None
-        self.a = None
-        self.b = None
+    def update_active(self):
+        self.set_active(0)
+        self.state = INACTIVE
 
-    def update(self):
-        if len(sum(self.inputs, [])) != 2:
-            raise exceptions.InputsCountError("wrong inputs count")
-        if self.active:
-            if self.a is not None and self.b is not None:
-                if self.op == "greater":
-                    self.value = self.a > self.b
-                if self.op == "greater or equal":
-                    self.value = self.a >= self.b
-                if self.op == "less":
-                    self.value = self.a < self.b
-                if self.op == "less or equal":
-                    self.value = self.a <= self.b
-                if self.op == "not equal":
-                    self.value = self.a != self.b
-                if self.op == "xor":
-                    self.value = bool(self.a) ^ bool(self.b)
-            else:
-                self.call_all()
-
-    def activate(self, wire):
-        if wire in self.inputs[0]:
-            self.a = wire.value
-        if wire in self.inputs[1]:
-            self.b = wire.value
-        return super().activate(wire)
-
-    def deactivate(self, wire):
-        if self.value is not None:
-            return super().deactivate(wire)
-        return False
-
-
-class NodeNot(base.Node):
-    def update(self):
-        if self.active:
-            self.value = not self.value
-
-    def activate(self, wire):
-        self.value = bool(wire.value)
-        return super().activate(wire)
-
-    def reset(self):
-        pass
+    def update_waiting(self):
+        if self.get_value(0) is not None and self.get_value(1) is not None:
+            if self.name == "greater":
+                self.output_values[0] = self.get_value(0) > self.get_value(1)
+            if self.name == "greater or equal":
+                self.output_values[0] = self.get_value(0) >= self.get_value(1)
+            if self.name == "less":
+                self.output_values[0] = self.get_value(0) < self.get_value(1)
+            if self.name == "less or equal":
+                self.output_values[0] = self.get_value(0) <= self.get_value(1)
+            if self.name == "not equal":
+                self.output_values[0] = self.get_value(0) != self.get_value(1)
+            if self.name == "xor":
+                self.output_values[0] = bool(self.get_value(0)) ^ bool(self.get_value(1))
+            self.state = ACTIVE
