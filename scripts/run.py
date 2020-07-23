@@ -48,6 +48,8 @@ class NodeGen:
             return construction.NodeForExt(data, utils.Number)
         if node_name == "if":
             return construction.NodeIf(data)
+        if node_name == "while":
+            return construction.NodeWhile(data)
 
         if node_name in ("and", "or", "equal"):
             return logic.NodeLogicA(data)
@@ -108,6 +110,8 @@ def run(n, w, limit=10**5):
                 node.update(base.INACTIVE)
             # print("--")
             for node in base.Node.nodes.values():
+                # if node.state == base.WAITING:
+                #     print(node.name, node.get_actual_state())
                 node.update(base.WAITING)
             # print("--")
             for node in base.Node.nodes.values():

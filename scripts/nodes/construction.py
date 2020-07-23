@@ -133,3 +133,40 @@ class NodeIf(base.Node):
                     self.condition = False
                 self.sub_state = READY
             self.state = WAITING
+
+
+class NodeWhile(base.Node):
+    def __init__(self, data):
+        super().__init__(data)
+        self.start = False
+
+    def update_active(self):
+        if self.get_value(1) is not None and not self.get_value(1):
+            self.set_active(0)
+            self.start = False
+            self.sub_state = None
+            self.state = INACTIVE
+        if self.sub_state == READY:
+            self.sub_state = ITERATION
+            self.set_active(1)
+            self.state = WAITING
+
+    def update_waiting(self):
+        if self.sub_state == BOUND:
+            if self.start:
+                self.sub_state = READY
+        if self.sub_state == READY:
+            self.state = ACTIVE
+        if self.sub_state == NEXT:
+            self.sub_state = READY
+            self.state = ACTIVE
+
+    def set_state(self, state, input_index, **kwargs):
+        if state == WAITING:
+            if self.get_actual_input(input_index) == 0:
+                self.start = True
+            if self.sub_state is None:
+                self.sub_state = BOUND
+            if self.sub_state == ITERATION and self.get_actual_input(input_index) == 2:
+                self.sub_state = NEXT
+            self.state = WAITING
