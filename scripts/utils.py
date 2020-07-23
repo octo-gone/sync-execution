@@ -28,6 +28,7 @@ class Char(str):
 
 
 class Number(Real):
+
     def __round__(self, ndigits=None):
         return Number(self.value.__round__(ndigits))
 
@@ -44,9 +45,13 @@ class Number(Real):
         return Number(self.value.__rmod__(other))
 
     def __lt__(self, other) -> bool:
+        if type(other) is Number:
+            return self.value.__lt__(other.value)
         return self.value.__lt__(other)
 
     def __le__(self, other) -> bool:
+        if type(other) is Number:
+            return self.value.__le__(other.value)
         return self.value.__le__(other)
 
     def __radd__(self, other):
@@ -114,10 +119,29 @@ class Number(Real):
     def __trunc__(self):
         return Number(self.value.__trunc__())
 
+    def __ge__(self, other) -> bool:
+        if type(other) is Number:
+            return self.value.__ge__(other.value)
+        return self.value.__ge__(other)
+
+    def __gt__(self, other) -> bool:
+        if type(other) is Number:
+            return self.value.__gt__(other.value)
+        return self.value.__gt__(other)
+
+    def __iadd__(self, other):
+        return Number(self.value + other)
+
+    def __isub__(self, other):
+        return Number(self.value - other)
+
+    def __imul__(self, other):
+        return Number(self.value * other)
+
     @staticmethod
     def number_coercion(value):
         if isinstance(coercion(value), (int, float)):
-            return coercion(value)
+            return round(coercion(value), 14)
         raise ValueError(f"invalid literal for Number: '{value}'")
 
 # number type (simple coercion)
