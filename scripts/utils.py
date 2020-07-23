@@ -144,6 +144,7 @@ class Number(Real):
             return round(coercion(value), 14)
         raise ValueError(f"invalid literal for Number: '{value}'")
 
+
 # number type (simple coercion)
 def number(v):
     try:
