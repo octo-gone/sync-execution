@@ -18,13 +18,15 @@ class NodeFor(base.Node):
         self.bound = None
 
     def update_active(self):
-        if self.iteration >= self.bound:
-            self.set_active(0)
-            self.start = False
-            self.iteration = self.value_type(0)
-            self.bound = None if self.inputs[1] else -1
-            self.sub_state = None
-            self.state = INACTIVE
+        if self.bound is not None:
+            if self.iteration >= self.bound:
+                self.set_active(0)
+                self.start = False
+                self.iteration = self.value_type(0)
+                self.output_values[1] = None
+                self.bound = None
+                self.sub_state = None
+                self.state = INACTIVE
         if self.sub_state == READY:
             self.sub_state = ITERATION
             self.output_values[1] = self.value_type(self.iteration)
@@ -50,7 +52,7 @@ class NodeFor(base.Node):
                 self.bound = None if self.inputs[1] else -1
             if self.sub_state is None:
                 self.sub_state = BOUND
-            if self.sub_state == ITERATION and self.get_actual_input(input_index) == 2:
+            if self.sub_state == ITERATION and self.get_actual_input(input_index) == 3:
                 self.sub_state = NEXT
             self.state = WAITING
 
@@ -64,13 +66,15 @@ class NodeForExt(base.Node):
         self.bound = None
 
     def update_active(self):
-        if self.iteration >= self.bound:
-            self.set_active(0)
-            self.start = False
-            self.bound = None if self.inputs[1] else -1
-            self.iteration = None if self.inputs[2] else 0
-            self.sub_state = None
-            self.state = INACTIVE
+        if self.bound:
+            if self.iteration >= self.bound:
+                self.set_active(0)
+                self.start = False
+                self.bound = None if self.inputs[1] else -1
+                self.iteration = None if self.inputs[2] else self.value_type(0)
+                self.output_values[1] = None
+                self.sub_state = None
+                self.state = INACTIVE
         if self.sub_state == READY:
             self.sub_state = ITERATION
             self.output_values[1] = self.value_type(self.iteration)
@@ -87,7 +91,7 @@ class NodeForExt(base.Node):
         if self.sub_state == READY:
             self.state = ACTIVE
         if self.sub_state == NEXT:
-            self.iteration += self.value_type(self.get_value(3))
+            self.iteration += self.get_value(3)
             self.sub_state = READY
             self.state = ACTIVE
 
@@ -95,8 +99,8 @@ class NodeForExt(base.Node):
         if state == WAITING:
             if self.get_actual_input(input_index) == 0:
                 self.start = True
-                self.bound = None if self.inputs[1] else -1
-                self.iteration = None if self.inputs[2] else 0
+                self.bound = self.value_type(self.get_value(1)) if self.inputs[1] else -1
+                self.iteration = self.value_type(self.get_value(2)) if self.inputs[2] else 0
             if self.sub_state is None:
                 self.sub_state = BOUND
             if self.sub_state == ITERATION and self.get_actual_input(input_index) == 3:

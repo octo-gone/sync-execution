@@ -12,6 +12,7 @@ def program_values(label, check=False):
         "$true": True,
         "$false": False,
         "$none": "",
+        "$sep": "- - -",
     }
     if check:
         return label in values

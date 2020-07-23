@@ -100,7 +100,7 @@ class NodeMult(base.Node):
         if all(map(lambda x: x is not None, self.get_value(0, True))):
             m = 1
             for v in self.get_value(0, True):
-                m = m * v
+                m *= v
             self.output_values[0] = m
             self.state = ACTIVE
 
