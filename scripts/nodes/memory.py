@@ -67,7 +67,7 @@ class NodeVar(base.Node):
                 break
 
     def update_inactive(self):
-        var_name = self.desc_value
+        var_name = f"{self.scope}$" + self.desc_value
         if var_name in self.variables:
             value = self.variables[var_name]
             if self.value_type is not None:
@@ -78,7 +78,7 @@ class NodeVar(base.Node):
     def update_waiting(self):
         value = self.get_value(0)
         if value is None:
-            var_name = self.desc_value
+            var_name = f"{self.scope}$" + self.desc_value
             if var_name in self.variables:
                 value = self.variables[var_name]
                 if self.value_type is not None:
@@ -86,7 +86,7 @@ class NodeVar(base.Node):
                 else:
                     self.output_values[0] = utils.coercion(value)
         else:
-            var_name = self.desc_value
+            var_name = f"{self.scope}$" + self.desc_value
             if self.value_type is not None:
                 value = self.value_type(value)
             else:
@@ -110,7 +110,7 @@ class NodeVarGet(base.Node):
                 break
 
     def update_inactive(self):
-        var_name = self.desc_value
+        var_name = f"{self.scope}$" + self.desc_value
         if var_name in self.variables:
             value = self.variables[var_name]
             if self.value_type is not None:
@@ -119,7 +119,7 @@ class NodeVarGet(base.Node):
                 self.output_values[0] = utils.coercion(value)
 
     def update_waiting(self):
-        var_name = self.desc_value
+        var_name = f"{self.scope}$" + self.desc_value
         if var_name in self.variables:
             value = self.variables[var_name]
             if self.value_type is not None:
@@ -145,7 +145,7 @@ class NodeVarSet(base.Node):
 
     def update_waiting(self):
         value = self.get_value(0)
-        var_name = self.desc_value
+        var_name = f"{self.scope}$" + self.desc_value
         if self.value_type is not None:
             value = self.value_type(value)
         else:
