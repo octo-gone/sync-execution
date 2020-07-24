@@ -42,6 +42,8 @@ class Node:
         self.state = INACTIVE
         self.sub_state = None
 
+        self.scope = 0
+
     def get_actual_input(self, input_index):
         for key, value in self.actual_inputs.items():
             if input_index in value:

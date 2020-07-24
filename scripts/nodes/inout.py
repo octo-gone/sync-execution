@@ -6,7 +6,9 @@ from scripts.utils import utils
 class NodePrintCtrl(base.Node):
     def update_waiting(self):
         value = self.desc_value
-        if utils.program_values(value, True):
+        if value == "$vars":
+            value = self.variables
+        elif utils.program_values(value, True):
             value = utils.program_values(value)
         else:
             value = self.get_value(0)
@@ -22,7 +24,9 @@ class NodePrintCtrl(base.Node):
 class NodePrint(base.Node):
     def update_waiting(self):
         value = self.desc_value
-        if utils.program_values(value, True):
+        if value == "$vars":
+            value = self.variables
+        elif utils.program_values(value, True):
             value = utils.program_values(value)
         else:
             value = self.get_value(0)

@@ -50,6 +50,8 @@ class NodeGen:
             return construction.NodeIf(data)
         if node_name == "while":
             return construction.NodeWhile(data)
+        if node_name == "counter":
+            return construction.NodeCounter(data)
 
         if node_name in ("and", "or", "equal"):
             return logic.NodeLogicA(data)
