@@ -43,6 +43,8 @@ class Node:
         self.sub_state = None
 
         self.scope = 0
+        self.pos = float(data["x"]), float(data["y"])
+        self.size = float(data["width"]), float(data["height"])
 
     def get_actual_input(self, input_index):
         for key, value in self.actual_inputs.items():
@@ -200,3 +202,29 @@ class Wire:
             if wire.source == node and wire.exit_connector == output_num:
                 nodes.append((wire.target, wire.entry_connector))
         return nodes
+
+
+class Scope:
+    scopes = []
+
+    def __init__(self, data):
+        self.pos = float(data["x"]), float(data["y"])
+        self.size = float(data["width"]), float(data["height"])
+        self.id = data["id"]
+        self.value = data["value"]
+        self.scopes.append(self)
+        self.scope = len(self.scopes)
+
+    @classmethod
+    def check_contains(cls, node):
+        for scope in cls.scopes:
+            if scope.check_bbox(node):
+                break
+
+    def check_bbox(self, node):
+        if self.pos[0] < node.pos[0] and self.pos[1] < node.pos[1]:
+            if (self.pos[0] + self.size[0]) > (node.pos[0] + node.size[0]) and \
+               (self.pos[1] + self.size[1]) > (node.pos[1] + node.size[1]):
+                node.scope = self.scope
+                return True
+        return False

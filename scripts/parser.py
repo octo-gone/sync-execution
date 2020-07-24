@@ -95,6 +95,7 @@ def get_connectors(inout):
 
 # patterns for parsing
 node_pattern = r"<mxCell[^<]*?syncNodeName=.*?;.*?<\/mxCell>"
+scope_pattern = r"<mxCell[^<]*?syncName=scope;.*?<\/mxCell>"
 wire_pattern = r"<mxCell[^<]*?source.*?target.*?<\/mxCell>"
 
 # patterns for node
@@ -188,4 +189,23 @@ def parse(file_path):
 
         wires.append(patterns)
 
-    return nodes, wires
+    scopes = []
+    for scope in re.findall(scope_pattern, data):
+        patterns = {
+            "id": id_pattern,
+            "value": value_pattern,
+            "x": x_pattern,
+            "y": y_pattern,
+            "width": width_pattern,
+            "height": height_pattern,
+        }
+        for key in patterns.keys():
+            res = re.search(patterns[key], scope)
+            if res:
+                patterns[key] = res.group(key)
+            else:
+                patterns[key] = None
+
+        scopes.append(patterns)
+
+    return nodes, wires, scopes

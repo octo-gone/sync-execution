@@ -88,8 +88,12 @@ class NodeGen:
 
 
 # main program
-def create_structure(n, w):
+def create_structure(n, w, s):
     utils.iteration = 0
+
+    for scope in s:
+        base.Scope(scope)
+
     for node in n:
         NodeGen(node)
 
@@ -98,13 +102,14 @@ def create_structure(n, w):
 
     for node in base.Node.nodes.values():
         node.update_connections()
+        base.Scope.check_contains(node)
 
     # for node in base.Node.nodes.values():
     #     print(node.id, node.name, node.inputs, node.outputs)
 
 
-def run(n, w, limit=10**5):
-    create_structure(n, w)
+def run(n, w, s, limit=10**5):
+    create_structure(n, w, s)
     print("- program -")
     for utils.iteration in range(limit):
         try:

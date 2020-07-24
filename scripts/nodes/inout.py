@@ -7,7 +7,11 @@ class NodePrintCtrl(base.Node):
     def update_waiting(self):
         value = self.desc_value
         if value == "$vars":
-            value = self.variables
+            variables = []
+            for var in self.variables.items():
+                if var[0].startswith(f"{self.scope}$"):
+                    variables.append((var[0][len(f"{self.scope}$"):], var[1]))
+            value = dict(variables)
         elif utils.program_values(value, True):
             value = utils.program_values(value)
         else:
@@ -25,7 +29,11 @@ class NodePrint(base.Node):
     def update_waiting(self):
         value = self.desc_value
         if value == "$vars":
-            value = self.variables
+            variables = []
+            for var in self.variables.items():
+                if var[0].startswith(f"{self.scope}$"):
+                    variables.append((var[0][len(f"{self.scope}$"):], var[1]))
+            value = dict(variables)
         elif utils.program_values(value, True):
             value = utils.program_values(value)
         else:
