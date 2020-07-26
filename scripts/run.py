@@ -7,8 +7,8 @@ from scripts.utils import exceptions
 class NodeGen:
     def __new__(cls, data):
         node_name = data["node_name"]
-        if str(node_name).startswith("function"):
-            return base.NodeFunction(data)
+        # if str(node_name).startswith("function"):
+        #     return base.NodeFunction(data)
 
         if node_name == "run":
             return control.NodeRun(data)
