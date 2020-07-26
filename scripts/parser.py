@@ -1,6 +1,6 @@
 import re
 import math
-from scripts.utils import nodes_v3 as nodes_info
+from scripts.utils import nodes_v4 as nodes_info
 from xml.sax.saxutils import unescape
 
 # possible connectors variants
@@ -104,6 +104,11 @@ node_name_pattern = r"syncNodeName=(?P<node_name>.*?);"
 image_pattern = r"image=data:image/svg\+xml,(?P<img>.*?);"
 value_pattern = r"value=\"(?P<value>.*?)\""
 
+# patterns for function
+points_pattern = r"points=(?P<points>\[[0-9\.\[\], ]+?\]);"
+inputs_pattern = r"syncInputs=(?P<inputs>\[.+?\]);"
+outputs_pattern = r"syncOutputs=(?P<outputs>\[.+?\]);"
+
 # general patterns
 x_pattern = r"<mxGeometry.*x=\"(?P<x>.*?)\""
 y_pattern = r"<mxGeometry.*y=\"(?P<y>.*?)\""
@@ -127,6 +132,7 @@ def parse(file_path):
     """
     with open(file_path, "r") as file:
         data = unescape("".join(file.read().split("\n")))
+        data = "'".join(data.split("&#39;"))
 
     nodes = []
     wires = []
@@ -142,29 +148,57 @@ def parse(file_path):
             "height": height_pattern,
             "node_name": node_name_pattern
         }
+        if not str(re.search(patterns["node_name"], node).group("node_name")).startswith("function"):
+            for key in patterns.keys():
+                res = re.search(patterns[key], node)
+                if res:
+                    patterns[key] = res.group(key)
+                else:
+                    patterns[key] = None
 
-        for key in patterns.keys():
-            res = re.search(patterns[key], node)
-            if res:
-                patterns[key] = res.group(key)
-                # if key == "img":
-                #     patterns[key] = drawio_nodes[res.group(key)]
-            else:
-                patterns[key] = None
+            inputs = get_connectors(nodes_info.nodes_info[patterns["node_name"]]["inputs"])
+            outputs = get_connectors(nodes_info.nodes_info[patterns["node_name"]]["outputs"])
 
-        inputs = get_connectors(nodes_info.nodes_info[patterns["node_name"]]["inputs"])
-        outputs = get_connectors(nodes_info.nodes_info[patterns["node_name"]]["outputs"])
+            ratio = (1, max(get_ratio(nodes_info.nodes_info[patterns["node_name"]]["inputs"]),
+                            get_ratio(nodes_info.nodes_info[patterns["node_name"]]["outputs"])))
 
-        ratio = (1, max(get_ratio(nodes_info.nodes_info[patterns["node_name"]]["inputs"]),
-                        get_ratio(nodes_info.nodes_info[patterns["node_name"]]["outputs"])))
+            inputs = list(map(lambda x: round(x/ratio[1], 5), inputs))
+            outputs = list(map(lambda x: round(x/ratio[1], 5), outputs))
 
-        inputs = list(map(lambda x: round(x/ratio[1], 5), inputs))
-        outputs = list(map(lambda x: round(x/ratio[1], 5), outputs))
+            patterns["inputs"] = inputs
+            patterns["outputs"] = outputs
 
-        patterns["inputs"] = inputs
-        patterns["outputs"] = outputs
+            nodes.append(patterns)
+        else:
+            patterns["points"] = points_pattern
+            patterns["inputs"] = inputs_pattern
+            patterns["outputs"] = outputs_pattern
+            for key in patterns.keys():
+                res = re.search(patterns[key], node)
+                if res:
+                    patterns[key] = res.group(key)
+                    if key in ("points", "inputs", "outputs"):
+                        patterns[key] = eval(res.group(key))
+                else:
+                    patterns[key] = None
+                    if key in ("points", "inputs", "outputs"):
+                        patterns[key] = []
 
-        nodes.append(patterns)
+            inputs = get_connectors(patterns["inputs"])
+            outputs = get_connectors(patterns["outputs"])
+
+            ratio = (1, max(get_ratio(patterns["inputs"]),
+                            get_ratio(patterns["outputs"])))
+
+            inputs = list(map(lambda x: round(x / ratio[1], 5), inputs))
+            outputs = list(map(lambda x: round(x / ratio[1], 5), outputs))
+
+            patterns["inputs_names"] = patterns["inputs"]
+            patterns["inputs"] = inputs
+            patterns["outputs_names"] = patterns["outputs"]
+            patterns["outputs"] = outputs
+
+            nodes.append(patterns)
 
     for wire in re.findall(wire_pattern, data):
         patterns = {

@@ -7,6 +7,8 @@ from scripts.utils import exceptions
 class NodeGen:
     def __new__(cls, data):
         node_name = data["node_name"]
+        if str(node_name).startswith("function"):
+            return base.NodeFunction(data)
 
         if node_name == "run":
             return control.NodeRun(data)
@@ -43,9 +45,9 @@ class NodeGen:
             return memory.NodeVarGet(data)
 
         if node_name == "for":
-            return construction.NodeFor(data, utils.Number)
+            return construction.NodeFor(data)
         if node_name == "for ext":
-            return construction.NodeForExt(data, utils.Number)
+            return construction.NodeForExt(data)
         if node_name == "if":
             return construction.NodeIf(data)
         if node_name == "while":
@@ -104,8 +106,10 @@ def create_structure(n, w, s):
         node.update_connections()
         base.Scope.check_contains(node)
 
+    # base.NodeFunction.init_function()
     # for node in base.Node.nodes.values():
-    #     print(node.id, node.name, node.inputs, node.outputs)
+    #     # if node.name.startswith("function"):
+    #     print(node.id, node.name, node.inputs, node.outputs, node.scope)
 
 
 def run(n, w, s, limit=10**5):

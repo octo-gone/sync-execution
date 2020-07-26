@@ -10,9 +10,9 @@ NEXT = "next"
 
 
 class NodeFor(base.Node):
-    def __init__(self, data, value_type=None):
+    def __init__(self, data):
         super().__init__(data)
-        self.value_type = value_type
+        self.value_type = utils.Number
         self.start = False
         self.iteration = self.value_type(0)
         self.bound = None
@@ -58,9 +58,9 @@ class NodeFor(base.Node):
 
 
 class NodeForExt(base.Node):
-    def __init__(self, data, value_type=None):
+    def __init__(self, data):
         super().__init__(data)
-        self.value_type = value_type
+        self.value_type = utils.Number
         self.start = False
         self.iteration = None
         self.bound = None
