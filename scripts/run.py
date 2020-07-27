@@ -67,6 +67,10 @@ class NodeGen:
 
         if node_name == "value switch":
             return misc.NodeValueSwitch(data)
+        if node_name == "get type":
+            return misc.NodeGetType(data)
+        if node_name == "type":
+            return misc.NodeType(data)
 
         if node_name == "abs":
             return mathematic.NodeAbs(data)

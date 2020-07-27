@@ -163,3 +163,14 @@ class Number(Real):
         if isinstance(coercion(value), (int, float)):
             return round(coercion(value), 14)
         raise ValueError(f"invalid literal for Number: '{value}'")
+
+
+types_default = {
+    "int": int(0),
+    "real": float(0),
+    "number": Number(0),
+    "num": Number(0),
+    "char": Char(""),
+    "bool": False,
+    "str": str("")
+}
