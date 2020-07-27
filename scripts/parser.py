@@ -94,9 +94,9 @@ def get_connectors(inout):
 
 
 # patterns for parsing
-node_pattern = r"<mxCell[^<]*?syncNodeName=.*?;.*?<\/mxCell>"
-scope_pattern = r"<mxCell[^<]*?syncName=scope;.*?<\/mxCell>"
-wire_pattern = r"<mxCell[^<]*?source.*?target.*?<\/mxCell>"
+node_pattern = r"<mxCell[^<]*?syncNodeName=.*?;.*?</mxCell>"
+scope_pattern = r"<mxCell[^<]*?syncName=scope;.*?</mxCell>"
+wire_pattern = r"<mxCell[^<]*?source.*?target.*?</mxCell>"
 
 # patterns for node
 id_pattern = r"id=\"(?P<id>.*?)\""
@@ -105,7 +105,7 @@ image_pattern = r"image=data:image/svg\+xml,(?P<img>.*?);"
 value_pattern = r"value=\"(?P<value>.*?)\""
 
 # patterns for function
-points_pattern = r"points=(?P<points>\[[0-9\.\[\], ]+?\]);"
+points_pattern = r"points=(?P<points>\[[0-9.\[\], ]+?\]);"
 inputs_pattern = r"syncInputs=(?P<inputs>\[.+?\]);"
 outputs_pattern = r"syncOutputs=(?P<outputs>\[.+?\]);"
 
