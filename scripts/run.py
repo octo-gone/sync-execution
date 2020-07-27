@@ -110,6 +110,7 @@ def create_structure(n, w, s):
     # for node in base.Node.nodes.values():
     #     # if node.name.startswith("function"):
     #     print(node.id, node.name, node.inputs, node.outputs, node.scope)
+    # exit()
 
 
 def run(n, w, s, limit=10**5):
@@ -122,13 +123,14 @@ def run(n, w, s, limit=10**5):
             # print("--")
             for node in base.Node.nodes.values():
                 # if node.state == base.WAITING:
-                #     print(node.name, node.id, node.get_actual_state())
+                #     print(node.name, node.id, node.get_actual_state(), node.inputs)
                 node.update(base.WAITING)
             # print("--")
             for node in base.Node.nodes.values():
                 node.update(base.ACTIVE)
-            # for node in base.Node.nodes.values():
-            #     print(node.id, node.name, node.get_actual_state())
+            for node in base.Node.nodes.values():
+                if node.name == 'run':
+                    print(node.id, node.name, node.get_actual_state(), node.outputs)
             # print("--")
         except exceptions.StopSync:
             print("- stop -")
