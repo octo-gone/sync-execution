@@ -24,6 +24,8 @@ class NodeGen:
             return control.NodeDelay(data)
         if node_name == "timer":
             return control.NodeTimer(data)
+        if node_name == "error":
+            return control.NodeError(data)
 
         if node_name == "print ctrl":
             return inout.NodePrintCtrl(data)

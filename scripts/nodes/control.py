@@ -111,3 +111,15 @@ class NodeTimer(base.Node):
         if state == WAITING and self.get_actual_input(input_index) == 1:
             self.state = ACTIVE
             self.output_values[0] = self.timer_counter
+
+
+class NodeError(base.Node):
+    class NodeErrorException(Exception):
+        pass
+
+    def update_waiting(self):
+        raise self.NodeErrorException(self.desc_value)
+
+    def update_active(self):
+        self.set_active(0)
+        self.state = INACTIVE
