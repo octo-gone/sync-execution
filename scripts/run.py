@@ -38,7 +38,6 @@ class NodeGen:
             return memory.NodeConst(data)
         if node_name == "const ctrl":
             return memory.NodeConstCtrl(data)
-
         if node_name == "var":
             return memory.NodeVar(data)
         if node_name == "var set":
@@ -61,6 +60,8 @@ class NodeGen:
             return logic.NodeLogicA(data)
         if node_name in ("greater", "greater or equal", "less", "less or equal", "not equal", "xor"):
             return logic.NodeLogicB(data)
+        if node_name == "in":
+            return logic.NodeIn(data)
 
         if node_name == "value switch":
             return misc.NodeValueSwitch(data)
@@ -130,9 +131,9 @@ def run(n, w, s, limit=10**5):
             # print("--")
             for node in base.Node.nodes.values():
                 node.update(base.ACTIVE)
-            for node in base.Node.nodes.values():
-                if node.name == 'run':
-                    print(node.id, node.name, node.get_actual_state(), node.outputs)
+            # for node in base.Node.nodes.values():
+            #     if node.name == 'run':
+            #         print(node.id, node.name, node.get_actual_state(), node.outputs)
             # print("--")
         except exceptions.StopSync:
             print("- stop -")

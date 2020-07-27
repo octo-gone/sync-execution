@@ -44,3 +44,26 @@ class NodeLogicB(base.Node):
             if self.name == "xor":
                 self.output_values[0] = bool(self.get_value(0)) ^ bool(self.get_value(1))
             self.state = ACTIVE
+
+
+class NodeIn(base.Node):
+    def __init__(self, data):
+        super().__init__(data)
+        self.variant = all if self.desc_value != "any" else any
+
+    def update_active(self):
+        self.set_active(0)
+        self.state = INACTIVE
+
+    def update_waiting(self):
+        if self.variant(map(lambda x: x is not None, self.get_value(0, True))):
+            self.output_values[0] = False
+            for value in self.get_value(0, True):
+                if self.get_value(1) == value:
+                    self.output_values[0] = True
+                    break
+            self.state = ACTIVE
+
+    def set_state(self, state, input_index, **kwargs):
+        if state == WAITING and self.get_actual_input(input_index) == 1:
+            self.state = state
