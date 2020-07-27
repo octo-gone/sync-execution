@@ -55,6 +55,8 @@ class NodeGen:
             return construction.NodeWhile(data)
         if node_name == "counter":
             return construction.NodeCounter(data)
+        if node_name == "foreach":
+            return construction.NodeForeach(data)
 
         if node_name in ("and", "or", "equal"):
             return logic.NodeLogicA(data)

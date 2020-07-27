@@ -222,3 +222,57 @@ class NodeCounter(base.Node):
             if self.sub_state == ITERATION and self.get_actual_input(input_index) == 3:
                 self.sub_state = NEXT
             self.state = WAITING
+
+
+class NodeForeach(base.Node):
+    def __init__(self, data):
+        super().__init__(data)
+        self.variant = all if self.desc_value != "any" else any
+        self.start = False
+        self.iteration = 0
+        self.bound = None
+        self.values = None
+
+    def update_active(self):
+        if self.bound is not None:
+            if self.iteration >= self.bound:
+                self.set_active(0)
+                self.start = False
+                self.iteration = 0
+                self.output_values[1] = None
+                self.bound = None
+                self.sub_state = None
+                self.state = INACTIVE
+        if self.sub_state == READY:
+            self.sub_state = ITERATION
+            self.output_values[1] = self.values[self.iteration]
+            self.set_active(1)
+            self.state = WAITING
+
+    def update_waiting(self):
+        if self.sub_state == BOUND:
+            if self.variant(map(lambda x: x is not None, self.get_value(1, True))):
+                self.values = []
+                for value in self.get_value(1, True):
+                    if value is not None:
+                        self.values.append(value)
+                self.bound = len(self.values)
+            if self.bound is not None and self.start:
+                self.sub_state = READY
+        if self.sub_state == READY:
+            self.state = ACTIVE
+        if self.sub_state == NEXT:
+            self.iteration += 1
+            self.sub_state = READY
+            self.state = ACTIVE
+
+    def set_state(self, state, input_index, **kwargs):
+        if state == WAITING:
+            if self.get_actual_input(input_index) == 0:
+                self.start = True
+                self.bound = None
+            if self.sub_state is None:
+                self.sub_state = BOUND
+            if self.sub_state == ITERATION and self.get_actual_input(input_index) == 3:
+                self.sub_state = NEXT
+            self.state = WAITING
