@@ -160,7 +160,7 @@ class NodeVarSet(base.Node):
         self.state = INACTIVE
 
 
-class NodeCreateArray(base.Node):
+class NodeArrayCreate(base.Node):
     def __init__(self, data):
         super().__init__(data)
         self.value_type = None
@@ -177,8 +177,8 @@ class NodeCreateArray(base.Node):
             self.struct_variables[self.desc_value] = {
                 "structure": "array",
                 "len": int(array_len),
-                "type": utils.types[self.value_type],
-                "values": [copy(utils.types_default[self.value_type]) for _ in range(int(array_len))]
+                "type": self.value_type,
+                "values": [copy(utils.types_default[utils.types[self.value_type]]) for _ in range(int(array_len))]
             }
             self.state = ACTIVE
 
@@ -187,13 +187,13 @@ class NodeCreateArray(base.Node):
         self.state = INACTIVE
 
 
-class NodeGetArray(base.Node):
+class NodeArrayGet(base.Node):
     def update_waiting(self):
         if self.desc_value in self.struct_variables:
             if self.struct_variables[self.desc_value]["structure"] == "array":
                 array_index = self.get_value(0)
                 if array_index in range(self.struct_variables[self.desc_value]["len"]):
-                    self.output_values[0] = self.struct_variables[self.desc_value][array_index]
+                    self.output_values[0] = self.struct_variables[self.desc_value]["values"][array_index]
         self.state = ACTIVE
 
     def update_active(self):
@@ -201,7 +201,7 @@ class NodeGetArray(base.Node):
         self.state = INACTIVE
 
 
-class NodeSetArray(base.Node):
+class NodeArraySet(base.Node):
     def update_waiting(self):
         if self.get_value(0) is not None and self.get_value(1) is not None:
             if self.desc_value in self.struct_variables:
@@ -211,7 +211,7 @@ class NodeSetArray(base.Node):
                     if array_index in range(self.struct_variables[self.desc_value]["len"]):
                         try:
                             array_value = self.struct_variables[self.desc_value]["type"](array_value)
-                            self.struct_variables[self.desc_value][array_index] = array_value
+                            self.struct_variables[self.desc_value]["values"][array_index] = array_value
                         except ValueError:
                             # raise Error
                             pass
@@ -222,7 +222,7 @@ class NodeSetArray(base.Node):
         self.state = INACTIVE
 
 
-class NodeGetSetArray(base.Node):
+class NodeArrayGetSet(base.Node):
     def update_waiting(self):
         if self.get_value(0) is not None:
             if (self.get_value(1) is not None) or self.inputs[1]:
@@ -234,11 +234,11 @@ class NodeGetSetArray(base.Node):
                                 array_value = self.get_value(1)
                                 try:
                                     array_value = self.struct_variables[self.desc_value]["type"](array_value)
-                                    self.struct_variables[self.desc_value][array_index] = array_value
+                                    self.struct_variables[self.desc_value]["values"][array_index] = array_value
                                 except ValueError:
                                     # raise Error
                                     pass
-                            self.output_values[0] = self.struct_variables[self.desc_value][array_index]
+                            self.output_values[0] = self.struct_variables[self.desc_value]["values"][array_index]
             self.state = ACTIVE
 
     def update_active(self):

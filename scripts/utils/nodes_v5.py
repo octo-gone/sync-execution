@@ -1,4 +1,36 @@
 nodes_info = {
+    'array create': {
+        'inputs': ('int', ),
+        'inputs_label': ('len', ),
+        'outputs': ('ctrl', ),
+        'outputs_label': ('ctrl', ),
+        'inner': 'Array',
+        'label': 'array create'
+    },
+    'array set': {
+        'inputs': ('int', 'any'),
+        'inputs_label': ('len', 'value'),
+        'outputs': ('ctrl', ),
+        'outputs_label': ('ctrl', ),
+        'inner': 'A-Set',
+        'label': 'array set'
+    },
+    'array get': {
+        'inputs': ('int', ),
+        'inputs_label': ('len', ),
+        'outputs': ('any', ),
+        'outputs_label': ('value', ),
+        'inner': 'A-Get',
+        'label': 'array get'
+    },
+    'array get and set': {
+        'inputs': ('int', 'any'),
+        'inputs_label': ('len', 'value'),
+        'outputs': ('any', ),
+        'outputs_label': ('value', ),
+        'inner': 'A-GS',
+        'label': 'array get and set'
+    },
     'abs': {
         'inputs': ('number', ),
         'inputs_label': ('number', ),

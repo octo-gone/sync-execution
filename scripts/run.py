@@ -44,6 +44,14 @@ class NodeGen:
             return memory.NodeVarSet(data)
         if node_name == "var get":
             return memory.NodeVarGet(data)
+        if node_name == "array create":
+            return memory.NodeArrayCreate(data)
+        if node_name == "array get":
+            return memory.NodeArrayGet(data)
+        if node_name == "array set":
+            return memory.NodeArraySet(data)
+        if node_name == "array get and set":
+            return memory.NodeArrayGetSet(data)
 
         if node_name == "for":
             return construction.NodeFor(data)
@@ -146,3 +154,4 @@ def run(n, w, s, limit=10**5):
             break
     print("- end -")
     print("variables:", base.Node.variables)
+    print("struct variables:", base.Node.struct_variables)
