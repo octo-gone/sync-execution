@@ -1,6 +1,8 @@
 from scripts.utils import utils
 from scripts.nodes import base
 from scripts.nodes.base import ACTIVE, WAITING, INACTIVE
+from copy import copy
+
 
 value_types = {
     "$int": int,
@@ -152,6 +154,92 @@ class NodeVarSet(base.Node):
             value = utils.coercion(value)
         self.variables[var_name] = value
         self.state = ACTIVE
+
+    def update_active(self):
+        self.set_active(0)
+        self.state = INACTIVE
+
+
+class NodeCreateArray(base.Node):
+    def __init__(self, data):
+        super().__init__(data)
+        self.value_type = None
+        for value_type in value_types.keys():
+            if self.desc_value.endswith(value_type):
+                self.value_type = value_types[value_type]
+                self.desc_value = self.desc_value[:self.desc_value.index("$")]
+                break
+        self.value_type = int if self.value_type is None else self.value_type
+
+    def update_waiting(self):
+        array_len = self.get_value(0)
+        if self.desc_value is not None and array_len is not None:
+            self.struct_variables[self.desc_value] = {
+                "structure": "array",
+                "len": int(array_len),
+                "type": utils.types[self.value_type],
+                "values": [copy(utils.types_default[self.value_type]) for _ in range(int(array_len))]
+            }
+            self.state = ACTIVE
+
+    def update_active(self):
+        self.set_active(0)
+        self.state = INACTIVE
+
+
+class NodeGetArray(base.Node):
+    def update_waiting(self):
+        if self.desc_value in self.struct_variables:
+            if self.struct_variables[self.desc_value]["structure"] == "array":
+                array_index = self.get_value(0)
+                if array_index in range(self.struct_variables[self.desc_value]["len"]):
+                    self.output_values[0] = self.struct_variables[self.desc_value][array_index]
+        self.state = ACTIVE
+
+    def update_active(self):
+        self.set_active(0)
+        self.state = INACTIVE
+
+
+class NodeSetArray(base.Node):
+    def update_waiting(self):
+        if self.get_value(0) is not None and self.get_value(1) is not None:
+            if self.desc_value in self.struct_variables:
+                if self.struct_variables[self.desc_value]["structure"] == "array":
+                    array_index = self.get_value(0)
+                    array_value = self.get_value(1)
+                    if array_index in range(self.struct_variables[self.desc_value]["len"]):
+                        try:
+                            array_value = self.struct_variables[self.desc_value]["type"](array_value)
+                            self.struct_variables[self.desc_value][array_index] = array_value
+                        except ValueError:
+                            # raise Error
+                            pass
+            self.state = ACTIVE
+
+    def update_active(self):
+        self.set_active(0)
+        self.state = INACTIVE
+
+
+class NodeGetSetArray(base.Node):
+    def update_waiting(self):
+        if self.get_value(0) is not None:
+            if (self.get_value(1) is not None) or self.inputs[1]:
+                if self.desc_value in self.struct_variables:
+                    if self.struct_variables[self.desc_value]["structure"] == "array":
+                        array_index = self.get_value(0)
+                        if array_index in range(self.struct_variables[self.desc_value]["len"]):
+                            if self.inputs[1]:
+                                array_value = self.get_value(1)
+                                try:
+                                    array_value = self.struct_variables[self.desc_value]["type"](array_value)
+                                    self.struct_variables[self.desc_value][array_index] = array_value
+                                except ValueError:
+                                    # raise Error
+                                    pass
+                            self.output_values[0] = self.struct_variables[self.desc_value][array_index]
+            self.state = ACTIVE
 
     def update_active(self):
         self.set_active(0)

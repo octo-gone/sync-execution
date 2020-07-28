@@ -19,6 +19,7 @@ WAITING = "waiting"
 
 class Node:
     variables = {}
+    struct_variables = {}
     nodes = {}
 
     def __init__(self, data):

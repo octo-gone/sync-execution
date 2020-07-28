@@ -165,6 +165,15 @@ class Number(Real):
         raise ValueError(f"invalid literal for Number: '{value}'")
 
 
+types = {
+    int: "int",
+    float: "real",
+    Number: "num",
+    Char: "char",
+    bool: "bool",
+    str: "str"
+}
+
 types_default = {
     "int": int(0),
     "real": float(0),
