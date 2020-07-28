@@ -18,6 +18,10 @@ class NodeLogicA(base.Node):
                 self.output_values[0] = all(self.get_value(0, True))
             elif self.name == "or":
                 self.output_values[0] = any(self.get_value(0, True))
+            elif self.name == "not and":
+                self.output_values[0] = not all(self.get_value(0, True))
+            elif self.name == "nor or":
+                self.output_values[0] = not any(self.get_value(0, True))
             elif self.name == "equal":
                 self.output_values[0] = len(set(self.get_value(0, True))) == 1
             self.state = ACTIVE

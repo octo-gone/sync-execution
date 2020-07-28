@@ -58,7 +58,7 @@ class NodeGen:
         if node_name == "foreach":
             return construction.NodeForeach(data)
 
-        if node_name in ("and", "or", "equal"):
+        if node_name in ("and", "or", "not and", "not or", "equal"):
             return logic.NodeLogicA(data)
         if node_name in ("greater", "greater or equal", "less", "less or equal", "not equal", "xor"):
             return logic.NodeLogicB(data)
