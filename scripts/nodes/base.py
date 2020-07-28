@@ -1,5 +1,5 @@
 from abc import abstractmethod, ABC
-from scripts.utils import nodes_v4 as nodes_info
+from scripts.utils import nodes_v5 as nodes_info
 from copy import deepcopy, copy
 
 

@@ -23,8 +23,17 @@ nodes_info = {
         'inputs_color': ('bool', ),
         'outputs': ('bool', ),
         'outputs_label': ('bool', ),
-        'inner': '&',
+        'inner': 'AND',
         'label': 'and'
+    },
+    'not and': {
+        'inputs': ('mult', ),
+        'inputs_label': ('values', ),
+        'inputs_color': ('bool', ),
+        'outputs': ('bool', ),
+        'outputs_label': ('bool', ),
+        'inner': 'NAND',
+        'label': 'not and'
     },
     'bool': {
         'inputs': ('any', ),
@@ -285,8 +294,17 @@ nodes_info = {
         'inputs_color': ('bool', ),
         'outputs': ('bool', ),
         'outputs_label': ('bool', ),
-        'inner': '|',
+        'inner': 'OR',
         'label': 'or'
+    },
+    'not or': {
+        'inputs': ('mult', ),
+        'inputs_label': ('values', ),
+        'inputs_color': ('bool', ),
+        'outputs': ('bool', ),
+        'outputs_label': ('bool', ),
+        'inner': 'NOR',
+        'label': 'not or'
     },
     'print': {
         'inputs': ('any', ),
@@ -411,7 +429,7 @@ nodes_info = {
         'inputs_label': ('bool', 'bool'),
         'outputs': ('bool', ),
         'outputs_label': ('bool', ),
-        'inner': '^',
+        'inner': 'XOR',
         'label': 'xor'
     },
     'value switch': {
