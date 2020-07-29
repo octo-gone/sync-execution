@@ -23,6 +23,8 @@ nodes_info = {
         'bg_color': (255, 255, 255),  # optional
         'border_color': (0, 0, 0),  # optional
         'border_width': 10,  # optional
+
+        'width': 1  # optional
     },
 }
 
