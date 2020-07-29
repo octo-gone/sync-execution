@@ -261,6 +261,14 @@ nodes_info = {
         'label': 'inversion',
         'sync_name': 'inv'
     },
+    'length': {
+        'inputs': ('ctrl', ),
+        'inputs_label': ('ctrl', ),
+        'outputs': ('int', ),
+        'outputs_label': ('int', ),
+        'inner': 'Len',
+        'label': 'length',
+    },
     'list create': {
         'inputs': ('ctrl', ),
         'inputs_label': ('ctrl', ),

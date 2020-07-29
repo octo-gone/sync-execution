@@ -203,9 +203,10 @@ class NodeArrayGet(base.Node):
 
 class NodeArraySet(base.Node):
     def update_waiting(self):
-        if self.get_value(0) is not None and self.get_value(1) is not None:
-            if self.desc_value in self.struct_variables:
-                if self.struct_variables[self.desc_value]["structure"] == "array":
+
+        if self.desc_value in self.struct_variables:
+            if self.struct_variables[self.desc_value]["structure"] == "array":
+                if self.get_value(0) is not None and self.get_value(1) is not None:
                     array_index = self.get_value(0)
                     array_value = self.get_value(1)
                     if array_index in range(self.struct_variables[self.desc_value]["len"]):
@@ -215,7 +216,7 @@ class NodeArraySet(base.Node):
                         except ValueError:
                             # raise Error
                             pass
-            self.state = ACTIVE
+                    self.state = ACTIVE
 
     def update_active(self):
         self.set_active(0)
@@ -225,10 +226,10 @@ class NodeArraySet(base.Node):
 class NodeArrayGetSet(base.Node):
     def update_waiting(self):
         array_value = None
-        if self.get_value(0) is not None:
-            if (self.get_value(1) is not None) or not self.inputs[1]:
-                if self.desc_value in self.struct_variables:
-                    if self.struct_variables[self.desc_value]["structure"] == "array":
+        if self.desc_value in self.struct_variables:
+            if self.struct_variables[self.desc_value]["structure"] == "array":
+                if self.get_value(0) is not None:
+                    if (self.get_value(1) is not None) or not self.inputs[1]:
                         array_index = self.get_value(0)
                         if array_index in range(self.struct_variables[self.desc_value]["len"]):
                             if self.inputs[1]:
@@ -240,10 +241,10 @@ class NodeArrayGetSet(base.Node):
                                     # raise Error
                                     pass
                             self.output_values[0] = self.struct_variables[self.desc_value]["values"][array_index]
-            if not self.inputs[1]:
-                self.state = ACTIVE
-            elif array_value is not None:
-                self.state = ACTIVE
+                    if not self.inputs[1]:
+                        self.state = ACTIVE
+                    elif array_value is not None:
+                        self.state = ACTIVE
 
     def update_active(self):
         self.set_active(0)
@@ -280,20 +281,19 @@ class NodeListGet(base.Node):
 
 class NodeListSet(base.Node):
     def update_waiting(self):
-        if not self.inputs[0]:
-            if self.desc_value in self.struct_variables:
-                if self.struct_variables[self.desc_value]["structure"] == "list":
+        if self.desc_value in self.struct_variables:
+            if self.struct_variables[self.desc_value]["structure"] == "list":
+                if not self.inputs[0]:
                     array_value = self.get_value(1)
                     self.struct_variables[self.desc_value]["values"].append(array_value)
-            self.state = ACTIVE
-        elif self.get_value(0) is not None and self.get_value(1) is not None:
-            if self.desc_value in self.struct_variables:
-                if self.struct_variables[self.desc_value]["structure"] == "list":
+                    self.state = ACTIVE
+                elif self.get_value(0) is not None and self.get_value(1) is not None:
                     array_index = self.get_value(0)
                     array_value = self.get_value(1)
                     if array_index in range(len(self.struct_variables[self.desc_value]["values"])):
                         self.struct_variables[self.desc_value]["values"][array_index] = array_value
-            self.state = ACTIVE
+                    self.struct_variables[self.desc_value]["values"].append(array_value)
+                    self.state = ACTIVE
 
     def update_active(self):
         self.set_active(0)
@@ -303,28 +303,37 @@ class NodeListSet(base.Node):
 class NodeListGetSet(base.Node):
     def update_waiting(self):
         array_value = None
-        if not self.inputs[0]:
-            if self.desc_value in self.struct_variables:
-                if self.struct_variables[self.desc_value]["structure"] == "list":
+        if self.desc_value in self.struct_variables:
+            if self.struct_variables[self.desc_value]["structure"] == "list":
+                if not self.inputs[0]:
                     array_value = self.get_value(1)
                     self.struct_variables[self.desc_value]["values"].append(array_value)
-            self.state = ACTIVE
-        elif self.get_value(0) is not None:
-            if (self.get_value(1) is not None) or not self.inputs[1]:
-                if self.desc_value in self.struct_variables:
-                    if self.struct_variables[self.desc_value]["structure"] == "list":
+                    self.state = ACTIVE
+                elif self.get_value(0) is not None:
+                    if (self.get_value(1) is not None) or not self.inputs[1]:
                         array_index = self.get_value(0)
                         if array_index in range(len(self.struct_variables[self.desc_value]["values"])):
                             if self.inputs[1]:
                                 array_value = self.get_value(1)
                                 self.struct_variables[self.desc_value]["values"][array_index] = array_value
                             self.output_values[0] = self.struct_variables[self.desc_value]["values"][array_index]
-            if not self.inputs[1]:
-                self.state = ACTIVE
-            elif array_value is not None:
-                self.state = ACTIVE
+                    if not self.inputs[1]:
+                        self.state = ACTIVE
+                    elif array_value is not None:
+                        self.state = ACTIVE
 
     def update_active(self):
         self.set_active(0)
         self.state = INACTIVE
 
+
+class NodeLen(base.Node):
+    def update_waiting(self):
+        if self.desc_value in self.struct_variables:
+            if self.struct_variables[self.desc_value]["structure"] in ("list", "array"):
+                self.output_values[0] = len(self.struct_variables[self.desc_value]["values"])
+        self.state = ACTIVE
+
+    def update_active(self):
+        self.set_active(0)
+        self.state = INACTIVE
