@@ -26,4 +26,5 @@ nodes_info = {
     },
 }
 
-style = gen.NodeSVG(nodes_info['len'])
+node = gen.NodeSVG(nodes_info['len'])
+style = node.draw("<save-path>")
