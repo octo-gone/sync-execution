@@ -48,7 +48,7 @@ class NodePrint(base.Node):
 
 class NodeInput(base.Node):
     def update_waiting(self):
-        prompt = "$: "
+        prompt = "$ "
         if self.desc_value:
             prompt = self.desc_value
         value = input(prompt)
