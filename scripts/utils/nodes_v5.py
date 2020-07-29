@@ -9,7 +9,7 @@ nodes_info = {
     },
     'array set': {
         'inputs': ('int', 'any'),
-        'inputs_label': ('len', 'value'),
+        'inputs_label': ('index', 'value'),
         'outputs': ('ctrl', ),
         'outputs_label': ('ctrl', ),
         'inner': 'A-Set',
@@ -17,7 +17,7 @@ nodes_info = {
     },
     'array get': {
         'inputs': ('int', ),
-        'inputs_label': ('len', ),
+        'inputs_label': ('index', ),
         'outputs': ('any', ),
         'outputs_label': ('value', ),
         'inner': 'A-Get',
@@ -25,7 +25,7 @@ nodes_info = {
     },
     'array get and set': {
         'inputs': ('int', 'any'),
-        'inputs_label': ('len', 'value'),
+        'inputs_label': ('index', 'value'),
         'outputs': ('any', ),
         'outputs_label': ('value', ),
         'inner': 'A-GS',
@@ -260,6 +260,38 @@ nodes_info = {
         'inner': 'Inv',
         'label': 'inversion',
         'sync_name': 'inv'
+    },
+    'list create': {
+        'inputs': ('ctrl', ),
+        'inputs_label': ('ctrl', ),
+        'outputs': ('ctrl', ),
+        'outputs_label': ('ctrl', ),
+        'inner': 'List',
+        'label': 'list create'
+    },
+    'list set': {
+        'inputs': ('int', 'any'),
+        'inputs_label': ('index', 'value'),
+        'outputs': ('ctrl', ),
+        'outputs_label': ('ctrl', ),
+        'inner': 'L-Set',
+        'label': 'list set'
+    },
+    'list get': {
+        'inputs': ('int', ),
+        'inputs_label': ('index', ),
+        'outputs': ('any', ),
+        'outputs_label': ('value', ),
+        'inner': 'L-Get',
+        'label': 'list get'
+    },
+    'list get and set': {
+        'inputs': ('int', 'any'),
+        'inputs_label': ('index', 'value'),
+        'outputs': ('any', ),
+        'outputs_label': ('value', ),
+        'inner': 'L-GS',
+        'label': 'list get and set'
     },
     'less': {
         'inputs': ('any', 'any'),

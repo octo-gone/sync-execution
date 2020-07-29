@@ -44,6 +44,7 @@ class NodeGen:
             return memory.NodeVarSet(data)
         if node_name == "var get":
             return memory.NodeVarGet(data)
+
         if node_name == "array create":
             return memory.NodeArrayCreate(data)
         if node_name == "array get":
@@ -52,6 +53,15 @@ class NodeGen:
             return memory.NodeArraySet(data)
         if node_name == "array get and set":
             return memory.NodeArrayGetSet(data)
+
+        if node_name == "list create":
+            return memory.NodeListCreate(data)
+        if node_name == "list get":
+            return memory.NodeListGet(data)
+        if node_name == "list set":
+            return memory.NodeListSet(data)
+        if node_name == "list get and set":
+            return memory.NodeListGetSet(data)
 
         if node_name == "for":
             return construction.NodeFor(data)
