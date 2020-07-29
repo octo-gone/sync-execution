@@ -9,17 +9,17 @@ __sync-execution__ is a python program that can run an algorithmic language __sy
 <br/>
 The language itself is a kind of notation that allows you to visualize algorithms and logical schemes.
 
-##### Project requirements
+### Project requirements
 Project available for pure __Python 3.8__, but it is possible to run it on older versions.
 <br/>
 To draw diagrams you can use any diagram editor (based on __jgraph's__ Drawio https://github.com/jgraph/drawio). 
 
-##### Сontent
+### Сontent
 - __resources__ contains versions of programming language
 - __examples__ contains examples of language construction and typical exercises' solution
 - __scripts__ contains base of program 
 
-### Personal Node
+## Personal Node
 If you want to create your own node, use scripts in __drawer__. 
 But to run them you need to install __svgwrite__. 
 ```
