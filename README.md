@@ -16,14 +16,14 @@ To draw diagrams you can use any diagram editor (based on __jgraph's__ Drawio ht
 
 ### Сontent
 - __resources__ contains versions of programming language
-    - _Nodes.drawio_ is library for Drawio with basic nodes
-    - _Nodes_VarStruct.drawio_ is library with additional nodes 
+    - _Nodes.drawio_ - library for Drawio with basic nodes
+    - _Nodes_VarStruct.drawio_ - library with additional nodes 
 - __examples__ contains examples of language construction and typical exercises' solution
 - __scripts__ contains base of program 
     - __nodes__ contains python modules, each of them include several classes (nodes)
     - __utils__ contains module with exceptions, list of nodes in python dictionary and useful functions
-    - _parser.py_ is a specific xml parser based on regular expressions
-    - _run.py_ is base of program and contains functions that define relationships between nodes
+    - _parser.py_ - specific xml parser based on regular expressions
+    - _run.py_ - base of program and contains functions that define relationships between nodes
 
 ## Personal Node
 If you want to create your own node, use scripts in __drawer__. 
