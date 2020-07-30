@@ -1,6 +1,5 @@
 from abc import abstractmethod, ABC
 from scripts.utils import nodes_v5 as nodes_info
-from copy import deepcopy, copy
 
 
 # the limit imposed on the number of connected wires
@@ -182,9 +181,12 @@ class Wire:
         if self.exit[0] == 0:
             self.exit, self.entry = self.entry, self.exit
             self.target, self.source = self.source, self.target
-
-        self.entry_connector = self.target.input_connectors.index(self.entry[1])
-        self.exit_connector = self.source.output_connectors.index(self.exit[1])
+        try:
+            self.entry_connector = self.target.input_connectors.index(self.entry[1])
+            self.exit_connector = self.source.output_connectors.index(self.exit[1])
+        except:
+            print(self.source.output_connectors)
+            raise
 
         self.active_ctrl = False
         self.value = None

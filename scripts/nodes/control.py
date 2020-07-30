@@ -57,6 +57,10 @@ class NodeMerge(base.Node):
     def update_waiting(self):
         self.state = ACTIVE
 
+    def set_state(self, state, input_index, **kwargs):
+        if state == WAITING and self.get_actual_input(input_index) == 0:
+            self.state = state
+
 
 class NodeCtrl(base.Node):
     def update_active(self):

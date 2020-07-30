@@ -1,5 +1,5 @@
 from scripts.utils import utils
-from scripts.nodes import base, control, inout, memory, construction, logic, misc, mathematic
+from scripts.nodes import base, control, inout, memory, construction, logic, misc, mathematic, func
 from scripts.utils import exceptions
 
 
@@ -7,8 +7,8 @@ from scripts.utils import exceptions
 class NodeGen:
     def __new__(cls, data):
         node_name = data["node_name"]
-        # if str(node_name).startswith("function"):
-        #     return base.NodeFunction(data)
+        if str(node_name).startswith("function"):
+            return func.NodeFunction(data)
 
         if node_name == "run":
             return control.NodeRun(data)
@@ -82,6 +82,8 @@ class NodeGen:
             return logic.NodeLogicB(data)
         if node_name == "in":
             return logic.NodeIn(data)
+        if node_name == "bool":
+            return logic.NodeBool(data)
 
         if node_name == "value switch":
             return misc.NodeValueSwitch(data)
@@ -133,7 +135,7 @@ def create_structure(n, w, s):
         node.update_connections()
         base.Scope.check_contains(node)
 
-    # base.NodeFunction.init_function()
+    func.NodeFunction.init_function()
     # for node in base.Node.nodes.values():
     #     # if node.name.startswith("function"):
     #     print(node.id, node.name, node.inputs, node.outputs, node.scope)

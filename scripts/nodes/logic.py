@@ -71,3 +71,16 @@ class NodeIn(base.Node):
     def set_state(self, state, input_index, **kwargs):
         if state == WAITING and self.get_actual_input(input_index) == 1:
             self.state = state
+
+
+class NodeBool(base.Node):
+    def update_active(self):
+        self.set_active(0)
+        self.state = INACTIVE
+
+    def update_waiting(self):
+        if self.get_value(0) is None:
+            self.output_values[0] = False
+        else:
+            self.output_values[0] = bool(self.get_value(0))
+        self.state = ACTIVE
