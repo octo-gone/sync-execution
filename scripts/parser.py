@@ -194,6 +194,10 @@ def parse(file_path):
             ratio = (1, max(get_ratio(patterns["inputs"]),
                             get_ratio(patterns["outputs"])))
 
+            if patterns["node_name"].startswith("function input") or \
+               patterns["node_name"].startswith("function output"):
+                ratio = (ratio[0], max(2, ratio[1]))
+
             inputs = list(map(lambda x: round(x / ratio[1], 5), inputs))
             outputs = list(map(lambda x: round(x / ratio[1], 5), outputs))
 
