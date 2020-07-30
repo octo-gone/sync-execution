@@ -119,6 +119,7 @@ class NodeIf(base.Node):
         else:
             self.condition = None
             self.set_active(1)
+        self.state = INACTIVE
 
     def update_waiting(self):
         if self.sub_state == READY:
