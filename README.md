@@ -16,8 +16,8 @@ To draw diagrams you can use any diagram editor (based on __jgraph's__ Drawio ht
 
 ### Сontent
 - __resources__ contains versions of programming language
-    - _Nodes_v<b>\<version\></b>.drawio_ is library for Drawio with basic nodes
-    - _Nodes_VarStruct_v<b>\<version\></b>.drawio_ is library with additional nodes 
+    - _Nodes.drawio_ is library for Drawio with basic nodes
+    - _Nodes_VarStruct.drawio_ is library with additional nodes 
 - __examples__ contains examples of language construction and typical exercises' solution
 - __scripts__ contains base of program 
     - __nodes__ contains python modules, each of them include several classes (nodes)
