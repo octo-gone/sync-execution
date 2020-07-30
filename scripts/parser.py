@@ -1,6 +1,7 @@
 import re
 import math
 from scripts.utils import nodes_v5 as nodes_info
+from scripts.utils import logger
 from xml.sax.saxutils import unescape
 
 # possible connectors variants
@@ -156,6 +157,9 @@ def parse(file_path):
                 else:
                     patterns[key] = None
 
+            if patterns["node_name"] not in nodes_info.nodes_info:
+                logger.log_error(f"no built-in nodes found with name '{patterns['node_name']}'")
+
             inputs = get_connectors(nodes_info.nodes_info[patterns["node_name"]]["inputs"])
             outputs = get_connectors(nodes_info.nodes_info[patterns["node_name"]]["outputs"])
 
@@ -219,6 +223,9 @@ def parse(file_path):
                 patterns[key] = None
 
         for key in ["exitX", "exitY", "entryX", "entryY"]:
+            if patterns[key] is None:
+                logger.log_error(f"wrong connected wire found with source '{patterns['source']}' "
+                                 f"and target '{patterns['target']}'")
             patterns[key] = round(float(patterns[key]), 5)
 
         wires.append(patterns)

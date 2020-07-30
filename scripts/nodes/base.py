@@ -1,6 +1,6 @@
 from abc import abstractmethod, ABC
 from scripts.utils import nodes_v5 as nodes_info
-
+from scripts.utils import logger
 
 # the limit imposed on the number of connected wires
 one_connection = ("int", "real", "obj", "char", "ctrl", "bool", "any", "number", "dir_mult_s", "dir_mult")
@@ -94,7 +94,7 @@ class Node:
                 offset += 5
         for i, v in enumerate(ins):
             if inputs_info[i] in one_connection and len(v) > 1:
-                raise ValueError("wrong connection count")
+                logger.log_error(f"wrong input connections count in node '{self.name}/{self.id}'")
 
         self.inputs = ins
 
@@ -163,30 +163,29 @@ class Wire:
         self.wires.append(self)
         self.raw_data = data
 
-        if data["source"] in Node.nodes:
-            self.source = Node.nodes[data["source"]]
-        else:
-            raise ValueError("no source node")
+        self.source = Node.nodes.get(data["source"], None)
+        self.target = Node.nodes.get(data["target"], None)
 
-        if data["target"] in Node.nodes:
-            self.target = Node.nodes[data["target"]]
-        else:
-            raise ValueError("no target node")
+        if self.source is None and self.target is None:
+            logger.log_warning("no source and target nodes found")
+        if self.source is None:
+            logger.log_error(f"no source node found for wire with target '{self.target.name}/{self.target.id}'")
+        if self.target is None:
+            logger.log_error(f"no target node found for wire with source '{self.source.name}/{self.source.id}'")
 
         self.exit = data["exitX"], data["exitY"]
         self.entry = data["entryX"], data["entryY"]
 
         if self.exit[0] == self.entry[0]:
-            raise ValueError("wrong connection")
+            logger.log_error(f"wrong wire connection from node '{self.source.name}/{self.source.id}' "
+                             f"to node '{self.target.name}/{self.target.id}'")
+
         if self.exit[0] == 0:
             self.exit, self.entry = self.entry, self.exit
             self.target, self.source = self.source, self.target
-        try:
-            self.entry_connector = self.target.input_connectors.index(self.entry[1])
-            self.exit_connector = self.source.output_connectors.index(self.exit[1])
-        except:
-            print(self.source.output_connectors)
-            raise
+
+        self.entry_connector = self.target.input_connectors.index(self.entry[1])
+        self.exit_connector = self.source.output_connectors.index(self.exit[1])
 
         self.active_ctrl = False
         self.value = None

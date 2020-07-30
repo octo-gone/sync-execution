@@ -1,6 +1,6 @@
 from scripts.nodes import base
 from scripts.nodes.base import ACTIVE, WAITING, INACTIVE
-from scripts.utils import utils
+from scripts.utils import utils, logger
 
 
 READY = "ready"
@@ -85,7 +85,6 @@ class NodeForExt(base.Node):
         if self.sub_state == BOUND:
             self.bound = self.value_type(self.get_value(1)) if self.inputs[1] else -1
             self.iteration = self.value_type(self.get_value(2)) if self.inputs[2] else 0
-
             if self.bound is not None and self.start is not None:
                 self.sub_state = READY
         if self.sub_state == READY:

@@ -1,6 +1,6 @@
 from scripts.nodes import base
 from scripts.nodes.base import ACTIVE, WAITING, INACTIVE
-from scripts.utils import utils
+from scripts.utils import utils, logger
 
 
 class NodeValueSwitch(base.Node):

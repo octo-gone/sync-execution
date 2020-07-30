@@ -1,4 +1,4 @@
-from scripts.utils import utils
+from scripts.utils import utils, logger
 from scripts.nodes import base
 from scripts.nodes.base import ACTIVE, WAITING, INACTIVE
 from copy import copy
@@ -210,12 +210,8 @@ class NodeArraySet(base.Node):
                     array_index = self.get_value(0)
                     array_value = self.get_value(1)
                     if array_index in range(self.struct_variables[self.desc_value]["len"]):
-                        try:
-                            array_value = self.struct_variables[self.desc_value]["type"](array_value)
-                            self.struct_variables[self.desc_value]["values"][array_index] = array_value
-                        except ValueError:
-                            # raise Error
-                            pass
+                        array_value = self.struct_variables[self.desc_value]["type"](array_value)
+                        self.struct_variables[self.desc_value]["values"][array_index] = array_value
                     self.state = ACTIVE
 
     def update_active(self):
@@ -234,12 +230,8 @@ class NodeArrayGetSet(base.Node):
                         if array_index in range(self.struct_variables[self.desc_value]["len"]):
                             if self.inputs[1]:
                                 array_value = self.get_value(1)
-                                try:
-                                    array_value = self.struct_variables[self.desc_value]["type"](array_value)
-                                    self.struct_variables[self.desc_value]["values"][array_index] = array_value
-                                except ValueError:
-                                    # raise Error
-                                    pass
+                                array_value = self.struct_variables[self.desc_value]["type"](array_value)
+                                self.struct_variables[self.desc_value]["values"][array_index] = array_value
                             self.output_values[0] = self.struct_variables[self.desc_value]["values"][array_index]
                     if not self.inputs[1]:
                         self.state = ACTIVE

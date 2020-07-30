@@ -1,4 +1,4 @@
-from scripts.utils import utils
+from scripts.utils import utils, logger
 from scripts.nodes import base
 from scripts.nodes.base import ACTIVE, WAITING, INACTIVE
 

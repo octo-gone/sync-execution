@@ -1,5 +1,5 @@
 from scripts.nodes import base
-from scripts.utils import exceptions
+from scripts.utils import exceptions, logger, utils
 from scripts.nodes.base import ACTIVE, WAITING, INACTIVE
 
 
@@ -118,11 +118,9 @@ class NodeTimer(base.Node):
 
 
 class NodeError(base.Node):
-    class NodeErrorException(Exception):
-        pass
 
     def update_waiting(self):
-        raise self.NodeErrorException(self.desc_value)
+        logger.log_error(f"node 'err' raised exception '{self.desc_value}'")
 
     def update_active(self):
         self.set_active(0)

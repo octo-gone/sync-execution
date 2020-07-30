@@ -1,6 +1,5 @@
-from scripts.utils import utils
+from scripts.utils import utils, exceptions, logger
 from scripts.nodes import base, control, inout, memory, construction, logic, misc, mathematic, func
-from scripts.utils import exceptions
 
 
 # node auto init
@@ -115,6 +114,7 @@ class NodeGen:
         if node_name == "sub":
             return mathematic.NodeSub(data)
 
+        logger.log_warning(f"no function node found with name '{node_name}'")
         return base.Node(data)
 
 
@@ -136,34 +136,24 @@ def create_structure(n, w, s):
         base.Scope.check_contains(node)
 
     func.NodeFunction.init_function()
-    # for node in base.Node.nodes.values():
-    #     # if node.name.startswith("function"):
-    #     print(node.id, node.name, node.inputs, node.outputs, node.scope)
-    # exit()
 
 
 def run(n, w, s, limit=10**5):
     create_structure(n, w, s)
-    print("- program -")
+    if "run" not in map(lambda x: x.name, base.Node.nodes.values()):
+        logger.log_error("no 'start' node")
+    logger.log_message("program started")
     for utils.iteration in range(limit):
         try:
             for node in base.Node.nodes.values():
                 node.update(base.INACTIVE)
-            # print("--")
             for node in base.Node.nodes.values():
-                # if node.state == base.WAITING:
-                #     print(node.name, node.id, node.get_actual_state(), node.inputs)
                 node.update(base.WAITING)
-            # print("--")
             for node in base.Node.nodes.values():
                 node.update(base.ACTIVE)
-            # for node in base.Node.nodes.values():
-            #     if node.name == 'run':
-            #         print(node.id, node.name, node.get_actual_state(), node.outputs)
-            # print("--")
         except exceptions.StopSync:
-            print("- stop -")
+            logger.log_message("program stopped via node 'stop'")
+            utils.iteration = -1
             break
-    print("- end -")
-    print("variables:", base.Node.variables)
-    print("struct variables:", base.Node.struct_variables)
+    if utils.iteration != -1:
+        logger.log_error("iteration overstepped the limit")

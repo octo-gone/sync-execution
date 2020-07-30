@@ -1,5 +1,6 @@
 from copy import deepcopy, copy
 from scripts.nodes import base
+from scripts.utils import logger
 import abc
 
 
@@ -9,7 +10,6 @@ class NodeFunction(base.Node, abc.ABC):
 
     def __init__(self, data):
         super().__init__(data)
-        print(self.name)
         if self.name.startswith("function input"):
             if " ".join(self.name.split(" ")[2:]) not in self.functions:
                 self.functions[" ".join(self.name.split(" ")[2:])] = {}
