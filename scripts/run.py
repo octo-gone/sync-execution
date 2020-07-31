@@ -90,6 +90,12 @@ class NodeGen:
             return misc.NodeGetType(data)
         if node_name == "type":
             return misc.NodeType(data)
+        if node_name == "random":
+            return misc.NodeRandom(data)
+        if node_name == "random int":
+            return misc.NodeRandomInt(data)
+        if node_name == "random num":
+            return misc.NodeRandomNum(data)
 
         if node_name == "abs":
             return mathematic.NodeAbs(data)

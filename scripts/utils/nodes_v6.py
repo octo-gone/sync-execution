@@ -395,6 +395,30 @@ nodes_info = {
         'label': 'print with ctrl',
         'sync_name': 'print ctrl'
     },
+    'random int': {
+        'inputs': ('int', 'int'),
+        'inputs_label': ('bottom', 'top'),
+        'outputs': ('int', ),
+        'outputs_label': ('int', ),
+        'inner': 'R-Int',
+        'label': 'random int',
+    },
+    'random num': {
+        'inputs': ('number', 'number'),
+        'inputs_label': ('bottom', 'top'),
+        'outputs': ('number', ),
+        'outputs_label': ('number', ),
+        'inner': 'R-Num',
+        'label': 'random num',
+    },
+    'random': {
+        'inputs': ('ctrl', ),
+        'inputs_label': ('ctrl', ),
+        'outputs': ('real', ),
+        'outputs_label': ('real', ),
+        'inner': 'Rand',
+        'label': 'random',
+    },
     'round': {
         'inputs': ('number', 'int'),
         'inputs_label': ('number', 'precision'),

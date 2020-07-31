@@ -1,7 +1,7 @@
 import gen
 
 
-nodes_info = {
+example_node = {
     'len': {
         'inputs': ('ctrl', ),
         'inputs_color': ('ctrl', ),  # optional
@@ -28,5 +28,30 @@ nodes_info = {
     },
 }
 
-node = gen.NodeSVG(nodes_info['len'])
-style = node.draw("<save-path>")
+
+nodes_info = {
+    'random int': {
+        'inputs': ('int', 'int'),
+        'outputs': ('int', ),
+        'inner': 'R-Int',
+        'label': 'random int',
+    },
+    'random num': {
+        'inputs': ('number', 'number'),
+        'outputs': ('number', ),
+        'inner': 'R-Num',
+        'label': 'random num',
+    },
+    'random': {
+        'inputs': ('ctrl', ),
+        'outputs': ('real', ),
+        'inner': 'Rand',
+        'label': 'random',
+    }
+}
+
+for node_info in nodes_info.values():
+    node = gen.NodeSVG(**node_info)
+    file_path, style = node.draw_node("generated/")
+    print(style)
+    input()
