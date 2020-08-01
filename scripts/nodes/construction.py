@@ -251,7 +251,13 @@ class NodeForeach(base.Node):
 
     def update_waiting(self):
         if self.sub_state == BOUND:
-            if self.variant(map(lambda x: x is not None, self.get_value(1, True))):
+            if not self.inputs[1]:
+                if self.desc_value in self.struct_variables:
+                    struct = self.struct_variables[self.desc_value]
+                    if struct["structure"] in ("list", "array"):
+                        self.values = self.struct_variables[self.desc_value]["values"]
+                self.bound = len(self.values)
+            elif self.variant(map(lambda x: x is not None, self.get_value(1, True))):
                 self.values = []
                 for value in self.get_value(1, True):
                     if value is not None:

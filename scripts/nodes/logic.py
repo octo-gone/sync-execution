@@ -60,7 +60,16 @@ class NodeIn(base.Node):
         self.state = INACTIVE
 
     def update_waiting(self):
-        if self.variant(map(lambda x: x is not None, self.get_value(0, True))):
+        if not self.inputs[0]:
+            self.output_values[0] = False
+            if self.desc_value in self.struct_variables:
+                struct = self.struct_variables[self.desc_value]
+                if struct["structure"] in ("list", "array"):
+                    values = self.struct_variables[self.desc_value]["values"]
+                    if self.get_value(1) in values:
+                        self.output_values[0] = True
+            self.state = ACTIVE
+        elif self.variant(map(lambda x: x is not None, self.get_value(0, True))):
             self.output_values[0] = False
             for value in self.get_value(0, True):
                 if self.get_value(1) == value:
