@@ -71,7 +71,6 @@ class NodeGen:
         if node_name == "matrix get and set":
             return memory.NodeMatrixGetSet(data)
 
-
         if node_name == "for":
             return construction.NodeFor(data)
         if node_name == "for ext":
