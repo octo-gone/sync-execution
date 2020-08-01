@@ -12,6 +12,7 @@ value_types = {
     "$number": utils.Number,
     "$num": utils.Number,
     "$string": str,
+    "$str": str,
     "$any": utils.coercion
 }
 
