@@ -62,6 +62,16 @@ class NodeGen:
         if node_name == "length":
             return memory.NodeLen(data)
 
+        if node_name == "matrix create":
+            return memory.NodeMatrixCreate(data)
+        if node_name == "matrix get":
+            return memory.NodeMatrixGet(data)
+        if node_name == "matrix set":
+            return memory.NodeMatrixSet(data)
+        if node_name == "matrix get and set":
+            return memory.NodeMatrixGetSet(data)
+
+
         if node_name == "for":
             return construction.NodeFor(data)
         if node_name == "for ext":

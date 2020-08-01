@@ -317,6 +317,38 @@ nodes_info = {
         'inner': 'a<=b',
         'label': 'less or equal'
     },
+    'matrix create': {
+        'inputs': ('int', 'int', ),
+        'inputs_label': ('len y', 'len x', ),
+        'outputs': ('ctrl', ),
+        'outputs_label': ('ctrl', ),
+        'inner': 'Mtx',
+        'label': 'matrix create'
+    },
+    'matrix set': {
+        'inputs': ('int', 'int', 'sep', 'any'),
+        'inputs_label': ('index y', 'index x', 'sep', 'value'),
+        'outputs': ('ctrl', ),
+        'outputs_label': ('ctrl', ),
+        'inner': 'M-Set',
+        'label': 'matrix set'
+    },
+    'matrix get': {
+        'inputs': ('int', 'int'),
+        'inputs_label': ('index y', 'index x'),
+        'outputs': ('any', ),
+        'outputs_label': ('value', ),
+        'inner': 'M-Get',
+        'label': 'matrix get'
+    },
+    'matrix get and set': {
+        'inputs': ('int', 'int', 'sep', 'any'),
+        'inputs_label': ('index y', 'index x', 'sep', 'value'),
+        'outputs': ('any', ),
+        'outputs_label': ('value', ),
+        'inner': 'M-GS',
+        'label': 'matrix get and set'
+    },
     'merge': {
         'inputs': ('ctrl', 'any'),
         'inputs_label': ('ctrl', 'any'),
