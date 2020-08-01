@@ -46,6 +46,9 @@ def coercion(value):
 
 class Number(Real):
 
+    def __repr__(self):
+        return f"Number({self.value})"
+
     def __round__(self, ndigits=None):
         return self.__class__(self.value.__round__(ndigits))
 
