@@ -50,7 +50,10 @@ class NodeInput(base.Node):
     def update_waiting(self):
         prompt = ">>> "
         if self.desc_value:
-            prompt = self.desc_value
+            if self.desc_value.endswith(" "):
+                prompt = self.desc_value
+            else:
+                prompt = self.desc_value + " "
         value = input(prompt)
         self.output_values[0] = utils.coercion(value)
         self.state = ACTIVE
