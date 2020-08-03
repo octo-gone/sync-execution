@@ -39,6 +39,7 @@ class Node:
         self.output_connectors = data["outputs"]
 
         self.actual_inputs = None
+        self.actual_outputs = None
 
         self.state = INACTIVE
         self.sub_state = None
@@ -50,6 +51,11 @@ class Node:
     def get_actual_input(self, input_index):
         for key, value in self.actual_inputs.items():
             if input_index in value:
+                return key
+
+    def get_actual_output(self, output_index):
+        for key, value in self.actual_outputs.items():
+            if output_index in value:
                 return key
 
     def get_actual_state(self):
@@ -92,6 +98,20 @@ class Node:
                 ins.append(sum(self.inputs[offset:offset+5], []))
                 self.actual_inputs[i] = tuple(range(offset, offset+5))
                 offset += 5
+
+        self.actual_outputs = {}
+        offset = 0
+        for i, v in enumerate(outputs_info):
+            if v in one_connector:
+                self.actual_outputs[i] = tuple(range(offset, offset + 1))
+                offset += 1
+            if v in seven_connectors:
+                self.actual_outputs[i] = tuple(range(offset, offset + 7))
+                offset += 7
+            if v in five_connectors:
+                self.actual_outputs[i] = tuple(range(offset, offset + 5))
+                offset += 5
+
         for i, v in enumerate(ins):
             if inputs_info[i] in one_connection and len(v) > 1:
                 logger.log_error(f"wrong input connections count in node '{self.name}/{self.id}'")
