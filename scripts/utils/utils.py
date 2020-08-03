@@ -1,5 +1,6 @@
 from numbers import Real
 import math
+import sys
 
 
 iteration = 0
@@ -8,6 +9,8 @@ iteration = 0
 def program_values(label, check=False):
     values = {
         "$iteration": iteration,
+        "$min": -sys.maxsize,
+        "$max": sys.maxsize,
         "$pi": math.pi,
         "$true": True,
         "$false": False,
