@@ -275,7 +275,7 @@ class NodeSVG:
             connectors.append([1, i/self.ratio[1]])
         points_style = f"points={connectors};"
         style = "verticalLabelPosition=top;labelBackgroundColor=none;verticalAlign=bottom;aspect=fixed;" \
-                "imageAspect=0;fontFamily=Courier;fontSize=8;labelPosition=center;align=center;spacing=0;" \
+                "imageAspect=0;fontFamily=Courier;fontSize=8;labelPosition=center;align=center;spacing=-1;" \
                 f"fontStyle=1;syncNodeName={self.sync_name};"
         draw.save()
         return file_path, points_style + style
