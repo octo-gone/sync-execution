@@ -1,6 +1,7 @@
 from scripts.nodes import base
 from scripts.nodes.base import ACTIVE, WAITING, INACTIVE
 from scripts.utils import utils, logger
+import re
 
 
 class NodePrintCtrl(base.Node):
@@ -48,6 +49,28 @@ class NodePrint(base.Node):
 
 class NodeInput(base.Node):
     def update_waiting(self):
+
+        pattern = r"{(?P<var>[^\{\}]+?)(?:\$(?P<type>[^\{\}]+?))?}"
+
+        for match in re.finditer(pattern, self.desc_value):
+
+            var_name = f"{self.scope}$" + match["var"]
+            var_type = match["type"]
+
+            if var_type is not None:
+                if var_type in utils.types_default:
+                    var_type = utils.types_default[var_type].__class__
+                else:
+                    var_type = utils.coercion
+
+            if var_name in self.variables:
+                var_value = self.variables[var_name]
+                if var_type is not None:
+                    var_value = var_type(var_value)
+                self.desc_value = list(self.desc_value)
+                self.desc_value[match.span()[0]:match.span()[1]] = list(str(var_value))
+                self.desc_value = "".join(self.desc_value)
+
         prompt = ">>> "
         if self.desc_value:
             if self.desc_value.endswith(" "):
