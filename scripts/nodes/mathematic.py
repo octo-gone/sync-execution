@@ -126,3 +126,25 @@ class NodeSub(base.Node):
         if self.get_value(0) is not None and self.get_value(1) is not None:
             self.output_values[0] = self.get_value(0) - self.get_value(1)
             self.state = ACTIVE
+
+
+class NodeMod(base.Node):
+    def update_active(self):
+        self.set_active(0)
+        self.state = INACTIVE
+
+    def update_waiting(self):
+        if self.get_value(0) is not None and self.get_value(1) is not None:
+            self.output_values[0] = self.get_value(0) % self.get_value(1)
+            self.state = ACTIVE
+
+
+class NodeDiv(base.Node):
+    def update_active(self):
+        self.set_active(0)
+        self.state = INACTIVE
+
+    def update_waiting(self):
+        if self.get_value(0) is not None and self.get_value(1) is not None:
+            self.output_values[0] = self.get_value(0) // self.get_value(1)
+            self.state = ACTIVE

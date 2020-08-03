@@ -128,6 +128,10 @@ class NodeGen:
             return mathematic.NodeRound(data)
         if node_name == "sub":
             return mathematic.NodeSub(data)
+        if node_name == "div":
+            return mathematic.NodeDiv(data)
+        if node_name == "mod":
+            return mathematic.NodeMod(data)
 
         logger.log_warning(f"no function node found with name '{node_name}'")
         return base.Node(data)
