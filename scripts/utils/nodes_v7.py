@@ -467,6 +467,16 @@ nodes_info = {
         'inner': 'Run',
         'label': 'run'
     },
+    'split string': {
+        'inputs': ('any', 'sep', 'ctrl'),
+        'inputs_color': ('char', 'ctrl'),
+        'inputs_label': ('str', 'sep', 'ctrl', ),
+        'outputs': ('ctrl', 'sep', 'any', ),
+        'outputs_color': ('ctrl', 'char'),
+        'outputs_label': ('ctrl', 'sep', 'str', ),
+        'inner': 'Split',
+        'label': 'split string'
+    },
     'stop': {
         'inputs': ('ctrl', ),
         'inputs_label': ('ctrl', ),

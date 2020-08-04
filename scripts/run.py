@@ -83,6 +83,8 @@ class NodeGen:
             return construction.NodeCounter(data)
         if node_name == "foreach":
             return construction.NodeForeach(data)
+        if node_name == "split string":
+            return construction.NodeSplitString(data)
 
         if node_name in ("and", "or", "not and", "not or", "equal"):
             return logic.NodeLogicA(data)

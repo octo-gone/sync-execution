@@ -30,37 +30,15 @@ example_node = {
 
 
 nodes_info = {
-    'matrix create': {
-        'inputs': ('int', 'int', ),
-        'inputs_label': ('len y', 'len x', ),
-        'outputs': ('ctrl', ),
-        'outputs_label': ('ctrl', ),
-        'inner': 'Mtx',
-        'label': 'matrix create'
-    },
-    'matrix set': {
-        'inputs': ('int', 'int', 'sep', 'any'),
-        'inputs_label': ('index y', 'index x', 'sep', 'value'),
-        'outputs': ('ctrl', ),
-        'outputs_label': ('ctrl', ),
-        'inner': 'M-Set',
-        'label': 'matrix set'
-    },
-    'matrix get': {
-        'inputs': ('int', 'int'),
-        'inputs_label': ('index y', 'index x'),
-        'outputs': ('any', ),
-        'outputs_label': ('value', ),
-        'inner': 'M-Get',
-        'label': 'matrix get'
-    },
-    'matrix get and set': {
-        'inputs': ('int', 'int', 'sep', 'any'),
-        'inputs_label': ('index y', 'index x', 'sep', 'value'),
-        'outputs': ('any', ),
-        'outputs_label': ('value', ),
-        'inner': 'M-GS',
-        'label': 'matrix get and set'
+    'split string': {
+        'inputs': ('any', 'sep', 'ctrl'),
+        'inputs_color': ('char', 'ctrl'),
+        'inputs_label': ('str', 'sep', 'ctrl', ),
+        'outputs': ('ctrl', 'sep', 'any', ),
+        'outputs_color': ('ctrl', 'char'),
+        'outputs_label': ('ctrl', 'sep', 'str', ),
+        'inner': 'Split',
+        'label': 'split string'
     },
 }
 
