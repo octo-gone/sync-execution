@@ -114,7 +114,7 @@ class NodeTimer(base.Node):
             self.timer_counter = 0
         if state == WAITING and self.get_actual_input(input_index) == 1:
             self.state = ACTIVE
-            self.output_values[0] = self.timer_counter
+            self.output_values[0] = max(self.timer_counter - 1, 0)
 
 
 class NodeError(base.Node):
