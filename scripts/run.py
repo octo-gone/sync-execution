@@ -61,7 +61,6 @@ class NodeGen:
             return memory.NodeListGetSet(data)
         if node_name == "length":
             return memory.NodeLen(data)
-
         if node_name == "matrix create":
             return memory.NodeMatrixCreate(data)
         if node_name == "matrix get":
@@ -70,6 +69,16 @@ class NodeGen:
             return memory.NodeMatrixSet(data)
         if node_name == "matrix get and set":
             return memory.NodeMatrixGetSet(data)
+        if node_name == "dict create":
+            return memory.NodeDictCreate(data)
+        if node_name == "dict insert":
+            return memory.NodeDictInsert(data)
+        if node_name == "dict find":
+            return memory.NodeDictFind(data)
+        if node_name == "dict insert and find":
+            return memory.NodeDictInsertFind(data)
+        if node_name == "dict remove":
+            return memory.NodeDictRemove(data)
 
         if node_name == "for":
             return construction.NodeFor(data)

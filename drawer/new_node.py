@@ -31,15 +31,45 @@ example_node = {
 
 
 nodes_info = {
-    'split string': {
-        'inputs': ('any', 'sep', 'ctrl'),
-        'inputs_color': ('char', 'ctrl'),
-        'inputs_label': ('str', 'sep', 'ctrl', ),
-        'outputs': ('ctrl', 'sep', 'any', ),
-        'outputs_color': ('ctrl', 'char'),
-        'outputs_label': ('ctrl', 'sep', 'str', ),
-        'inner': 'Split',
-        'label': 'split string'
+    'dict create': {
+        'inputs': ('obj', 'obj'),
+        'inputs_label': ('key', 'value'),
+        'outputs': ('ctrl',),
+        'outputs_label': ('ctrl',),
+        'inner': 'Dict',
+        'label': 'dict create'
+    },
+    'dict insert': {
+        'inputs': ('any', 'any'),
+        'inputs_label': ('key', 'value'),
+        'outputs': ('ctrl',),
+        'outputs_label': ('ctrl',),
+        'inner': 'D-Ins',
+        'label': 'dict insert'
+    },
+    'dict find': {
+        'inputs': ('any', ),
+        'inputs_label': ('key', ),
+        'outputs': ('any',),
+        'outputs_label': ('value',),
+        'inner': 'D-Fnd',
+        'label': 'dict find'
+    },
+    'dict insert and find': {
+        'inputs': ('any', 'any'),
+        'inputs_label': ('key', 'value'),
+        'outputs': ('any',),
+        'outputs_label': ('value',),
+        'inner': 'D-IF',
+        'label': 'dict insert and find'
+    },
+    'dict remove': {
+        'inputs': ('any', ),
+        'inputs_label': ('key', ),
+        'outputs': ('ctrl',),
+        'outputs_label': ('ctrl',),
+        'inner': 'D-Rmv',
+        'label': 'dict remove'
     },
 }
 
