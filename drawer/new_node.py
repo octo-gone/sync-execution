@@ -13,12 +13,13 @@ example_node = {
         'time': '~',  # optional
 
         'sync_name': 'length',  # optional
-        'inner': 'Len',
+        'inner': 'Len',  # <6 symbols preferred
         'label': 'length',
+        'desc': 'in',  # optional
 
-        'label_size': 40,  # optional
-        'description_size': 30,  # optional
-        'inner_size': 70,  # optional
+        'desc_size': 6,  # optional
+        'adds_size': 6,  # optional
+        'inner_size': 8,  # optional
 
         'bg_color': (255, 255, 255),  # optional
         'border_color': (0, 0, 0),  # optional
@@ -42,8 +43,9 @@ nodes_info = {
     },
 }
 
-for node_info in nodes_info.values():
+for i, node_info in enumerate(nodes_info.values()):
     node = gen.NodeSVG(**node_info)
     file_path, style = node.draw_node("generated/")
     print(style)
-    input()
+    if i + 1 != len(nodes_info.values()):
+        input()

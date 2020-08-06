@@ -77,9 +77,11 @@ class NodeSVG:
 
         self.border_width = kwargs.get("border_width", 10)
 
-        self.label_size = kwargs.get("label_size", 40)
-        self.time_size = kwargs.get("description_size", 30)
-        self.inner_size = kwargs.get("inner_size", 70)
+        self.desc_size = kwargs.get("desc_size", 8)
+        self.adds_size = kwargs.get("adds_size", 6)
+        self.inner_size = kwargs.get("inner_size", 8)
+
+        self.auto_inner_size = True
 
     def adjust_ratio(self, values):
         sep_values = [[]]
@@ -246,23 +248,27 @@ class NodeSVG:
 
         inputs_label_centers, input_connectors = draw_connectors(self.inputs, True, self.inputs_color)
         outputs_label_centers, output_connectors = draw_connectors(self.outputs, False, self.outputs_color)
-        inner_text = draw.text(self.inner, insert=(20, 22), text_anchor="middle",
-                               style="font-size:8px; font-family:Courier;font-weight:bold;")
+
+        if len(self.inner) > 5 and self.auto_inner_size:
+            self.inner_size -= len(self.inner) - 5
+
+        inner_text = draw.text(self.inner, insert=(20*self.ratio[0], 22), text_anchor="middle",
+                               style=f"font-size:{self.inner_size}px; font-family:Courier;font-weight:bold;")
         draw.add(inner_text)
 
         if self.desc:
-            desc_text = draw.text(self.desc, insert=(20, 62), text_anchor="middle",
-                                  style="font-size:8px; font-family:Courier;font-weight:bold;")
+            desc_text = draw.text(self.desc, insert=(20*self.ratio[0], 62), text_anchor="middle",
+                                  style=f"font-size:{self.desc_size}px; font-family:Courier;font-weight:bold;")
             draw.add(desc_text)
 
         if self.user_symbol:
             desc_text = draw.text(self.user_symbol[0], insert=(side*self.ratio[0]-3, 6), text_anchor="middle",
-                                  style="font-size:6px; font-family:Courier;font-weight:bold;")
+                                  style=f"font-size:{self.adds_size}px; font-family:Courier;font-weight:bold;")
             draw.add(desc_text)
 
         if self.time:
-            desc_text = draw.text(self.time, insert=(side*self.ratio[0]-2, side*self.ratio[1]-2),
-                                  text_anchor="end", style="font-size:6px; font-family:Courier;font-weight:bold;")
+            desc_text = draw.text(self.time, insert=(side*self.ratio[0]-2, side*self.ratio[1]-2), text_anchor="end",
+                                  style=f"font-size:{self.adds_size}px; font-family:Courier;font-weight:bold;")
             draw.add(desc_text)
 
         draw.add(draw.rect(insert=(0, 0), size=size, stroke=self.border_color,
