@@ -1,5 +1,13 @@
 # Sync ChangeLog
 All changes since version 0.6.6 are written here
+## <span style="color:#daa520;font-weight:bold">0.7.8</span> (06.08.2020)
++ Added new node example [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/dfcb43a6274aacc5858b5f2b0e5f62982ca9bc49)
++ Added interoperability for new nodes [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/bc9afb8a82bf6df1fd01e79e0a877e46f9e300f6)
++ Added new nodes [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/15fe6dc94cc7e787521c80d82ddd4f1175bb8b70)
++ Added font and text adjustment in node generation [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/5c146d296836d3425fb0e9807a8614be648a194b)
++ Added dependency on scope for structure nodes [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/c1455bd780f58d3ef1425fca17a11b23de92edd4)
++ Removed 'timer' wrong increment [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/17619ebde07680652ee368e69f56415780146f8b)
++ Changelog updated [![](https://img.shields.io/badge/-style-blue.svg)](https://github.com/octo-gone/sync-execution/commit/f106dfdb4b57dd42edee780ca427d849eae2cfcf)
 ## <span style="color:#daa520;font-weight:bold">0.6.8</span> (05.08.2020)
 + Added new node example [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/dfcb43a6274aacc5858b5f2b0e5f62982ca9bc49)
 + Removed 'timer' wrong increment [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/17619ebde07680652ee368e69f56415780146f8b)
