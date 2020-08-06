@@ -256,6 +256,8 @@ class NodeForeach(base.Node):
                     struct = self.struct_variables[self.desc_value]
                     if struct["structure"] in ("list", "array"):
                         self.values = self.struct_variables[self.desc_value]["values"]
+                    elif struct["structure"] in ("dict", ):
+                        self.values = self.struct_variables[self.desc_value]["values"].keys()
                 self.bound = len(self.values)
             elif self.variant(map(lambda x: x is not None, self.get_value(1, True))):
                 self.values = []

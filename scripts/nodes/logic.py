@@ -68,6 +68,10 @@ class NodeIn(base.Node):
                     values = self.struct_variables[self.desc_value]["values"]
                     if self.get_value(1) in values:
                         self.output_values[0] = True
+                elif struct["structure"] in ("dict", ):
+                    values = self.struct_variables[self.desc_value]["values"].keys()
+                    if self.get_value(1) in values:
+                        self.output_values[0] = True
             self.state = ACTIVE
         elif self.variant(map(lambda x: x is not None, self.get_value(0, True))):
             self.output_values[0] = False
