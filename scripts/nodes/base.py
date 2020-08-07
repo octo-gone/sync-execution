@@ -257,9 +257,27 @@ class Node:
 
 
 class Wire:
+    """
+    Interim class that used for creating relations
+    between node. It saves information about the
+    wires in the diagram.
+    """
     wires = []
 
     def __init__(self, data):
+        """
+        Wire constructor. Attribute takes dictionary with
+        several descriptive parameters:
+            source - identifier of the first connected object in scheme;
+            target - identifier of the second connected object in scheme;
+            exitX/exitY - connection (exit) point in source object;
+            entryX/entryY - connection (entry) point in target object;
+            x/y/width/height - position and size of node in scheme.
+        It checks validity of connected objects and
+        calculates entry and exit connector indexes
+
+        :param dict data: information about wire
+        """
         self.wires.append(self)
         self.raw_data = data
 
@@ -287,15 +305,25 @@ class Wire:
         self.entry_connector = self.target.input_connectors.index(self.entry[1])
         self.exit_connector = self.source.output_connectors.index(self.exit[1])
 
-        self.active_ctrl = False
-        self.value = None
-
     def __del__(self):
+        """
+        Removes wire from the list of all wires.
+        """
         if self in self.wires:
             self.wires.pop(self.wires.index(self))
 
     @classmethod
     def get_nodes_from_input(cls, node, input_num):
+        """
+        Function checks every wire with specified node
+        as target node. And if input index corresponds to
+        wire entry connector it adds tuple - node with exit
+        connector (of node from which wire was sourced)
+
+        :param node: Node or object with parent Node
+        :param int input_num: index of scheme input in node
+        :return: list of nodes with exit connectors of source node
+        """
         nodes = []
         for wire in cls.wires:
             if wire.target == node and wire.entry_connector == input_num:
@@ -304,6 +332,16 @@ class Wire:
 
     @classmethod
     def get_nodes_from_output(cls, node, output_num):
+        """
+       Function checks every wire with specified node
+       as source node. And if output index corresponds to
+       wire exit connector it adds tuple - node with entry
+       connector (of node in which wire was connected)
+
+       :param node: Node or object with parent Node
+       :param int output_num: index of scheme output in node
+       :return: list of nodes with entry connectors of target node
+       """
         nodes = []
         for wire in cls.wires:
             if wire.source == node and wire.exit_connector == output_num:
