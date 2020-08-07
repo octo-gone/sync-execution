@@ -46,7 +46,6 @@ class Node:
         self.name = data["node_name"]
         self.desc_value = data["value"]
 
-        print(data["inputs"], data["outputs"])
         self.inputs = [[] for _ in range(len(data["inputs"]))]
         self.outputs = [[] for _ in range(len(data["outputs"]))]
 
