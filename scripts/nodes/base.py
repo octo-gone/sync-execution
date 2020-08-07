@@ -272,7 +272,6 @@ class Wire:
             target - identifier of the second connected object in scheme;
             exitX/exitY - connection (exit) point in source object;
             entryX/entryY - connection (entry) point in target object;
-            x/y/width/height - position and size of node in scheme.
         It checks validity of connected objects and
         calculates entry and exit connector indexes
 
@@ -350,9 +349,22 @@ class Wire:
 
 
 class Scope:
+    """
+    Class that changes scope in Node object based
+    on selected area in scheme.
+    """
     scopes = []
 
     def __init__(self, data):
+        """
+        Scope constructor. Attribute takes dictionary with
+        several descriptive parameters:
+            id - identifier of the first connected object in scheme;
+            value - text inserted as description in scheme;
+            x/y/width/height - position and size of selection in scheme.
+
+        :param dict data: information about selection
+        """
         self.pos = float(data["x"]), float(data["y"])
         self.size = float(data["width"]), float(data["height"])
         self.id = data["id"]
@@ -362,11 +374,24 @@ class Scope:
 
     @classmethod
     def check_contains(cls, node):
+        """
+        Checks whether the object belongs to scope
+        and runs changing of node scope.
+
+        :param node: Node or object with parent Node
+        """
         for scope in cls.scopes:
             if scope.check_bbox(node):
                 break
 
     def check_bbox(self, node):
+        """
+        Checks belonging bounding box of node to
+        bounding box of scope and changes scope in node
+
+        :param node: Node or object with parent Node
+        :return bool: changed scope or not
+        """
         if self.pos[0] < node.pos[0] and self.pos[1] < node.pos[1]:
             if (self.pos[0] + self.size[0]) > (node.pos[0] + node.size[0]) and \
                (self.pos[1] + self.size[1]) > (node.pos[1] + node.size[1]):
