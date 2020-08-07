@@ -75,7 +75,7 @@ class NodeSVG:
         self.inputs_color = kwargs.get("inputs_color", ())
         self.outputs_color = kwargs.get("outputs_color", ())
 
-        self.border_width = kwargs.get("border_width", 10)
+        self.border_width = kwargs.get("border_width", 0.8)
 
         self.desc_size = kwargs.get("desc_size", 8)
         self.adds_size = kwargs.get("adds_size", 6)
@@ -108,7 +108,7 @@ class NodeSVG:
     def draw_node(self, path):
 
         side = 40
-        stroke_width = 0.8  # 0.4
+        stroke_width = self.border_width  # 0.4
         size = self.ratio[0]*side, self.ratio[1]*side
 
         file_path = f"{path}{self.label}.svg"
