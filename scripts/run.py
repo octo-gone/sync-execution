@@ -2,9 +2,18 @@ from scripts.utils import utils, exceptions, logger
 from scripts.nodes import base, control, inout, memory, construction, logic, misc, mathematic, func
 
 
-# node auto init
 class NodeGen:
+    """
+    Class that automatically sets the node class from data
+    """
     def __new__(cls, data):
+        """
+        Function runs before constructor and selects suitable class.
+        If node is function (function input or output) method
+        will run special nodes class constructor.
+
+        :param dict data: node information
+        """
         node_name = data["node_name"]
         if str(node_name).startswith("function"):
             return func.NodeFunction(data)
@@ -148,8 +157,14 @@ class NodeGen:
         return base.Node(data)
 
 
-# main program
 def create_structure(n, w, s):
+    """
+    Function creates instances of nodes, wires, functions and scopes.
+
+    :param n: list of nodes information
+    :param w: list of wires information
+    :param s: list of scope information
+    """
     utils.iteration = 0
 
     for scope in s:
@@ -169,6 +184,18 @@ def create_structure(n, w, s):
 
 
 def run(n, w, s, limit=10**5):
+    """
+    Function iteratively launches nodes update functions for
+    different states: INACTIVE, WAITING and ACTIVE. If node stop
+    or similar generates exception StopSync, then function stops
+    iteration, otherwise if the iteration exceeds the limit
+    function stops updating.
+
+    :param n: list of nodes information
+    :param w: list of wires information
+    :param s: list of scope information
+    :param limit: limit number of updates
+    """
     create_structure(n, w, s)
     if "run" not in map(lambda x: x.name, base.Node.nodes.values()):
         logger.log_error("no 'start' node")
