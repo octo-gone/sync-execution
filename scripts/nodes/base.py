@@ -37,7 +37,7 @@ class Node:
             inputs/outputs - input/output connectors position on node (list of floats);
             x/y/width/height - position and size of node in scheme.
 
-        :param dict data: information about node
+        :param dict data: node information
         """
         self.id = data["id"]
         self.nodes[self.id] = self
@@ -214,7 +214,7 @@ class Node:
 
     def set_state(self, state, input_index, **kwargs):
         """
-        Changes state. Can be redefined.
+        Change state function, runs when other nodes are trying to activate current node. Can be redefined.
 
         :param str state: new state
         :param int input_index: index of input from which the state change is requested
@@ -238,20 +238,20 @@ class Node:
     @abstractmethod
     def update_active(self):
         """
-        Abstract function. It runs if state is ACTIVE
+        Abstract function. Runs if state is ACTIVE.
         """
         pass
 
     @abstractmethod
     def update_waiting(self):
         """
-        Abstract function. It runs if state is WAITING
+        Abstract function. Runs if state is WAITING.
         """
         pass
 
     def update_inactive(self):
         """
-        Abstract function. It runs if state is INACTIVE
+        Abstract function. Runs if state is INACTIVE.
         """
         pass
 
@@ -332,15 +332,15 @@ class Wire:
     @classmethod
     def get_nodes_from_output(cls, node, output_num):
         """
-       Function checks every wire with specified node
-       as source node. And if output index corresponds to
-       wire exit connector it adds tuple - node with entry
-       connector (of node in which wire was connected)
+        Function checks every wire with specified node
+        as source node. And if output index corresponds to
+        wire exit connector it adds tuple - node with entry
+        connector (of node in which wire was connected)
 
-       :param node: Node or object with parent Node
-       :param int output_num: index of scheme output in node
-       :return: list of nodes with entry connectors of target node
-       """
+        :param node: Node or object with parent Node
+        :param int output_num: index of scheme output in node
+        :return: list of nodes with entry connectors of target node
+        """
         nodes = []
         for wire in cls.wires:
             if wire.source == node and wire.exit_connector == output_num:

@@ -129,7 +129,7 @@ def parse(file_path):
     """
     Function parse uncompressed .drawio file and returns all nodes and all connected wires with description
     :param file_path: path to .drawio file
-    :return: tuple (nodes, wires)
+    :return: tuple (nodes, wires, scopes)
     """
     with open(file_path, "r") as file:
         data = unescape("".join(file.read().split("\n")))
