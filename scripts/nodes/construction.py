@@ -10,7 +10,26 @@ NEXT = "next"
 
 
 class NodeFor(base.Node):
+    """
+    Class for node 'for'. Basic loop with start 0,
+    settable upper boundary and changeable increment.
+    Substates:
+        READY - ready to activate next node;
+        ITERATION - ready to start new iteration and waits activation from 'increment' input;
+        BOUND - waits init values for iteration (bound);
+        NEXT - received signal from 'increment' input.
+    """
+
     def __init__(self, data):
+        """
+        Class constructor. Creates variables:
+            value_type - data type that node operates with;
+            start - state describing whether node is running or not;
+            iteration - current value of iteration;
+            bound - upper boundary value.
+
+        :param dict data: node information
+        """
         super().__init__(data)
         self.value_type = utils.Number
         self.start = False
@@ -18,6 +37,15 @@ class NodeFor(base.Node):
         self.bound = None
 
     def update_active(self):
+        """
+        Update function, runs if state is ACTIVE.
+
+        If boundary value is not None, then node checks if bound
+        value is exceeded. If exceeded then resets node and activates next node.
+
+        If node is ready to activate next node then activates corresponding
+        output and sets output_values of this output to current iteration (with coercion).
+        """
         if self.bound is not None:
             if self.iteration >= self.bound:
                 self.set_active(0)
@@ -34,6 +62,16 @@ class NodeFor(base.Node):
             self.state = WAITING
 
     def update_waiting(self):
+        """
+        Update function, runs if state is WAITING.
+
+        If node waits bound (BOUND state) then node tries to get value from corresponding input.
+
+        If node is ready to activate next node then it sets state to ACTIVE.
+
+        If node received signal from 'increment' input then it adds value
+        from input to iteration and sets sub_state to READY.
+        """
         if self.sub_state == BOUND:
             self.bound = self.value_type(self.get_value(1))
             if self.bound is not None and self.start:
@@ -46,6 +84,15 @@ class NodeFor(base.Node):
             self.state = ACTIVE
 
     def set_state(self, state, input_index, **kwargs):
+        """
+        Change state function, runs when other nodes are trying to activate current node.
+
+        If input is start then node checks connection to 'bound' input and sets
+        start condition to True. If there is no bound then bound value sets to -1.
+
+        If node is ready to start new iteration and signal is from
+        'increment' input then node changes sub_state to NEXT.
+        """
         if state == WAITING:
             if self.get_actual_input(input_index) == 0:
                 self.start = True
@@ -58,7 +105,26 @@ class NodeFor(base.Node):
 
 
 class NodeForExt(base.Node):
+    """
+    Class for node 'for extended'. Loop with settable start,
+    settable upper boundary and changeable increment.
+    Substates:
+        READY - ready to activate next node;
+        ITERATION - ready to start new iteration and waits activation from 'increment' input;
+        BOUND - waits init values for iteration;
+        NEXT - received signal from 'increment' input.
+    """
+
     def __init__(self, data):
+        """
+        Class constructor. Creates variables:
+            value_type - data type that node operates with;
+            start - state describing whether node is running or not;
+            iteration - current value of iteration;
+            bound - upper boundary value.
+
+        :param dict data: node information
+        """
         super().__init__(data)
         self.value_type = utils.Number
         self.start = False
@@ -66,7 +132,16 @@ class NodeForExt(base.Node):
         self.bound = None
 
     def update_active(self):
-        if self.bound:
+        """
+        Update function, runs if state is ACTIVE.
+
+        If boundary value is not None, then node checks if bound
+        value is exceeded. If exceeded then resets node and activates next node.
+
+        If node is ready to activate next node then activates corresponding
+        output and sets output_values of this output to current iteration (with coercion).
+        """
+        if self.bound is not None:
             if self.iteration >= self.bound:
                 self.set_active(0)
                 self.start = False
@@ -82,6 +157,17 @@ class NodeForExt(base.Node):
             self.state = WAITING
 
     def update_waiting(self):
+        """
+        Update function, runs if state is WAITING.
+
+        If node waits bound and start value (BOUND state)
+        then node tries to get values from corresponding inputs.
+
+        If node is ready to activate next node then it sets state to ACTIVE.
+
+        If node received signal from 'increment' input then it adds value
+        from input to iteration and sets sub_state to READY.
+        """
         if self.sub_state == BOUND:
             self.bound = self.value_type(self.get_value(1)) if self.inputs[1] else -1
             self.iteration = self.value_type(self.get_value(2)) if self.inputs[2] else 0
@@ -95,6 +181,16 @@ class NodeForExt(base.Node):
             self.state = ACTIVE
 
     def set_state(self, state, input_index, **kwargs):
+        """
+        Change state function, runs when other nodes are trying to activate current node.
+
+        If input is 'start' then node checks connection to 'bound' input and sets
+        start condition to True. If there is no bound then
+        bound value sets to -1. If there is no iteration then iteration value sets to 0.
+
+        If node is ready to start new iteration and signal is from
+        'increment' input then node changes sub_state to NEXT.
+        """
         if state == WAITING:
             if self.get_actual_input(input_index) == 0:
                 self.start = True
@@ -108,11 +204,28 @@ class NodeForExt(base.Node):
 
 
 class NodeIf(base.Node):
+    """
+    Class for node 'if'. Logic switch.
+    Substates:
+        READY - ready to activate next node;
+    """
+
     def __init__(self, data):
+        """
+        Class constructor. Creates variables:
+            condition - upper boundary value.
+
+        :param dict data: node information
+        """
         super().__init__(data)
         self.condition = None
 
     def update_active(self):
+        """
+        Update function, runs if state is ACTIVE.
+
+        If condition is True then activates 'true' input else 'false' input.
+        """
         if self.condition:
             self.condition = None
             self.set_active(0)
@@ -122,8 +235,14 @@ class NodeIf(base.Node):
         self.state = INACTIVE
 
     def update_waiting(self):
+        """
+        Update function, runs if state is WAITING.
+
+        Each update checks value from 'condition' input and
+        if sub_state equals READY resets sub_state and sets state to ACTIVE.
+        """
         if self.sub_state == READY:
-            if len(self.inputs) != 0:
+            if len(self.inputs[1]) != 0:
                 self.condition = bool(self.get_value(1))
             self.sub_state = None
             self.state = ACTIVE
@@ -131,20 +250,46 @@ class NodeIf(base.Node):
             self.condition = bool(self.get_value(1))
 
     def set_state(self, state, input_index, **kwargs):
+        """
+        Change state function, runs when other nodes are trying to activate current node.
+
+        If signal received from 'ctrl' input then sub_state changes to READY.
+        """
         if state == WAITING:
             if self.get_actual_input(input_index) == 0:
-                if len(self.inputs) == 0:
+                if len(self.inputs[1]) == 0:
                     self.condition = False
                 self.sub_state = READY
             self.state = WAITING
 
 
 class NodeWhile(base.Node):
+    """
+    Class for node 'while'. Condition loop.
+    Substates:
+        READY - ready to activate next node;
+        ITERATION - ready to start new iteration and waits activation from 'next' input;
+        BOUND - waits condition for iteration;
+        NEXT - received signal from 'next' input.
+    """
+
     def __init__(self, data):
+        """
+        Class constructor. Creates variables:
+            start - state describing whether node is running or not.
+
+        :param dict data: node information
+        """
         super().__init__(data)
         self.start = False
 
     def update_active(self):
+        """
+        Update function, runs if state is ACTIVE.
+
+        If condition value is False or driven to False, but not None
+        then it resets and deactivates node and activate next node.
+        """
         if self.get_value(1) is not None and not self.get_value(1):
             self.set_active(0)
             self.start = False
@@ -156,6 +301,12 @@ class NodeWhile(base.Node):
             self.state = WAITING
 
     def update_waiting(self):
+        """
+        Update function, runs if state is WAITING.
+
+        If node received signal from 'next' input
+        then it sets sub_state to READY and state to ACTIVE.
+        """
         if self.sub_state == BOUND:
             if self.start:
                 self.sub_state = READY
@@ -166,6 +317,14 @@ class NodeWhile(base.Node):
             self.state = ACTIVE
 
     def set_state(self, state, input_index, **kwargs):
+        """
+        Change state function, runs when other nodes are trying to activate current node.
+
+        If input is 'start' then node change start value to True.
+
+        If node is ready to start new iteration and signal is from
+        'next' input then node changes sub_state to NEXT.
+        """
         if state == WAITING:
             if self.get_actual_input(input_index) == 0:
                 self.start = True
@@ -177,7 +336,26 @@ class NodeWhile(base.Node):
 
 
 class NodeCounter(base.Node):
+    """
+    Class for node 'counter'. Simplified 'for' loop with constant increment (equal 1),
+    start 0 and settable upper boundary and.
+    Substates:
+        READY - ready to activate next node;
+        ITERATION - ready to start new iteration and waits activation from 'next' input;
+        BOUND - waits init values for iteration;
+        NEXT - received signal from 'next' input.
+    """
+
     def __init__(self, data):
+        """
+        Class constructor. Creates variables:
+            value_type - data type that node operates with (int for counter);
+            start - state describing whether node is running or not;
+            iteration - current value of iteration;
+            bound - upper boundary value.
+
+        :param dict data: node information
+        """
         super().__init__(data)
         self.value_type = int
         self.start = False
@@ -185,6 +363,15 @@ class NodeCounter(base.Node):
         self.bound = None
 
     def update_active(self):
+        """
+        Update function, runs if state is ACTIVE.
+
+        If boundary value is not None, then node checks if bound
+        value is exceeded. If exceeded then resets node and activates next node.
+
+        If node is ready to activate next node then activates corresponding
+        output and sets output_values of this output to current iteration (with coercion).
+        """
         if self.bound is not None:
             if self.iteration >= self.bound:
                 self.set_active(0)
@@ -201,6 +388,17 @@ class NodeCounter(base.Node):
             self.state = WAITING
 
     def update_waiting(self):
+        """
+        Update function, runs if state is WAITING.
+
+        If node waits bound and start value (BOUND state)
+        then node tries to get values from corresponding inputs.
+
+        If node is ready to activate next node then it sets state to ACTIVE.
+
+        If node received signal from 'increment' input then it adds 1
+        to iteration and sets sub_state to READY.
+        """
         if self.sub_state == BOUND:
             self.bound = self.value_type(self.get_value(1))
             if self.bound is not None and self.start:
@@ -213,6 +411,16 @@ class NodeCounter(base.Node):
             self.state = ACTIVE
 
     def set_state(self, state, input_index, **kwargs):
+        """
+        Change state function, runs when other nodes are trying to activate current node.
+
+        If input is 'start' then node checks connection to 'bound' input and sets
+        start condition to True. If there is no bound then
+        bound value sets to -1. If there is no iteration then iteration value sets to 0.
+
+        If node is ready to start new iteration and signal is from
+        'increment' input then node changes sub_state to NEXT.
+        """
         if state == WAITING:
             if self.get_actual_input(input_index) == 0:
                 self.start = True
@@ -225,7 +433,30 @@ class NodeCounter(base.Node):
 
 
 class NodeForeach(base.Node):
+    """
+    Class for node 'foreach'. Specialized loop which iterates on
+    list of values from inputs (or structured variables).
+    Substates:
+        READY - ready to activate next node;
+        ITERATION - ready to start new iteration and waits activation from 'next' input;
+        BOUND - waits condition for iteration;
+        NEXT - received signal from 'next' input.
+    """
+
     def __init__(self, data):
+        """
+        Class constructor. Creates variables:
+            variant - method to wait for data;
+                all - waits data from all input nodes;
+                any - waits first not None value from inputs nodes.
+            values - list of data;
+            value_type - data type that node operates with;
+            start - state describing whether node is running or not;
+            iteration - current value of iteration;
+            bound - upper boundary value.
+
+        :param dict data: node information
+        """
         super().__init__(data)
         self.variant = all if self.desc_value != "any" else any
         self.start = False
@@ -234,6 +465,16 @@ class NodeForeach(base.Node):
         self.values = None
 
     def update_active(self):
+        """
+        Update function, runs if state is ACTIVE.
+
+        If boundary value is not None, then node checks if bound
+        value is exceeded. If exceeded then resets node and activates next node.
+
+        If node is ready to activate next node then activates corresponding
+        output and sets output_values of this output to value in
+        list of values with index equal to iteration.
+        """
         if self.bound is not None:
             if self.iteration >= self.bound:
                 self.set_active(0)
@@ -250,6 +491,19 @@ class NodeForeach(base.Node):
             self.state = WAITING
 
     def update_waiting(self):
+        """
+        Update function, runs if state is WAITING.
+
+        If node waits bound and start value (BOUND state)
+        then node checks number of 'value' inputs. If 'value' inputs are empty then
+        function tries to get structured variable and sets values variable
+        to values from 'list', 'array' or list of keys from 'dict'.
+
+        If node is ready to activate next node then it sets state to ACTIVE.
+
+        If node received signal from 'increment' input then it adds 1
+        to iteration and sets sub_state to READY.
+        """
         if self.sub_state == BOUND:
             if not self.inputs[1]:
                 if self.desc_value in self.struct_variables:
@@ -275,6 +529,14 @@ class NodeForeach(base.Node):
             self.state = ACTIVE
 
     def set_state(self, state, input_index, **kwargs):
+        """
+        Change state function, runs when other nodes are trying to activate current node.
+
+        If input is 'start' then function sets start condition to True.
+
+        If node is ready to start new iteration and signal is from
+        'increment' input then node changes sub_state to NEXT.
+        """
         if state == WAITING:
             if self.get_actual_input(input_index) == 0:
                 self.start = True
@@ -287,7 +549,26 @@ class NodeForeach(base.Node):
 
 
 class NodeSplitString(base.Node):
+    """
+    Class for node 'split string'. Similar to 'foreach' node,
+    but input is only one string.
+    Substates:
+        READY - ready to activate next node;
+        ITERATION - ready to start new iteration and waits activation from 'next' input;
+        BOUND - waits condition for iteration;
+        NEXT - received signal from 'next' input.
+    """
+
     def __init__(self, data):
+        """
+        Class constructor. Creates variables:
+            values - list of data;
+            start - state describing whether node is running or not;
+            iteration - current value of iteration;
+            bound - upper boundary value.
+
+        :param dict data: node information
+        """
         super().__init__(data)
         self.start = False
         self.iteration = 0
@@ -295,6 +576,16 @@ class NodeSplitString(base.Node):
         self.values = None
 
     def update_active(self):
+        """
+        Update function, runs if state is ACTIVE.
+
+        If boundary value is not None, then node checks if bound
+        value is exceeded. If exceeded then resets node and activates next node.
+
+        If node is ready to activate next node then activates corresponding
+        output and sets output_values of this output to value in
+        list of values with index equal to iteration.
+        """
         if self.bound is not None:
             if self.iteration >= self.bound:
                 self.set_active(0)
@@ -311,9 +602,22 @@ class NodeSplitString(base.Node):
             self.state = WAITING
 
     def update_waiting(self):
+        """
+        Update function, runs if state is WAITING.
+
+        If node waits bound and start value (BOUND state)
+        then node checks 'value' input. If 'value' input has string then
+        values variable take split of string.
+
+        If node is ready to activate next node then it sets state to ACTIVE.
+
+        If node received signal from 'increment' input then it adds 1
+        to iteration and sets sub_state to READY.
+        """
         if self.sub_state == BOUND:
-            self.values = str(self.get_value(0)).split()
-            self.bound = len(self.values)
+            if self.get_value(0) is not None:
+                self.values = str(self.get_value(0)).split()
+                self.bound = len(self.values)
             if self.bound is not None and self.start:
                 self.sub_state = READY
         if self.sub_state == READY:
@@ -324,6 +628,14 @@ class NodeSplitString(base.Node):
             self.state = ACTIVE
 
     def set_state(self, state, input_index, **kwargs):
+        """
+        Change state function, runs when other nodes are trying to activate current node.
+
+        If input is 'start' then function sets start condition to True.
+
+        If node is ready to start new iteration and signal is from
+        'increment' input then node changes sub_state to NEXT.
+        """
         if state == WAITING:
             if self.get_actual_input(input_index) == 0:
                 self.start = True
