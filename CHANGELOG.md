@@ -1,5 +1,10 @@
 # Sync ChangeLog
 All changes since version 0.6.6 are written here
+## <span style="color:#daa520;font-weight:bold">0.7.2</span> (13.08.2020)
++ Log duplication fixed [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/9436cd1e1c4360c24423e94789f71d82bca57dfc)
++ Documentation updated [![](https://img.shields.io/badge/-docs-lightgrey.svg)](https://github.com/octo-gone/sync-execution/commit/1a72e72b23329adbe5555b495aca75c3fb45f641)
++ Added documentation for nodes in group 'construction' [![](https://img.shields.io/badge/-docs-lightgrey.svg)](https://github.com/octo-gone/sync-execution/commit/2c7c711f3784326712f727c90060042a499b8b61)
++ Run and NodeGen documentation added [![](https://img.shields.io/badge/-docs-lightgrey.svg)](https://github.com/octo-gone/sync-execution/commit/15d27b7b31c8d56370fc36dda5d86034724e71c5)
 ## <span style="color:#daa520;font-weight:bold">0.7.1</span> (07.08.2020)
 + Fixed ability to change stroke width in node drawer [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/c9ef01705520b0972d679333473ec25bedd8c4cd)
 + Logger for Changelog and README fixed [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/82f8700e142fdff858e6347a141deeab3f0e02dc)
