@@ -68,7 +68,7 @@ class NodeWait(base.Node):
         Class constructor. Creates variables:
             variant - mode of node:
                 all - node waits all signals from inputs;
-                any - node waits first signal from inputs and
+                any - node waits first signal from inputs.
             active_sources - list of states of inputs.
 
         True in active_sources means that signal has taken from input node.

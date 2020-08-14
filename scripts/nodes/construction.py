@@ -41,7 +41,7 @@ class NodeFor(base.Node):
         Update function, runs if state is ACTIVE.
 
         If boundary value is not None, then node checks if bound
-        value is exceeded. If exceeded then resets node and activates next node.
+        value is exceeded. If exceeded then resets node and activates next nodes.
 
         If node is ready to activate next node then activates corresponding
         output and sets output_values of this output to current iteration (with coercion).
@@ -87,7 +87,7 @@ class NodeFor(base.Node):
         """
         Change state function, runs when other nodes are trying to activate current node.
 
-        If input is start then node checks connection to 'bound' input and sets
+        If input is 'start' then node checks connection to 'bound' input and sets
         start condition to True. If there is no bound then bound value sets to -1.
 
         If node is ready to start new iteration and signal is from
@@ -136,7 +136,7 @@ class NodeForExt(base.Node):
         Update function, runs if state is ACTIVE.
 
         If boundary value is not None, then node checks if bound
-        value is exceeded. If exceeded then resets node and activates next node.
+        value is exceeded. If exceeded then resets node and activates next nodes.
 
         If node is ready to activate next node then activates corresponding
         output and sets output_values of this output to current iteration (with coercion).
@@ -367,7 +367,7 @@ class NodeCounter(base.Node):
         Update function, runs if state is ACTIVE.
 
         If boundary value is not None, then node checks if bound
-        value is exceeded. If exceeded then resets node and activates next node.
+        value is exceeded. If exceeded then resets node and activates next nodes.
 
         If node is ready to activate next node then activates corresponding
         output and sets output_values of this output to current iteration (with coercion).
@@ -446,7 +446,7 @@ class NodeForeach(base.Node):
     def __init__(self, data):
         """
         Class constructor. Creates variables:
-            variant - method to wait for data;
+            variant - method to wait for data:
                 all - waits data from all input nodes;
                 any - waits first not None value from inputs nodes.
             values - list of data;
@@ -469,7 +469,7 @@ class NodeForeach(base.Node):
         Update function, runs if state is ACTIVE.
 
         If boundary value is not None, then node checks if bound
-        value is exceeded. If exceeded then resets node and activates next node.
+        value is exceeded. If exceeded then resets node and activates next nodes.
 
         If node is ready to activate next node then activates corresponding
         output and sets output_values of this output to value in
@@ -580,7 +580,7 @@ class NodeSplitString(base.Node):
         Update function, runs if state is ACTIVE.
 
         If boundary value is not None, then node checks if bound
-        value is exceeded. If exceeded then resets node and activates next node.
+        value is exceeded. If exceeded then resets node and activates next nodes.
 
         If node is ready to activate next node then activates corresponding
         output and sets output_values of this output to value in

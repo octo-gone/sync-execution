@@ -258,7 +258,7 @@ class Node:
 
 class Wire:
     """
-    Interim class that used for creating relations
+    Class that used for creating relations
     between node. It saves information about the
     wires in the diagram.
     """

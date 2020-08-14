@@ -4,7 +4,7 @@ from scripts.nodes import base, control, inout, memory, construction, logic, mis
 
 class NodeGen:
     """
-    Class that automatically sets the node class from data
+    Interim class that automatically sets node class from data
     """
     def __new__(cls, data):
         """
