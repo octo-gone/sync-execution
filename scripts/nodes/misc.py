@@ -6,10 +6,10 @@ import random
 
 class NodeValueSwitch(base.Node):
     def update_waiting(self):
-        pass
+        self.state = INACTIVE
 
     def update_active(self):
-        pass
+        self.state = INACTIVE
 
     def set_state(self, state, input_index, **kwargs):
         if state == WAITING:
@@ -19,13 +19,19 @@ class NodeValueSwitch(base.Node):
 
 
 class NodeGetType(base.Node):
+    def __init__(self, data):
+        super().__init__(data)
+        self.value_created = False
+
     def update_inactive(self):
-        if self.desc_value in utils.types_default:
-            self.output_values[1] = utils.types_default[self.desc_value]
-            self.output_values[0] = type(utils.types_default[self.desc_value])
-        else:
-            self.output_values[0] = None
-            self.output_values[1] = None
+        if not self.value_created:
+            if self.desc_value in utils.types_default:
+                self.output_values[1] = utils.types_default[self.desc_value]
+                self.output_values[0] = type(utils.types_default[self.desc_value])
+            else:
+                self.output_values[0] = None
+                self.output_values[1] = None
+            self.value_created = True
 
     def update_waiting(self):
         pass
