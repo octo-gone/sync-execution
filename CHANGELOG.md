@@ -1,5 +1,12 @@
 # Sync ChangeLog
 All changes since version 0.6.6 are written here
+## <span style="color:#daa520;font-weight:bold">0.7.3</span> (14.08.2020)
++ Removed constant re-creation of variables and added some protection for node 'value switch' [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/47c21a34e18074afe32e78ddd261d58b6a4ffd8c)
++ Added clearing from None value in NodeLogicA if mode 'any' used [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/a4700cb3e62b60dfd18b845ab384ebb23b8b2169)
++ Documentation updated and mistakes fixed [![](https://img.shields.io/badge/-docs-lightgrey.svg)](https://github.com/octo-gone/sync-execution/commit/3c06cf1c25572545129c5e7cd7b5fc076664fc17)
++ Added documentation for nodes in group 'logic' [![](https://img.shields.io/badge/-docs-lightgrey.svg)](https://github.com/octo-gone/sync-execution/commit/3e8b003218d58486d690d8390d44fe8ca409407c)
++ Added documentation for nodes in group 'inout' (input/output) [![](https://img.shields.io/badge/-docs-lightgrey.svg)](https://github.com/octo-gone/sync-execution/commit/fa738a479bebbd619179419d45540f2be845e96c)
++ Added documentation for nodes in group 'control' [![](https://img.shields.io/badge/-docs-lightgrey.svg)](https://github.com/octo-gone/sync-execution/commit/42dbce705075b70f9125749faa8a1f99e4cc3efe)
 ## <span style="color:#daa520;font-weight:bold">0.7.2</span> (13.08.2020)
 + Log duplication fixed [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/9436cd1e1c4360c24423e94789f71d82bca57dfc)
 + Documentation updated [![](https://img.shields.io/badge/-docs-lightgrey.svg)](https://github.com/octo-gone/sync-execution/commit/1a72e72b23329adbe5555b495aca75c3fb45f641)
