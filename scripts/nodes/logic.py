@@ -14,16 +14,17 @@ class NodeLogicA(base.Node):
 
     def update_waiting(self):
         if self.variant(map(lambda x: x is not None, self.get_value(0, True))):
+            values = list(filter(lambda x: x is not None, self.get_value(0, True)))
             if self.name == "and":
-                self.output_values[0] = all(self.get_value(0, True))
+                self.output_values[0] = all(values)
             elif self.name == "or":
-                self.output_values[0] = any(self.get_value(0, True))
+                self.output_values[0] = any(values)
             elif self.name == "not and":
-                self.output_values[0] = not all(self.get_value(0, True))
-            elif self.name == "nor or":
-                self.output_values[0] = not any(self.get_value(0, True))
+                self.output_values[0] = not all(values)
+            elif self.name == "not or":
+                self.output_values[0] = not any(values)
             elif self.name == "equal":
-                self.output_values[0] = len(set(self.get_value(0, True))) == 1
+                self.output_values[0] = len(set(values)) == 1
             self.state = ACTIVE
 
 
