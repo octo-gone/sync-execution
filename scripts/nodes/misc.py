@@ -81,3 +81,13 @@ class NodeRandomNum(base.Node):
     def update_active(self):
         self.set_active(0)
         self.state = INACTIVE
+
+
+class NodeRandomSeed(base.Node):
+    def update_waiting(self):
+        random.seed(self.get_value(0))
+        self.state = ACTIVE
+
+    def update_active(self):
+        self.set_active(0)
+        self.state = INACTIVE
