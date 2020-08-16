@@ -18,12 +18,6 @@ value_types = {
 
 
 class NodeConst(base.Node):
-    def update_active(self):
-        pass
-
-    def update_waiting(self):
-        pass
-
     def __init__(self, data):
         super().__init__(data)
         self.value_type = None
@@ -32,6 +26,12 @@ class NodeConst(base.Node):
                 self.value_type = value_types[value_type]
                 self.desc_value = self.desc_value[:-len(value_type)]
                 break
+
+    def update_active(self):
+        pass
+
+    def update_waiting(self):
+        pass
 
     def update_inactive(self):
         value = self.desc_value
@@ -80,8 +80,8 @@ class NodeVar(base.Node):
 
     def update_waiting(self):
         value = self.get_value(0)
+        var_name = f"{self.scope}$" + self.desc_value
         if value is None:
-            var_name = f"{self.scope}$" + self.desc_value
             if var_name in self.variables:
                 value = self.variables[var_name]
                 if self.value_type is not None:
@@ -89,7 +89,6 @@ class NodeVar(base.Node):
                 else:
                     self.output_values[0] = utils.coercion(value)
         else:
-            var_name = f"{self.scope}$" + self.desc_value
             if self.value_type is not None:
                 value = self.value_type(value)
             else:
