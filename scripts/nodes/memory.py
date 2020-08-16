@@ -91,8 +91,10 @@ class NodeVar(base.Node):
         else:
             if self.value_type is not None:
                 value = self.value_type(value)
+                self.output_values[0] = self.value_type(value)
             else:
                 value = utils.coercion(value)
+                self.output_values[0] = utils.coercion(value)
             self.variables[var_name] = value
         self.state = ACTIVE
 
