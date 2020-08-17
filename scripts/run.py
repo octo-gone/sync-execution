@@ -1,11 +1,12 @@
 from scripts.utils import utils, exceptions, logger
-from scripts.nodes import base, control, inout, memory, construction, logic, misc, mathematic, func
+from scripts.nodes import base, control, inout, memory, construction, logic, misc, mathematic, func, struct
 
 
 class NodeGen:
     """
     Interim class that automatically sets node class from data
     """
+
     def __new__(cls, data):
         """
         Function runs before constructor and selects suitable class.
@@ -52,42 +53,43 @@ class NodeGen:
             return memory.NodeVarSet(data)
         if node_name == "var get":
             return memory.NodeVarGet(data)
+
         if node_name == "array create":
-            return memory.NodeArrayCreate(data)
+            return struct.NodeArrayCreate(data)
         if node_name == "array get":
-            return memory.NodeArrayGet(data)
+            return struct.NodeArrayGet(data)
         if node_name == "array set":
-            return memory.NodeArraySet(data)
+            return struct.NodeArraySet(data)
         if node_name == "array get and set":
-            return memory.NodeArrayGetSet(data)
+            return struct.NodeArrayGetSet(data)
         if node_name == "list create":
-            return memory.NodeListCreate(data)
+            return struct.NodeListCreate(data)
         if node_name == "list get":
-            return memory.NodeListGet(data)
+            return struct.NodeListGet(data)
         if node_name == "list set":
-            return memory.NodeListSet(data)
+            return struct.NodeListSet(data)
         if node_name == "list get and set":
-            return memory.NodeListGetSet(data)
+            return struct.NodeListGetSet(data)
         if node_name == "length":
-            return memory.NodeLen(data)
+            return struct.NodeLen(data)
         if node_name == "matrix create":
-            return memory.NodeMatrixCreate(data)
+            return struct.NodeMatrixCreate(data)
         if node_name == "matrix get":
-            return memory.NodeMatrixGet(data)
+            return struct.NodeMatrixGet(data)
         if node_name == "matrix set":
-            return memory.NodeMatrixSet(data)
+            return struct.NodeMatrixSet(data)
         if node_name == "matrix get and set":
-            return memory.NodeMatrixGetSet(data)
+            return struct.NodeMatrixGetSet(data)
         if node_name == "dict create":
-            return memory.NodeDictCreate(data)
+            return struct.NodeDictCreate(data)
         if node_name == "dict insert":
-            return memory.NodeDictInsert(data)
+            return struct.NodeDictInsert(data)
         if node_name == "dict find":
-            return memory.NodeDictFind(data)
+            return struct.NodeDictFind(data)
         if node_name == "dict insert and find":
-            return memory.NodeDictInsertFind(data)
+            return struct.NodeDictInsertFind(data)
         if node_name == "dict remove":
-            return memory.NodeDictRemove(data)
+            return struct.NodeDictRemove(data)
 
         if node_name == "for":
             return construction.NodeFor(data)
