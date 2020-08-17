@@ -32,7 +32,7 @@ class NodeArrayCreate(base.Node):
     def update_waiting(self):
         desc_value = f"{self.scope}$" + self.desc_value
         array_len = self.get_value(0)
-        if self.desc_value is not None and array_len is not None:
+        if array_len is not None:
             self.struct_variables[desc_value] = {
                 "structure": "array",
                 "len": int(array_len),
@@ -110,13 +110,12 @@ class NodeArrayGetSet(base.Node):
 
 class NodeListCreate(base.Node):
     def update_waiting(self):
-        if self.desc_value is not None:
-            desc_value = f"{self.scope}$" + self.desc_value
-            self.struct_variables[desc_value] = {
-                "structure": "list",
-                "values": []
-            }
-            self.state = ACTIVE
+        desc_value = f"{self.scope}$" + self.desc_value
+        self.struct_variables[desc_value] = {
+            "structure": "list",
+            "values": []
+        }
+        self.state = ACTIVE
 
     def update_active(self):
         self.set_active(0)
@@ -218,7 +217,7 @@ class NodeMatrixCreate(base.Node):
         size_x = self.get_value(1)
         size_y = self.get_value(0)
         desc_value = f"{self.scope}$" + self.desc_value
-        if self.desc_value is not None and size_x is not None and size_y is not None:
+        if  size_x is not None and size_y is not None:
             self.struct_variables[desc_value] = {
                 "structure": "matrix",
                 "size": (int(size_x), int(size_y)),
@@ -316,7 +315,7 @@ class NodeDictCreate(base.Node):
                 logger.log_error(f"unaccepted type for value in node '{self.name}/{self.id}' "
                                  f"with name '{self.desc_value}'")
         desc_value = f"{self.scope}$" + self.desc_value
-        if self.desc_value is not None and key_type is not None and value_type is not None:
+        if key_type is not None and value_type is not None:
             self.struct_variables[desc_value] = {
                 "structure": "dict",
                 "key_type": key_type,
@@ -335,7 +334,7 @@ class NodeDictInsert(base.Node):
         key = self.get_value(0)
         value = self.get_value(1)
         desc_value = f"{self.scope}$" + self.desc_value
-        if self.desc_value is not None and key is not None and value is not None:
+        if key is not None and value is not None:
             if desc_value in self.struct_variables:
                 if self.struct_variables[desc_value]["structure"] == "dict":
                     struct = self.struct_variables[desc_value]
@@ -351,7 +350,7 @@ class NodeDictFind(base.Node):
     def update_waiting(self):
         key = self.get_value(0)
         desc_value = f"{self.scope}$" + self.desc_value
-        if self.desc_value is not None and key is not None:
+        if key is not None:
             if desc_value in self.struct_variables:
                 if self.struct_variables[desc_value]["structure"] == "dict":
                     struct = self.struct_variables[desc_value]
@@ -395,7 +394,7 @@ class NodeDictRemove(base.Node):
     def update_waiting(self):
         key = self.get_value(0)
         desc_value = f"{self.scope}$" + self.desc_value
-        if self.desc_value is not None and key is not None:
+        if key is not None:
             if desc_value in self.struct_variables:
                 if self.struct_variables[desc_value]["structure"] == "dict":
                     struct = self.struct_variables[desc_value]
