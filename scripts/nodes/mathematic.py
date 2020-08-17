@@ -43,6 +43,8 @@ class NodeDivision(base.Node):
 
     def update_waiting(self):
         if self.get_value(0) is not None and self.get_value(1) is not None:
+            if self.get_value(1) == 0:
+                logger.log_error(f"node 'division' raised exception 'Zero Division'")
             self.output_values[0] = self.get_value(0) / self.get_value(1)
             self.state = ACTIVE
 
@@ -146,5 +148,7 @@ class NodeDiv(base.Node):
 
     def update_waiting(self):
         if self.get_value(0) is not None and self.get_value(1) is not None:
+            if self.get_value(1) == 0:
+                logger.log_error(f"node 'division' raised exception 'Zero Division'")
             self.output_values[0] = self.get_value(0) // self.get_value(1)
             self.state = ACTIVE
