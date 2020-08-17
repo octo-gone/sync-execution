@@ -83,7 +83,7 @@ class NodeTrunc(base.Node):
 class NodeInv(base.Node):
     def update_waiting(self):
         if self.get_value(0) is not None:
-            self.output_values[0] = int(self.get_value(0))
+            self.output_values[0] = - self.get_value(0)
             self.state = ACTIVE
 
     def update_active(self):
