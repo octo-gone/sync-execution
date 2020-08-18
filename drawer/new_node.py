@@ -31,45 +31,13 @@ example_node = {
 
 
 nodes_info = {
-    'dict create': {
-        'inputs': ('obj', 'obj'),
-        'inputs_label': ('key', 'value'),
-        'outputs': ('ctrl',),
-        'outputs_label': ('ctrl',),
-        'inner': 'Dict',
-        'label': 'dict create'
-    },
-    'dict insert': {
-        'inputs': ('any', 'any'),
-        'inputs_label': ('key', 'value'),
-        'outputs': ('ctrl',),
-        'outputs_label': ('ctrl',),
-        'inner': 'D-Ins',
-        'label': 'dict insert'
-    },
-    'dict find': {
+    'random seed': {
         'inputs': ('any', ),
-        'inputs_label': ('key', ),
-        'outputs': ('any',),
-        'outputs_label': ('value',),
-        'inner': 'D-Fnd',
-        'label': 'dict find'
-    },
-    'dict insert and find': {
-        'inputs': ('any', 'any'),
-        'inputs_label': ('key', 'value'),
-        'outputs': ('any',),
-        'outputs_label': ('value',),
-        'inner': 'D-IF',
-        'label': 'dict insert and find'
-    },
-    'dict remove': {
-        'inputs': ('any', ),
-        'inputs_label': ('key', ),
+        'inputs_label': ('value', ),
         'outputs': ('ctrl',),
         'outputs_label': ('ctrl',),
-        'inner': 'D-Rmv',
-        'label': 'dict remove'
+        'inner': 'R-Seed',
+        'label': 'random seed'
     },
 }
 

@@ -127,6 +127,8 @@ class NodeGen:
             return misc.NodeRandomInt(data)
         if node_name == "random num":
             return misc.NodeRandomNum(data)
+        if node_name == "random seed":
+            return misc.NodeRandomSeed(data)
 
         if node_name == "abs":
             return mathematic.NodeAbs(data)

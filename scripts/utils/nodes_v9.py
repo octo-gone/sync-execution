@@ -483,6 +483,14 @@ nodes_info = {
         'inner': 'R-Num',
         'label': 'random num',
     },
+    'random seed': {
+        'inputs': ('any', ),
+        'inputs_label': ('value', ),
+        'outputs': ('ctrl',),
+        'outputs_label': ('ctrl',),
+        'inner': 'R-Seed',
+        'label': 'random seed'
+    },
     'random': {
         'inputs': ('ctrl', ),
         'inputs_label': ('ctrl', ),

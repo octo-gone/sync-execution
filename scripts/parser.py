@@ -1,6 +1,6 @@
 import re
 import math
-from scripts.utils import nodes_v8 as nodes_info
+from scripts.utils import nodes_v9 as nodes_info
 from scripts.utils import logger
 from xml.sax.saxutils import unescape
 

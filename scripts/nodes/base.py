@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from scripts.utils import nodes_v8 as nodes_info
+from scripts.utils import nodes_v9 as nodes_info
 from scripts.utils import logger
 
 # the limit imposed on the number of connected wires
