@@ -7,6 +7,13 @@ iteration = 0
 
 
 def program_values(label, check=False):
+    """
+    Function checks does label belongs to keywords or returns value of keyword.
+
+    :param str label: keyword
+    :param bool check: if True function only checks whether the string belongs to keywords
+    :return: value of keyword.
+    """
     values = {
         "$iteration": iteration,
         "$min": -sys.maxsize,
@@ -24,7 +31,16 @@ def program_values(label, check=False):
 
 # char type
 class Char(str):
+    """
+    Class for type 'char' based on class 'str' and
+    redefines only initialization in which checks length of value.
+    """
+
     def __init__(self, _):
+        """
+        Class constructor. If length of saved to variable value more than 1
+        then function raises exception.
+        """
         super().__init__()
         if len(self) > 1:
             raise ValueError(f"char most length is 1, not {len(self)}")
@@ -32,6 +48,18 @@ class Char(str):
 
 # auto typecasting
 def coercion(value):
+    """
+    Function that auto typecast input value.
+
+    If value is None then function skips typecasting.
+    If value is bool then function just return value without changes.
+    If value is convertible to int or float then function return numeric type.
+    If value is string or similar then function tries to return char type.
+    If none of conversions worked then function return unchanged value.
+
+    :param value: input value
+    :return: value
+    """
     if value is not None:
         if isinstance(value, bool):
             return value
@@ -41,13 +69,14 @@ def coercion(value):
                 return int(value)
             return value
         except ValueError:
-            if len(value) == 1:
+            if isinstance(value, str) and len(value) == 1:
                 return Char(value)
             return value
     return None
 
 
 class Number(Real):
+    """Class for type 'number'"""
 
     def __repr__(self):
         return f"Number({self.value})"
@@ -169,11 +198,19 @@ class Number(Real):
 
     @staticmethod
     def number_coercion(value):
+        """
+        Function returns converts value to 'int' and returns it if it has no value
+        after floating point otherwise returns 'float' value.
+
+        :param value: numeric value
+        :return: typecasted value
+        """
         if isinstance(coercion(value), (int, float)):
             return round(coercion(value), 14)
         raise ValueError(f"invalid literal for Number: '{value}'")
 
 
+# conversion from Python types to Sync types
 types = {
     int: "int",
     float: "real",
@@ -183,6 +220,7 @@ types = {
     str: "str"
 }
 
+# conversion from Sync types to Python types (with default value)
 types_default = {
     "int": int(0),
     "real": float(0),
