@@ -76,7 +76,7 @@ def coercion(value):
 
 
 class Number(Real):
-    """Class for type 'number'"""
+    """Class for type 'number'."""
 
     def __repr__(self):
         return f"Number({self.value})"
