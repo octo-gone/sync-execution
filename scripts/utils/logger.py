@@ -62,25 +62,33 @@ class Color:
             text = cls.foreground(text, fg)
         return text
 
+    @classmethod
+    def colored_input(cls, prompt, fg="yellow", bg=None):
+        fg = "\33[38;5;" + str(cls.colors[fg]) + "m" if fg is not None else ""
+        bg = "\33[48;5;" + str(cls.colors[bg]) + "m" if bg is not None else ""
+        value = input(prompt + fg + bg)
+        print("\33[0m", end="")
+        return value
+
 
 def log_error(message):
     """Prints information colored with red color (error)."""
-    print(Color.colored(f"[ ERR ] [ ITERATION {utils.iteration} ] {message}", fg="red"))
+    print(Color.colored(f"{utils.iteration}: {message}", fg="red"))
     input("Press ENTER to exit...")
     exit()
 
 
 def log_warning(message):
     """Prints information colored with yellow color (warning)."""
-    print(Color.colored(f"[ WAR ] [ ITERATION {utils.iteration} ] {message}", fg="yellow"))
+    print(Color.colored(f"{utils.iteration}: {message}", fg="yellow"))
 
 
 def log_success(message):
     """Prints information colored with green color (success)."""
-    print(Color.colored(f"[ SCS ] [ ITERATION {utils.iteration} ] {message}", fg="green"))
+    print(Color.colored(f"{utils.iteration}: {message}", fg="green"))
 
 
 def log_message(message):
     """Prints information."""
-    print(Color.colored(f"[ MSG ] [ ITERATION {utils.iteration} ] {message}"))
+    print(Color.colored(f"{utils.iteration}: {message}"))
 

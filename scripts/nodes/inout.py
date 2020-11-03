@@ -31,7 +31,7 @@ class NodePrintCtrl(base.Node):
         else:
             value = self.get_value(0)
             value = value if value is not None else self.desc_value
-        print(value)
+        print(f"{utils.iteration}:", value)
         self.state = ACTIVE
 
     def update_active(self):
@@ -71,7 +71,7 @@ class NodePrint(base.Node):
         else:
             value = self.get_value(0)
             value = value if value is not None else self.desc_value
-        print(value)
+        print(f"{utils.iteration}:", value)
         self.state = INACTIVE
 
     def update_active(self):
@@ -125,7 +125,11 @@ class NodeInput(base.Node):
                 prompt = self.desc_value
             else:
                 prompt = self.desc_value + " "
-        value = input(prompt)
+        prompt = f"{utils.iteration}: " + prompt
+        if utils.colored_input is not False:
+            value = logger.Color.colored_input(prompt, utils.colored_input)
+        else:
+            value = input(prompt)
         self.output_values[0] = utils.coercion(value)
         self.state = ACTIVE
 

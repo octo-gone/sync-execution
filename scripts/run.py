@@ -203,7 +203,7 @@ def run(n, w, s, limit=10**5):
     create_structure(n, w, s)
     if "run" not in map(lambda x: x.name, base.Node.nodes.values()):
         logger.log_error("no 'start' node")
-    logger.log_message("program started")
+    logger.log_success("program started")
     for utils.iteration in range(limit):
         try:
             for node in base.Node.nodes.values():
@@ -213,7 +213,7 @@ def run(n, w, s, limit=10**5):
             for node in base.Node.nodes.values():
                 node.update(base.ACTIVE)
         except exceptions.StopSync:
-            logger.log_message("program stopped via node 'stop'")
+            logger.log_success("program stopped via node 'stop'")
             utils.iteration = -1
             break
     if utils.iteration != -1:
