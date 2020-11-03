@@ -64,7 +64,7 @@ class Color:
 def log_error(message):
     """Prints information colored with red color (error)."""
     print(Color.colored(f"[ ERR ] [ ITERATION {utils.iteration} ] {message}", fg="red"))
-    input("Press ENTER to exit.")
+    input("Press ENTER to exit...")
     exit()
 
 

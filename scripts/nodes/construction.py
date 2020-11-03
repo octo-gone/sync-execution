@@ -160,7 +160,7 @@ class NodeForExt(base.Node):
         """
         Update function, runs if state is WAITING.
 
-        If node waits bound and start value (BOUND state)
+        If node waits bound or start value (BOUND state)
         then node tries to get values from corresponding inputs.
 
         If node is ready to activate next node then it sets state to ACTIVE.
@@ -391,7 +391,7 @@ class NodeCounter(base.Node):
         """
         Update function, runs if state is WAITING.
 
-        If node waits bound and start value (BOUND state)
+        If node waits bound or start value (BOUND state)
         then node tries to get values from corresponding inputs.
 
         If node is ready to activate next node then it sets state to ACTIVE.
@@ -494,7 +494,7 @@ class NodeForeach(base.Node):
         """
         Update function, runs if state is WAITING.
 
-        If node waits bound and start value (BOUND state)
+        If node waits bound or start value (BOUND state)
         then node checks number of 'value' inputs. If 'value' inputs are empty then
         function tries to get structured variable and sets values variable
         to values from 'list', 'array' or list of keys from 'dict'.
@@ -605,7 +605,7 @@ class NodeSplitString(base.Node):
         """
         Update function, runs if state is WAITING.
 
-        If node waits bound and start value (BOUND state)
+        If node waits bound or start value (BOUND state)
         then node checks 'value' input. If 'value' input has string then
         values variable take split of string.
 
