@@ -2,6 +2,7 @@ import re
 import math
 from scripts.utils import nodes_v9 as nodes_info
 from scripts.utils import logger
+from scripts.utils import coder
 from xml.sax.saxutils import unescape
 
 # possible connectors variants
@@ -94,6 +95,8 @@ def get_connectors(inout):
     return node_connectors
 
 
+diagram_pattern = r"<diagram[^>]*?>(?P<diagram>.*?)<\/diagram>"
+
 # patterns for parsing
 node_pattern = r"<mxCell[^<]*?syncNodeName=.*?;.*?</mxCell>"
 scope_pattern = r"<mxCell[^<]*?syncName=scope;.*?</mxCell>"
@@ -131,9 +134,15 @@ def parse(file_path):
     :param file_path: path to .drawio file
     :return: tuple (nodes, wires, scopes)
     """
+
     with open(file_path, "r") as file:
         data = unescape("".join(file.read().split("\n")))
         data = "'".join(data.split("&#39;"))
+
+    data = re.search(diagram_pattern, data)
+    if data is None:
+        logger.log_error("no data in diagram")
+    data = coder.from_library(data['diagram'])
 
     nodes = []
     wires = []

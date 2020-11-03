@@ -1,6 +1,6 @@
 from scripts import parser, run
 
 
-file = "examples/test.drawio"
+file = "examples/test_compressed.drawio"
 run.run(*parser.parse(file))
-input("Press ENTER to exit.")
+input("Press ENTER to exit...")
