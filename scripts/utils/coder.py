@@ -51,8 +51,8 @@ def to_base64(string_val):
 
 
 def from_percent_encode(string_val):
-    return parse.unquote_plus(string_val)
+    return parse.unquote(string_val)
 
 
 def to_percent_encode(string_val):
-    return parse.quote_plus(string_val)
+    return "%2F".join(parse.quote(string_val).split("/"))
