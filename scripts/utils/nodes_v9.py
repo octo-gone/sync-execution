@@ -1,36 +1,4 @@
-nodes_info = {
-    'array create': {
-        'inputs': ('int', ),
-        'inputs_label': ('len', ),
-        'outputs': ('ctrl', ),
-        'outputs_label': ('ctrl', ),
-        'inner': 'Array',
-        'label': 'array create'
-    },
-    'array set': {
-        'inputs': ('int', 'any'),
-        'inputs_label': ('index', 'value'),
-        'outputs': ('ctrl', ),
-        'outputs_label': ('ctrl', ),
-        'inner': 'A-Set',
-        'label': 'array set'
-    },
-    'array get': {
-        'inputs': ('int', ),
-        'inputs_label': ('index', ),
-        'outputs': ('any', ),
-        'outputs_label': ('value', ),
-        'inner': 'A-Get',
-        'label': 'array get'
-    },
-    'array get and set': {
-        'inputs': ('int', 'any'),
-        'inputs_label': ('index', 'value'),
-        'outputs': ('any', ),
-        'outputs_label': ('value', ),
-        'inner': 'A-GS',
-        'label': 'array get and set'
-    },
+base_nodes_info = {
     'abs': {
         'inputs': ('number', ),
         'inputs_label': ('number', ),
@@ -109,54 +77,6 @@ nodes_info = {
         'inner': 'Dec',
         'label': 'decrement',
         'sync_name': 'dec'
-    },
-    'delay': {
-        'inputs': ('ctrl', 'int'),
-        'inputs_label': ('ctrl', 'time'),
-        'outputs': ('ctrl', ),
-        'outputs_label': ('ctrl', ),
-        'inner': 'Delay',
-        'label': 'delay'
-    },
-    'dict create': {
-        'inputs': ('obj', 'obj'),
-        'inputs_label': ('key', 'value'),
-        'outputs': ('ctrl',),
-        'outputs_label': ('ctrl',),
-        'inner': 'Dict',
-        'label': 'dict create'
-    },
-    'dict insert': {
-        'inputs': ('any', 'any'),
-        'inputs_label': ('key', 'value'),
-        'outputs': ('ctrl',),
-        'outputs_label': ('ctrl',),
-        'inner': 'D-Ins',
-        'label': 'dict insert'
-    },
-    'dict find': {
-        'inputs': ('any', ),
-        'inputs_label': ('key', ),
-        'outputs': ('any',),
-        'outputs_label': ('value',),
-        'inner': 'D-Fnd',
-        'label': 'dict find'
-    },
-    'dict insert and find': {
-        'inputs': ('any', 'any'),
-        'inputs_label': ('key', 'value'),
-        'outputs': ('any',),
-        'outputs_label': ('value',),
-        'inner': 'D-IF',
-        'label': 'dict insert and find'
-    },
-    'dict remove': {
-        'inputs': ('any', ),
-        'inputs_label': ('key', ),
-        'outputs': ('ctrl',),
-        'outputs_label': ('ctrl',),
-        'inner': 'D-Rmv',
-        'label': 'dict remove'
     },
     'div': {
         'inputs': ('number', 'number'),
@@ -301,46 +221,6 @@ nodes_info = {
         'label': 'inversion',
         'sync_name': 'inv'
     },
-    'length': {
-        'inputs': ('ctrl', ),
-        'inputs_label': ('ctrl', ),
-        'outputs': ('int', ),
-        'outputs_label': ('int', ),
-        'inner': 'Len',
-        'label': 'length',
-    },
-    'list create': {
-        'inputs': ('ctrl', ),
-        'inputs_label': ('ctrl', ),
-        'outputs': ('ctrl', ),
-        'outputs_label': ('ctrl', ),
-        'inner': 'List',
-        'label': 'list create'
-    },
-    'list set': {
-        'inputs': ('int', 'any'),
-        'inputs_label': ('index', 'value'),
-        'outputs': ('ctrl', ),
-        'outputs_label': ('ctrl', ),
-        'inner': 'L-Set',
-        'label': 'list set'
-    },
-    'list get': {
-        'inputs': ('int', ),
-        'inputs_label': ('index', ),
-        'outputs': ('any', ),
-        'outputs_label': ('value', ),
-        'inner': 'L-Get',
-        'label': 'list get'
-    },
-    'list get and set': {
-        'inputs': ('int', 'any'),
-        'inputs_label': ('index', 'value'),
-        'outputs': ('any', ),
-        'outputs_label': ('value', ),
-        'inner': 'L-GS',
-        'label': 'list get and set'
-    },
     'less': {
         'inputs': ('any', 'any'),
         'inputs_label': ('a', 'b'),
@@ -356,38 +236,6 @@ nodes_info = {
         'outputs_label': ('bool', ),
         'inner': 'a<=b',
         'label': 'less or equal'
-    },
-    'matrix create': {
-        'inputs': ('int', 'int', ),
-        'inputs_label': ('len y', 'len x', ),
-        'outputs': ('ctrl', ),
-        'outputs_label': ('ctrl', ),
-        'inner': 'Mtx',
-        'label': 'matrix create'
-    },
-    'matrix set': {
-        'inputs': ('int', 'int', 'sep', 'any'),
-        'inputs_label': ('index y', 'index x', 'sep', 'value'),
-        'outputs': ('ctrl', ),
-        'outputs_label': ('ctrl', ),
-        'inner': 'M-Set',
-        'label': 'matrix set'
-    },
-    'matrix get': {
-        'inputs': ('int', 'int'),
-        'inputs_label': ('index y', 'index x'),
-        'outputs': ('any', ),
-        'outputs_label': ('value', ),
-        'inner': 'M-Get',
-        'label': 'matrix get'
-    },
-    'matrix get and set': {
-        'inputs': ('int', 'int', 'sep', 'any'),
-        'inputs_label': ('index y', 'index x', 'sep', 'value'),
-        'outputs': ('any', ),
-        'outputs_label': ('value', ),
-        'inner': 'M-GS',
-        'label': 'matrix get and set'
     },
     'merge': {
         'inputs': ('ctrl', 'any'),
@@ -627,3 +475,160 @@ nodes_info = {
         'label': 'value switch'
     }
 }
+structure_nodes_info = {
+    'array create': {
+        'inputs': ('int',),
+        'inputs_label': ('len',),
+        'outputs': ('ctrl',),
+        'outputs_label': ('ctrl',),
+        'inner': 'Array',
+        'label': 'array create'
+    },
+    'array set': {
+        'inputs': ('int', 'any'),
+        'inputs_label': ('index', 'value'),
+        'outputs': ('ctrl',),
+        'outputs_label': ('ctrl',),
+        'inner': 'A-Set',
+        'label': 'array set'
+    },
+    'array get': {
+        'inputs': ('int',),
+        'inputs_label': ('index',),
+        'outputs': ('any',),
+        'outputs_label': ('value',),
+        'inner': 'A-Get',
+        'label': 'array get'
+    },
+    'array get and set': {
+        'inputs': ('int', 'any'),
+        'inputs_label': ('index', 'value'),
+        'outputs': ('any',),
+        'outputs_label': ('value',),
+        'inner': 'A-GS',
+        'label': 'array get and set'
+    },
+    'delay': {
+        'inputs': ('ctrl', 'int'),
+        'inputs_label': ('ctrl', 'time'),
+        'outputs': ('ctrl',),
+        'outputs_label': ('ctrl',),
+        'inner': 'Delay',
+        'label': 'delay'
+    },
+    'dict create': {
+        'inputs': ('obj', 'obj'),
+        'inputs_label': ('key', 'value'),
+        'outputs': ('ctrl',),
+        'outputs_label': ('ctrl',),
+        'inner': 'Dict',
+        'label': 'dict create'
+    },
+    'dict insert': {
+        'inputs': ('any', 'any'),
+        'inputs_label': ('key', 'value'),
+        'outputs': ('ctrl',),
+        'outputs_label': ('ctrl',),
+        'inner': 'D-Ins',
+        'label': 'dict insert'
+    },
+    'dict find': {
+        'inputs': ('any',),
+        'inputs_label': ('key',),
+        'outputs': ('any',),
+        'outputs_label': ('value',),
+        'inner': 'D-Fnd',
+        'label': 'dict find'
+    },
+    'dict insert and find': {
+        'inputs': ('any', 'any'),
+        'inputs_label': ('key', 'value'),
+        'outputs': ('any',),
+        'outputs_label': ('value',),
+        'inner': 'D-IF',
+        'label': 'dict insert and find'
+    },
+    'dict remove': {
+        'inputs': ('any',),
+        'inputs_label': ('key',),
+        'outputs': ('ctrl',),
+        'outputs_label': ('ctrl',),
+        'inner': 'D-Rmv',
+        'label': 'dict remove'
+    },
+    'length': {
+        'inputs': ('ctrl',),
+        'inputs_label': ('ctrl',),
+        'outputs': ('int',),
+        'outputs_label': ('int',),
+        'inner': 'Len',
+        'label': 'length',
+    },
+    'list create': {
+        'inputs': ('ctrl',),
+        'inputs_label': ('ctrl',),
+        'outputs': ('ctrl',),
+        'outputs_label': ('ctrl',),
+        'inner': 'List',
+        'label': 'list create'
+    },
+    'list set': {
+        'inputs': ('int', 'any'),
+        'inputs_label': ('index', 'value'),
+        'outputs': ('ctrl',),
+        'outputs_label': ('ctrl',),
+        'inner': 'L-Set',
+        'label': 'list set'
+    },
+    'list get': {
+        'inputs': ('int',),
+        'inputs_label': ('index',),
+        'outputs': ('any',),
+        'outputs_label': ('value',),
+        'inner': 'L-Get',
+        'label': 'list get'
+    },
+    'list get and set': {
+        'inputs': ('int', 'any'),
+        'inputs_label': ('index', 'value'),
+        'outputs': ('any',),
+        'outputs_label': ('value',),
+        'inner': 'L-GS',
+        'label': 'list get and set'
+    },
+    'matrix create': {
+        'inputs': ('int', 'int',),
+        'inputs_label': ('len y', 'len x',),
+        'outputs': ('ctrl',),
+        'outputs_label': ('ctrl',),
+        'inner': 'Mtx',
+        'label': 'matrix create'
+    },
+    'matrix set': {
+        'inputs': ('int', 'int', 'sep', 'any'),
+        'inputs_label': ('index y', 'index x', 'sep', 'value'),
+        'outputs': ('ctrl',),
+        'outputs_label': ('ctrl',),
+        'inner': 'M-Set',
+        'label': 'matrix set'
+    },
+    'matrix get': {
+        'inputs': ('int', 'int'),
+        'inputs_label': ('index y', 'index x'),
+        'outputs': ('any',),
+        'outputs_label': ('value',),
+        'inner': 'M-Get',
+        'label': 'matrix get'
+    },
+    'matrix get and set': {
+        'inputs': ('int', 'int', 'sep', 'any'),
+        'inputs_label': ('index y', 'index x', 'sep', 'value'),
+        'outputs': ('any',),
+        'outputs_label': ('value',),
+        'inner': 'M-GS',
+        'label': 'matrix get and set'
+    },
+}
+nodes_info = {}
+nodes_info.update(base_nodes_info)
+nodes_info.update(structure_nodes_info)
