@@ -1,5 +1,11 @@
 # Sync ChangeLog
 All changes since version 0.6.6 are written here
+## <span style="color:#daa520;font-weight:bold">0.9.0</span> (03.11.2020)
++ Nodes description separated for future updates [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/6f6786770774612aef8a548f0537a01e96110aa5)
++ Added reading for compressed files [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/e73affc38bba79e892be7c580a70772dd10e7905)
++ Added new node 'random seed' [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/51d4d347e0428bd6638f06f267fd7c61f33e3937)
++ Documentation mistakes fixed [![](https://img.shields.io/badge/-docs-lightgrey.svg)](https://github.com/octo-gone/sync-execution/commit/31c0363d436d14d8a0f3c3c54f7ba3e4cf8b83e7)
++ Added waiting after finishing program [![](https://img.shields.io/badge/-chore-cea262.svg)](https://github.com/octo-gone/sync-execution/commit/445695cc8bb86196b7f4ff83e42ede87216ae0d2)
 ## <span style="color:#daa520;font-weight:bold">0.8.0</span> (18.08.2020)
 + Added user waiting before exit in logger error message [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/bccaf2e80ab494e14b3574d4a411d3c78e585720)
 + Added documentation for function creation [![](https://img.shields.io/badge/-docs-lightgrey.svg)](https://github.com/octo-gone/sync-execution/commit/9f8859b8912e09ac3fb8e98327ccf1f8aa0ddc71)
