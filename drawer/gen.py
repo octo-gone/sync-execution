@@ -1,5 +1,6 @@
 import math
 from svgwrite import drawing
+from scripts.utils.coder import to_shape, to_library
 
 
 colors = {
@@ -18,33 +19,20 @@ colors = {
     "empty": (0, 0, 0)
 }
 
-small_connectors = ("int", "real", "obj", "char", "ctrl", "bool", "any", "number", "mult_s", "dir_mult_s")
-triangle_connectors = ("int", "real", "ctrl", "bool", "any", "number")
-round_connectors = ("obj", "char")
-big_connectors = ("mult", "dir_mult")
-rectangle_connectors = ("mult",)
-cut_rectangle_connectors = ("dir_mult",)
-separators = ("sep",)
-empty_connectors = ("empty",)
+SMALL = ("int", "real", "obj", "char", "ctrl", "bool", "any", "number", "mult_s", "dir_mult_s")
+BIG = ("mult", "dir_mult")
 
-square_connectors = ("mult_s", )
-cut_square_connectors = ("dir_mult_s", )
+TRIANGLE = ("int", "real", "ctrl", "bool", "any", "number")
+ROUND = ("obj", "char")
+RECTANGLE = ("mult",)
+CUT_RECTANGLE = ("dir_mult",)
+SEPARATORS = ("sep",)
+EMPTY = ("empty",)
+SQUARE = ("mult_s",)
+CUT_SQUARE = ("dir_mult_s",)
 
 
 class NodeSVG:
-    colors = colors
-    small_connectors = small_connectors
-    triangle_connectors = triangle_connectors
-    round_connectors = round_connectors
-    big_connectors = big_connectors
-    rectangle_connectors = rectangle_connectors
-    cut_rectangle_connectors = cut_rectangle_connectors
-    separators = separators
-    empty_connectors = empty_connectors
-
-    square_connectors = square_connectors
-    cut_square_connectors = cut_square_connectors
-
     def __init__(self, **kwargs):
 
         self.inputs = kwargs.get("inputs", tuple())
@@ -83,11 +71,12 @@ class NodeSVG:
 
         self.auto_inner_size = True
 
-    def adjust_ratio(self, values):
+    @staticmethod
+    def adjust_ratio(values):
         sep_values = [[]]
         sep_i = 0
         for value in values:
-            if value not in ("sep", ):
+            if value not in ("sep",):
                 sep_values[sep_i].append(value)
             else:
                 sep_i += 1
@@ -96,11 +85,11 @@ class NodeSVG:
         for value in sep_values:
             height = 0
             for v in value:
-                if v in self.small_connectors + self.empty_connectors:
-                    height += 1/3
-                if v in self.big_connectors:
-                    height += 2/3
-            height += 1/3
+                if v in SMALL + EMPTY:
+                    height += 1 / 3
+                if v in BIG:
+                    height += 2 / 3
+            height += 1 / 3
             sum_height += math.ceil(height)
 
         return sum_height
@@ -109,12 +98,16 @@ class NodeSVG:
 
         side = 40
         stroke_width = self.border_width  # 0.4
-        size = self.ratio[0]*side, self.ratio[1]*side
+        size = self.ratio[0] * side, self.ratio[1] * side
 
         file_path = f"{path}{self.label}.svg"
         draw = drawing.Drawing(file_path, size=size)
 
-        draw.add(draw.rect(insert=(0, 0), size=size, stroke=self.border_color, stroke_width=0.5, fill=self.bg_color))
+        draw.add(draw.rect(insert=(0, 0),
+                           size=size,
+                           stroke=self.border_color,
+                           stroke_width=0.5,
+                           fill=self.bg_color))
         r = 1 / 6
 
         def draw_connectors(inout, orientation, connectors_color):
@@ -124,7 +117,7 @@ class NodeSVG:
                 sep_connectors = [[]]
                 sep_i = 0
                 for value in inout:
-                    if value not in self.separators:
+                    if value not in SEPARATORS:
                         sep_connectors[sep_i].append(value)
                     else:
                         sep_i += 1
@@ -134,27 +127,26 @@ class NodeSVG:
                 for _, value in enumerate(sep_connectors):
                     height = 0
                     for v in value:
-                        if v in self.small_connectors + self.empty_connectors:
+                        if v in SMALL + EMPTY:
                             height += 1 / 3
-                        if v in self.big_connectors:
+                        if v in BIG:
                             height += 2 / 3
                     height += 1 / 3
-                    offset = (math.ceil(height) - height)/2
+                    offset = (math.ceil(height) - height) / 2
                     height = last_height
                     for v in value:
                         height += 1 / 3
                         if connectors_color:
-                            color = self.colors[connectors_color[actual_counter]]
+                            color = colors[connectors_color[actual_counter]]
                             color = "#%02x%02x%02x" % color
-                        elif v not in self.empty_connectors:
-                            color = self.colors[v]
+                        elif v not in EMPTY:
+                            color = colors[v]
                             color = "#%02x%02x%02x" % color
                         else:
                             color = self.bg_color
 
-                        if v in self.big_connectors + self.triangle_connectors + \
-                                self.square_connectors + self.cut_square_connectors:
-                            if v in self.rectangle_connectors:
+                        if v in BIG + TRIANGLE + SQUARE + CUT_SQUARE:
+                            if v in RECTANGLE:
                                 if orientation:
                                     points = ((0, (offset + height - r) * side),
                                               (r * side, (offset + height - r) * side),
@@ -167,7 +159,7 @@ class NodeSVG:
                                               (size[0] - r * side, (offset + height + 3 * r) * side),
                                               (size[0], (offset + height + 3 * r) * side),
                                               (size[0], (offset + height - r) * side))
-                            elif v in self.square_connectors:
+                            elif v in SQUARE:
                                 if orientation:
                                     points = ((0, (offset + height - r) * side),
                                               (r * side, (offset + height - r) * side),
@@ -180,7 +172,7 @@ class NodeSVG:
                                               (size[0] - r * side, (offset + height + r) * side),
                                               (size[0], (offset + height + r) * side),
                                               (size[0], (offset + height - r) * side))
-                            elif v in self.cut_rectangle_connectors:
+                            elif v in CUT_RECTANGLE:
                                 if orientation:
                                     points = ((0, (offset + height - r) * side),
                                               (r * side, (offset + height + 3 * r) * side),
@@ -191,7 +183,7 @@ class NodeSVG:
                                               (size[0] - r * side, (offset + height + 3 * r) * side),
                                               (size[0], (offset + height + 3 * r) * side),
                                               (size[0], (offset + height - r) * side))
-                            elif v in self.cut_square_connectors:
+                            elif v in CUT_SQUARE:
                                 if orientation:
                                     points = ((0, (offset + height - r) * side),
                                               (r * side, (offset + height + r) * side),
@@ -205,26 +197,29 @@ class NodeSVG:
                             else:
                                 if orientation:
                                     points = ((0, (offset + height - r) * side),
-                                              (r*side, (offset+height)*side),
-                                              (0, (offset+height+r)*side),
-                                              (0, (offset+height-r)*side))
+                                              (r * side, (offset + height) * side),
+                                              (0, (offset + height + r) * side),
+                                              (0, (offset + height - r) * side))
                                 else:
                                     points = ((size[0], (offset + height - r) * side),
-                                              (size[0]-r*side, (offset+height)*side),
-                                              (size[0], (offset+height+r)*side),
-                                              (size[0], (offset+height-r)*side))
-                            draw.add(draw.polygon(points, fill=color, stroke="black", stroke_width=stroke_width))
+                                              (size[0] - r * side, (offset + height) * side),
+                                              (size[0], (offset + height + r) * side),
+                                              (size[0], (offset + height - r) * side))
+                            draw.add(draw.polygon(points,
+                                                  fill=color,
+                                                  stroke="black",
+                                                  stroke_width=stroke_width))
 
-                            if v in self.big_connectors:
-                                if v in self.rectangle_connectors:
+                            if v in BIG:
+                                if v in RECTANGLE:
                                     node_connectors += [offset + height + r * (ic / 2) for ic in range(-1, 6)]
-                                elif v in self.cut_rectangle_connectors:
+                                elif v in CUT_RECTANGLE:
                                     node_connectors += [offset + height + r * (ic / 2) for ic in range(1, 6)]
                                 height += 1 / 3
                             else:
                                 node_connectors.append(offset + height)
 
-                        if v in self.round_connectors:
+                        if v in ROUND:
                             radius = r * side
                             if orientation:
                                 center = (0, (offset + height) * side)
@@ -234,12 +229,15 @@ class NodeSVG:
                                 center = (size[0], (offset + height) * side)
                                 points = ((center[0], center[1] + radius),
                                           (center[0], center[1] - radius))
-                            path = f"M {points[0][0]} {points[0][1]} A {radius} {radius} " \
-                                   f"0 0 1 {points[1][0]} {points[1][1]}"
-                            draw.add(draw.path(d=path, fill=color, stroke=self.border_color, stroke_width=stroke_width))
+                            svg_path = f"M {points[0][0]} {points[0][1]} A {radius} {radius} " \
+                                       f"0 0 1 {points[1][0]} {points[1][1]}"
+                            draw.add(draw.path(d=svg_path,
+                                               fill=color,
+                                               stroke=self.border_color,
+                                               stroke_width=stroke_width))
                             node_connectors.append(offset + height)
 
-                        if v not in self.empty_connectors:
+                        if v not in EMPTY:
                             label_centers.append((offset + height))
                             actual_counter += 1
                     height += 0.3
@@ -249,50 +247,84 @@ class NodeSVG:
         inputs_label_centers, input_connectors = draw_connectors(self.inputs, True, self.inputs_color)
         outputs_label_centers, output_connectors = draw_connectors(self.outputs, False, self.outputs_color)
 
-        if len(self.inner) > 5 and self.auto_inner_size:
-            self.inner_size -= len(self.inner) - 5
+        inner = self.inner.split("\n")
+        if len(inner) == 2:
+            if (len(inner[0]) > 5 or len(inner[1]) > 5) and self.auto_inner_size:
+                self.inner_size -= max(len(inner[0]), len(inner[1])) - 5
 
-        inner_text = draw.text(self.inner, insert=(20*self.ratio[0], 22), text_anchor="middle",
-                               style=f"font-size:{self.inner_size}px; font-family:Courier;font-weight:bold;")
-        draw.add(inner_text)
+            draw.add(draw.text(inner[0],
+                               insert=(20 * self.ratio[0], 19),
+                               text_anchor="middle",
+                               style=f"font-size:{self.inner_size}px;font-family:Courier;font-weight:bold;"))
+            draw.add(draw.text(inner[1],
+                               insert=(20 * self.ratio[0], 25),
+                               text_anchor="middle",
+                               style=f"font-size:{self.inner_size}px;font-family:Courier;font-weight:bold;"))
+        else:
+            if len(inner[0]) > 5 and self.auto_inner_size:
+                self.inner_size -= len(inner[0]) - 5
+
+            draw.add(draw.text(inner[0],
+                               insert=(20 * self.ratio[0], 22),
+                               text_anchor="middle",
+                               style=f"font-size:{self.inner_size}px;font-family:Courier;font-weight:bold;"))
 
         if self.desc:
-            desc_text = draw.text(self.desc, insert=(20*self.ratio[0], 62), text_anchor="middle",
-                                  style=f"font-size:{self.desc_size}px; font-family:Courier;font-weight:bold;")
-            draw.add(desc_text)
+            draw.add(draw.text(self.desc,
+                               insert=(20 * self.ratio[0], 62),
+                               text_anchor="middle",
+                               style=f"font-size:{self.desc_size}px;font-family:Courier;font-weight:bold;"))
 
         if self.user_symbol:
-            desc_text = draw.text(self.user_symbol[0], insert=(side*self.ratio[0]-3, 6), text_anchor="middle",
-                                  style=f"font-size:{self.adds_size}px; font-family:Courier;font-weight:bold;")
-            draw.add(desc_text)
+            draw.add(draw.text(self.user_symbol[0],
+                               insert=(side * self.ratio[0] - 3, 6),
+                               text_anchor="middle",
+                               style=f"font-size:{self.adds_size}px;font-family:Courier;font-weight:bold;"))
 
         if self.time:
-            desc_text = draw.text(self.time, insert=(side*self.ratio[0]-2, side*self.ratio[1]-2), text_anchor="end",
-                                  style=f"font-size:{self.adds_size}px; font-family:Courier;font-weight:bold;")
-            draw.add(desc_text)
+            draw.add(draw.text(self.time,
+                               insert=(side * self.ratio[0] - 2, side * self.ratio[1] - 2),
+                               text_anchor="end",
+                               style=f"font-size:{self.adds_size}px;font-family:Courier;font-weight:bold;"))
 
-        draw.add(draw.rect(insert=(0, 0), size=size, stroke=self.border_color,
-                           stroke_width=2*stroke_width, fill="none"))
+        draw.add(draw.rect(insert=(0, 0),
+                           size=size,
+                           stroke=self.border_color,
+                           stroke_width=2 * stroke_width,
+                           fill="none"))
 
         connectors = []
         for i in input_connectors:
-            connectors.append([0, i/self.ratio[1]])
+            connectors.append([0, i / self.ratio[1]])
         for i in output_connectors:
-            connectors.append([1, i/self.ratio[1]])
+            connectors.append([1, i / self.ratio[1]])
         points_style = f"points={connectors};"
         style = "verticalLabelPosition=top;labelBackgroundColor=none;verticalAlign=bottom;aspect=fixed;" \
                 "imageAspect=0;fontFamily=Courier;fontSize=8;labelPosition=center;align=center;spacing=-1;" \
                 f"fontStyle=1;syncNodeName={self.sync_name};"
         draw.save()
-        return file_path, points_style + style
+
+        with open(file_path, "r") as xml:
+            encoded_svg = to_shape(xml.read())
+        shape = f"""<mxGraphModel><root><mxCell id="0"/><mxCell id="1" parent="0"/><mxCell id="2" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;aspect=fixed;imageAspect=0;image=data:image/svg+xml,{encoded_svg};{points_style+style}" vertex="1" parent="1"><mxGeometry width="{size[0]}" height="{size[1]}" as="geometry"/></mxCell></root></mxGraphModel>"""
+        encoded_shape = to_library(shape).decode("utf-8")
+        drawio_node_json = {
+            "xml": encoded_shape,
+            "w": size[0],
+            "h": size[1],
+            "aspect": "fixed",
+            "title": self.label.title()
+        }
+
+        return drawio_node_json, file_path, points_style+style
 
 
 class NodeFunctionSVG:
     def __init__(self, **kwargs):
         self.node = NodeSVG(**kwargs)
         output_node_kwargs = dict(tuple(kwargs.items()))
-        output_node_kwargs["outputs"] = ("ctrl", )
-        output_node_kwargs["outputs_label"] = ("ctrl", )
+        output_node_kwargs["outputs"] = ("ctrl",)
+        output_node_kwargs["outputs_label"] = ("ctrl",)
         output_node_kwargs["outputs_color"] = ()
         output_node_kwargs["inputs"] = self.node.outputs
         output_node_kwargs["inputs_label"] = self.node.outputs_label
@@ -301,8 +333,8 @@ class NodeFunctionSVG:
         output_node_kwargs["label"] = f"function output {output_node_kwargs['label']}"
 
         input_node_kwargs = dict(tuple(kwargs.items()))
-        input_node_kwargs["inputs"] = ("ctrl", )
-        input_node_kwargs["inputs_label"] = ("ctrl", )
+        input_node_kwargs["inputs"] = ("ctrl",)
+        input_node_kwargs["inputs_label"] = ("ctrl",)
         input_node_kwargs["inputs_color"] = ()
         input_node_kwargs["outputs"] = self.node.inputs
         input_node_kwargs["outputs_label"] = self.node.inputs_label
