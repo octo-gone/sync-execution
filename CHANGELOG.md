@@ -1,5 +1,9 @@
 # Sync ChangeLog
 All changes since version 0.6.6 are written here
+## 0.10.0 Library (03.11.2020)
++ Drawio library generation added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/a411593035366330a8add07631d52a678ac1978c)
++ Web execution added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/f8474e509aeec713981618658166e9e981a69ba2)
++ Quoting slash added [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/cec0b2a60dd60e9d0750facfe9be1cae07561108)
 ## 0.9.2 (03.11.2020)
 + Fixed color support [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/56e349bea1bb1d3b8ea2648817aff5d29d61fa21)
 + Removed redundant html inserts [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/21649864c149c9b7fcc9b2e806c377ee7409695b)
