@@ -1,5 +1,8 @@
 # Sync ChangeLog
 All changes since version 0.6.6 are written here
+## 0.9.2 (03.11.2020)
++ Fixed color support [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/56e349bea1bb1d3b8ea2648817aff5d29d61fa21)
++ Removed redundant html inserts [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/21649864c149c9b7fcc9b2e806c377ee7409695b)
 ## 0.9.0 Uncompression (03.11.2020)
 + Nodes description separated for future updates [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/6f6786770774612aef8a548f0537a01e96110aa5)
 + Added reading for compressed files [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/e73affc38bba79e892be7c580a70772dd10e7905)
