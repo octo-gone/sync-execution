@@ -1,6 +1,6 @@
 # Sync ChangeLog
 All changes since version 0.6.6 are written here
-## 0.10.2 (03.11.2020)
+## 0.10.1 (03.11.2020)
 + Color input added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/feb2a8431a3012072b98e6cbffdf4f2e50e72a8d)
 ## 0.10.0 Library (03.11.2020)
 + Drawio library generation added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/a411593035366330a8add07631d52a678ac1978c)
