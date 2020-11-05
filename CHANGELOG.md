@@ -1,5 +1,9 @@
 # Sync ChangeLog
 All changes since version 0.6.6 are written here
+## 0.10.2 (05.11.2020)
++ Drawer config file added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/0aca39b25500b529d2eb368d5032981ae8fdd9a6)
++ Project structure changed [![](https://img.shields.io/badge/-chore-cea262.svg)](https://github.com/octo-gone/sync-execution/commit/1af332875484152d7864c71e22ef61973d66fb1a)
++ Run project changed for repl.it [![](https://img.shields.io/badge/-chore-cea262.svg)](https://github.com/octo-gone/sync-execution/commit/ba10d406e8a0c5a3d24e5d13f0d18f00838aecf5)
 ## 0.10.1 (03.11.2020)
 + Color input added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/feb2a8431a3012072b98e6cbffdf4f2e50e72a8d)
 ## 0.10.0 Library (03.11.2020)

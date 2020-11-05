@@ -1,6 +1,6 @@
 # Sync
 
-[![version badge](https://img.shields.io/badge/Version-0.10.1-daa520.svg)](https://github.com/octo-gone/sync-execution/)  
+[![version badge](https://img.shields.io/badge/Version-0.10.2-daa520.svg)](https://github.com/octo-gone/sync-execution/)  
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python_3.8.3-1f425f.svg)](https://www.python.org/)
 
 ### About
@@ -17,6 +17,7 @@ To draw diagrams you can use any diagram editor (based on __jgraph's__ Drawio ht
     - _Nodes_VarStruct.drawio_ - library with additional nodes 
 - __examples__ contains examples of language construction and typical exercises' solution
 - __scripts__ contains base of program 
+    - __drawer__ contains generator for svg images and drawio libs
     - __nodes__ contains python modules, each of them include several classes (nodes)
     - __utils__ contains module with exceptions, list of nodes in python dictionary and useful functions
     - _parser.py_ - specific xml parser based on regular expressions
@@ -44,6 +45,7 @@ $ pip install svgwrite
 After installing run `new_node.py` with changed node specification.
 In variable `style` you will get style for Drawio, it add/removes connectors and add some special information.
 To add node drag svg-image on Drawio's workspace and append style in this diagram block (select block and press `ctrl-e`).
+Another variant is to use Drawio library, which the script can generate.
 
-[2]: https://app.diagrams.net/?splash=0&libs=0&clibs=Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/Nodes_VarStruct_v5.drawio&clibs=Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/Nodes_v7.drawio
+[2]: https://app.diagrams.net/?splash=0&libs=0&clibs=Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/libraries/Nodes_VarStruct_v5.drawio;https://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/libraries/Nodes_v7.drawio
 [3]: https://repl.it/@mr_zed/sync-execution#script.drawio
