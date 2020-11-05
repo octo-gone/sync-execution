@@ -47,5 +47,5 @@ In variable `style` you will get style for Drawio, it add/removes connectors and
 To add node drag svg-image on Drawio's workspace and append style in this diagram block (select block and press `ctrl-e`).
 Another variant is to use Drawio library, which the script can generate.
 
-[2]: https://app.diagrams.net/?splash=0&libs=0&clibs=Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/libraries/Nodes_VarStruct_v5.drawio;https://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/libraries/Nodes_v7.drawio
+[2]: https://app.diagrams.net/?splash=0&libs=0&clibs=Uhttps://app.diagrams.net/?splash=0&clibs=Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/simple.drawio;https://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/structure.drawio
 [3]: https://repl.it/@mr_zed/sync-execution#script.drawio
