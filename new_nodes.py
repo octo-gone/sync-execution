@@ -1,4 +1,4 @@
-import gen
+from scripts.drawer import gen
 import json
 
 
@@ -35,15 +35,15 @@ def generate_library(name, nodes):
     library_data = "<mxlibrary>[{}]</mxlibrary>"
     n = []
     for i, node_info in enumerate(nodes.values()):
-        json_node, file_path, style = gen.NodeSVG(**node_info).draw_node("generated/svg/")
+        json_node, file_path, style = gen.NodeSVG(**node_info).draw_node("resources/generated/svg/")
         n.append(json.dumps(json_node))
 
-    with open(f"generated/{name}.drawio", 'w') as file:
-        file.write(library_data.format(",".join(nodes)))
+    with open(f"resources/generated/{name}.drawio", 'w') as file:
+        file.write(library_data.format(",".join(n)))
 
 
 def generate_node(node):
-    json_node, file_path, style = gen.NodeSVG(**node).draw_node("generated/svg/")
+    json_node, file_path, style = gen.NodeSVG(**node).draw_node("resources/generated/svg/")
     print(f"Image saved to '{file_path}'")
     print(f"Style for draw.io: {style}")
 
