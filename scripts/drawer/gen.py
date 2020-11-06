@@ -3,6 +3,58 @@ from svgwrite import drawing
 import os
 from scripts.utils.coder import to_shape, to_library
 from scripts.drawer.config import *
+import textwrap
+import html
+
+
+def generate_tooltip(tooltip):
+    def add_label(label, wrap):
+        return f"<b>{textwrap.fill(label, width=wrap)}</b>"
+
+    def add_io_element(io_name, io_desc, wrap):
+        return f"<b style='padding-left:15px;' >{io_name}:</b> {textwrap.fill(io_desc, width=wrap)}"
+
+    def add_desc(desc, wrap):
+        return f"<span style='padding-left:15px'> {textwrap.fill(desc, width=wrap)}</span>"
+
+    def add_input_label():
+        return f"<b style='color:darkgreen'>Входы:</b>"
+
+    def add_output_label():
+        return f"<b style='color:darkred'>Выходы:</b>"
+
+    def add_adds(adds, wrap):
+        text = textwrap.fill(adds, width=wrap)
+        color = "#%02x%02x%02x" % TOOLTIP_KEYWORDS_COLOR
+        for keyword in TOOLTIP_KEYWORDS:
+            text = f"<span style='color:{color}'>{keyword}</span>".join(text.split(keyword))
+        return f"\n<i style='color:#333'>{text}</i>"
+
+    tooltip_html = []
+
+    label = tooltip.get('label')
+    desc = tooltip.get('desc')
+    adds = tooltip.get('adds')
+    inputs = tooltip.get('inputs')
+    outputs = tooltip.get('outputs')
+    word_wrap = tooltip.get('word_wrap', TOOLTIP_WRAP_LENGTH)
+
+    tooltip_html.append(add_label(label, word_wrap))
+    if desc:
+        tooltip_html.append(add_desc(desc, word_wrap))
+    if inputs:
+        tooltip_html.append(add_input_label())
+        for i, iv in enumerate(inputs):
+            tooltip_html.append(add_io_element(i+1, iv[1], word_wrap))
+    if outputs:
+        tooltip_html.append(add_output_label())
+        for i, iv in enumerate(outputs):
+            tooltip_html.append(add_io_element(i+1, iv[1], word_wrap))
+    if adds:
+        tooltip_html.append(add_adds(adds, word_wrap))
+    a = "\n".join(map(html.escape, tooltip_html))
+    b = html.escape("<span style='font-size:medium;font-family:Courier'>") + a + html.escape("</span>")
+    return "&#xA;".join(b.split('\n'))
 
 
 class NodeSVG:
@@ -43,6 +95,8 @@ class NodeSVG:
         self.inner_size = kwargs.get("inner_size", NODE_INNER_FONTSIZE)
 
         self.side = NODE_SIZE
+
+        self.tooltip = kwargs.get("tooltip", None)
 
         self.auto_inner_size = True
 
@@ -147,7 +201,12 @@ class NodeSVG:
 
         with open(file_path, "r") as xml:
             encoded_svg = to_shape(xml.read())
-        shape = f"""<mxGraphModel><root><mxCell id="0"/><mxCell id="1" parent="0"/><mxCell id="2" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;aspect=fixed;imageAspect=0;image=data:image/svg+xml,{encoded_svg};{points_style+style}" vertex="1" parent="1"><mxGeometry width="{size[0]}" height="{size[1]}" as="geometry"/></mxCell></root></mxGraphModel>"""
+
+        if self.tooltip:
+            tooltip = generate_tooltip(self.tooltip)
+            shape = f"""<mxGraphModel><root><mxCell id="0"/><mxCell id="1" parent="0"/><UserObject label="" tooltip="{tooltip}" id="2"><mxCell style="shape=image;image=data:image/svg+xml,{encoded_svg};{points_style+style}" vertex="1" parent="1"><mxGeometry width="{size[0]}" height="{size[1]}" as="geometry"/></mxCell></UserObject></root></mxGraphModel>"""
+        else:
+            shape = f"""<mxGraphModel><root><mxCell id="0"/><mxCell id="1" parent="0"/><mxCell id="2" value="" style="shape=image;image=data:image/svg+xml,{encoded_svg};{points_style+style}" vertex="1" parent="1"><mxGeometry width="{size[0]}" height="{size[1]}" as="geometry"/></mxCell></root></mxGraphModel>"""
         encoded_shape = to_library(shape).decode("utf-8")
         drawio_node_json = {
             "xml": encoded_shape,

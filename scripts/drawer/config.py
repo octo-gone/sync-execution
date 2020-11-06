@@ -1,4 +1,3 @@
-
 colors = {
     "number": (136, 209, 201),
     "real": (163, 211, 156),
@@ -36,3 +35,8 @@ NODE_ADDS_FONTSIZE = 6
 NODE_INNER_FONTSIZE = 8
 
 NODE_SIZE = 40
+
+TOOLTIP_WRAP_LENGTH = 30
+TOOLTIP_KEYWORDS = ["$iteration", "$min", "$max", "$pi", "$true", "$false", "$none", "$sep", "$int", "$real", "$bool",
+                    "$char", "$num", "$str", "$any"]
+TOOLTIP_KEYWORDS_COLOR = (147, 107, 9)
