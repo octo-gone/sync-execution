@@ -58,7 +58,8 @@ def generate_tooltip(tooltip):
 
 
 class NodeSVG:
-    def __init__(self, **kwargs):
+    def __init__(self, is_function=False, **kwargs):
+        self.is_function = is_function
 
         self.inputs = kwargs.get("inputs", tuple())
         self.separated_inputs = []
@@ -194,9 +195,12 @@ class NodeSVG:
         for i in output_connectors:
             connectors.append([1, i / self.ratio[1]])
         points_style = f"points={connectors};"
+
         style = "verticalLabelPosition=top;labelBackgroundColor=none;verticalAlign=bottom;aspect=fixed;" \
                 "imageAspect=0;fontFamily=Courier;fontSize=8;labelPosition=center;align=center;spacing=-1;" \
                 f"fontStyle=1;syncNodeName={self.sync_name};"
+        if self.is_function:
+            style += f"syncInputs={list(self.inputs)};syncOutputs={list(self.outputs)};"
         draw.save()
 
         with open(file_path, "r") as xml:
@@ -357,31 +361,33 @@ class NodeSVG:
 
 class NodeFunctionSVG:
     def __init__(self, **kwargs):
-        self.node = NodeSVG(**kwargs)
+        self.node = NodeSVG(**kwargs, is_function=True)
         output_node_kwargs = dict(tuple(kwargs.items()))
-        output_node_kwargs["outputs"] = ("ctrl",)
-        output_node_kwargs["outputs_label"] = ("ctrl",)
+        output_node_kwargs["outputs"] = ()
+        output_node_kwargs["outputs_label"] = ()
         output_node_kwargs["outputs_color"] = ()
         output_node_kwargs["inputs"] = self.node.outputs
         output_node_kwargs["inputs_label"] = self.node.outputs_label
         output_node_kwargs["inputs_color"] = self.node.outputs_color
         output_node_kwargs["desc"] = "out"
         output_node_kwargs["label"] = f"function output {output_node_kwargs['label']}"
+        output_node_kwargs["sync_name"] = output_node_kwargs["label"]
 
         input_node_kwargs = dict(tuple(kwargs.items()))
-        input_node_kwargs["inputs"] = ("ctrl",)
-        input_node_kwargs["inputs_label"] = ("ctrl",)
+        input_node_kwargs["inputs"] = ()
+        input_node_kwargs["inputs_label"] = ()
         input_node_kwargs["inputs_color"] = ()
         input_node_kwargs["outputs"] = self.node.inputs
         input_node_kwargs["outputs_label"] = self.node.inputs_label
         input_node_kwargs["outputs_color"] = self.node.inputs_color
         input_node_kwargs["desc"] = "in"
         input_node_kwargs["label"] = f"function input {input_node_kwargs['label']}"
+        input_node_kwargs["sync_name"] = input_node_kwargs["label"]
 
         self.node.label = f"function {kwargs['label']}"
         self.node.sync_name = f"function {kwargs['label']}"
-        self.input_node = NodeSVG(**input_node_kwargs)
-        self.output_node = NodeSVG(**output_node_kwargs)
+        self.input_node = NodeSVG(**input_node_kwargs, is_function=True)
+        self.output_node = NodeSVG(**output_node_kwargs, is_function=True)
 
     def draw_node(self, path):
         a = self.node.draw_node(path)
