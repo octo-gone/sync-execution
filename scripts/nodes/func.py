@@ -80,14 +80,20 @@ class NodeFunction(base.Node, abc.ABC):
                 # 1
                 _id = cls.get_new_scope()
                 # 2
-                nodes = [func["in"], func["out"]]
+                _nodes = [func["in"], func["out"]]
                 used_nodes = [func["in"], func["out"]]
-                while nodes:
-                    node = nodes.pop(0)
-                    for n, i in sum(node.inputs, []) + sum(node.outputs, []):
+                while _nodes:
+                    node = _nodes.pop(0)
+                    if node == func["in"]:
+                        sample = sum(node.outputs, [])
+                    elif node == func["out"]:
+                        sample = sum(node.inputs, [])
+                    else:
+                        sample = sum(node.inputs, []) + sum(node.outputs, [])
+                    for n, i in sample:
                         if n not in used_nodes:
                             used_nodes.append(n)
-                            nodes.append(n)
+                            _nodes.append(n)
                 # 3
                 used_nodes.pop(0)
                 used_nodes.pop(0)
