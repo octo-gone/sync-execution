@@ -98,7 +98,7 @@ def get_connectors(inout):
 diagram_pattern = r"<diagram[^>]*?>(?P<diagram>.*?)<\/diagram>"
 
 # patterns for parsing
-node_pattern = r"<mxCell[^<]*?syncNodeName=.*?;.*?</mxCell>"
+node_pattern = r"(<UserObject.*?)?(?(1)<mxCell[^<]*?syncNodeName=.*?;.*?</mxCell>.*?</UserObject>|<mxCell[^<]*?syncNodeName=.*?;.*?</mxCell>)"
 scope_pattern = r"<mxCell[^<]*?syncName=scope;.*?</mxCell>"
 wire_pattern = r"<mxCell[^<]*?source.*?target.*?</mxCell>"
 
@@ -106,12 +106,12 @@ wire_pattern = r"<mxCell[^<]*?source.*?target.*?</mxCell>"
 id_pattern = r"id=\"(?P<id>.*?)\""
 node_name_pattern = r"syncNodeName=(?P<node_name>.*?);"
 image_pattern = r"image=data:image/svg\+xml,(?P<img>.*?);"
-value_pattern = r"value=\"(?P<value>.*?)\""
+value_pattern = r"(UserObject.*)?(?(1)label=\"(?P<value0>.*?)\"|value=\"(?P<value1>.*?)\")"
 
 # patterns for function
-points_pattern = r"points=(?P<points>\[[0-9.\[\], ]+?\]);"
-inputs_pattern = r"syncInputs=(?P<inputs>\[.+?\]);"
-outputs_pattern = r"syncOutputs=(?P<outputs>\[.+?\]);"
+points_pattern = r"points=(?P<points>\[[0-9.\[\], ]*?\]);"
+inputs_pattern = r"syncInputs=(?P<inputs>\[.*?\]);"
+outputs_pattern = r"syncOutputs=(?P<outputs>\[.*?\]);"
 
 # general patterns
 x_pattern = r"<mxGeometry.*x=\"(?P<x>.*?)\""
@@ -135,7 +135,7 @@ def parse(file_path):
     :return: tuple (nodes, wires, scopes)
     """
 
-    with open(file_path, "r") as file:
+    with open(file_path, "r", encoding="utf-8") as file:
         data = unescape("".join(file.read().split("\n")))
         data = "'".join(data.split("&#39;"))
 
@@ -147,7 +147,7 @@ def parse(file_path):
     nodes = []
     wires = []
 
-    for node in re.findall(node_pattern, data):
+    for node in re.finditer(node_pattern, data):
         patterns = {
             "id": id_pattern,
             "img": image_pattern,
@@ -158,13 +158,17 @@ def parse(file_path):
             "height": height_pattern,
             "node_name": node_name_pattern
         }
+        node = node.group()
         if not str(re.search(patterns["node_name"], node).group("node_name")).startswith("function"):
             for key in patterns.keys():
                 res = re.search(patterns[key], node)
-                if res:
-                    patterns[key] = res.group(key)
+                if key == "value":
+                    patterns[key] = res.group("value0") if res.group("value0") is not None else res.group("value1")
                 else:
-                    patterns[key] = None
+                    if res:
+                        patterns[key] = res.group(key)
+                    else:
+                        patterns[key] = None
 
             if patterns["node_name"] not in nodes_info.nodes_info:
                 logger.log_error(f"no built-in nodes found with name '{patterns['node_name']}'")
@@ -189,9 +193,12 @@ def parse(file_path):
             for key in patterns.keys():
                 res = re.search(patterns[key], node)
                 if res:
-                    patterns[key] = res.group(key)
-                    if key in ("points", "inputs", "outputs"):
-                        patterns[key] = eval(res.group(key))
+                    if key == "value":
+                        patterns[key] = res.group("value0") if res.group("value0") else res.group("value1")
+                    else:
+                        patterns[key] = res.group(key)
+                        if key in ("points", "inputs", "outputs"):
+                            patterns[key] = eval(res.group(key))
                 else:
                     patterns[key] = None
                     if key in ("points", "inputs", "outputs"):
