@@ -8,7 +8,7 @@ def from_library(val):
         val_deflated = from_base64(val)
         val_percent = inflate(val_deflated).decode('utf-8')
         return from_percent_encode(val_percent)
-    except zlib.error:
+    except:
         return val
 
 

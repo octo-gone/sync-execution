@@ -46,7 +46,7 @@ example_node = {
 }
 
 
-def generate_library(name, nodes, svg_folder="resources/generated/svg/", lib_folder="resources/generated/"):
+def generate_library(name, nodes, svg_folder="resources/generated/svg/", lib_folder="resources/libraries/"):
     svg_folder = svg_folder if svg_folder.endswith('/') else svg_folder + '/'
     lib_folder = lib_folder if lib_folder.endswith('/') else lib_folder + '/'
 
@@ -65,6 +65,17 @@ def generate_node(node, svg_folder="resources/generated/svg/"):
     json_node, file_path, style = gen.NodeSVG(**node).draw_node(svg_folder)
     print(f"Image saved to '{file_path}'")
     print(f"Style for draw.io: {style}")
+
+
+def generate_function(node, svg_folder="resources/generated/svg/", lib_folder="resources/libraries/"):
+    svg_folder = svg_folder if svg_folder.endswith('/') else svg_folder + '/'
+    lib_folder = lib_folder if lib_folder.endswith('/') else lib_folder + '/'
+
+    library_data = "<mxlibrary>[{}]</mxlibrary>"
+    n = list(map(lambda x: json.dumps(x[0]), gen.NodeFunctionSVG(**node).draw_node(svg_folder)))
+    name = node.get('label', 'test')
+    with open(f"{lib_folder}{name}.drawio", 'w') as file:
+        file.write(library_data.format(",".join(n)))
 
 
 if __name__ == '__main__':
@@ -91,6 +102,6 @@ if __name__ == '__main__':
             }
         }
     }
-    generate_library(library_name, nodes_info, svg_save_folder, lib_save_folder)
-
+    # generate_library(library_name, nodes_info, svg_save_folder, lib_save_folder)
+    generate_function(nodes_info['const'])
     # generate_node(nodes_info['random seed'], svg_save_folder)
