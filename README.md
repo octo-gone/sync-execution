@@ -1,6 +1,6 @@
 # Sync
 
-[![version badge](https://img.shields.io/badge/Version-0.10.2-daa520.svg)](https://github.com/octo-gone/sync-execution/)  
+[![version badge](https://img.shields.io/badge/Version-0.11.0-daa520.svg)](https://github.com/octo-gone/sync-execution/)  
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python_3.8.3-1f425f.svg)](https://www.python.org/)
 
 ### About
@@ -47,5 +47,5 @@ In variable `style` you will get style for Drawio, it add/removes connectors and
 To add node drag svg-image on Drawio's workspace and append style in this diagram block (select block and press `ctrl-e`).
 Another variant is to use Drawio library, which the script can generate.
 
-[2]: https://app.diagrams.net/?splash=0&libs=0&clibs=Uhttps://app.diagrams.net/?splash=0&clibs=Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/simple.drawio;https://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/structure.drawio
+[2]: https://app.diagrams.net/?splash=0&libs=0&clibs=Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/simple.drawio;Uhttps://app.diagrams.net/?splash=0&clibs=Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/structure.drawio
 [3]: https://repl.it/@mr_zed/sync-execution#script.drawio
