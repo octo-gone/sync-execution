@@ -102,6 +102,8 @@ class NodeFunction(base.Node, abc.ABC):
                     new_node.output_values = copy(node.output_values)
                     new_node.actual_inputs = copy(node.actual_inputs)
                     new_node.scope = _id
+                    if new_node.desc_value == '$desc':
+                        new_node.desc_value = func_node.desc_value
                     new_nodes.append(new_node)
                 # 5
                 for new_node in new_nodes:
