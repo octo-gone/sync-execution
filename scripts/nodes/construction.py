@@ -506,12 +506,13 @@ class NodeForeach(base.Node):
         """
         if self.sub_state == BOUND:
             if not self.inputs[1]:
-                if self.desc_value in self.struct_variables:
-                    struct = self.struct_variables[self.desc_value]
+                var_name = f"{self.scope}$" + self.desc_value
+                if var_name in self.struct_variables:
+                    struct = self.struct_variables[var_name]
                     if struct["structure"] in ("list", "array"):
-                        self.values = self.struct_variables[self.desc_value]["values"]
+                        self.values = self.struct_variables[var_name]["values"]
                     elif struct["structure"] in ("dict", ):
-                        self.values = self.struct_variables[self.desc_value]["values"].keys()
+                        self.values = self.struct_variables[var_name]["values"].keys()
                 self.bound = len(self.values)
             elif self.variant(map(lambda x: x is not None, self.get_value(1, True))):
                 self.values = []
