@@ -10,7 +10,7 @@ All changes since version 0.6.6 are written here
 + ChangeLog fixed [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/64175c322e1569daf22f4fa59de45881f71d8cc5)
 ## 0.11.0 Tooltip (06.11.2020)
 + Standard libraries updated [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/32f61b6a6fccb14080bbe6a7272ff5340b59b909)
-+ Each node got a tooltip [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/70056c9128d6fe329add32781b1e227a6a84bff9)
++ Each node got a tooltip (RU) [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/70056c9128d6fe329add32781b1e227a6a84bff9)
 + Tooltip generation added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/c6479ad24165f0c66ae24bc5347a300f8419c1a9)
 + Using function description inside function added ($desc) [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/d9cd3e1edbc36f32a08596eb22abf245ba5c0de7)
 + Links fixed [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/690e39c144ee7d5db3e02db01e899d1fc326de68)

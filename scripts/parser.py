@@ -139,10 +139,13 @@ def parse(file_path):
         data = unescape("".join(file.read().split("\n")))
         data = "'".join(data.split("&#39;"))
 
-    data = re.search(diagram_pattern, data)
-    if data is None:
+    res = ""
+    for diag in re.finditer(diagram_pattern, data):
+        res += coder.from_library(diag['diagram'])
+
+    data = res
+    if not data:
         logger.log_error("no data in diagram")
-    data = coder.from_library(data['diagram'])
 
     nodes = []
     wires = []
