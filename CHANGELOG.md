@@ -1,5 +1,10 @@
 # Sync ChangeLog
 All changes since version 0.6.6 are written here
+## 0.11.2 (08.11.2020)
++ Multiple page parsing added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/7b0e1bd37eb1507812b49f6b8e24fa6bef023816)
++ Nodes order updated [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/29e8dd97aabc7416c723289b37b0fbae77ac19d5)
++ Function tooltip generation added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/16d86a0efa6b70997bb16a062de7b841a5381ace)
++ Decoding of russian language fixed [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/980d7a169ed4c3157a74dd31e871b1d669011493)
 ## 0.11.1 (06.11.2020)
 + Parsing for new version nodes added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/0dc3ba9af5008e907f57bbca7c4cd645f91f6191)
 + Added safety for function scope generation [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/fdb48de18d6c1bde246f67aae3da46c939270757)
