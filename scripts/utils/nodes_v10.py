@@ -1,9 +1,9 @@
 base_nodes_info = {
     'abs': {
-        'inputs': ('number', ),
-        'inputs_label': ('number', ),
-        'outputs': ('number', ),
-        'outputs_label': ('number', ),
+        'inputs': ('number',),
+        'inputs_label': ('number',),
+        'outputs': ('number',),
+        'outputs_label': ('number',),
         'inner': 'Abs',
         'label': 'abs',
         'tooltip': {
@@ -18,11 +18,11 @@ base_nodes_info = {
         }
     },
     'add': {
-        'inputs': ('mult', ),
-        'inputs_label': ('number', ),
-        'inputs_color': ('number', ),
-        'outputs': ('number', ),
-        'outputs_label': ('number', ),
+        'inputs': ('mult',),
+        'inputs_label': ('number',),
+        'inputs_color': ('number',),
+        'outputs': ('number',),
+        'outputs_label': ('number',),
         'inner': '+',
         'label': 'add number',
         'sync_name': 'add',
@@ -38,11 +38,11 @@ base_nodes_info = {
         }
     },
     'and': {
-        'inputs': ('mult', ),
-        'inputs_label': ('values', ),
-        'inputs_color': ('bool', ),
-        'outputs': ('bool', ),
-        'outputs_label': ('bool', ),
+        'inputs': ('mult',),
+        'inputs_label': ('values',),
+        'inputs_color': ('bool',),
+        'outputs': ('bool',),
+        'outputs_label': ('bool',),
         'inner': 'AND',
         'label': 'and',
         'tooltip': {
@@ -58,11 +58,11 @@ base_nodes_info = {
         }
     },
     'not and': {
-        'inputs': ('mult', ),
-        'inputs_label': ('values', ),
-        'inputs_color': ('bool', ),
-        'outputs': ('bool', ),
-        'outputs_label': ('bool', ),
+        'inputs': ('mult',),
+        'inputs_label': ('values',),
+        'inputs_color': ('bool',),
+        'outputs': ('bool',),
+        'outputs_label': ('bool',),
         'inner': 'NAND',
         'label': 'not and',
         'tooltip': {
@@ -78,10 +78,10 @@ base_nodes_info = {
         }
     },
     'bool': {
-        'inputs': ('any', ),
-        'inputs_label': ('any', ),
-        'outputs': ('bool', ),
-        'outputs_label': ('bool', ),
+        'inputs': ('any',),
+        'inputs_label': ('any',),
+        'outputs': ('bool',),
+        'outputs_label': ('bool',),
         'inner': 'Bool',
         'label': 'bool',
         'tooltip': {
@@ -99,8 +99,8 @@ base_nodes_info = {
     'const': {
         'inputs': (),
         'inputs_label': (),
-        'outputs': ('any', ),
-        'outputs_label': ('any', ),
+        'outputs': ('any',),
+        'outputs_label': ('any',),
         'inner': 'Const',
         'label': 'constant',
         'sync_name': 'const',
@@ -114,10 +114,10 @@ base_nodes_info = {
         }
     },
     'const ctrl': {
-        'inputs': ('ctrl', ),
-        'inputs_label': ('ctrl', ),
-        'outputs': ('any', ),
-        'outputs_label': ('any', ),
+        'inputs': ('ctrl',),
+        'inputs_label': ('ctrl',),
+        'outputs': ('any',),
+        'outputs_label': ('any',),
         'inner': 'Const',
         'label': 'constant with ctrl',
         'sync_name': 'const ctrl',
@@ -153,10 +153,10 @@ base_nodes_info = {
         }
     },
     'dec': {
-        'inputs': ('number', ),
-        'inputs_label': ('number', ),
-        'outputs': ('number', ),
-        'outputs_label': ('number', ),
+        'inputs': ('number',),
+        'inputs_label': ('number',),
+        'outputs': ('number',),
+        'outputs_label': ('number',),
         'inner': 'Dec',
         'label': 'decrement',
         'sync_name': 'dec',
@@ -193,8 +193,8 @@ base_nodes_info = {
     'div': {
         'inputs': ('number', 'number'),
         'inputs_label': ('dividend', 'divider'),
-        'outputs': ('int', ),
-        'outputs_label': ('int', ),
+        'outputs': ('int',),
+        'outputs_label': ('int',),
         'inner': '//',
         'label': 'div',
         'tooltip': {
@@ -212,8 +212,8 @@ base_nodes_info = {
     'division': {
         'inputs': ('number', 'number'),
         'inputs_label': ('dividend', 'divider'),
-        'outputs': ('number', ),
-        'outputs_label': ('number', ),
+        'outputs': ('number',),
+        'outputs_label': ('number',),
         'inner': '/',
         'label': 'div number',
         'sync_name': 'division',
@@ -230,10 +230,10 @@ base_nodes_info = {
         }
     },
     'equal': {
-        'inputs': ('mult', ),
-        'inputs_label': ('values', ),
-        'outputs': ('bool', ),
-        'outputs_label': ('bool', ),
+        'inputs': ('mult',),
+        'inputs_label': ('values',),
+        'outputs': ('bool',),
+        'outputs_label': ('bool',),
         'inner': '=',
         'label': 'equal',
         'tooltip': {
@@ -248,8 +248,8 @@ base_nodes_info = {
         }
     },
     'error': {
-        'inputs': ('ctrl', ),
-        'inputs_label': ('ctrl', ),
+        'inputs': ('ctrl',),
+        'inputs_label': ('ctrl',),
         'outputs': (),
         'outputs_label': (),
         'inner': 'Err',
@@ -270,8 +270,8 @@ base_nodes_info = {
     'exp': {
         'inputs': ('number', 'number'),
         'inputs_label': ('base', 'exponent'),
-        'outputs': ('number', ),
-        'outputs_label': ('number', ),
+        'outputs': ('number',),
+        'outputs_label': ('number',),
         'inner': '**',
         'label': 'exp number',
         'sync_name': 'exp',
@@ -335,7 +335,7 @@ base_nodes_info = {
     },
     'foreach': {
         'inputs': ('ctrl', 'mult_s', 'sep', 'ctrl'),
-        'inputs_label': ('ctrl', 'values', 'next', ),
+        'inputs_label': ('ctrl', 'values', 'next',),
         'outputs': ('ctrl', 'sep', 'any'),
         'outputs_label': ('end ctrl', 'value'),
         'inner': 'For',
@@ -374,8 +374,8 @@ base_nodes_info = {
     'greater': {
         'inputs': ('any', 'any'),
         'inputs_label': ('a', 'b'),
-        'outputs': ('bool', ),
-        'outputs_label': ('bool', ),
+        'outputs': ('bool',),
+        'outputs_label': ('bool',),
         'inner': 'a>b',
         'label': 'greater',
         'tooltip': {
@@ -393,8 +393,8 @@ base_nodes_info = {
     'greater or equal': {
         'inputs': ('any', 'any'),
         'inputs_label': ('a', 'b'),
-        'outputs': ('bool', ),
-        'outputs_label': ('bool', ),
+        'outputs': ('bool',),
+        'outputs_label': ('bool',),
         'inner': 'a>=b',
         'label': 'greater or equal',
         'tooltip': {
@@ -433,8 +433,8 @@ base_nodes_info = {
     'in': {
         'inputs': ('mult_s', 'any'),
         'inputs_label': ('mult', 'any'),
-        'outputs': ('bool', ),
-        'outputs_label': ('bool', ),
+        'outputs': ('bool',),
+        'outputs_label': ('bool',),
         'inner': 'In',
         'label': 'contains',
         'sync_name': 'in',
@@ -452,10 +452,10 @@ base_nodes_info = {
         }
     },
     'inc': {
-        'inputs': ('number', ),
-        'inputs_label': ('number', ),
-        'outputs': ('number', ),
-        'outputs_label': ('number', ),
+        'inputs': ('number',),
+        'inputs_label': ('number',),
+        'outputs': ('number',),
+        'outputs_label': ('number',),
         'inner': 'Inc',
         'label': 'increment',
         'sync_name': 'inc',
@@ -471,10 +471,10 @@ base_nodes_info = {
         }
     },
     'input': {
-        'inputs': ('ctrl', ),
-        'inputs_label': ('ctrl', ),
-        'outputs': ('any', ),
-        'outputs_label': ('any', ),
+        'inputs': ('ctrl',),
+        'inputs_label': ('ctrl',),
+        'outputs': ('any',),
+        'outputs_label': ('any',),
         'inner': 'Input',
         'label': 'input',
         'tooltip': {
@@ -490,10 +490,10 @@ base_nodes_info = {
         }
     },
     'trunc': {
-        'inputs': ('number', ),
-        'inputs_label': ('number', ),
-        'outputs': ('int', ),
-        'outputs_label': ('int', ),
+        'inputs': ('number',),
+        'inputs_label': ('number',),
+        'outputs': ('int',),
+        'outputs_label': ('int',),
         'inner': 'Trunc',
         'label': 'trunc',
         'tooltip': {
@@ -508,10 +508,10 @@ base_nodes_info = {
         }
     },
     'inv': {
-        'inputs': ('number', ),
-        'inputs_label': ('number', ),
-        'outputs': ('number', ),
-        'outputs_label': ('number', ),
+        'inputs': ('number',),
+        'inputs_label': ('number',),
+        'outputs': ('number',),
+        'outputs_label': ('number',),
         'inner': 'Inv',
         'label': 'inversion',
         'sync_name': 'inv',
@@ -529,8 +529,8 @@ base_nodes_info = {
     'less': {
         'inputs': ('any', 'any'),
         'inputs_label': ('a', 'b'),
-        'outputs': ('bool', ),
-        'outputs_label': ('bool', ),
+        'outputs': ('bool',),
+        'outputs_label': ('bool',),
         'inner': 'a<b',
         'label': 'less',
         'tooltip': {
@@ -548,8 +548,8 @@ base_nodes_info = {
     'less or equal': {
         'inputs': ('any', 'any'),
         'inputs_label': ('a', 'b'),
-        'outputs': ('bool', ),
-        'outputs_label': ('bool', ),
+        'outputs': ('bool',),
+        'outputs_label': ('bool',),
         'inner': 'a<=b',
         'label': 'less or equal',
         'tooltip': {
@@ -567,8 +567,8 @@ base_nodes_info = {
     'merge': {
         'inputs': ('ctrl', 'any'),
         'inputs_label': ('ctrl', 'any'),
-        'outputs': ('any', ),
-        'outputs_label': ('any', ),
+        'outputs': ('any',),
+        'outputs_label': ('any',),
         'inner': 'Merge',
         'label': 'merge ctrl',
         'sync_name': 'merge',
@@ -588,8 +588,8 @@ base_nodes_info = {
     'mod': {
         'inputs': ('number', 'number'),
         'inputs_label': ('dividend', 'divider'),
-        'outputs': ('number', ),
-        'outputs_label': ('number', ),
+        'outputs': ('number',),
+        'outputs_label': ('number',),
         'inner': '%',
         'label': 'mod',
         'tooltip': {
@@ -605,11 +605,11 @@ base_nodes_info = {
         }
     },
     'mult': {
-        'inputs': ('mult', ),
-        'inputs_label': ('number', ),
-        'inputs_color': ('number', ),
-        'outputs': ('number', ),
-        'outputs_label': ('number', ),
+        'inputs': ('mult',),
+        'inputs_label': ('number',),
+        'inputs_color': ('number',),
+        'outputs': ('number',),
+        'outputs_label': ('number',),
         'inner': '*',
         'label': 'mult number',
         'sync_name': 'mult',
@@ -625,10 +625,10 @@ base_nodes_info = {
         }
     },
     'not': {
-        'inputs': ('bool', ),
-        'inputs_label': ('bool', ),
-        'outputs': ('bool', ),
-        'outputs_label': ('bool', ),
+        'inputs': ('bool',),
+        'inputs_label': ('bool',),
+        'outputs': ('bool',),
+        'outputs_label': ('bool',),
         'inner': 'NOT',
         'label': 'not',
         'tooltip': {
@@ -646,8 +646,8 @@ base_nodes_info = {
     'not equal': {
         'inputs': ('any', 'any'),
         'inputs_label': ('a', 'b'),
-        'outputs': ('bool', ),
-        'outputs_label': ('bool', ),
+        'outputs': ('bool',),
+        'outputs_label': ('bool',),
         'inner': 'a!=b',
         'label': 'not equal',
         'tooltip': {
@@ -663,11 +663,11 @@ base_nodes_info = {
         }
     },
     'or': {
-        'inputs': ('mult', ),
-        'inputs_label': ('values', ),
-        'inputs_color': ('bool', ),
-        'outputs': ('bool', ),
-        'outputs_label': ('bool', ),
+        'inputs': ('mult',),
+        'inputs_label': ('values',),
+        'inputs_color': ('bool',),
+        'outputs': ('bool',),
+        'outputs_label': ('bool',),
         'inner': 'OR',
         'label': 'or',
         'tooltip': {
@@ -684,11 +684,11 @@ base_nodes_info = {
         }
     },
     'not or': {
-        'inputs': ('mult', ),
-        'inputs_label': ('values', ),
-        'inputs_color': ('bool', ),
-        'outputs': ('bool', ),
-        'outputs_label': ('bool', ),
+        'inputs': ('mult',),
+        'inputs_label': ('values',),
+        'inputs_color': ('bool',),
+        'outputs': ('bool',),
+        'outputs_label': ('bool',),
         'inner': 'NOR',
         'label': 'not or',
         'tooltip': {
@@ -705,8 +705,8 @@ base_nodes_info = {
         }
     },
     'print': {
-        'inputs': ('any', ),
-        'inputs_label': ('any', ),
+        'inputs': ('any',),
+        'inputs_label': ('any',),
         'outputs': (),
         'outputs_label': (),
         'inner': 'Print',
@@ -721,10 +721,10 @@ base_nodes_info = {
         }
     },
     'print ctrl': {
-        'inputs': ('any', ),
-        'inputs_label': ('any', ),
-        'outputs': ('ctrl', ),
-        'outputs_label': ('ctrl', ),
+        'inputs': ('any',),
+        'inputs_label': ('any',),
+        'outputs': ('ctrl',),
+        'outputs_label': ('ctrl',),
         'inner': 'Print',
         'label': 'print with ctrl',
         'sync_name': 'print ctrl',
@@ -740,8 +740,8 @@ base_nodes_info = {
     'random int': {
         'inputs': ('int', 'int'),
         'inputs_label': ('bottom', 'top'),
-        'outputs': ('int', ),
-        'outputs_label': ('int', ),
+        'outputs': ('int',),
+        'outputs_label': ('int',),
         'inner': 'Random\nInt',
         'label': 'random int',
         'tooltip': {
@@ -759,8 +759,8 @@ base_nodes_info = {
     'random num': {
         'inputs': ('number', 'number'),
         'inputs_label': ('bottom', 'top'),
-        'outputs': ('number', ),
-        'outputs_label': ('number', ),
+        'outputs': ('number',),
+        'outputs_label': ('number',),
         'inner': 'Random\nNumber',
         'label': 'random num',
         'tooltip': {
@@ -776,8 +776,8 @@ base_nodes_info = {
         }
     },
     'random seed': {
-        'inputs': ('any', ),
-        'inputs_label': ('value', ),
+        'inputs': ('any',),
+        'inputs_label': ('value',),
         'outputs': ('ctrl',),
         'outputs_label': ('ctrl',),
         'inner': 'Random\nSeed',
@@ -794,10 +794,10 @@ base_nodes_info = {
         }
     },
     'random': {
-        'inputs': ('ctrl', ),
-        'inputs_label': ('ctrl', ),
-        'outputs': ('real', ),
-        'outputs_label': ('real', ),
+        'inputs': ('ctrl',),
+        'inputs_label': ('ctrl',),
+        'outputs': ('real',),
+        'outputs_label': ('real',),
         'inner': 'Random',
         'label': 'random',
         'tooltip': {
@@ -814,8 +814,8 @@ base_nodes_info = {
     'round': {
         'inputs': ('number', 'int'),
         'inputs_label': ('number', 'precision'),
-        'outputs': ('number', ),
-        'outputs_label': ('number', ),
+        'outputs': ('number',),
+        'outputs_label': ('number',),
         'inner': 'Round',
         'label': 'round',
         'tooltip': {
@@ -833,8 +833,8 @@ base_nodes_info = {
     'run': {
         'inputs': (),
         'inputs_label': (),
-        'outputs': ('ctrl', ),
-        'outputs_label': ('ctrl', ),
+        'outputs': ('ctrl',),
+        'outputs_label': ('ctrl',),
         'inner': 'Run',
         'label': 'run',
         'tooltip': {
@@ -846,8 +846,8 @@ base_nodes_info = {
         }
     },
     'stop': {
-        'inputs': ('ctrl', ),
-        'inputs_label': ('ctrl', ),
+        'inputs': ('ctrl',),
+        'inputs_label': ('ctrl',),
         'outputs': (),
         'outputs_label': (),
         'inner': 'Stop',
@@ -863,8 +863,8 @@ base_nodes_info = {
     'sub': {
         'inputs': ('number', 'number'),
         'inputs_label': ('minuend', 'subtrahend'),
-        'outputs': ('number', ),
-        'outputs_label': ('number', ),
+        'outputs': ('number',),
+        'outputs_label': ('number',),
         'inner': '-',
         'label': 'sub',
         'tooltip': {
@@ -882,8 +882,8 @@ base_nodes_info = {
     'timer': {
         'inputs': ('ctrl', 'ctrl'),
         'inputs_label': ('start ctrl', 'end ctrl'),
-        'outputs': ('int', ),
-        'outputs_label': ('time', ),
+        'outputs': ('int',),
+        'outputs_label': ('time',),
         'inner': 'Timer',
         'label': 'timer',
         'tooltip': {
@@ -899,10 +899,10 @@ base_nodes_info = {
         }
     },
     'ctrl': {
-        'inputs': ('any', ),
-        'inputs_label': ('any', ),
-        'outputs': ('ctrl', ),
-        'outputs_label': ('ctrl', ),
+        'inputs': ('any',),
+        'inputs_label': ('any',),
+        'outputs': ('ctrl',),
+        'outputs_label': ('ctrl',),
         'inner': 'Ctrl',
         'label': 'to ctrl',
         'sync_name': 'ctrl',
@@ -919,10 +919,10 @@ base_nodes_info = {
         }
     },
     'type': {
-        'inputs': ('any', ),
-        'inputs_label': ('any', ),
-        'outputs': ('obj', ),
-        'outputs_label': ('type', ),
+        'inputs': ('any',),
+        'inputs_label': ('any',),
+        'outputs': ('obj',),
+        'outputs_label': ('type',),
         'inner': 'Type',
         'label': 'type',
         'tooltip': {
@@ -937,10 +937,10 @@ base_nodes_info = {
         }
     },
     'var': {
-        'inputs': ('any', ),
-        'inputs_label': ('any', ),
-        'outputs': ('any', ),
-        'outputs_label': ('any', ),
+        'inputs': ('any',),
+        'inputs_label': ('any',),
+        'outputs': ('any',),
+        'outputs_label': ('any',),
         'inner': 'Var',
         'label': 'variable',
         'sync_name': 'var',
@@ -957,10 +957,10 @@ base_nodes_info = {
         }
     },
     'var set': {
-        'inputs': ('any', ),
-        'inputs_label': ('any', ),
-        'outputs': ('ctrl', ),
-        'outputs_label': ('ctrl', ),
+        'inputs': ('any',),
+        'inputs_label': ('any',),
+        'outputs': ('ctrl',),
+        'outputs_label': ('ctrl',),
         'inner': 'Var',
         'label': 'variable set',
         'sync_name': 'var set',
@@ -977,10 +977,10 @@ base_nodes_info = {
         }
     },
     'var get': {
-        'inputs': ('ctrl', ),
-        'inputs_label': ('ctrl', ),
-        'outputs': ('any', ),
-        'outputs_label': ('any', ),
+        'inputs': ('ctrl',),
+        'inputs_label': ('ctrl',),
+        'outputs': ('any',),
+        'outputs_label': ('any',),
         'inner': 'Var',
         'label': 'variable get',
         'sync_name': 'var get',
@@ -997,11 +997,11 @@ base_nodes_info = {
         }
     },
     'wait': {
-        'inputs': ('mult', ),
-        'inputs_label': ('ctrl', ),
-        'inputs_color': ('ctrl', ),
-        'outputs': ('ctrl', ),
-        'outputs_label': ('ctrl', ),
+        'inputs': ('mult',),
+        'inputs_label': ('ctrl',),
+        'inputs_color': ('ctrl',),
+        'outputs': ('ctrl',),
+        'outputs_label': ('ctrl',),
         'inner': 'Wait',
         'label': 'wait',
         'tooltip': {
@@ -1040,8 +1040,8 @@ base_nodes_info = {
     'xor': {
         'inputs': ('bool', 'bool'),
         'inputs_label': ('bool', 'bool'),
-        'outputs': ('bool', ),
-        'outputs_label': ('bool', ),
+        'outputs': ('bool',),
+        'outputs_label': ('bool',),
         'inner': 'XOR',
         'label': 'xor',
         'tooltip': {
@@ -1058,10 +1058,10 @@ base_nodes_info = {
         }
     },
     'value switch': {
-        'inputs': ('mult', ),
-        'inputs_label': ('values', ),
-        'outputs': ('any', ),
-        'outputs_label': ('value', ),
+        'inputs': ('mult',),
+        'inputs_label': ('values',),
+        'outputs': ('any',),
+        'outputs_label': ('value',),
         'inner': '>-',
         'label': 'value switch',
         'tooltip': {
@@ -1232,7 +1232,7 @@ structure_nodes_info = {
         'inputs_label': ('key', 'value'),
         'outputs': ('any',),
         'outputs_label': ('value',),
-        'inner': 'Dict\nI & F',
+        'inner': 'Dict\nI&F',
         'label': 'dict insert and find',
         'tooltip': {
             'label': 'Dict Insert and Find',
@@ -1348,7 +1348,7 @@ structure_nodes_info = {
         'inputs_label': ('index', 'value'),
         'outputs': ('any',),
         'outputs_label': ('value',),
-        'inner': 'List\nG & S',
+        'inner': 'List\nG&S',
         'label': 'list get and set',
         'tooltip': {
             'label': 'List Get and Set',
@@ -1429,7 +1429,7 @@ structure_nodes_info = {
         'inputs_label': ('index y', 'index x', 'sep', 'value'),
         'outputs': ('any',),
         'outputs_label': ('value',),
-        'inner': 'Matrix\nG & S',
+        'inner': 'Matrix\nG&S',
         'label': 'matrix get and set',
         'tooltip': {
             'label': 'Matrix Get',
@@ -1450,3 +1450,14 @@ structure_nodes_info = {
 nodes_info = {}
 nodes_info.update(base_nodes_info)
 nodes_info.update(structure_nodes_info)
+
+base_nodes_lib_order = ['run', 'stop', 'const', 'const ctrl', 'input', 'print', 'print ctrl', 'if', 'add', 'sub',
+                        'mult', 'division', 'exp', 'var', 'var set', 'var get', 'bool', 'and', 'or', 'not and',
+                        'not or', 'equal', 'not', 'not equal', 'xor', 'greater', 'greater or equal', 'less',
+                        'less or equal', 'inc', 'dec', 'abs', 'div', 'mod', 'inv', 'trunc', 'round', 'for', 'counter',
+                        'while', 'in', 'for ext', 'foreach', 'merge', 'delay', 'value switch', 'ctrl', 'timer', 'wait',
+                        'type', 'get type', 'error', 'random', 'random int', 'random num', 'random seed']
+structure_nodes_lib_order = ['length', 'array create', 'array set', 'array get', 'array get and set', 'list create',
+                             'list set', 'list get', 'list get and set', 'dict create', 'dict insert', 'dict find',
+                             'dict insert and find', 'dict remove', 'matrix create', 'matrix set', 'matrix get',
+                             'matrix get and set']

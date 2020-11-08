@@ -1,14 +1,13 @@
 from scripts.drawer import gen
 import json
 
-
 example_node = {
     'len': {
-        'inputs': ('ctrl', ),
-        'inputs_color': ('ctrl', ),  # optional
+        'inputs': ('ctrl',),
+        'inputs_color': ('ctrl',),  # optional
 
-        'outputs': ('int', ),
-        'outputs_color': ('int', ),  # optional
+        'outputs': ('int',),
+        'outputs_color': ('int',),  # optional
 
         'user_symbol': '&',  # optional
         'time': '~',  # optional
@@ -46,13 +45,13 @@ example_node = {
 }
 
 
-def generate_library(name, nodes, svg_folder="resources/generated/svg/", lib_folder="resources/libraries/"):
+def generate_library(name, nodes: list, svg_folder="resources/generated/svg/", lib_folder="resources/libraries/"):
     svg_folder = svg_folder if svg_folder.endswith('/') else svg_folder + '/'
     lib_folder = lib_folder if lib_folder.endswith('/') else lib_folder + '/'
 
     library_data = "<mxlibrary>[{}]</mxlibrary>"
     n = []
-    for i, node_info in enumerate(nodes.values()):
+    for i, node_info in enumerate(nodes):
         json_node, file_path, style = gen.NodeSVG(**node_info).draw_node(svg_folder)
         n.append(json.dumps(json_node))
 
@@ -78,30 +77,52 @@ def generate_function(node, svg_folder="resources/generated/svg/", lib_folder="r
         file.write(library_data.format(",".join(n)))
 
 
+def generate_base_libs():
+    from scripts.utils.nodes_v10 import base_nodes_info, structure_nodes_info, \
+        base_nodes_lib_order, structure_nodes_lib_order
+
+    base_library = []
+    for n in base_nodes_lib_order:
+        base_library.append(base_nodes_info[n])
+    generate_library("base", base_library, "resources/generated/svg/", "resources/")
+
+    structure_library = []
+    for n in structure_nodes_lib_order:
+        structure_library.append(structure_nodes_info[n])
+    generate_library("structure", structure_library, "resources/generated/svg/", "resources/")
+
+
 if __name__ == '__main__':
     svg_save_folder = "resources/generated/svg/"
     lib_save_folder = "resources/libraries/"
 
     library_name = "test"
-    nodes_info = {
-        'const': {
-            'inputs': (),
-            'inputs_label': (),
-            'outputs': ('any', ),
-            'outputs_label': ('any', ),
-            'inner': 'Const',
-            'label': 'constant',
-            'sync_name': 'const',
-            'tooltip': {
-                'label': 'Constant',
-                'desc': 'Пассивное получениe константы',
-                'outputs': [
-                    ('Выход', 'Константа указанная в описании Узла'),
-                ],
-                'adds': 'Кроме числовых или строковых значений, можно получить предустановленные значения ($iteration, $min, $max, $pi, $true, $false, $none, $sep). Можно установить тип получаемых данных, записав тип после значения ($int, $real, $bool, $char, $num, $str, $any)',
-            }
+    node = {
+        'inputs': ('mult',),
+        'inputs_color': ('int',),
+        'inputs_label': (),
+        'outputs': ('any',),
+        'outputs_label': ('any',),
+        'inner': 'Intany',
+        'label': 'intany',
+        'sync_name': 'intany',
+        'tooltip': {
+            'label': 'Int Any',
+            'desc': 'Из int в any',
+            'input': [
+                ('Вход', 'Число'),
+            ],
+            'outputs': [
+                ('Выход', 'Случайный тип'),
+            ],
+            'adds': 'Кроме числовых можно использовать предустановленные значения ($iteration, $min, $max, $pi, $true, $false, $none, $sep)',
         }
     }
+    nodes_info = [
+        node
+    ]
+
     # generate_library(library_name, nodes_info, svg_save_folder, lib_save_folder)
-    generate_function(nodes_info['const'])
-    # generate_node(nodes_info['random seed'], svg_save_folder)
+    # generate_function(node)
+    # generate_node(node, svg_save_folder)
+    # generate_base_libs()
