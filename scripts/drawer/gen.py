@@ -7,7 +7,7 @@ import textwrap
 import html
 
 
-def generate_tooltip(tooltip):
+def generate_tooltip(tooltip, is_function=False):
     def add_label(label, wrap):
         return f"<b>{textwrap.fill(label, width=wrap)}</b>"
 
@@ -24,6 +24,11 @@ def generate_tooltip(tooltip):
         return f"<b style='color:darkred'>Выходы:</b>"
 
     def add_adds(adds, wrap):
+        if is_function:
+            if adds.strip().endswith('.'):
+                adds = adds.strip() + " " + TOOLTIP_ADDS_FUNCTION
+            else:
+                adds = adds.strip() + ". " + TOOLTIP_ADDS_FUNCTION
         text = textwrap.fill(adds, width=wrap)
         color = "#%02x%02x%02x" % TOOLTIP_KEYWORDS_COLOR
         for keyword in TOOLTIP_KEYWORDS:
@@ -207,7 +212,7 @@ class NodeSVG:
             encoded_svg = to_shape(xml.read())
 
         if self.tooltip:
-            tooltip = generate_tooltip(self.tooltip)
+            tooltip = generate_tooltip(self.tooltip, self.is_function)
             shape = f"""<mxGraphModel><root><mxCell id="0"/><mxCell id="1" parent="0"/><UserObject label="" tooltip="{tooltip}" id="2"><mxCell style="shape=image;image=data:image/svg+xml,{encoded_svg};{points_style+style}" vertex="1" parent="1"><mxGeometry width="{size[0]}" height="{size[1]}" as="geometry"/></mxCell></UserObject></root></mxGraphModel>"""
         else:
             shape = f"""<mxGraphModel><root><mxCell id="0"/><mxCell id="1" parent="0"/><mxCell id="2" value="" style="shape=image;image=data:image/svg+xml,{encoded_svg};{points_style+style}" vertex="1" parent="1"><mxGeometry width="{size[0]}" height="{size[1]}" as="geometry"/></mxCell></root></mxGraphModel>"""
