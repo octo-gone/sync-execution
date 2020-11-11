@@ -70,6 +70,8 @@ class NodeGen:
             return struct.NodeListSet(data)
         if node_name == "list get and set":
             return struct.NodeListGetSet(data)
+        if node_name == "list remove":
+            return struct.NodeListRemove(data)
         if node_name == "length":
             return struct.NodeLen(data)
         if node_name == "matrix create":

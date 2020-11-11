@@ -240,7 +240,7 @@ class NodeListCreate(base.Node):
 
 class NodeListGet(base.Node):
     """
-    Class for node 'array get'. Node that has ability to take value from list variable.
+    Class for node 'list get'. Node that has ability to take value from list variable.
     """
 
     def update_waiting(self):
@@ -278,7 +278,7 @@ class NodeListGet(base.Node):
 
 class NodeListSet(base.Node):
     """
-    Class for node 'array get and set'. Node that has ability to set value to list variable.
+    Class for node 'list get and set'. Node that has ability to set value to list variable.
     """
 
     def update_waiting(self):
@@ -365,6 +365,44 @@ class NodeListGetSet(base.Node):
                         self.state = ACTIVE
                     elif array_value is not None:
                         self.state = ACTIVE
+
+    def update_active(self):
+        """
+        Update function, runs if state is ACTIVE.
+
+        Resets node and activates next nodes.
+        """
+        self.set_active(0)
+        self.state = INACTIVE
+
+
+class NodeListRemove(base.Node):
+    """
+    Class for node 'list remove'. Node that has ability to remove value from list variable.
+    """
+
+    def update_waiting(self):
+        """
+        Update function, runs if state is WAITING.
+
+        Function takes name of value from node description (desc_value)
+        and generates name of variable based on node scope.
+
+        If variable name with scope is in structured variables then function
+        checks that variable structure (in structured variables) matches to node.
+
+        If variable is suitable then function tries to take list index.
+
+        If list index is in possible range of indexes then
+        function removes value from structure variable.
+        """
+        desc_value = f"{self.scope}$" + self.desc_value
+        if desc_value in self.struct_variables:
+            if self.struct_variables[desc_value]["structure"] == "list":
+                list_index = self.get_value(0)
+                if list_index in range(len(self.struct_variables[desc_value]["values"])):
+                    self.struct_variables[desc_value]["values"].pop(list_index)
+        self.state = ACTIVE
 
     def update_active(self):
         """

@@ -866,7 +866,8 @@ base_nodes_info = {
         'outputs': ('number',),
         'outputs_label': ('number',),
         'inner': '-',
-        'label': 'sub',
+        'label': 'sub number',
+        'sync_name': 'sub',
         'tooltip': {
             'label': 'Substraction',
             'desc': 'Вычитание',
@@ -1277,7 +1278,7 @@ structure_nodes_info = {
             'label': 'Length',
             'desc': 'Длина структурной переменной',
             'inputs': [
-                ('Вход', 'Активирущий вход'),
+                ('Вход', 'Активирующий вход'),
             ],
             'outputs': [
                 ('Выход', 'Длина'),
@@ -1296,7 +1297,7 @@ structure_nodes_info = {
             'label': 'List',
             'desc': 'Создание списка',
             'inputs': [
-                ('Вход', 'Активирущий вход'),
+                ('Вход', 'Активирующий вход'),
             ],
             'outputs': [
                 ('Выход', 'Завершающий выход'),
@@ -1361,6 +1362,25 @@ structure_nodes_info = {
                 ('Выход', 'Значение на указанной позиции'),
             ],
             'adds': 'В описании к Узлу должно быть указано имя переменной. Если не указать значение элемента, то Узел вернет элемент без изменения. Если не указать позицию, то Узел добавит элемент в конец списка',
+        }
+    },
+    'list remove': {
+        'inputs': ('int',),
+        'inputs_label': ('index',),
+        'outputs': ('ctrl',),
+        'outputs_label': ('ctrl',),
+        'inner': 'List\nRemove',
+        'label': 'list remove',
+        'tooltip': {
+            'label': 'List Remove',
+            'desc': 'Удаление элемента списка',
+            'inputs': [
+                ('Вход', 'Индекс элемента'),
+            ],
+            'outputs': [
+                ('Выход', 'Завершающий выход'),
+            ],
+            'adds': 'В описании к Узлу должно быть указано имя переменной',
         }
     },
     'matrix create': {
@@ -1458,6 +1478,6 @@ base_nodes_lib_order = ['run', 'stop', 'const', 'const ctrl', 'input', 'print', 
                         'while', 'in', 'for ext', 'foreach', 'merge', 'delay', 'value switch', 'ctrl', 'timer', 'wait',
                         'type', 'get type', 'error', 'random', 'random int', 'random num', 'random seed']
 structure_nodes_lib_order = ['length', 'array create', 'array set', 'array get', 'array get and set', 'list create',
-                             'list set', 'list get', 'list get and set', 'dict create', 'dict insert', 'dict find',
-                             'dict insert and find', 'dict remove', 'matrix create', 'matrix set', 'matrix get',
-                             'matrix get and set']
+                             'list set', 'list get', 'list get and set', 'list remove', 'dict create', 'dict insert',
+                             'dict find', 'dict insert and find', 'dict remove', 'matrix create', 'matrix set',
+                             'matrix get', 'matrix get and set']
