@@ -96,26 +96,29 @@ if __name__ == '__main__':
     svg_save_folder = "resources/generated/svg/"
     lib_save_folder = "resources/libraries/"
 
-    library_name = "test"
+    library_name = "strops"
     node = {
-        'inputs': ('mult',),
-        'inputs_color': ('int',),
-        'inputs_label': (),
-        'outputs': ('any',),
-        'outputs_label': ('any',),
-        'inner': 'Intany',
-        'label': 'intany',
-        'sync_name': 'intany',
+        'inner': 'Join',
+        'label': 'join',
+        'sync_name': 'join',
+
+        'inputs': ('ctrl', 'str'),
+        'inputs_label': ('activation', 'join symbols'),
+
+        'outputs': ('str',),
+        'outputs_label': ('result',),
+
         'tooltip': {
-            'label': 'Int Any',
-            'desc': 'Из int в any',
+            'label': 'Join',
+            'desc': 'Объединение строк',
             'input': [
-                ('Вход', 'Число'),
+                ('Вход', 'Активирующий вход'),
+                ('Вход', 'Объединяющая строка'),
             ],
             'outputs': [
-                ('Выход', 'Случайный тип'),
+                ('Выход', 'Строка'),
             ],
-            'adds': 'Кроме числовых можно использовать предустановленные значения ($iteration, $min, $max, $pi, $true, $false, $none, $sep)',
+            'adds': 'Объединяет строки в структурной переменной указанной в описании Узла',
         }
     }
     nodes_info = [
@@ -125,4 +128,4 @@ if __name__ == '__main__':
     # generate_library(library_name, nodes_info, svg_save_folder, lib_save_folder)
     # generate_function(node)
     # generate_node(node, svg_save_folder)
-    # generate_base_libs()
+    generate_base_libs()

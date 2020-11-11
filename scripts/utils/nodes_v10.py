@@ -1076,9 +1076,80 @@ base_nodes_info = {
             ],
             'adds': 'Возвращает значение с активного входа',
         }
+    },
+    'join': {
+        'inner': 'Join',
+        'label': 'join',
+        'sync_name': 'join',
+
+        'inputs': ('ctrl', 'str'),
+        'inputs_label': ('activation', 'join symbols'),
+
+        'outputs': ('str',),
+        'outputs_label': ('result',),
+
+        'tooltip': {
+            'label': 'Join',
+            'desc': 'Объединение строк в массиве',
+            'inputs': [
+                ('Вход', 'Активирующий вход'),
+                ('Вход', 'Объединяющая строка'),
+            ],
+            'outputs': [
+                ('Выход', 'Строка'),
+            ],
+            'adds': 'Объединяет строки в структурной переменной указанной в описании Узла',
+        }
+    },
+    'concatenate': {
+        'inner': '+',
+        'label': 'concatenate',
+        'sync_name': 'concatenate',
+
+        'inputs': ('str', 'str'),
+        'inputs_label': ('a', 'b'),
+
+        'outputs': ('str',),
+        'outputs_label': ('result',),
+
+        'tooltip': {
+            'label': 'Concatenate',
+            'desc': 'Конкатенация строк',
+            'inputs': [
+                ('Вход', 'Первая строка'),
+                ('Вход', 'Вторая строка'),
+            ],
+            'outputs': [
+                ('Выход', 'Строка'),
+            ]
+        }
+    },
+    'format': {
+        'inner': 'Format',
+        'label': 'format',
+        'sync_name': 'format',
+
+        'inputs': ('str', 'any'),
+        'inputs_label': ('format', 'data'),
+
+        'outputs': ('str',),
+        'outputs_label': ('result', ),
+
+        'tooltip': {
+            'label': 'Format',
+            'desc': 'Форматирование данных',
+            'inputs': [
+                ('Вход', 'Формат'),
+                ('Вход', 'Данные'),
+            ],
+            'outputs': [
+                ('Выход', 'Форматированная строка'),
+            ],
+            'adds': 'Форматирует данные из структурной переменной указанной в описании Узла. Если используется второй вход, то формат происходит по значению из него. Формат имеет следующую структуру: {индекс в массиве, ключ словаря или 0}. Возможно использование спецификации - {индекс:спецификация}. Спецификация может быть следующей: [[[символ]<|>|^]ширина][.точность][f|%|e] (квадратныые скобки обозначают необязательность, вертикальная черта - возможность выбора между указанными значениями)',
+        }
     }
 }
-uncreated_nodes_info = {
+not_created_nodes_info = {
     'split string': {
         'inputs': ('any', 'sep', 'ctrl'),
         'inputs_color': ('char', 'ctrl'),
@@ -1276,7 +1347,7 @@ structure_nodes_info = {
         'label': 'length',
         'tooltip': {
             'label': 'Length',
-            'desc': 'Длина структурной переменной',
+            'desc': 'Длина структурной переменной (список или словарь)',
             'inputs': [
                 ('Вход', 'Активирующий вход'),
             ],
@@ -1472,11 +1543,12 @@ nodes_info.update(base_nodes_info)
 nodes_info.update(structure_nodes_info)
 
 base_nodes_lib_order = ['run', 'stop', 'const', 'const ctrl', 'input', 'print', 'print ctrl', 'if', 'add', 'sub',
-                        'mult', 'division', 'exp', 'var', 'var set', 'var get', 'bool', 'and', 'or', 'not and',
-                        'not or', 'equal', 'not', 'not equal', 'xor', 'greater', 'greater or equal', 'less',
-                        'less or equal', 'inc', 'dec', 'abs', 'div', 'mod', 'inv', 'trunc', 'round', 'for', 'counter',
-                        'while', 'in', 'for ext', 'foreach', 'merge', 'delay', 'value switch', 'ctrl', 'timer', 'wait',
-                        'type', 'get type', 'error', 'random', 'random int', 'random num', 'random seed']
+                        'mult', 'division', 'exp', 'var', 'var set', 'var get', 'join', 'concatenate', 'format',
+                        'bool', 'and', 'or', 'not and', 'not or', 'equal', 'not', 'not equal', 'xor', 'greater',
+                        'greater or equal', 'less', 'less or equal', 'inc', 'dec', 'abs', 'div', 'mod', 'inv', 'trunc',
+                        'round', 'for', 'counter', 'while', 'in', 'for ext', 'foreach', 'merge', 'delay',
+                        'value switch', 'ctrl', 'timer', 'wait', 'type', 'get type', 'error', 'random', 'random int',
+                        'random num', 'random seed']
 structure_nodes_lib_order = ['length', 'array create', 'array set', 'array get', 'array get and set', 'list create',
                              'list set', 'list get', 'list get and set', 'list remove', 'dict create', 'dict insert',
                              'dict find', 'dict insert and find', 'dict remove', 'matrix create', 'matrix set',

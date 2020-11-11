@@ -6,9 +6,9 @@ from scripts.utils import coder
 from xml.sax.saxutils import unescape
 
 # possible connectors variants
-small_connectors = ("int", "real", "obj", "char", "ctrl", "bool", "any", "number", "mult_s", "dir_mult_s")
+small_connectors = ("int", "real", "obj", "char", "ctrl", "bool", "any", "number", "mult_s", "dir_mult_s", "str")
 triangle_connectors = ("int", "real", "ctrl", "bool", "any", "number")
-round_connectors = ("obj", "char")
+round_connectors = ("obj", "char", "str")
 big_connectors = ("mult", "dir_mult")
 rectangle_connectors = ("mult",)
 cut_rectangle_connectors = ("dir_mult",)

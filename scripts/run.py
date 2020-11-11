@@ -132,6 +132,13 @@ class NodeGen:
         if node_name == "random seed":
             return misc.NodeRandomSeed(data)
 
+        if node_name == "join":
+            return misc.NodeJoin(data)
+        if node_name == "concatenate":
+            return misc.NodeConcatenate(data)
+        if node_name == "format":
+            return misc.NodeFormat(data)
+
         if node_name == "abs":
             return mathematic.NodeAbs(data)
         if node_name == "add":

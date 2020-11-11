@@ -212,3 +212,113 @@ class NodeRandomSeed(base.Node):
         """
         self.set_active(0)
         self.state = INACTIVE
+
+
+class NodeJoin(base.Node):
+    """
+    Class for node "join". Node return joined with specified symbol strings from structured variables.
+    """
+
+    def update_waiting(self):
+        """
+        Update function, runs if state is WAITING.
+
+        Function takes name of value from node description (desc_value)
+        and generates name of variable based on node scope.
+
+        If variable exists then function takes string, joins them and saves string to output.
+        """
+        desc_value = f"{self.scope}$" + self.desc_value
+        if desc_value in self.struct_variables:
+            join_value = str(self.get_value(1))
+            values = []
+            if self.struct_variables[desc_value]["structure"] in ("list", ):
+                values = self.struct_variables[desc_value]["values"]
+            if self.struct_variables[desc_value]["structure"] in ("dict", ):
+                values = self.struct_variables[desc_value]["values"].values()
+            self.output_values[0] = join_value.join(map(str, values))
+        self.state = ACTIVE
+
+    def update_active(self):
+        """
+        Update function, runs if state is ACTIVE.
+
+        Resets node and activates next nodes.
+        """
+        self.set_active(0)
+        self.state = INACTIVE
+
+    def set_state(self, state, input_index, **kwargs):
+        """
+        Change state function, runs when other nodes are trying to activate current node.
+
+        Only if input_index equal to 'ctrl' input then node activates.
+        """
+        if state == WAITING and self.get_actual_input(input_index) == 0:
+            self.state = state
+
+
+class NodeConcatenate(base.Node):
+    """
+    Class for node "concatenate". Node return concatenated strings.
+    """
+
+    def update_waiting(self):
+        """
+        Update function, runs if state is WAITING.
+
+        If node has both input values then evaluates concatenation.
+        """
+        if self.get_value(0) is not None and self.get_value(1) is not None:
+            self.output_values[0] = str(self.get_value(0)) + str(self.get_value(1))
+            self.state = ACTIVE
+
+    def update_active(self):
+        """
+        Update function, runs if state is ACTIVE.
+
+        Resets node and activates next nodes.
+        """
+        self.set_active(0)
+        self.state = INACTIVE
+
+
+class NodeFormat(base.Node):
+    """
+    Class for node "format". Node return formatted strings.
+    """
+
+    def update_waiting(self):
+        """
+        Update function, runs if state is WAITING.
+
+        If node has both input values then evaluates concatenation.
+        """
+        desc_value = f"{self.scope}$" + self.desc_value
+        format_string = self.get_value(0)
+        if self.inputs[1]:
+            self.output_values[0] = str(format_string).format(self.get_value(1))
+        elif desc_value in self.struct_variables:
+            if self.struct_variables[desc_value]["structure"] in ("list", "array"):
+                self.output_values[0] = str(format_string).format(*self.struct_variables[desc_value]["values"])
+            if self.struct_variables[desc_value]["structure"] in ("dict",):
+                self.output_values[0] = str(format_string).format(**self.struct_variables[desc_value]["values"])
+        self.state = ACTIVE
+
+    def update_active(self):
+        """
+        Update function, runs if state is ACTIVE.
+
+        Resets node and activates next nodes.
+        """
+        self.set_active(0)
+        self.state = INACTIVE
+
+    def set_state(self, state, input_index, **kwargs):
+        """
+        Change state function, runs when other nodes are trying to activate current node.
+
+        Only if input_index equal to 'format' input then node activates.
+        """
+        if state == WAITING and self.get_actual_input(input_index) == 0:
+            self.state = state
