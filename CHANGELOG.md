@@ -1,5 +1,9 @@
 # Sync ChangeLog
 All changes since version 0.6.6 are written here
+## 0.11.4 (11.11.2020)
++ Standard libraries updated [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/d64f7dd6779050b7e54e4e9186eaf0d2e8d72a03)
++ String operations nodes added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/0eeff2b3958716f719fccd3f396094ee86d7b3f2)
++ List remove node added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/84314b56756b6c32e0d4721b2e0713889915b13c)
 ## 0.11.3 (08.11.2020)
 + Fixed typo in base library tooltips [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/f37e7b1ed88732bc80c244cb5b06b142bb68f27c)
 + Fixed typo in tooltips [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/5c9a88f02b33cadf7860ba164711341b9a3643d2)
