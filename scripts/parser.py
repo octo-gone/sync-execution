@@ -3,19 +3,8 @@ import math
 from scripts.utils import nodes_v10 as nodes_info
 from scripts.utils import logger
 from scripts.utils import coder
+from scripts.constants import *
 from xml.sax.saxutils import unescape
-
-# possible connectors variants
-small_connectors = ("int", "real", "obj", "char", "ctrl", "bool", "any", "number", "mult_s", "dir_mult_s", "str")
-triangle_connectors = ("int", "real", "ctrl", "bool", "any", "number")
-round_connectors = ("obj", "char", "str")
-big_connectors = ("mult", "dir_mult")
-rectangle_connectors = ("mult",)
-cut_rectangle_connectors = ("dir_mult",)
-separators = ("sep",)
-empty_connectors = ("empty",)
-square_connectors = ("mult_s", )
-cut_square_connectors = ("dir_mult_s", )
 
 # half of distance between small connectors
 r = 1/6
@@ -35,9 +24,9 @@ def get_ratio(values):
     for value in sep_values:
         height = 0
         for v in value:
-            if v in small_connectors + empty_connectors:
+            if v in SMALL + EMPTY:
                 height += 1 / 3
-            if v in big_connectors:
+            if v in BIG:
                 height += 2 / 3
         height += 1 / 3
         sum_height += math.ceil(height)
@@ -53,7 +42,7 @@ def get_connectors(inout):
         sep_connectors = [[]]
         sep_i = 0
         for value in inout:
-            if value not in separators:
+            if value not in SEPARATORS:
                 sep_connectors[sep_i].append(value)
             else:
                 sep_i += 1
@@ -63,9 +52,9 @@ def get_connectors(inout):
         for _, value in enumerate(sep_connectors):
             height = 0
             for v in value:
-                if v in small_connectors + empty_connectors:
+                if v in SMALL + EMPTY:
                     height += 1 / 3
-                if v in big_connectors:
+                if v in BIG:
                     height += 2 / 3
             height += 1 / 3
             offset = (math.ceil(height) - height)/2
@@ -73,21 +62,21 @@ def get_connectors(inout):
             for v in value:
                 height += 1 / 3
 
-                if v in big_connectors + triangle_connectors + \
-                        square_connectors + cut_square_connectors:
-                    if v in big_connectors:
-                        if v in rectangle_connectors:
+                if v in BIG + TRIANGLE + \
+                        SQUARE + CUT_SQUARE:
+                    if v in BIG:
+                        if v in RECTANGLE:
                             node_connectors += [offset + height + r * (ic / 2) for ic in range(-1, 6)]
-                        elif v in cut_rectangle_connectors:
+                        elif v in CUT_RECTANGLE:
                             node_connectors += [offset + height + r * (ic / 2) for ic in range(1, 6)]
                         height += 1 / 3
                     else:
                         node_connectors.append(offset + height)
 
-                if v in round_connectors:
+                if v in ROUND:
                     node_connectors.append(offset + height)
 
-                if v not in empty_connectors:
+                if v not in EMPTY:
                     label_centers.append((offset + height))
                     actual_counter += 1
             height += 0.3

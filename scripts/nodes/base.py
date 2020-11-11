@@ -1,15 +1,16 @@
 from abc import abstractmethod
 from scripts.utils import nodes_v10 as nodes_info
 from scripts.utils import logger
+from scripts.constants import *
 
 # the limit imposed on the number of connected wires
-one_connection = ("int", "real", "obj", "char", "ctrl", "bool", "any", "number", "dir_mult_s", "dir_mult", "str")
-unlimited_connections = ("mult", "mult_s")
+one_connection = TRIANGLE + ROUND + CUT_RECTANGLE + CUT_SQUARE
+unlimited_connections = RECTANGLE + SQUARE
 
 # separation by drawio connection count
-one_connector = ("int", "real", "obj", "char", "ctrl", "bool", "any", "number", "mult_s", "dir_mult_s", "str")
-seven_connectors = ("mult", )
-five_connectors = ("dir_mult", )
+one_connector = SMALL
+seven_connectors = RECTANGLE
+five_connectors = CUT_RECTANGLE
 
 # basic states
 ACTIVE = "active"
