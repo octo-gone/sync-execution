@@ -13,8 +13,10 @@ To draw diagrams you can use any diagram editor (based on __jgraph's__ Drawio ht
 
 ### Сontent
 - __resources__ contains versions of programming language
-    - _Nodes.drawio_ - library for Drawio with basic nodes
-    - _Nodes_VarStruct.drawio_ - library with additional nodes 
+    - __generated__ - contains generated svg and png images 
+    - __libraries__ - contains generated and previously used libraries
+    - _base.drawio_ - library for Drawio with basic nodes
+    - _structure.drawio_ - library with additional nodes 
 - __examples__ contains examples of language construction and typical exercises' solution
 - __scripts__ contains base of program 
     - __drawer__ contains generator for svg images and drawio libs
