@@ -1,6 +1,8 @@
 theme: jekyll-theme-cayman
 layout: default
 title: Документация
+post_dirs: false
+permalink: pretty
 description:
   Sync - язык-нотация, позволяющий визуализировать алгоритмы и логические схемы.
   Данные страницы позволяют узнать больше о том как работать с ним и как работает он сам
