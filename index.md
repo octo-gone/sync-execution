@@ -7,4 +7,4 @@
 - [Работа с редактором][editor_tutorial]
 
 
-[editor_tutorial]: ../tutorials/editor
+[editor_tutorial]: ./tutorials/editor
