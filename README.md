@@ -5,7 +5,9 @@
 
 ### About
 __sync-execution__ is a python program that can run an algorithmic language __sync__ (code name).  
-The language itself is a kind of notation that allows you to visualize algorithms and logical schemes.
+The language itself is a kind of notation that allows you to visualize algorithms and logical schemes. 
+
+**Now available [Github Pages](https://octo-gone.github.io/sync-execution/index.html) with tutorials!**
 
 ### Project requirements
 Project available for pure __Python 3.8__, but it is possible to run it on older versions.  
