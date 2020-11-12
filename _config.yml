@@ -1,3 +1,6 @@
 theme: jekyll-theme-cayman
-title: Documentation
-description: [A short description of your site's purpose]
+layout: default
+title: Документация
+description:
+  Sync - язык-нотация, позволяющий визуализировать алгоритмы и логические схемы.
+  Данные страницы позволяют узнать больше о том как работать с ним и как работает он сам
