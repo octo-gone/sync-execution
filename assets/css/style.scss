@@ -6,3 +6,18 @@ $section-headings-color: #f2931e;
 
 
 @import "{{ site.theme }}";
+
+
+.page-header {
+  @include large {
+    padding: 5rem 12rem;
+  }
+
+  @include medium {
+    padding: 3rem 4rem;
+  }
+
+  @include small {
+    padding: 2rem 1rem;
+  }
+}

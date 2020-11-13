@@ -12,11 +12,13 @@ title: Обучение
 
 - [Работа с редактором][editor_tutorial]
 - [Оформление программы][style_tutorial]
+- [Типизация][types_tutorial]
 
 [На главную][index]
 
 [editor_tutorial]: {{site.baseurl}}/tutorials/editor#top
 [style_tutorial]: {{site.baseurl}}/tutorials/style#top
+[types_tutorial]: {{site.baseurl}}/tutorials/types#top
 
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#top
