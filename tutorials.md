@@ -6,19 +6,22 @@ title: Обучение
 
 ## Обучение
 
-Отсюда можно попасть в различные обучающие страницы, которые помогут в начале с работой с созданием программ и их запуском.
+Отсюда можно попасть в различные обучающие страницы, которые помогут в начале с работой с
+созданием программ и их запуском.
 
 На данный момент доступны следующие обучающие статьи:
 
 - [Работа с редактором][editor_tutorial]
 - [Оформление программы][style_tutorial]
 - [Типизация][types_tutorial]
+- [Соединение узлов][connecting_tutorial]
 
 [На главную][index]
 
 [editor_tutorial]: {{site.baseurl}}/tutorials/editor#top
 [style_tutorial]: {{site.baseurl}}/tutorials/style#top
 [types_tutorial]: {{site.baseurl}}/tutorials/types#top
+[connecting_tutorial]: {{site.baseurl}}/tutorials/connecting#top
 
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#top
