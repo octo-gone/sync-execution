@@ -36,6 +36,8 @@ title: Соединение
 
 > Узел Delay забирает значение из узла Const после активации, а узел If - из XOR, который мог выполниться заранее.
 
+[К обучению][tutorials]
+
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#top
 [drawio]: https://app.diagrams.net/?splash=0&libs=0&clibs=Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/base.drawio;Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/structure.drawio
