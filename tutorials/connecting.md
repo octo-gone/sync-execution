@@ -34,7 +34,7 @@ title: Соединение
 
 <img src="{{site.baseurl}}/resources/connecting/02_back_connecting.png"/> 
 
-> Узел Delay забирает значение из узла Const после активации, а узел If - из XOR, который мог выполниться намного заранее.
+> Узел Delay забирает значение из узла Const после активации, а узел If - из XOR, который мог выполниться заранее.
 
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#top
