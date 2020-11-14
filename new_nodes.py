@@ -125,7 +125,7 @@ if __name__ == '__main__':
         node
     ]
 
-    # generate_library(library_name, nodes_info, svg_save_folder, lib_save_folder)
-    # generate_function(node)
     # generate_node(node, svg_save_folder)
-    generate_base_libs()
+    # generate_function(node, svg_save_folder, lib_save_folder)
+    # generate_library(library_name, nodes_info, svg_save_folder, lib_save_folder)
+    # generate_base_libs()

@@ -138,7 +138,7 @@ class NodeSVG:
 
         size = self.ratio[0] * self.side, self.ratio[1] * self.side
 
-        file_path = f"{path}{self.label}.svg"
+        file_path = f"{path}{self.sync_name}.svg"
         draw = drawing.Drawing(file_path, size=size)
 
         draw.add(draw.rect(insert=(0, 0),
