@@ -127,4 +127,4 @@ Sync будет использоваться только внешние биб�
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#content
 [drawio]: https://app.diagrams.net/?splash=0&libs=0&clibs=Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/base.drawio;Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/structure.drawio
-[replit]: https://repl.it/@mr_zed/sync-execution#script.drawio
+[replit]: https://repl.it/github/octo-gone/sync-execution
