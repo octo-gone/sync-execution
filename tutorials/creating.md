@@ -194,7 +194,7 @@ node = {
 
 <img src="{{site.baseurl}}/resources/tutorials/creating/05_installing_svgwrite.png"/>
 
-Далее требуется перейти в скрипт **new_node.py** и перейти в раздел ```python if __name__ == "__main__": ...```.
+Далее требуется перейти в скрипт **new_node.py** и перейти в раздел ```if __name__ == "__main__": ...```.
 Внутри него есть пример узла и готовые закомментированные инструкции. Для их использования достаточно убрать решетку.
 Переменные "svg_save_folder" и "lib_save_folder" определяют места, куда сохранятся файлы SVG и DRAWIO, "library_name" - 
 название библиотеки.
