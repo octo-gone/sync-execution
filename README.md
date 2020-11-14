@@ -34,12 +34,12 @@ To execute program perform the following algorithm:
 1. Inside drawio.io menu press "File" > "Export as" > "XML" (without flags or with "Compressed").
 2. Press "Open in New Window".
 3. Copy all (`ctrl-a` then `ctrl-c`).
-4. Go to [sync-execution][3] in **repl.it** (if it is not **script.drawio** then choose it in project). 
-You must be logged in.
+4. Go to [sync-execution][3] in **repl.it** (if file is not **script.drawio** then choose it in project). 
+You must be logged in. After creating repl use it for future working. Don't create new repls using link above, 
+use created one.
 5. Paste with replacement (`ctrl-a` then `ctrl-v`).
 
 Just click the **Run** button at the top and the program will start.
- 
 
 ## Personal Node
 If you want to create your own node, use scripts in __drawer__. 
