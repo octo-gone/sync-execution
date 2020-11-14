@@ -31,18 +31,19 @@ To draw diagrams you can use any diagram editor (based on __jgraph's__ Drawio ht
 To create a diagram click the [link][2] to draw.io (all libraries included)
 
 To execute program perform the following algorithm:
-1. Inside drawio.io menu press "File" > "Export as" > "XML" (without flags or with "Compressed")
-2. Press "Open in New Window"
-3. Copy all (`ctrl-a` then `ctrl-c`)
-4. Go to [sync-execution][3] in **repl.it** (if it is not **script.drawio** then choose it in project)
-5. Paste with replacement (`ctrl-a` then `ctrl-v`)
+1. Inside drawio.io menu press "File" > "Export as" > "XML" (without flags or with "Compressed").
+2. Press "Open in New Window".
+3. Copy all (`ctrl-a` then `ctrl-c`).
+4. Go to [sync-execution][3] in **repl.it** (if it is not **script.drawio** then choose it in project). 
+You must be logged in.
+5. Paste with replacement (`ctrl-a` then `ctrl-v`).
 
 Just click the **Run** button at the top and the program will start.
  
 
 ## Personal Node
 If you want to create your own node, use scripts in __drawer__. 
-But to run them you need to install __svgwrite__. 
+However, to run them you need to install __svgwrite__. 
 ```
 $ pip install svgwrite
 ```
@@ -52,4 +53,4 @@ To add node drag svg-image on Drawio's workspace and append style in this diagra
 Another variant is to use Drawio library, which the script can generate.
 
 [2]: https://app.diagrams.net/?splash=0&libs=0&clibs=Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/base.drawio;Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/structure.drawio
-[3]: https://repl.it/@mr_zed/sync-execution#script.drawio
+[3]: https://repl.it/github/octo-gone/sync-execution
