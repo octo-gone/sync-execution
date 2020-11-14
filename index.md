@@ -1,8 +1,8 @@
 ---
-layout: default
+layout: start
 title: Начало
 ---
-# Начало
+# Обучение и документация
 
 Для работы с Sync достаточно иметь доступ к сети интернет. 
 Редактировать программу можно как в приложении на устройствах, так и в веб-интерфейсе [Draw.io][drawio]. 
@@ -11,6 +11,6 @@ title: Начало
 На данный момент есть возможность просмотреть [Обучающие статьи][tutorials].
 
 [index]: {{site.baseurl}}/index
-[tutorials]: {{site.baseurl}}/tutorials#top
+[tutorials]: {{site.baseurl}}/tutorials#content
 [drawio]: https://app.diagrams.net/?splash=0&libs=0&clibs=Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/base.drawio;Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/structure.drawio
 [replit]: https://repl.it/@mr_zed/sync-execution#script.drawio

@@ -1,9 +1,7 @@
 ---
-layout: default
-title: Типы данных
+layout: tutorials
+title: Типы входов и данных 
 ---
-<a name="top"></a>
-
 ## Типы данных
 
 Типы данных являются ключевыми ограничениями всех языков программирования, однако в базовых блок-схемах определять
@@ -57,9 +55,7 @@ title: Типы данных
 
 <img src="{{site.baseurl}}/resources/types/02_multiple_inputs.png"/>
 
-[К обучению][tutorials]
-
 [index]: {{site.baseurl}}/index
-[tutorials]: {{site.baseurl}}/tutorials#top
+[tutorials]: {{site.baseurl}}/tutorials#content
 [drawio]: https://app.diagrams.net/?splash=0&libs=0&clibs=Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/base.drawio;Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/structure.drawio
 [replit]: https://repl.it/@mr_zed/sync-execution#script.drawio

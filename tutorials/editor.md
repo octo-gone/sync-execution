@@ -1,9 +1,7 @@
 ---
-layout: default
+layout: tutorials
 title: Редактор
 ---
-<a name="top"></a>
-
 ## Редактор 
 
 Для работы с языком требуется использовать редактор диаграмм [Draw.io][drawio] или основанные на его движке редакторы. 
@@ -123,12 +121,10 @@ Sync будет использоваться только внешние биб�
 Если у фигуры есть одно соединение по центру, то неправильное подключение 
 будет вызвать ошибку.
 
-[К обучению][tutorials]
-
 [base_lib]: https://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/base.drawio
 [structure_lib]: https://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/structure.drawio
 
 [index]: {{site.baseurl}}/index
-[tutorials]: {{site.baseurl}}/tutorials#top
+[tutorials]: {{site.baseurl}}/tutorials#content
 [drawio]: https://app.diagrams.net/?splash=0&libs=0&clibs=Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/base.drawio;Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/structure.drawio
 [replit]: https://repl.it/@mr_zed/sync-execution#script.drawio

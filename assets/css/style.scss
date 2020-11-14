@@ -21,3 +21,22 @@ $section-headings-color: #f2931e;
     padding: 2rem 1rem;
   }
 }
+
+.page-no-header {
+  color: $header-heading-color;
+  text-align: center;
+  background-color: $header-bg-color;
+  background-image: linear-gradient(120deg, $header-bg-color-secondary, $header-bg-color);
+
+  @include large {
+    padding: 3rem 12rem;
+  }
+
+  @include medium {
+    padding: 2rem 4rem;
+  }
+
+  @include small {
+    padding: 1rem 1rem;
+  }
+}

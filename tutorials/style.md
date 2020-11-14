@@ -1,9 +1,7 @@
 ---
-layout: default
+layout: tutorials
 title: Оформление
 ---
-<a name="top"></a>
-
 ## Рекомендации к стилю диаграммы 
 
 Как и большинство языков программирования у Sync есть стандарт стилизации, 
@@ -66,11 +64,9 @@ title: Оформление
 Для связи узлов должны использоваться соединения без стрелок, это обосновано тем, что обработчик не смотрит на них, а 
 проверяет лишь соединены ли узлы, правильно и какие именно. Потому соединения уходящие в никуда невозможны.
 
-[К обучению][tutorials]
-
 [camelcase]: https://ru.wikipedia.org/wiki/CamelCase
 
 [index]: {{site.baseurl}}/index
-[tutorials]: {{site.baseurl}}/tutorials#top
+[tutorials]: {{site.baseurl}}/tutorials#content
 [drawio]: https://app.diagrams.net/?splash=0&libs=0&clibs=Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/base.drawio;Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/structure.drawio
 [replit]: https://repl.it/@mr_zed/sync-execution#script.drawio 

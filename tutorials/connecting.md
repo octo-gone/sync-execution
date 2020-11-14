@@ -1,9 +1,7 @@
 ---
-layout: default
+layout: tutorials
 title: Соединение
 ---
-<a name="top"></a>
-
 ## Соединение Узлов
 
 Правильное соедиинение узлов - залог правильной работы программы. Нужно придерживаться нескольких правил:
@@ -36,9 +34,14 @@ title: Соединение
 
 > Узел Delay забирает значение из узла Const после активации, а узел If - из XOR, который мог выполниться заранее.
 
-[К обучению][tutorials]
+### Циклы
+
+Зацикленность требуется реализовывать через циклы-узлы, а не через петли, так как если один узел запрашивает 
+данные из второго и при этом второй запрашивает данные из первого, то программа не сможет обработать. Однако при
+правильной реализации мы получаем программу, которая работает намного быстрее чем циклы-узлы
+Это можно избежать сделав подачу неких значений по умолчанию.
 
 [index]: {{site.baseurl}}/index
-[tutorials]: {{site.baseurl}}/tutorials#top
+[tutorials]: {{site.baseurl}}/tutorials#content
 [drawio]: https://app.diagrams.net/?splash=0&libs=0&clibs=Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/base.drawio;Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/structure.drawio
 [replit]: https://repl.it/@mr_zed/sync-execution#script.drawio

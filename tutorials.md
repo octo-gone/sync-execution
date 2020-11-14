@@ -1,15 +1,12 @@
 ---
-layout: default
+layout: default_no_header
 title: Обучение
+description: Отсюда можно попасть в различные обучающие страницы, которые помогут в начале с работой с
+ созданием программ и их запуском.
 ---
-<a name="top"></a>
+## Обучающие статьи
 
-## Обучение
-
-Отсюда можно попасть в различные обучающие страницы, которые помогут в начале с работой с
-созданием программ и их запуском.
-
-На данный момент доступны следующие обучающие статьи:
+На данный момент доступны следующие статьи:
 
 - [Работа с редактором][editor_tutorial]
 - [Оформление программы][style_tutorial]
@@ -18,12 +15,12 @@ title: Обучение
 
 [На главную][index]
 
-[editor_tutorial]: {{site.baseurl}}/tutorials/editor#top
-[style_tutorial]: {{site.baseurl}}/tutorials/style#top
-[types_tutorial]: {{site.baseurl}}/tutorials/types#top
-[connecting_tutorial]: {{site.baseurl}}/tutorials/connecting#top
+[editor_tutorial]: {{site.baseurl}}/tutorials/editor#content
+[style_tutorial]: {{site.baseurl}}/tutorials/style#content
+[types_tutorial]: {{site.baseurl}}/tutorials/types#content
+[connecting_tutorial]: {{site.baseurl}}/tutorials/connecting#content
 
 [index]: {{site.baseurl}}/index
-[tutorials]: {{site.baseurl}}/tutorials#top
+[tutorials]: {{site.baseurl}}/tutorials#content
 [drawio]: https://app.diagrams.net/?splash=0&libs=0&clibs=Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/base.drawio;Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/structure.drawio
 [replit]: https://repl.it/@mr_zed/sync-execution#script.drawio
