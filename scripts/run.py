@@ -1,15 +1,19 @@
 from scripts.utils import utils, exceptions, logger
 from scripts.nodes import base, control, inout, memory, construction, logic, misc, mathematic, func, struct
+from scripts.nodes import user_nodes
+import sys
+import inspect
 
 
 class NodeGen:
     """
     Interim class that automatically sets node class from data
     """
+    user_classes = inspect.getmembers(sys.modules[user_nodes.__name__], inspect.isclass)
 
     def __new__(cls, data):
         """
-        Function runs before constructor and selects suitable class.
+        Function runs before the constructor and selects suitable class.
         If node is function (function input or output) method
         will run special nodes class constructor.
 
@@ -18,6 +22,10 @@ class NodeGen:
         node_name = data["node_name"]
         if str(node_name).startswith("function"):
             return func.NodeFunction(data)
+
+        for class_name, class_constr in cls.user_classes:
+            if node_name == class_constr.name:
+                return class_constr(data)
 
         if node_name == "run":
             return control.NodeRun(data)
@@ -196,7 +204,7 @@ def create_structure(n, w, s):
     func.NodeFunction.init_function()
 
 
-def run(n, w, s, limit=10**5):
+def run(n, w, s, limit=10 ** 5):
     """
     Function iteratively launches nodes update functions for
     different states: INACTIVE, WAITING and ACTIVE. If node stop
