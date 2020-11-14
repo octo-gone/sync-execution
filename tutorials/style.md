@@ -8,6 +8,10 @@ title: Оформление
 это позволяет быстро ориентироваться в программе, а также быстро переключаться между
 программами от разных разработчиков.
 
+> Всегда пишите код так, будто сопровождать его будет склонный к насилию психопат, который знает, где вы живете.
+>
+> Martin Golding.
+
 ### Наименование
 
 Фигуры на диаграмме имеют название **Узлы** или же на английском Nodes (ноды). Название Узел основывается
@@ -20,17 +24,20 @@ title: Оформление
 Связь между узлами называются **Соединением**, однако всегда можно провести 
 аналогию с реальными устройствами и прозвать их проводами.
 
+Диаграмма созданная из узлов называется программой или Sync-программой, так как впоследствии её можно запустить 
+и работать с ней как с настоящей программой.
+
 **Описание** узла - это дополнительная информация, которая используется в программе. Описание в [Draw.io][drawio] можно
 увидеть или добавить двойным кликом по узлу.
 
-<img src="{{site.baseurl}}/resources/style/01_add_description.gif"/>
+<img src="{{site.baseurl}}/resources/tutorials/style/01_add_description.gif"/>
 
 ### Шрифт и Именование переменных
 
 Для именование переменных лучше использовать [CamelCase][camelcase]. Также не стоит использовать слова с символом "$".
 Данный символ используется в ключевых словах и при неправильном использовании может испортить работу программы.
 
-<img src="{{site.baseurl}}/resources/style/02_naming_variables.png"/>
+<img src="{{site.baseurl}}/resources/tutorials/style/02_naming_variables.png"/>
 
 ### Расположение Узлов и Соединений
 
@@ -39,25 +46,25 @@ title: Оформление
 
 - Последовательно используемые функции должны располагаться друг за другом.
 
-<img src="{{site.baseurl}}/resources/style/03_line_program.png"/>
+<img src="{{site.baseurl}}/resources/tutorials/style/03_line_program.png"/>
 - Одновременно используемые - друг под другом.
 
-<img src="{{site.baseurl}}/resources/style/04_async_program.png"/>
+<img src="{{site.baseurl}}/resources/tutorials/style/04_async_program.png"/>
 - Длинные линейные части программы можно разделить и расположить друг под другом. 
 
-<img src="{{site.baseurl}}/resources/style/05_compressed_line_program.png"/>
+<img src="{{site.baseurl}}/resources/tutorials/style/05_compressed_line_program.png"/>
 - Операции в цикле должны располагаться под циклом.
 
-<img src="{{site.baseurl}}/resources/style/06_loop_position.png"/>
+<img src="{{site.baseurl}}/resources/tutorials/style/06_loop_position.png"/>
 - Пересечения соединительных линий должны понятно показывать свою принадлежность.
 
-<img src="{{site.baseurl}}/resources/style/07_linking.gif"/>
+<img src="{{site.baseurl}}/resources/tutorials/style/07_linking.gif"/>
 - Подключения в один порт, который поддерживает это, должны быть разделены.
 
-<img src="{{site.baseurl}}/resources/style/08_one_input_linking.gif"/>
+<img src="{{site.baseurl}}/resources/tutorials/style/08_one_input_linking.gif"/>
 - Отступы между узлами должны помещать в себя как минимум один узел, возможно расширение если нет места под соединения. Вертикальный отступ может быть меньше.
 
-<img src="{{site.baseurl}}/resources/style/09_node_spacing.gif"/>
+<img src="{{site.baseurl}}/resources/tutorials/style/09_node_spacing.gif"/>
 
 ### Стиль соединений
 

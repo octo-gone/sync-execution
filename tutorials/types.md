@@ -39,7 +39,7 @@ title: Типы входов и данных
 | **any** | бестиповой | любые | Серый |
 | **ctrl** | сигнал | - | Бордовый |
 
-<img src="{{site.baseurl}}/resources/types/01_types_colors.png"/>
+<img src="{{site.baseurl}}/resources/tutorials/types/01_types_colors.png"/>
 
 ### Входы узлов
 
@@ -53,7 +53,7 @@ title: Типы входов и данных
 - **Прямоугольный** - неограниченное количество
 - **Квадратный** - неограниченное количество (уменьшенная копия прямоугольных входов)
 
-<img src="{{site.baseurl}}/resources/types/02_multiple_inputs.png"/>
+<img src="{{site.baseurl}}/resources/tutorials/types/02_multiple_inputs.png"/>
 
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#content

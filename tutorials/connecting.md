@@ -11,7 +11,7 @@ title: Соединение
 3. Подключать несколько входов к одинарному входу нельзя
 4. Соединение обязательно должно исходить из узла и входить в узел
 
-<img src="{{site.baseurl}}/resources/connecting/01_connecting_rules.png"/> 
+<img src="{{site.baseurl}}/resources/tutorials/connecting/01_connecting_rules.png"/> 
 
 ### Запуск обработки узла
 
@@ -30,7 +30,7 @@ title: Соединение
 узлы запускаются и хранят данные не всегда при подаче сигнала, они могут работать всегда или запускаться только при 
 подаче сигнала на определенный вход.
 
-<img src="{{site.baseurl}}/resources/connecting/02_back_connecting.png"/> 
+<img src="{{site.baseurl}}/resources/tutorials/connecting/02_back_connecting.png"/> 
 
 > Узел Delay забирает значение из узла Const после активации, а узел If - из XOR, который мог выполниться заранее.
 
