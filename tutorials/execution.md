@@ -70,7 +70,7 @@ title: Запуск
     <img src="{{site.baseurl}}/resources/tutorials/execution/12_changing_project_2.png"/>
 
 Финальным действием является запуск. В Repl.it достаточно нажать Run (или написать в консоли `python main.py`). 
-А на устройстве потребуется запустить скрипт **main.py** (или написать в консоли `python main.py`).
+А на устройстве потребуется запустить скрипт **main.py**.
 
 <img src="{{site.baseurl}}/resources/tutorials/execution/13_running.png"/>
 

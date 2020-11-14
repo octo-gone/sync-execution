@@ -13,6 +13,7 @@ description: Отсюда можно попасть в различные обу
 - [Типизация][types_tutorial]
 - [Соединение узлов][connecting_tutorial]
 - [Запуск программ][execution_tutorial]
+- [Создание узлов][creating_tutorial]
 
 [На главную][index]
 
@@ -21,6 +22,7 @@ description: Отсюда можно попасть в различные обу
 [types_tutorial]: {{site.baseurl}}/tutorials/types#content
 [connecting_tutorial]: {{site.baseurl}}/tutorials/connecting#content
 [execution_tutorial]: {{site.baseurl}}/tutorials/execution#content
+[creating_tutorial]: {{site.baseurl}}/tutorials/creating#content
 
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#content
