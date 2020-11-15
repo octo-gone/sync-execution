@@ -38,7 +38,7 @@ title: Создание узлов
 У создания узлов есть несколько вариантов:
 
 - Создание узла
-- Создание узла с функционалом (требуется знание Python)
+- Создание узла [с функционалом][advanced_creating_tutorial] (требуется знание Python)
 - Создание функции
 - Создание библиотеки из нескольких узлов
 
@@ -262,6 +262,7 @@ generate_library(library_name, nodes_info, svg_save_folder, lib_save_folder)
 > Последней строчкой `generate_base_libs` является функция обновления стандартных библиотек 
 
 [github]: https://github.com/octo-gone/sync-execution
+[advanced_creating_tutorial]:
 
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#content

@@ -16,6 +16,11 @@ description: Отсюда можно попасть в различные обу
 - [Создание узлов][creating_tutorial]
 - [Работа с функциями][functions_tutorial]
 
+Также доступны продвинутые обучающие статьи, которые расскажут о том, как работает проект:
+
+- [Запуск программы][advanced_running_tutorial]
+- [Продвинутое создание узлов][advanced_creating_tutorial]
+
 [На главную][index]
 
 [editor_tutorial]: {{site.baseurl}}/tutorials/editor#content
@@ -25,6 +30,8 @@ description: Отсюда можно попасть в различные обу
 [execution_tutorial]: {{site.baseurl}}/tutorials/execution#content
 [creating_tutorial]: {{site.baseurl}}/tutorials/creating#content
 [functions_tutorial]: {{site.baseurl}}/tutorials/functions#content
+[advanced_running_tutorial]: {{site.baseurl}}/tutorials/advanced-running#content
+[advanced_creating_tutorial]: {{site.baseurl}}/tutorials/advanced-creating#content
 
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#content
