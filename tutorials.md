@@ -14,6 +14,7 @@ description: Отсюда можно попасть в различные обу
 - [Соединение узлов][connecting_tutorial]
 - [Запуск программ][execution_tutorial]
 - [Создание узлов][creating_tutorial]
+- [Работа с функциями][functions_tutorial]
 
 [На главную][index]
 
@@ -23,6 +24,7 @@ description: Отсюда можно попасть в различные обу
 [connecting_tutorial]: {{site.baseurl}}/tutorials/connecting#content
 [execution_tutorial]: {{site.baseurl}}/tutorials/execution#content
 [creating_tutorial]: {{site.baseurl}}/tutorials/creating#content
+[functions_tutorial]: {{site.baseurl}}/tutorials/functions#content
 
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#content
