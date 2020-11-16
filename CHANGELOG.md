@@ -1,5 +1,13 @@
 # Sync ChangeLog
 All changes since version 0.6.6 are written here
+## 0.12.0 (16.11.2020)
++ Simplification for user node creation [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/033a8350a00ebcdc884319e17739fb6b1696c833)
++ User node functionality added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/69b4228a3b6747d6be9367d57e223704105ed802)
++ Added link to Github Pages [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/13eee076e77c851d90046753101298bebe0346ae)
++ Project constants moved [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/da8a2ffe5db76707dcebf7bbc1ece52d64f76d36)
++ Establishment of equality between documentation and project [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/8c3b1f3993a6ba2741c91267eedbf0c1822fd341)
++ Repl.it running fixed [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/ecfb6955a71dec8b93fbb655e7975e4f7a79622c)
++ README mistakes fixed [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/1509b402a99cf05bd722d494f0f332abb0c56086)
 ## 0.11.4 (11.11.2020)
 + Standard libraries updated [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/d64f7dd6779050b7e54e4e9186eaf0d2e8d72a03)
 + String operations nodes added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/0eeff2b3958716f719fccd3f396094ee86d7b3f2)
