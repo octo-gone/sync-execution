@@ -100,7 +100,7 @@ class NodeArrayGet(base.Node):
             if self.struct_variables[desc_value]["structure"] == "array":
                 array_index = self.get_value(0)
                 if array_index in range(self.struct_variables[desc_value]["len"]):
-                    self.output_values[0] = self.struct_variables[desc_value]["values"][array_index]
+                    self.set_value(self.struct_variables[desc_value]["values"][array_index], 0)
         self.state = ACTIVE
 
     def update_active(self):
@@ -186,7 +186,7 @@ class NodeArrayGetSet(base.Node):
                                 array_value = self.get_value(1)
                                 array_value = self.struct_variables[desc_value]["type"](array_value)
                                 self.struct_variables[desc_value]["values"][array_index] = array_value
-                            self.output_values[0] = self.struct_variables[desc_value]["values"][array_index]
+                            self.set_value(self.struct_variables[desc_value]["values"][array_index], 0)
                     if not self.inputs[1]:
                         self.state = ACTIVE
                     elif array_value is not None:
@@ -263,7 +263,7 @@ class NodeListGet(base.Node):
             if self.struct_variables[desc_value]["structure"] == "list":
                 list_index = self.get_value(0)
                 if list_index in range(len(self.struct_variables[desc_value]["values"])):
-                    self.output_values[0] = self.struct_variables[desc_value]["values"][list_index]
+                    self.set_value(self.struct_variables[desc_value]["values"][list_index], 0)
         self.state = ACTIVE
 
     def update_active(self):
@@ -360,7 +360,7 @@ class NodeListGetSet(base.Node):
                             if self.inputs[1]:
                                 array_value = self.get_value(1)
                                 self.struct_variables[desc_value]["values"][array_index] = array_value
-                            self.output_values[0] = self.struct_variables[desc_value]["values"][array_index]
+                            self.set_value(self.struct_variables[desc_value]["values"][array_index], 0)
                     if not self.inputs[1]:
                         self.state = ACTIVE
                     elif array_value is not None:
@@ -431,9 +431,9 @@ class NodeLen(base.Node):
         desc_value = f"{self.scope}$" + self.desc_value
         if desc_value in self.struct_variables:
             if self.struct_variables[desc_value]["structure"] in ("list", ):
-                self.output_values[0] = len(self.struct_variables[desc_value]["values"])
+                self.set_value(len(self.struct_variables[desc_value]["values"]), 0)
             if self.struct_variables[desc_value]["structure"] in ("dict", ):
-                self.output_values[0] = len(self.struct_variables[desc_value]["values"].keys())
+                self.set_value(len(self.struct_variables[desc_value]["values"].keys()), 0)
         self.state = ACTIVE
 
     def update_active(self):
@@ -532,7 +532,7 @@ class NodeMatrixGet(base.Node):
                 mat_index_y = self.get_value(0)
                 if mat_index_x in range(struct["size"][0]) and \
                    mat_index_y in range(struct["size"][1]):
-                    self.output_values[0] = struct["values"][mat_index_y][mat_index_x]
+                    self.set_value(struct["values"][mat_index_y][mat_index_x], 0)
                 self.state = ACTIVE
 
     def update_active(self):
@@ -626,7 +626,7 @@ class NodeMatrixGetSet(base.Node):
                                 mat_value = self.get_value(2)
                                 mat_value = struct["type"](mat_value)
                                 self.struct_variables[desc_value]["values"][mat_index_y][mat_index_x] = mat_value
-                            self.output_values[0] = struct["values"][mat_index_y][mat_index_x]
+                            self.set_value(struct["values"][mat_index_y][mat_index_x], 0)
                     if not self.inputs[1]:
                         self.state = ACTIVE
                     elif mat_value is not None:
@@ -756,7 +756,7 @@ class NodeDictFind(base.Node):
             if desc_value in self.struct_variables:
                 if self.struct_variables[desc_value]["structure"] == "dict":
                     struct = self.struct_variables[desc_value]
-                    self.output_values[0] = struct["values"][key]
+                    self.set_value(struct["values"][key], 0)
             self.state = ACTIVE
 
     def update_active(self):
@@ -805,10 +805,10 @@ class NodeDictInsertFind(base.Node):
                             value = self.get_value(1)
                             value = struct["value_type"](value)
                             self.struct_variables[desc_value]["values"][key] = value
-                            self.output_values[0] = struct["values"][key]
+                            self.set_value(struct["values"][key], 0)
                         if not self.inputs[1]:
                             if key in struct["values"]:
-                                self.output_values[0] = struct["values"][key]
+                                self.set_value(struct["values"][key], 0)
                     if not self.inputs[1]:
                         self.state = ACTIVE
                     elif value is not None:

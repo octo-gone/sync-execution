@@ -130,7 +130,7 @@ class NodeInput(base.Node):
             value = logger.Color.colored_input(prompt, utils.colored_input)
         else:
             value = input(prompt)
-        self.output_values[0] = utils.coercion(value)
+        self.set_value(utils.coercion(value), 0)
         self.state = ACTIVE
 
     def update_active(self):

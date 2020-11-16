@@ -41,15 +41,15 @@ class NodeLogicA(base.Node):
         if self.variant(map(lambda x: x is not None, self.get_value(0, True))):
             values = list(filter(lambda x: x is not None, self.get_value(0, True)))
             if self.name == "and":
-                self.output_values[0] = all(values)
+                self.set_value(all(values), 0)
             elif self.name == "or":
-                self.output_values[0] = any(values)
+                self.set_value(any(values), 0)
             elif self.name == "not and":
-                self.output_values[0] = not all(values)
+                self.set_value(not all(values), 0)
             elif self.name == "nor or":
-                self.output_values[0] = not any(values)
+                self.set_value(not any(values), 0)
             elif self.name == "equal":
-                self.output_values[0] = len(set(values)) == 1
+                self.set_value(len(set(values)) == 1, 0)
             self.state = ACTIVE
 
 
@@ -76,17 +76,17 @@ class NodeLogicB(base.Node):
         """
         if self.get_value(0) is not None and self.get_value(1) is not None:
             if self.name == "greater":
-                self.output_values[0] = self.get_value(0) > self.get_value(1)
+                self.set_value(self.get_value(0) > self.get_value(1), 0)
             if self.name == "greater or equal":
-                self.output_values[0] = self.get_value(0) >= self.get_value(1)
+                self.set_value(self.get_value(0) >= self.get_value(1), 0)
             if self.name == "less":
-                self.output_values[0] = self.get_value(0) < self.get_value(1)
+                self.set_value(self.get_value(0) < self.get_value(1), 0)
             if self.name == "less or equal":
-                self.output_values[0] = self.get_value(0) <= self.get_value(1)
+                self.set_value(self.get_value(0) <= self.get_value(1), 0)
             if self.name == "not equal":
-                self.output_values[0] = self.get_value(0) != self.get_value(1)
+                self.set_value(self.get_value(0) != self.get_value(1), 0)
             if self.name == "xor":
-                self.output_values[0] = bool(self.get_value(0)) ^ bool(self.get_value(1))
+                self.set_value(bool(self.get_value(0)) ^ bool(self.get_value(1)), 0)
             self.state = ACTIVE
 
 
@@ -130,23 +130,23 @@ class NodeIn(base.Node):
         checks whether value matches with something in list of input values.
         """
         if not self.inputs[0]:
-            self.output_values[0] = False
+            self.set_value(False, 0)
             if self.desc_value in self.struct_variables:
                 struct = self.struct_variables[self.desc_value]
                 if struct["structure"] in ("list", "array"):
                     values = self.struct_variables[self.desc_value]["values"]
                     if self.get_value(1) in values:
-                        self.output_values[0] = True
+                        self.set_value(True, 0)
                 elif struct["structure"] in ("dict", ):
                     values = self.struct_variables[self.desc_value]["values"].keys()
                     if self.get_value(1) in values:
-                        self.output_values[0] = True
+                        self.set_value(True, 0)
             self.state = ACTIVE
         elif self.variant(map(lambda x: x is not None, self.get_value(0, True))):
-            self.output_values[0] = False
+            self.set_value(False, 0)
             for value in self.get_value(0, True):
                 if self.get_value(1) == value:
-                    self.output_values[0] = True
+                    self.set_value(True, 0)
                     break
             self.state = ACTIVE
 
@@ -188,7 +188,7 @@ class NodeBool(base.Node):
             'some text' -> True
         """
         if self.get_value(0) is None:
-            self.output_values[0] = False
+            self.set_value(False, 0)
         else:
-            self.output_values[0] = bool(self.get_value(0))
+            self.set_value(bool(self.get_value(0)), 0)
         self.state = ACTIVE

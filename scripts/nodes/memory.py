@@ -63,9 +63,9 @@ class NodeConst(base.Node):
         if utils.program_values(value, True):
             value = utils.program_values(value)
         if self.value_type is not None:
-            self.output_values[0] = self.value_type(value)
+            self.set_value(self.value_type(value), 0)
         else:
-            self.output_values[0] = utils.coercion(value)
+            self.set_value(utils.coercion(value), 0)
 
 
 class NodeConstCtrl(NodeConst):
@@ -86,9 +86,9 @@ class NodeConstCtrl(NodeConst):
         if utils.program_values(value, True):
             value = utils.program_values(value)
         if self.value_type is not None:
-            self.output_values[0] = self.value_type(value)
+            self.set_value(self.value_type(value), 0)
         else:
-            self.output_values[0] = utils.coercion(value)
+            self.set_value(utils.coercion(value), 0)
         self.state = ACTIVE
 
     def update_active(self):
@@ -133,9 +133,9 @@ class NodeVar(base.Node):
         if var_name in self.variables:
             value = self.variables[var_name]
             if self.value_type is not None:
-                self.output_values[0] = self.value_type(value)
+                self.set_value(self.value_type(value), 0)
             else:
-                self.output_values[0] = utils.coercion(value)
+                self.set_value(utils.coercion(value), 0)
 
     def update_waiting(self):
         """
@@ -152,16 +152,16 @@ class NodeVar(base.Node):
             if var_name in self.variables:
                 value = self.variables[var_name]
                 if self.value_type is not None:
-                    self.output_values[0] = self.value_type(value)
+                    self.set_value(self.value_type(value), 0)
                 else:
-                    self.output_values[0] = utils.coercion(value)
+                    self.set_value(utils.coercion(value), 0)
         else:
             if self.value_type is not None:
                 value = self.value_type(value)
-                self.output_values[0] = self.value_type(value)
+                self.set_value(self.value_type(value), 0)
             else:
                 value = utils.coercion(value)
-                self.output_values[0] = utils.coercion(value)
+                self.set_value(utils.coercion(value), 0)
             self.variables[var_name] = value
         self.state = ACTIVE
 
@@ -207,9 +207,9 @@ class NodeVarGet(base.Node):
         if var_name in self.variables:
             value = self.variables[var_name]
             if self.value_type is not None:
-                self.output_values[0] = self.value_type(value)
+                self.set_value(self.value_type(value), 0)
             else:
-                self.output_values[0] = utils.coercion(value)
+                self.set_value(utils.coercion(value), 0)
 
     def update_waiting(self):
         """
@@ -221,9 +221,9 @@ class NodeVarGet(base.Node):
         if var_name in self.variables:
             value = self.variables[var_name]
             if self.value_type is not None:
-                self.output_values[0] = self.value_type(value)
+                self.set_value(self.value_type(value), 0)
             else:
-                self.output_values[0] = utils.coercion(value)
+                self.set_value(utils.coercion(value), 0)
         self.state = ACTIVE
 
     def update_active(self):

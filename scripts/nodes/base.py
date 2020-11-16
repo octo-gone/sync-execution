@@ -22,7 +22,7 @@ class Node:
     """
     Create a new node object from the given data. Node has
     some abstract methods, therefore it is better to use
-    this class as parent class for specific node.
+    this class as parent class for a specific node.
     """
     variables = {}
     struct_variables = {}
@@ -255,6 +255,9 @@ class Node:
         Abstract function. Runs if state is INACTIVE.
         """
         pass
+
+    def set_value(self, value, index):
+        self.output_values[index] = value
 
 
 class Wire:

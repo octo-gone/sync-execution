@@ -51,13 +51,13 @@ class NodeFor(base.Node):
                 self.set_active(0)
                 self.start = False
                 self.iteration = self.value_type(0)
-                self.output_values[1] = None
+                self.set_value(None, 1)
                 self.bound = None
                 self.sub_state = None
                 self.state = INACTIVE
         if self.sub_state == READY:
             self.sub_state = ITERATION
-            self.output_values[1] = self.value_type(self.iteration)
+            self.set_value(self.value_type(self.iteration), 1)
             self.set_active(1)
             self.state = WAITING
 
@@ -147,12 +147,12 @@ class NodeForExt(base.Node):
                 self.start = False
                 self.bound = None if self.inputs[1] else -1
                 self.iteration = None if self.inputs[2] else self.value_type(0)
-                self.output_values[1] = None
+                self.set_value(None, 1)
                 self.sub_state = None
                 self.state = INACTIVE
         if self.sub_state == READY:
             self.sub_state = ITERATION
-            self.output_values[1] = self.value_type(self.iteration)
+            self.set_value(self.value_type(self.iteration), 1)
             self.set_active(1)
             self.state = WAITING
 
@@ -377,13 +377,13 @@ class NodeCounter(base.Node):
                 self.set_active(0)
                 self.start = False
                 self.iteration = self.value_type(0)
-                self.output_values[1] = None
+                self.set_value(None, 1)
                 self.bound = None
                 self.sub_state = None
                 self.state = INACTIVE
         if self.sub_state == READY:
             self.sub_state = ITERATION
-            self.output_values[1] = self.value_type(self.iteration)
+            self.set_value(self.value_type(self.iteration), 1)
             self.set_active(1)
             self.state = WAITING
 
@@ -480,13 +480,13 @@ class NodeForeach(base.Node):
                 self.set_active(0)
                 self.start = False
                 self.iteration = 0
-                self.output_values[1] = None
+                self.set_value(None, 1)
                 self.bound = None
                 self.sub_state = None
                 self.state = INACTIVE
         if self.sub_state == READY:
             self.sub_state = ITERATION
-            self.output_values[1] = self.values[self.iteration]
+            self.set_value(self.values[self.iteration], 1)
             self.set_active(1)
             self.state = WAITING
 
@@ -592,13 +592,13 @@ class NodeSplitString(base.Node):
                 self.set_active(0)
                 self.start = False
                 self.iteration = 0
-                self.output_values[1] = None
+                self.set_value(None, 1)
                 self.bound = None
                 self.sub_state = None
                 self.state = INACTIVE
         if self.sub_state == READY:
             self.sub_state = ITERATION
-            self.output_values[1] = self.values[self.iteration]
+            self.set_value(self.values[self.iteration], 1)
             self.set_active(1)
             self.state = WAITING
 

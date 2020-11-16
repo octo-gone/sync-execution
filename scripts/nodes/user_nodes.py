@@ -3,7 +3,7 @@ from scripts.utils import exceptions, logger, utils
 from scripts.nodes.base import ACTIVE, WAITING, INACTIVE
 
 
-class NodeUserExample(base.Node):
+class NodeExample(base.Node):
     name = "example"
 
     def __init__(self, data):

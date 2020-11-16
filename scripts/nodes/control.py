@@ -126,7 +126,7 @@ class NodeMerge(base.Node):
         Resets node and activates next nodes.
         """
         self.set_active(0)
-        self.output_values[0] = self.get_value(1)
+        self.set_value(self.get_value(1), 0)
         self.state = INACTIVE
 
     def update_waiting(self):
@@ -274,7 +274,7 @@ class NodeTimer(base.Node):
             self.timer_counter = 0
         if state == WAITING and self.get_actual_input(input_index) == 1 and self.timer_counter is not None:
             self.state = ACTIVE
-            self.output_values[0] = max(self.timer_counter - 1, 0)
+            self.set_value(max(self.timer_counter - 1, 0), 0)
 
 
 class NodeError(base.Node):

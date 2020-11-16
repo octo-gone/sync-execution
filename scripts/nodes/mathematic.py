@@ -16,7 +16,7 @@ class NodeAbs(base.Node):
         absolute value and sets it to output.
         """
         if self.get_value(0) is not None:
-            self.output_values[0] = abs(self.get_value(0))
+            self.set_value(abs(self.get_value(0)), 0)
             self.state = ACTIVE
 
     def update_active(self):
@@ -50,7 +50,7 @@ class NodeAdd(base.Node):
         If all inputs have value then function summarizes them and saves value to output.
         """
         if all(map(lambda x: x is not None, self.get_value(0, True))):
-            self.output_values[0] = sum(self.get_value(0, True))
+            self.set_value(sum(self.get_value(0, True)), 0)
             self.state = ACTIVE
 
 
@@ -66,7 +66,7 @@ class NodeDec(base.Node):
         If node has input value then function sets to output decremented value.
         """
         if self.get_value(0) is not None:
-            self.output_values[0] = self.get_value(0) - 1
+            self.set_value(self.get_value(0) - 1, 0)
             self.state = ACTIVE
 
     def update_active(self):
@@ -106,7 +106,7 @@ class NodeDivision(base.Node):
         if self.get_value(0) is not None and self.get_value(1) is not None:
             if self.get_value(1) == 0:
                 logger.log_error(f"node 'division' raised exception 'Zero Division'")
-            self.output_values[0] = self.get_value(0) / self.get_value(1)
+            self.set_value(self.get_value(0) / self.get_value(1), 0)
             self.state = ACTIVE
 
 
@@ -133,7 +133,7 @@ class NodeExp(base.Node):
         generates value and sets it to output.
         """
         if self.get_value(0) is not None and self.get_value(1) is not None:
-            self.output_values[0] = self.get_value(0) ** self.get_value(1)
+            self.set_value(self.get_value(0) ** self.get_value(1), 0)
             self.state = ACTIVE
 
 
@@ -149,7 +149,7 @@ class NodeInc(base.Node):
         If node has input value then function sets to output incremented value.
         """
         if self.get_value(0) is not None:
-            self.output_values[0] = self.get_value(0) + 1
+            self.set_value(self.get_value(0) + 1, 0)
             self.state = ACTIVE
 
     def update_active(self):
@@ -174,7 +174,7 @@ class NodeTrunc(base.Node):
         If node has input value then function sets to output integer from number.
         """
         if self.get_value(0) is not None:
-            self.output_values[0] = int(self.get_value(0))
+            self.set_value(int(self.get_value(0)), 0)
             self.state = ACTIVE
 
     def update_active(self):
@@ -199,7 +199,7 @@ class NodeInv(base.Node):
         If node has input value then function sets to output inverse number value.
         """
         if self.get_value(0) is not None:
-            self.output_values[0] = -self.get_value(0)
+            self.set_value(-self.get_value(0), 0)
             self.state = ACTIVE
 
     def update_active(self):
@@ -236,7 +236,7 @@ class NodeMult(base.Node):
             m = 1
             for v in self.get_value(0, True):
                 m *= v
-            self.output_values[0] = m
+            self.set_value(m, 0)
             self.state = ACTIVE
 
 
@@ -266,7 +266,7 @@ class NodeRound(base.Node):
         """
         precision = self.get_value(1) if self.inputs[1] else 0
         if self.get_value(0) is not None and precision is not None:
-            self.output_values[0] = round(self.get_value(0), precision)
+            self.set_value(round(self.get_value(0), precision), 0)
             self.state = ACTIVE
 
 
@@ -292,7 +292,7 @@ class NodeSub(base.Node):
         generates value and sets it to output.
         """
         if self.get_value(0) is not None and self.get_value(1) is not None:
-            self.output_values[0] = self.get_value(0) - self.get_value(1)
+            self.set_value(self.get_value(0) - self.get_value(1), 0)
             self.state = ACTIVE
 
 
@@ -322,8 +322,8 @@ class NodeMod(base.Node):
         """
         if self.get_value(0) is not None and self.get_value(1) is not None:
             if self.get_value(1) == 0:
-                logger.log_error(f"node 'division' raised exception 'Zero Division'")
-            self.output_values[0] = self.get_value(0) % self.get_value(1)
+                logger.log_error(f"node 'mod' raised exception 'Zero Division'")
+            self.set_value(self.get_value(0) % self.get_value(1), 0)
             self.state = ACTIVE
 
 
@@ -353,6 +353,6 @@ class NodeDiv(base.Node):
         """
         if self.get_value(0) is not None and self.get_value(1) is not None:
             if self.get_value(1) == 0:
-                logger.log_error(f"node 'division' raised exception 'Zero Division'")
-            self.output_values[0] = self.get_value(0) // self.get_value(1)
+                logger.log_error(f"node 'div' raised exception 'Zero Division'")
+            self.set_value(self.get_value(0) // self.get_value(1), 0)
             self.state = ACTIVE
