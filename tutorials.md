@@ -22,7 +22,8 @@ description: Отсюда можно попасть в различные обу
 - [Запуск программы][advanced_running_tutorial]
 - [Продвинутое создание узлов][advanced_creating_tutorial]
     - [Получение данных со входов узла][act_taking_input]
-    - [Работа с выходом ][act_working_with_output]
+    - [Работа с выходом][act_working_with_output]
+    - [Взаимодействие с атрибутами и переменными классов][act_working_with_attr]
 
 [На главную][index]
 
