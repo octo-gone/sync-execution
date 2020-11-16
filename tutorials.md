@@ -21,6 +21,8 @@ description: Отсюда можно попасть в различные обу
 
 - [Запуск программы][advanced_running_tutorial]
 - [Продвинутое создание узлов][advanced_creating_tutorial]
+    - [Получение данных со входов узла][act_taking_input]
+    - [Работа с выходом ][act_working_with_output]
 
 [На главную][index]
 
@@ -33,6 +35,9 @@ description: Отсюда можно попасть в различные обу
 [functions_tutorial]: {{site.baseurl}}/tutorials/functions#content
 [advanced_running_tutorial]: {{site.baseurl}}/tutorials/advanced-running#content
 [advanced_creating_tutorial]: {{site.baseurl}}/tutorials/advanced-creating#content
+[act_taking_input]: {{site.baseurl}}/tutorials/advanced-creating#working-with-input
+[act_working_with_output]: {{site.baseurl}}/tutorials/advanced-creating#working-with-output
+[act_working_with_attr]: {{site.baseurl}}/tutorials/advanced-creating#working-with-attr
 
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#content
