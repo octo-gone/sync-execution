@@ -25,6 +25,7 @@ description: Отсюда можно попасть в различные обу
     - [Работа с выходом][act_working_with_output]
     - [Взаимодействие с атрибутами и переменными классов][act_working_with_attr]
     - [Изменение состояния][act_working_with_attr]
+    - [Взаимодействие со входным сигналом][act_working_with_set_state]
     - [Пример создания узла][act_new_node]
 
 [На главную][index]
@@ -41,6 +42,7 @@ description: Отсюда можно попасть в различные обу
 [act_working_with_input]: {{site.baseurl}}/tutorials/advanced-creating#input
 [act_working_with_output]: {{site.baseurl}}/tutorials/advanced-creating#output
 [act_working_with_attr]: {{site.baseurl}}/tutorials/advanced-creating#attr
+[act_working_with_set_state]: {{site.baseurl}}/tutorials/advanced-creating#set-state
 [act_new_node]: {{site.baseurl}}/tutorials/advanced-creating#new-node
 
 [index]: {{site.baseurl}}/index
