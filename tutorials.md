@@ -21,9 +21,11 @@ description: Отсюда можно попасть в различные обу
 
 - [Запуск программы][advanced_running_tutorial]
 - [Продвинутое создание узлов][advanced_creating_tutorial]
-    - [Получение данных со входов узла][act_taking_input]
+    - [Получение данных со входов узла][act_working_with_input]
     - [Работа с выходом][act_working_with_output]
     - [Взаимодействие с атрибутами и переменными классов][act_working_with_attr]
+    - [Изменение состояния][act_working_with_attr]
+    - [Пример создания узла][act_new_node]
 
 [На главную][index]
 
@@ -36,9 +38,10 @@ description: Отсюда можно попасть в различные обу
 [functions_tutorial]: {{site.baseurl}}/tutorials/functions#content
 [advanced_running_tutorial]: {{site.baseurl}}/tutorials/advanced-running#content
 [advanced_creating_tutorial]: {{site.baseurl}}/tutorials/advanced-creating#content
-[act_taking_input]: {{site.baseurl}}/tutorials/advanced-creating#working-with-input
-[act_working_with_output]: {{site.baseurl}}/tutorials/advanced-creating#working-with-output
-[act_working_with_attr]: {{site.baseurl}}/tutorials/advanced-creating#working-with-attr
+[act_working_with_input]: {{site.baseurl}}/tutorials/advanced-creating#input
+[act_working_with_output]: {{site.baseurl}}/tutorials/advanced-creating#output
+[act_working_with_attr]: {{site.baseurl}}/tutorials/advanced-creating#attr
+[act_new_node]: {{site.baseurl}}/tutorials/advanced-creating#new-node
 
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#content

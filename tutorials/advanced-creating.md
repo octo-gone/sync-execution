@@ -24,6 +24,8 @@ title: Продвинутое создание узлов
 - [Получение данных с входов узла][working_with_input]
 - [Работа с выходом][working_with_output]
 - [Взаимодействие с атрибутами и переменными][working_with_attr]
+- [Изменение состояния][working_with_attr]
+- [Пример создания узла][new_node]
 
 ## Что используется в работе узла
 
@@ -82,11 +84,15 @@ title: Продвинутое создание узлов
 
 Для работы узла требуется класс, который будет обрабатывать все его действия. Для этого нужно перейти в скрипт
 **user_nodes.py**. Внутри него нужно положить класс узла с определенной структурой, а после программа сама поймет что делать.
+Создание узла основывается на свойствах ООП - полиморфизме и наследовании. Наследование позволяет получать все требуемые
+для работы функции не расписывая их заново для каждого класса, а полиморфизм позволяет настроить класс под определенный
+функционал. Все измененные методы класса существовали в родительском в неком общем виде.
 
 Базовая структура любого пользовательского узла должна выглядеть следующим образом:
 ```python
 class Node<ИмяКлассаУзла>(base.Node):
-    name = "<Наименование узла>"
+    name = "..."  # Наименование узла
+    desc = {...}  # Описание узла
 
     def update_waiting(self):
         <Операции, когда узел обрабатывается>
@@ -97,7 +103,8 @@ class Node<ИмяКлассаУзла>(base.Node):
 
 Имя класса должно быть уникальном в скрипте **user_nodes.py**. Наименование узла должно совпадать с именем используемые 
 в создании узла (**label**, **sync_name**). Методы **update_waiting** и **update_active** должны присутствовать в классе в любом
-случае, даже если не используются.
+случае, даже если не используются. **Описание узла должно быть в формате указанном в данной [статье][creating_tutorial_desc].**
+Иначе программа не поймет как связывать узел с другими. 
 
 > **Что такое self?**  
 >
@@ -107,7 +114,7 @@ class Node<ИмяКлассаУзла>(base.Node):
 > переменной или методу класса. В Python ссылку на объект или **self** также требуется прописывать как аргумент функции, тем
 > самым показывая, что данная функция работает с объектом и требует его.
 
-#### Получение данных со входов узла <a id="working-with-input"></a>
+#### Получение данных со входов узла <a id="input"></a>
 
 Рассмотрим случай, когда узел был активирован одним из входов. От узла требуется получить значения с 0 и 2 входов, а 
 после получения нужно переключить узел в состояние ACTIVE. Для выполнения такой задачи требуется изменить метод **update_waiting**, 
@@ -174,7 +181,7 @@ class NodeExample1(base.Node):
 
 > Проверять на равенство None желательно через конструкцию `<v> is None` или `<v> is not None`
 
-#### Работа с выходом <a id="working-with-output"></a>
+#### Работа с выходом <a id="output"></a>
 
 Кроме получения данных, узлу требуется активировать следующие узлы и/или передать в них данные. Для сохранения данных
 в порты используется метод **set_value**, в него передается значение и номер выхода. Для активации следующего узла 
@@ -244,7 +251,7 @@ class NodeInv(base.Node):
 
 > Хорошим улучшением было бы добавление проверки на то, что входное значение является значением с возможностью инвертирования.
 
-#### Взаимодействие с атрибутами и переменными классов <a id="working-with-attr"></a>
+#### Взаимодействие с атрибутами и переменными классов <a id="attr"></a>
 
 Много информации для вычислений можно получить из атрибутов и переменных классов. Например в описании к узлу есть данные, 
 которые могут использоваться в вычислениях, в Sync предусмотрена возможность
@@ -281,7 +288,7 @@ class NodeVar(base.Node):
     ...
 ```
 
-> **value_type** - атрибут созданный только для этого класса (хранит переводчик типа данных или конструктор требуемого класса),
+> **value_type** - атрибут созданный для этого класса (хранит переводчик типа данных или конструктор требуемого класса),
 > **value_types** - переменная используемая для определения типа данных по имени типа (для "num" тип данных будет "number").
 > 
 > **super().\_\_init\_\_(data)** - данная строка позволяет запустить инициализацию родительского класса, который как раз и создает
@@ -309,11 +316,273 @@ class NodeVar(base.Node):
 
 > **utils.coercion** - функция автоматически подбирающая тип для входных данных
 
-# В процессе написания ✍(◔◡◔)
+## Пример создания узла <a id="working_with_set_state"></a>
 
-[working_with_input]: {{site.baseurl}}/tutorials/advanced-creating#working-with-input
-[working_with_output]: {{site.baseurl}}/tutorials/advanced-creating#working-with-output
-[working_with_attr]: {{site.baseurl}}/tutorials/advanced-creating#working-with-attr
+Самым полезным методом для комплексных функций, например для циклов или счетчиков, является метод **set_state**. Он 
+исполняется автоматически для узлов при использовании функции **set_active**. Базовая структура (неизменная) описана ниже.
+Вне зависимости от значений аргументов функция изменит состояние узла.
+
+```python
+class NodeExample3(base.Node):
+    ...
+
+    def set_state(self, state, input_index, **kwargs):
+        """
+        Change state function, runs when other nodes are trying to activate the current node. Can be redefined.
+
+        :param str state: new state
+        :param int input_index: index of input from which the state change has been requested
+        :param kwargs: additional arguments if needed (obj and output_index)
+        """
+        self.state = state
+    
+    ...
+``` 
+
+Однако в некоторых случаях так не должно быть, например в циклах, где при подаче только на определенный вход программа должна
+обработать сигнал и вывести значение, а при подаче на любой другой - проигнорировать. Специально для таких случаев добавлен
+аргумент **input_index**, который показывает по какому именно входу подается сигнал. 
+
+Попробуем реализовать проверку того, что только на первый вход может подаваться сигнал, а на все остальные нет.
+
+```python
+class NodeExample3(base.Node):
+    ...
+
+    def set_state(self, state, input_index, **kwargs):
+        if input_index == 0:
+            self.state = state
+    ...
+``` 
+
+Сделаем аналогичную проверку, но узел должен проверить, что входное значение равно значению из описания (как ключ к шкатулке).
+
+```python
+class NodeExample3(base.Node):
+    ...
+
+    def set_state(self, state, input_index, **kwargs):
+        if input_index == 0 and self.get_value(0) == self.desc_value:
+            self.state = state
+    ...
+``` 
+
+## Пример создания узла <a id="new-node"></a>
+
+Финальной частью статьи будет создание узла: счетчик с минимальным значением 0 и максимальным 15, где один входной порт 
+увеличивает значение, а другой уменьшает, переход за минимум и максимум цикличен (-1=15 и 16=0).
+Реализовать данный узел можно несколькими способами. Однако первоначально нужно описать узел и создать его с помощью
+скрипта *new_nodes.py*
+
+Изменим переменную **node** следующим образом
+
+```python
+node = {
+    'inner': 'C16',
+    'label': 'count 16',
+    'inputs': ('ctrl', 'ctrl'),
+    'outputs': ('int',),
+    'tooltip': {
+        'label': 'Count 16 (+/-)',
+        'desc': 'Счетчик 16',
+        'input': [
+            ('Вход', 'Увеличивающий вход'),
+            ('Вход', 'Уменьшающий вход'),
+        ],
+        'outputs': [
+            ('Выход', 'Значение'),
+        ],
+        'adds': 'Счетчик с пересчетом 16, где один входной порт увеличивает, а другой уменьшает',
+    }
+}
+```
+
+Воспользуемся созданием библиотеки, для получения уже готового узла.
+
+```python
+svg_save_folder = "resources/generated/svg/"
+lib_save_folder = "resources/libraries/"
+library_name = "c16"
+nodes_info = [
+    node
+]
+generate_library(library_name, nodes_info, svg_save_folder, lib_save_folder)
+```
+
+Проверим результат выполнения программы, импортировав полученную библиотеку в [Draw.io][drawio].
+
+<img src="{{site.baseurl}}/resources/tutorials/advanced-creating/01_c16_node.png"/>
+
+Проведем аналогичные операции, но теперь вместо библиотеки создадим функцию, и попробуем реализовать программу
+через доступные узлы.
+
+<img src="{{site.baseurl}}/resources/tutorials/advanced-creating/02_c16_func.png"/>
+
+Составленная программа немного сложна, так как требуется при первом запуске создавать переменную, если она была создана, то
+достаточно будет складывать или вычитать.
+
+<img src="{{site.baseurl}}/resources/tutorials/advanced-creating/03_c16_func_prog.png"/>
+
+Тестовая программа будет выглядеть просто, на один из входов подается значение из цикла, подача на другой вход была
+проверена и работает. 
+
+<img src="{{site.baseurl}}/resources/tutorials/advanced-creating/04_c16_test.png"/>
+
+После запуска функции видно, что на такую программу тратится огромное количество шагов, но результат правильный.
+
+<img src="{{site.baseurl}}/resources/tutorials/advanced-creating/05_c16_func_work.png"/>
+
+Теперь реализуем класс и его функционал. Если сразу запустить программу, то можно увидеть, что программа вернет сообщение
+об ошибке `0: no built-in nodes found with name 'count 16'`. Это значит, что узел не был найден, исправим это.
+
+Первым делом требуется ввести описание узла
+
+```python
+class NodeCount16(base.Node):
+    name = "count 16"
+    desc = {
+        'inner': 'C16',
+        'label': 'count 16',
+        'inputs': ('ctrl', 'ctrl'),
+        'outputs': ('int',),
+        'tooltip': {
+            'label': 'Count 16 (+/-)',
+            'desc': 'Счетчик 16',
+            'input': [
+                ('Вход', 'Увеличивающий вход'),
+                ('Вход', 'Уменьшающий вход'),
+            ],
+            'outputs': [
+                ('Выход', 'Значение'),
+            ],
+            'adds': 'Счетчик с пересчетом 16, где один входной порт увеличивает, а другой уменьшает',
+        }
+    }
+    ...
+```
+
+Введем 2 переменные, одна будет счетчиком, а вторая определять что нужно сделать со значением. Видно, что переменную мы ввели сразу,
+потому дой большой проверки не будет.
+
+```python
+class NodeCount16(base.Node):
+    ...
+    def __init__(self, data):
+        super().__init__(data)
+        self.count = 0
+        self.operation = None
+    ...
+```
+
+Сделаем изменение счетчика.
+
+```python
+class NodeCount16(base.Node):
+    ...
+    def update_waiting(self):
+        if self.operation == "+":
+            new_value = (self.count + 1) % 16
+            self.set_value(new_value, 0)
+            self.count = new_value
+        elif self.count == 0:
+            new_value = 15
+            self.set_value(new_value, 0)
+            self.count = new_value
+        else:
+            new_value = self.count - 1
+            self.set_value(new_value, 0)
+            self.count = new_value
+        self.state = ACTIVE
+    ...
+```
+
+Остается сделать переключение из состояния ACTIVE и обработку входных сигналов.
+
+```python
+class NodeCount16(base.Node):
+    ...
+    def update_active(self):
+        self.set_active(0)
+        self.state = INACTIVE
+
+    def set_state(self, state, input_index, **kwargs):
+        if input_index == 0:
+            self.operation = "+"
+        else:
+            self.operation = "-"
+        self.state = state
+```
+
+Программирование закончилось, осталось лишь запустить программу и увидеть разницу в результатах. Узел будет работать намного
+быстрее функции, и в то же время выполнять все тот же функционал.
+
+<img src="{{site.baseurl}}/resources/tutorials/advanced-creating/06_c16_node_work.png"/>
+
+Класс целиком:
+
+```python
+class NodeCount16(base.Node):
+    name = "count 16"
+    desc = {
+        'inner': 'C16',
+        'label': 'count 16',
+        'inputs': ('ctrl', 'ctrl'),
+        'outputs': ('int',),
+        'tooltip': {
+            'label': 'Count 16 (+/-)',
+            'desc': 'Счетчик 16',
+            'input': [
+                ('Вход', 'Увеличивающий вход'),
+                ('Вход', 'Уменьшающий вход'),
+            ],
+            'outputs': [
+                ('Выход', 'Значение'),
+            ],
+            'adds': 'Счетчик с пересчетом 16, где один входной порт увеличивает, а другой уменьшает',
+        }
+    }
+
+    def __init__(self, data):
+        super().__init__(data)
+        self.count = 0
+        self.operation = None
+
+    def update_waiting(self):
+        if self.operation == "+":
+            new_value = (self.count + 1) % 16
+            self.set_value(new_value, 0)
+            self.count = new_value
+        elif self.count == 0:
+            new_value = 15
+            self.set_value(new_value, 0)
+            self.count = new_value
+        else:
+            new_value = self.count - 1
+            self.set_value(new_value, 0)
+            self.count = new_value
+        self.state = ACTIVE
+
+    def update_active(self):
+        self.set_active(0)
+        self.state = INACTIVE
+
+    def set_state(self, state, input_index, **kwargs):
+        if input_index == 0:
+            self.operation = "+"
+        else:
+            self.operation = "-"
+        self.state = state
+```
+
+[working_with_input]: {{site.baseurl}}/tutorials/advanced-creating#input
+[working_with_output]: {{site.baseurl}}/tutorials/advanced-creating#output
+[working_with_attr]: {{site.baseurl}}/tutorials/advanced-creating#attr
+[working_with_set_state]: {{site.baseurl}}/tutorials/advanced-creating#set-state
+[new_node]: {{site.baseurl}}/tutorials/advanced-creating#new-node
+
+[creating_tutorial]: {{site.baseurl}}/tutorials/creating#content
+[creating_tutorial_desc]: {{site.baseurl}}/tutorials/creating#description
+[functions_tutorial]: {{site.baseurl}}/tutorials/functions#content
 
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#content
