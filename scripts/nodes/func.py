@@ -4,6 +4,7 @@ from scripts.utils import logger
 import abc
 
 
+# TODO: not working!!!
 class NodeFunction(base.Node, abc.ABC):
     """
     Class for function creation constructions. It has several class variables:
@@ -107,7 +108,7 @@ class NodeFunction(base.Node, abc.ABC):
                     new_node.inputs = copy(node.inputs)
                     new_node.output_values = copy(node.output_values)
                     new_node.actual_inputs = copy(node.actual_inputs)
-                    new_node.scope = _id
+                    new_node.scope = deepcopy(_id)
                     if new_node.desc_value == '$desc':
                         new_node.desc_value = func_node.desc_value
                     new_nodes.append(new_node)
