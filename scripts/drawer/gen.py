@@ -3,6 +3,7 @@ from svgwrite import drawing
 import os
 from scripts.utils.coder import to_shape, to_library
 from scripts.drawer.config import *
+from scripts.constants import *
 import textwrap
 import html
 

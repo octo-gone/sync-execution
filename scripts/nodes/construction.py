@@ -94,12 +94,12 @@ class NodeFor(base.Node):
         'increment' input then node changes sub_state to NEXT.
         """
         if state == WAITING:
-            if self.get_actual_input(input_index) == 0:
+            if input_index == 0:
                 self.start = True
                 self.bound = None if self.inputs[1] else -1
             if self.sub_state is None:
                 self.sub_state = BOUND
-            if self.sub_state == ITERATION and self.get_actual_input(input_index) == 3:
+            if self.sub_state == ITERATION and input_index == 3:
                 self.sub_state = NEXT
             self.state = WAITING
 
@@ -192,13 +192,13 @@ class NodeForExt(base.Node):
         'increment' input then node changes sub_state to NEXT.
         """
         if state == WAITING:
-            if self.get_actual_input(input_index) == 0:
+            if input_index == 0:
                 self.start = True
                 self.bound = self.value_type(self.get_value(1)) if self.inputs[1] else -1
                 self.iteration = self.value_type(self.get_value(2)) if self.inputs[2] else 0
             if self.sub_state is None:
                 self.sub_state = BOUND
-            if self.sub_state == ITERATION and self.get_actual_input(input_index) == 3:
+            if self.sub_state == ITERATION and input_index == 3:
                 self.sub_state = NEXT
             self.state = WAITING
 
@@ -256,7 +256,7 @@ class NodeIf(base.Node):
         If signal received from 'ctrl' input then sub_state changes to READY.
         """
         if state == WAITING:
-            if self.get_actual_input(input_index) == 0:
+            if input_index == 0:
                 if len(self.inputs[1]) == 0:
                     self.condition = False
                 self.sub_state = READY
@@ -326,11 +326,11 @@ class NodeWhile(base.Node):
         'next' input then node changes sub_state to NEXT.
         """
         if state == WAITING:
-            if self.get_actual_input(input_index) == 0:
+            if input_index == 0:
                 self.start = True
             if self.sub_state is None:
                 self.sub_state = BOUND
-            if self.sub_state == ITERATION and self.get_actual_input(input_index) == 2:
+            if self.sub_state == ITERATION and input_index == 2:
                 self.sub_state = NEXT
             self.state = WAITING
 
@@ -422,12 +422,12 @@ class NodeCounter(base.Node):
         'increment' input then node changes sub_state to NEXT.
         """
         if state == WAITING:
-            if self.get_actual_input(input_index) == 0:
+            if input_index == 0:
                 self.start = True
                 self.bound = None if self.inputs[1] else -1
             if self.sub_state is None:
                 self.sub_state = BOUND
-            if self.sub_state == ITERATION and self.get_actual_input(input_index) == 3:
+            if self.sub_state == ITERATION and input_index == 3:
                 self.sub_state = NEXT
             self.state = WAITING
 
@@ -539,12 +539,12 @@ class NodeForeach(base.Node):
         'increment' input then node changes sub_state to NEXT.
         """
         if state == WAITING:
-            if self.get_actual_input(input_index) == 0:
+            if input_index == 0:
                 self.start = True
                 self.bound = None
             if self.sub_state is None:
                 self.sub_state = BOUND
-            if self.sub_state == ITERATION and self.get_actual_input(input_index) == 3:
+            if self.sub_state == ITERATION and input_index == 3:
                 self.sub_state = NEXT
             self.state = WAITING
 
@@ -638,11 +638,11 @@ class NodeSplitString(base.Node):
         'increment' input then node changes sub_state to NEXT.
         """
         if state == WAITING:
-            if self.get_actual_input(input_index) == 0:
+            if input_index == 0:
                 self.start = True
                 self.bound = None
             if self.sub_state is None:
                 self.sub_state = BOUND
-            if self.sub_state == ITERATION and self.get_actual_input(input_index) == 2:
+            if self.sub_state == ITERATION and input_index == 2:
                 self.sub_state = NEXT
             self.state = WAITING

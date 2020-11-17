@@ -27,6 +27,6 @@ NODE_SIZE = 40
 
 TOOLTIP_WRAP_LENGTH = 30
 TOOLTIP_KEYWORDS = ["$iteration", "$min", "$max", "$pi", "$true", "$false", "$none", "$sep", "$int", "$real", "$bool",
-                    "$char", "$num", "$str", "$any", "$", "$desc", "[[[символ]<|>|^]шир", "ина][.точность][f|%|e]"]
+                    "$char", "$num", "$str", "$any", "$desc", "[[[символ]<|>|^]шир", "ина][.точность][f|%|e]", "$"]
 TOOLTIP_KEYWORDS_COLOR = (147, 107, 9)
 TOOLTIP_ADDS_FUNCTION = "Внутри определения функции можно получить значение описания функции в программе используя $desc"

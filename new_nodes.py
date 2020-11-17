@@ -96,29 +96,23 @@ if __name__ == '__main__':
     svg_save_folder = "resources/generated/svg/"
     lib_save_folder = "resources/libraries/"
 
-    library_name = "strops"
+    library_name = "c16"
     node = {
-        'inner': 'Join',
-        'label': 'join',
-        'sync_name': 'join',
-
-        'inputs': ('ctrl', 'str'),
-        'inputs_label': ('activation', 'join symbols'),
-
-        'outputs': ('str',),
-        'outputs_label': ('result',),
-
+        'inner': 'C16',
+        'label': 'count 16',
+        'inputs': ('ctrl', 'ctrl'),
+        'outputs': ('int',),
         'tooltip': {
-            'label': 'Join',
-            'desc': 'Объединение строк',
+            'label': 'Count 16 (+/-)',
+            'desc': 'Счетчик 16',
             'input': [
-                ('Вход', 'Активирующий вход'),
-                ('Вход', 'Объединяющая строка'),
+                ('Вход', 'Увеличивающий вход'),
+                ('Вход', 'Уменьшающий вход'),
             ],
             'outputs': [
-                ('Выход', 'Строка'),
+                ('Выход', 'Значение'),
             ],
-            'adds': 'Объединяет строки в структурной переменной указанной в описании Узла',
+            'adds': 'Счетчик с пересчетом 16, где один входной порт увеличивает, а другой уменьшает',
         }
     }
     nodes_info = [
@@ -126,6 +120,6 @@ if __name__ == '__main__':
     ]
 
     # generate_node(node, svg_save_folder)
-    # generate_function(node, svg_save_folder, lib_save_folder)
+    generate_function(node, svg_save_folder, lib_save_folder)
     # generate_library(library_name, nodes_info, svg_save_folder, lib_save_folder)
     # generate_base_libs()

@@ -143,7 +143,7 @@ class NodeMerge(base.Node):
 
         Only if input_index equal to 'ctrl' input then node activates.
         """
-        if state == WAITING and self.get_actual_input(input_index) == 0:
+        if state == WAITING and input_index == 0:
             self.state = state
 
 
@@ -221,7 +221,7 @@ class NodeDelay(base.Node):
 
         Only if input_index equal to 'ctrl' input then node activates.
         """
-        if state == WAITING and self.get_actual_input(input_index) == 0:
+        if state == WAITING and input_index == 0:
             self.state = WAITING
 
 
@@ -269,10 +269,10 @@ class NodeTimer(base.Node):
 
         If input is 'stop' then function tries to evaluate difference between start and stop signals.
         """
-        if state == WAITING and self.get_actual_input(input_index) == 0:
+        if state == WAITING and input_index == 0:
             self.state = WAITING
             self.timer_counter = 0
-        if state == WAITING and self.get_actual_input(input_index) == 1 and self.timer_counter is not None:
+        if state == WAITING and input_index == 1 and self.timer_counter is not None:
             self.state = ACTIVE
             self.set_value(max(self.timer_counter - 1, 0), 0)
 

@@ -13,7 +13,6 @@ class NodeExample(base.Node):
         self.state = ACTIVE
 
     def update_active(self):
-        self.set_active(0)
         self.state = INACTIVE
 
     def set_state(self, state, input_index, **kwargs):

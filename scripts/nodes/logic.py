@@ -157,7 +157,7 @@ class NodeIn(base.Node):
         If activation received from 'value' input (not from multiple input) then
         function change node state.
         """
-        if state == WAITING and self.get_actual_input(input_index) == 1:
+        if state == WAITING and input_index == 1:
             self.state = state
 
 

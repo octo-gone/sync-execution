@@ -124,13 +124,15 @@ class NodeFunction(base.Node, abc.ABC):
                 # 6
                 for new_node in new_nodes:
                     for iic, input_connector in enumerate(new_node.inputs):
-                        for ii, ins in enumerate(input_connector):
-                            if ins[0] == func["in"]:
-                                new_node.inputs[iic][ii:ii+1] = func_node.inputs[func_node.get_actual_input(ins[1])]
+                        while func["in"] in list(map(lambda x: x[0], input_connector)):
+                            for ii, ins in enumerate(input_connector):
+                                if ins[0] == func["in"]:
+                                    new_node.inputs[iic][ii:ii+1] = func_node.inputs[func_node.get_actual_input(ins[1])]
                     for ioc, output_connector in enumerate(new_node.outputs):
-                        for io, outs in enumerate(output_connector):
-                            if outs[0] == func["out"]:
-                                new_node.outputs[ioc][io:io+1] = func_node.outputs[outs[1]]
+                        while func["out"] in list(map(lambda x: x[0], output_connector)):
+                            for io, outs in enumerate(output_connector):
+                                if outs[0] == func["out"]:
+                                    new_node.outputs[ioc][io:io+1] = func_node.outputs[outs[1]]
                 # 7
                 for iic, input_connectors in enumerate(func_node.inputs):
                     for iin, input_node in enumerate(input_connectors):

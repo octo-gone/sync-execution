@@ -254,7 +254,7 @@ class NodeJoin(base.Node):
 
         Only if input_index equal to 'ctrl' input then node activates.
         """
-        if state == WAITING and self.get_actual_input(input_index) == 0:
+        if state == WAITING and input_index == 0:
             self.state = state
 
 
@@ -320,5 +320,5 @@ class NodeFormat(base.Node):
 
         Only if input_index equal to 'format' input then node activates.
         """
-        if state == WAITING and self.get_actual_input(input_index) == 0:
+        if state == WAITING and input_index == 0:
             self.state = state

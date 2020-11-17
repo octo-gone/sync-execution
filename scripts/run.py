@@ -234,4 +234,8 @@ def run(n, w, s, limit=10 ** 5):
             utils.iteration = -1
             break
     if utils.iteration != -1:
-        logger.log_error("iteration overstepped the limit")
+        active_nodes = []
+        for node in base.Node.nodes.values():
+            if node.state == base.WAITING:
+                active_nodes.append(node)
+        logger.log_error(f"iteration overstepped the limit\n{active_nodes}")

@@ -63,7 +63,9 @@ class Node:
         self.sub_state = None
 
         self.scope = 0
-        self.pos = float(data["x"]), float(data["y"])
+        x = data["x"] if data["x"] is not None else 0
+        y = data["y"] if data["y"] is not None else 0
+        self.pos = float(x), float(y)
         self.size = float(data["width"]), float(data["height"])
 
     def get_actual_input(self, input_index):
@@ -211,14 +213,17 @@ class Node:
         :param int output_index: actual output of node
         """
         for output_node, input_index in self.outputs[output_index]:
-            output_node.set_state(WAITING, input_index, obj=self, output_index=output_index)
+            output_node.set_state(WAITING,
+                                  output_node.get_actual_input(input_index),
+                                  obj=self,
+                                  output_index=output_index)
 
     def set_state(self, state, input_index, **kwargs):
         """
-        Change state function, runs when other nodes are trying to activate current node. Can be redefined.
+        Change state function, runs when other nodes are trying to activate the current node. Can be redefined.
 
         :param str state: new state
-        :param int input_index: index of input from which the state change is requested
+        :param int input_index: index of input from which the state change has been requested
         :param kwargs: additional arguments if needed (obj and output_index)
         """
         self.state = state
@@ -258,6 +263,9 @@ class Node:
 
     def set_value(self, value, index):
         self.output_values[index] = value
+
+    def __repr__(self):
+        return f"Node({self.__class__}, id={self.id})"
 
 
 class Wire:
