@@ -1,0 +1,37 @@
+---
+---
+
+$large-breakpoint: 64em !default;
+$medium-breakpoint: 42em !default;
+
+@mixin large {
+  @media screen and (min-width: #{$large-breakpoint}) {
+    @content;
+  }
+}
+
+@mixin medium {
+  @media screen and (min-width: #{$medium-breakpoint}) and (max-width: #{$large-breakpoint}) {
+    @content;
+  }
+}
+
+@mixin small {
+  @media screen and (max-width: #{$medium-breakpoint}) {
+    @content;
+  }
+}
+
+img .img-node {
+  @include large {
+    width: 20em;
+  }
+
+  @include medium {
+    width: 15em;
+  }
+
+  @include small {
+    width: max-content;
+  }
+}

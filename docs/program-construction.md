@@ -1,5 +1,7 @@
 ---
-layout: docs
+layout: default_no_header
+return_page: /docs
+return_title: К документации
 title: Соединение узлов и работа программы
 ---
 ## Создание программы

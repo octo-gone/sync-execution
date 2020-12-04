@@ -18,9 +18,11 @@ title: Документация
 ### Узлы
 
 Главной составляющей программы являются узлы, многие имеет свою особенность при запуске, обработке или выводе
-данных или сигнала. В статьях ниже можно прочитать про это. Узлы делятся на следующе типы:
+данных или сигнала. В статьях ниже можно прочитать про это. Больше про узлы можно узнать [здесь][nodes].
 
-- control
+#### Узлы делятся на следующе типы:
+
+- [Control][n_control]
 - math
 - logic
 - inout
@@ -37,6 +39,9 @@ title: Документация
 [pc_connectors]: {{site.baseurl}}/docs/program-construction#connectors
 [pc_running]: {{site.baseurl}}/docs/program-construction#running
 [pc_callback]: {{site.baseurl}}/docs/program-construction#callback
+
+[nodes]: {{site.baseurl}}/docs/nodes#content
+[n_control]: {{site.baseurl}}/docs/nodes/control#content
 
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#content

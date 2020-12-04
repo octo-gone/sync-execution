@@ -28,8 +28,6 @@ description: Отсюда можно попасть в различные обу
     - [Взаимодействие со входным сигналом][act_working_with_set_state]
     - [Пример создания узла][act_new_node]
 
-[На главную][index]
-
 [editor_tutorial]: {{site.baseurl}}/tutorials/editor#content
 [style_tutorial]: {{site.baseurl}}/tutorials/style#content
 [types_tutorial]: {{site.baseurl}}/tutorials/types#content

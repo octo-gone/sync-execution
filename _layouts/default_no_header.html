@@ -31,7 +31,11 @@
 
 <main id="content" class="main-content" role="main">
     {{ content }}
-
+    {% if page.no_return != true %}
+        <div class="content-center">
+            <a href="{{ site.baseurl }}{{ page.return_page | default: '/' }}#content" class="btn-return">{{ page.return_title | default: 'На Главную' }}</a>
+        </div>
+    {% endif %}
     <footer class="site-footer">
         {% if site.github.is_project_page %}
             <span class="site-footer-owner"><a

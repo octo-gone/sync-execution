@@ -3,6 +3,7 @@ layout: default
 title: Sync
 post_dirs: false
 permalink: pretty
+lang: ru-RU
 description:
   Sync - язык-нотация, позволяющий визуализировать алгоритмы и логические схемы.
   Данная документация позволяет узнать больше о том как работать с ним и как работает он сам

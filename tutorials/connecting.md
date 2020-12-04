@@ -1,5 +1,7 @@
 ---
-layout: tutorials
+layout: default_no_header
+return_page: /tutorials
+return_title: К обучению
 title: Соединение
 ---
 ## Соединение Узлов
