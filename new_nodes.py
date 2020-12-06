@@ -77,49 +77,46 @@ def generate_function(node, svg_folder="resources/generated/svg/", lib_folder="r
         file.write(library_data.format(",".join(n)))
 
 
-def generate_base_libs():
+def generate_png_descriptions():
+    from scripts.drawer import old
+    from scripts.utils.nodes_v10 import base_nodes_info, structure_nodes_info
+
+    for n in list(base_nodes_info.values()) + list(structure_nodes_info.values()):
+        old.NodePNG(**n).draw_node()
+
+
+def generate_base_libs(svg_folder="resources/generated/svg/", lib_folder="resources/"):
     from scripts.utils.nodes_v10 import base_nodes_info, structure_nodes_info, \
         base_nodes_lib_order, structure_nodes_lib_order
 
     base_library = []
     for n in base_nodes_lib_order:
         base_library.append(base_nodes_info[n])
-    generate_library("base", base_library, "resources/generated/svg/", "resources/")
+    generate_library("base", base_library, svg_folder, lib_folder)
 
     structure_library = []
     for n in structure_nodes_lib_order:
         structure_library.append(structure_nodes_info[n])
-    generate_library("structure", structure_library, "resources/generated/svg/", "resources/")
+    generate_library("structure", structure_library, svg_folder, "resources/")
 
 
 if __name__ == '__main__':
     svg_save_folder = "resources/generated/svg/"
     lib_save_folder = "resources/libraries/"
 
-    library_name = "c16"
+    library_name = "wire"
     node = {
-        'inner': 'C16',
-        'label': 'count 16',
-        'inputs': ('ctrl', 'ctrl'),
-        'outputs': ('int',),
-        'tooltip': {
-            'label': 'Count 16 (+/-)',
-            'desc': 'Счетчик 16',
-            'input': [
-                ('Вход', 'Увеличивающий вход'),
-                ('Вход', 'Уменьшающий вход'),
-            ],
-            'outputs': [
-                ('Выход', 'Значение'),
-            ],
-            'adds': 'Счетчик с пересчетом 16, где один входной порт увеличивает, а другой уменьшает',
-        }
+        'inner': '~',
+        'label': 'wire',
+        'inputs': ('any',),
+        'outputs': ('any',)
     }
     nodes_info = [
         node
     ]
 
+    # generate_png_descriptions()
     # generate_node(node, svg_save_folder)
-    generate_function(node, svg_save_folder, lib_save_folder)
+    # generate_function(node, svg_save_folder, lib_save_folder)
     # generate_library(library_name, nodes_info, svg_save_folder, lib_save_folder)
-    # generate_base_libs()
+    # generate_base_libs(svg_save_folder, "resources/")
