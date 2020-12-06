@@ -201,10 +201,13 @@ class Node:
         if mult:
             values = []
             for input_node, output_index in self.inputs[input_index]:
-                values.append(input_node.output_values[output_index])
+                values.append(input_node.give_value(output_index))
             return values
         for input_node, output_index in self.inputs[input_index]:
-            return input_node.output_values[output_index]
+            return input_node.give_value(output_index)
+
+    def give_value(self, output_index):
+        return self.output_values[output_index]
 
     def set_active(self, output_index):
         """

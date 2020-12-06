@@ -292,7 +292,7 @@ class NodeFormat(base.Node):
         """
         Update function, runs if state is WAITING.
 
-        If node has both input values then evaluates concatenation.
+        Gets format from input 0 and value that should be processed.
         """
         desc_value = f"{self.scope}$" + self.desc_value
         format_string = self.get_value(0)
