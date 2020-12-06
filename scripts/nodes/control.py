@@ -289,7 +289,7 @@ class NodeError(base.Node):
 
         Log error if function runs (logger will raise exception).
         """
-        logger.log_error(f"node 'err' raised exception '{self.desc_value}'")
+        logger.log_error(f"node 'error' raised exception '{self.desc_value}'")
 
     def update_active(self):
         """
@@ -298,3 +298,28 @@ class NodeError(base.Node):
         Change state to WAITING if node state changed directly.
         """
         self.state = WAITING
+
+
+class NodeWarning(base.Node):
+    """
+    Class for node 'warning'. If a signal was received, node
+    will cause a warning with information specified in the node description (desc_value).
+    """
+
+    def update_waiting(self):
+        """
+        Update function, runs if state is WAITING.
+
+        Log warning if function runs (logger will raise exception).
+        """
+        logger.log_warning(f"node 'warning' raised exception '{self.desc_value}'")
+        self.state = ACTIVE
+
+    def update_active(self):
+        """
+        Update function, runs if state is ACTIVE.
+
+        Change state to WAITING if node state changed directly.
+        """
+        self.set_active(0)
+        self.state = INACTIVE

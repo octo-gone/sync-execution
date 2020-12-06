@@ -43,6 +43,8 @@ class NodeGen:
             return control.NodeTimer(data)
         if node_name == "error":
             return control.NodeError(data)
+        if node_name == "warning":
+            return control.NodeWarning(data)
 
         if node_name == "print ctrl":
             return inout.NodePrintCtrl(data)

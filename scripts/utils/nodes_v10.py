@@ -261,8 +261,25 @@ base_nodes_info = {
             'inputs': [
                 ('Вход', 'Активирующий вход'),
             ],
+            'adds': 'При получения сигнала показывает ошибку указанную в описании Узла',
+        }
+    },
+    'warning': {
+        'inputs': ('ctrl',),
+        'inputs_label': ('ctrl',),
+        'outputs': ('ctrl',),
+        'outputs_label': ('ctrl',),
+        'inner': 'Wrng',
+        'label': 'warning message',
+        'sync_name': 'warning',
+        'tooltip': {
+            'label': 'Warning',
+            'desc': 'Сообщение об ошибке',
+            'inputs': [
+                ('Вход', 'Активирующий вход'),
+            ],
             'outputs': [
-                ('Выход', 'Приведенное логическое значение'),
+                ('Выход', 'Завершающий выход'),
             ],
             'adds': 'При получения сигнала показывает ошибку указанную в описании Узла',
         }
@@ -1547,8 +1564,8 @@ base_nodes_lib_order = ['run', 'stop', 'const', 'const ctrl', 'input', 'print', 
                         'bool', 'and', 'or', 'not and', 'not or', 'equal', 'not', 'not equal', 'xor', 'greater',
                         'greater or equal', 'less', 'less or equal', 'inc', 'dec', 'abs', 'div', 'mod', 'inv', 'trunc',
                         'round', 'for', 'counter', 'while', 'in', 'for ext', 'foreach', 'merge', 'delay',
-                        'value switch', 'ctrl', 'timer', 'wait', 'type', 'get type', 'error', 'random', 'random int',
-                        'random num', 'random seed']
+                        'value switch', 'ctrl', 'timer', 'wait', 'type', 'get type', 'error', 'warning', 'random',
+                        'random int', 'random num', 'random seed']
 structure_nodes_lib_order = ['length', 'array create', 'array set', 'array get', 'array get and set', 'list create',
                              'list set', 'list get', 'list get and set', 'list remove', 'dict create', 'dict insert',
                              'dict find', 'dict insert and find', 'dict remove', 'matrix create', 'matrix set',
