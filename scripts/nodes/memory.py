@@ -65,7 +65,12 @@ class NodeConst(base.Node):
         if self.value_type is not None:
             self.set_value(self.value_type(value), 0)
         else:
-            self.set_value(utils.coercion(value), 0)
+            if value.startswith("'") and value.endswith("'"):
+                self.set_value(utils.Char(value[1:-1]), 0)
+            elif value.startswith('"') and value.endswith('"'):
+                self.set_value(str(value[1:-1]), 0)
+            else:
+                self.set_value(utils.coercion(value), 0)
 
 
 class NodeConstCtrl(NodeConst):
@@ -83,10 +88,10 @@ class NodeConstCtrl(NodeConst):
         and saves with specified type to output.
         """
         value = self.desc_value
-        if utils.program_values(value, True):
-            value = utils.program_values(value)
-        if self.value_type is not None:
-            self.set_value(self.value_type(value), 0)
+        if value.startswith("'") and value.endswith("'"):
+            self.set_value(utils.Char(value[1:-1]), 0)
+        elif value.startswith('"') and value.endswith('"'):
+            self.set_value(str(value[1:-1]), 0)
         else:
             self.set_value(utils.coercion(value), 0)
         self.state = ACTIVE
