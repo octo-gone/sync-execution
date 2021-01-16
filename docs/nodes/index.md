@@ -13,10 +13,12 @@ title: Узлы
     - [Control][base_control] - узлы работающие с сигналом
     - [Math][base_mathematic] - узлы работающие с числами
     - [Logic][base_logic] - узлы работающие с логикой
+    - [Input and Output][base_inout] - узлы работающие с вводом и выводом
 
 [base_control]: {{site.baseurl}}/docs/nodes/control#content
 [base_mathematic]: {{site.baseurl}}/docs/nodes/math#content
 [base_logic]: {{site.baseurl}}/docs/nodes/logic#content
+[base_inout]: {{site.baseurl}}/docs/nodes/inout#content
 
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#content

@@ -25,7 +25,7 @@ title: Документация
 - [Control][n_control]
 - [Math][n_mathematic]
 - [Logic][n_logic]
-- inout
+- [Input and Output][n_inout]
 - construction
 - misc
 - memory
@@ -44,6 +44,7 @@ title: Документация
 [n_control]: {{site.baseurl}}/docs/nodes/control#content
 [n_mathematic]: {{site.baseurl}}/docs/nodes/math#content
 [n_logic]: {{site.baseurl}}/docs/nodes/logic#content
+[n_inout]: {{site.baseurl}}/docs/nodes/inout#content
 
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#content
