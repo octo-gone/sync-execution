@@ -28,10 +28,10 @@ title: Документация
 - [Input and Output][n_inout]
 - [Memory][n_mem]
 - [Construction][n_construction]
-- misc
-- struct
-- user_nodes
-- functions
+- [Miscellaneous][n_misc]
+- [Struct][n_struct]
+
+Дополнительно есть возможность создать собственные узлы или узлы-функции. Об этом можно прочитать в разделе обучения.
 
 [style_tutorial]: {{site.baseurl}}/tutorials/style#content
 
@@ -47,6 +47,8 @@ title: Документация
 [n_inout]: {{site.baseurl}}/docs/nodes/inout#content
 [n_mem]: {{site.baseurl}}/docs/nodes/mem#content
 [n_construction]: {{site.baseurl}}/docs/nodes/construction#content
+[n_misc]: {{site.baseurl}}/docs/nodes/misc#content
+[n_struct]: {{site.baseurl}}/docs/nodes/struct#content
 
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#content

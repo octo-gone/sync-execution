@@ -15,12 +15,21 @@ title: Узлы
     - [Logic][base_logic] - узлы работающие с логикой
     - [Input and Output][base_inout] - узлы работающие с вводом и выводом
     - [Memory][base_mem] - узлы работающие с памятью
+    - [Construction][base_construction] - узлы-циклы и развязки
+    - [Miscellaneous][base_misc] - разное
+
+- Расширенные возможности:
+    - [Struct][struct_nodes] - узлы работающие со структурными переменными в памяти
+    
 
 [base_control]: {{site.baseurl}}/docs/nodes/control#content
 [base_mathematic]: {{site.baseurl}}/docs/nodes/math#content
 [base_logic]: {{site.baseurl}}/docs/nodes/logic#content
 [base_inout]: {{site.baseurl}}/docs/nodes/inout#content
 [base_mem]: {{site.baseurl}}/docs/nodes/mem#content
+[base_construction]: {{site.baseurl}}/docs/nodes/construction#content
+[base_misc]: {{site.baseurl}}/docs/nodes/misc#content
+[struct_nodes]: {{site.baseurl}}/docs/nodes/struct#content
 
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#content
