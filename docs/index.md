@@ -26,9 +26,9 @@ title: Документация
 - [Math][n_mathematic]
 - [Logic][n_logic]
 - [Input and Output][n_inout]
-- construction
+- [Memory][n_mem]
+- [Construction][n_construction]
 - misc
-- memory
 - struct
 - user_nodes
 - functions
@@ -45,6 +45,8 @@ title: Документация
 [n_mathematic]: {{site.baseurl}}/docs/nodes/math#content
 [n_logic]: {{site.baseurl}}/docs/nodes/logic#content
 [n_inout]: {{site.baseurl}}/docs/nodes/inout#content
+[n_mem]: {{site.baseurl}}/docs/nodes/mem#content
+[n_construction]: {{site.baseurl}}/docs/nodes/construction#content
 
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#content

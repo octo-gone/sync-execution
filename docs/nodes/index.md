@@ -14,11 +14,13 @@ title: Узлы
     - [Math][base_mathematic] - узлы работающие с числами
     - [Logic][base_logic] - узлы работающие с логикой
     - [Input and Output][base_inout] - узлы работающие с вводом и выводом
+    - [Memory][base_mem] - узлы работающие с памятью
 
 [base_control]: {{site.baseurl}}/docs/nodes/control#content
 [base_mathematic]: {{site.baseurl}}/docs/nodes/math#content
 [base_logic]: {{site.baseurl}}/docs/nodes/logic#content
 [base_inout]: {{site.baseurl}}/docs/nodes/inout#content
+[base_mem]: {{site.baseurl}}/docs/nodes/mem#content
 
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#content
