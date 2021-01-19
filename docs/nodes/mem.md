@@ -1,7 +1,7 @@
 ---
 layout: default_no_header
-return_page: /docs
-return_title: К документации
+return_page: /docs/nodes
+return_title: К узлам
 title: Memory
 ---
 ## Узлы для работы с памятью
