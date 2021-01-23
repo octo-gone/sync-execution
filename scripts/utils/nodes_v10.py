@@ -1203,7 +1203,7 @@ structure_nodes_info = {
         'inputs_label': ('index', 'value'),
         'outputs': ('ctrl',),
         'outputs_label': ('ctrl',),
-        'inner': 'A-Set',
+        'inner': 'Array\nSet',
         'label': 'array set',
         'tooltip': {
             'label': 'Array Set',
@@ -1223,7 +1223,7 @@ structure_nodes_info = {
         'inputs_label': ('index',),
         'outputs': ('any',),
         'outputs_label': ('value',),
-        'inner': 'A-Get',
+        'inner': 'Array\nGet',
         'label': 'array get',
         'tooltip': {
             'label': 'Array Get',
@@ -1242,7 +1242,7 @@ structure_nodes_info = {
         'inputs_label': ('index', 'value'),
         'outputs': ('any',),
         'outputs_label': ('value',),
-        'inner': 'A-GS',
+        'inner': 'Array\nG&S',
         'label': 'array get and set',
         'tooltip': {
             'label': 'Array Get and Set',
