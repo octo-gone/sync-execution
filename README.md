@@ -1,6 +1,6 @@
 # Sync
 
-[![version badge](https://img.shields.io/badge/Version-0.13.1-daa520.svg)](https://github.com/octo-gone/sync-execution/)  
+[![version badge](https://img.shields.io/badge/Version-0.13.1-daa520.svg)](https://github.com/octo-gone/sync-execution/blob/master/CHANGELOG.md)  
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python_3.8.3-1f425f.svg)](https://www.python.org/)
 
 ### About
