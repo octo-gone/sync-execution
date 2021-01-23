@@ -1,5 +1,9 @@
 # Sync ChangeLog
 All changes since version 0.6.6 are written here
+## 0.13.1 (23.01.2021)
++ Unescape fixed [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/9c28bb1cb4d9baa4429cda05dbaa3ee5f2238c59)
++ Png-image generation fixed [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/4b57f1fd2d939ba0bc2c36ba8b24352ac3a680b5)
++ Minor changes [![](https://img.shields.io/badge/-chore-cea262.svg)](https://github.com/octo-gone/sync-execution/commit/542350d81dfc8cb1269c287baaa2582e06370a51)
 ## 0.13.0 (06.12.2020)
 + String literals checking added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/78923a8b60df738bb97d12e17b2e863d405cc8b8)
 + New node 'warning' added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/5a55db394443347a480b5bedda4c2925aa7df8c6)
