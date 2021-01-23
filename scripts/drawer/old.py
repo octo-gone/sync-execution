@@ -231,9 +231,18 @@ class NodePNG:
 
         if self.inner:
             font = ImageFont.truetype(font_path, self.inner_size)
-            pos = (delta[0] - draw.textsize(self.inner, font=font)[0] / 2 + 150,
-                   delta[1] - draw.textsize(self.inner, font=font)[1] / 2 + 150 - 8)
-            draw.text(pos, self.inner, fill="black", font=font)
+            while draw.textsize(self.inner, font=font)[0] > 200:
+                self.inner_size -= 1
+                font = ImageFont.truetype(font_path, self.inner_size)
+            inner_text_size = draw.textsize(self.inner, font=font)
+            split_text = self.inner.split("\n")
+            row_count = len(split_text)
+            y_pos_start = inner_text_size[1]
+            for it, text in enumerate(split_text):
+                y_pos = y_pos_start - it * (inner_text_size[1] / row_count) * 2
+                pos = (delta[0] - draw.textsize(text, font=font)[0] / 2 + 150,
+                       delta[1] - y_pos / 2 + 150 - 8)
+                draw.text(pos, text, fill="black", font=font)
 
         if self.time:
             font = ImageFont.truetype(font_path, self.time_size)
