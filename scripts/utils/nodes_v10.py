@@ -1493,7 +1493,7 @@ structure_nodes_info = {
     },
     'matrix set': {
         'inputs': ('int', 'int', 'sep', 'any'),
-        'inputs_label': ('index y', 'index x', 'sep', 'value'),
+        'inputs_label': ('index y', 'index x', 'value'),
         'outputs': ('ctrl',),
         'outputs_label': ('ctrl',),
         'inner': 'Matrix\nSet',
@@ -1534,7 +1534,7 @@ structure_nodes_info = {
     },
     'matrix get and set': {
         'inputs': ('int', 'int', 'sep', 'any'),
-        'inputs_label': ('index y', 'index x', 'sep', 'value'),
+        'inputs_label': ('index y', 'index x', 'value'),
         'outputs': ('any',),
         'outputs_label': ('value',),
         'inner': 'Matrix\nG&S',
