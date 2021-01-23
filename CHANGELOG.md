@@ -3,7 +3,7 @@ All changes since version 0.6.6 are written here
 ## 0.13.0 (06.12.2020)
 + String literals checking added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/78923a8b60df738bb97d12e17b2e863d405cc8b8)
 + New node 'warning' added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/5a55db394443347a480b5bedda4c2925aa7df8c6)
-+ Info image generation aded [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/3d1e2cf359a5fe60a14ddf9a79b6f20faf5a1f64)
++ Info image generation added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/3d1e2cf359a5fe60a14ddf9a79b6f20faf5a1f64)
 + Minor fixes [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/519cfb06f367305a39c0dfb55264eea7a656c115)
 + User nodes wiring fixed [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/63881d94531c89736f31b9c954ee60478fb7161b)
 + Function connection creating fixed [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/7568cdea7a932e41a8c92b58917744081dd21b7e)

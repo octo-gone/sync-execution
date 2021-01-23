@@ -1,13 +1,13 @@
 import re
 import math
+import sys
+import inspect
 from scripts.utils import nodes_v10 as nodes_info
 from scripts.utils import logger
 from scripts.utils import coder
 from scripts.constants import *
 from xml.sax.saxutils import unescape
 from scripts.nodes import user_nodes
-import sys
-import inspect
 
 # half of distance between small connectors
 r = 1/6
@@ -129,7 +129,7 @@ def parse(file_path):
 
     user_classes = inspect.getmembers(sys.modules[user_nodes.__name__], inspect.isclass)
     for class_name, class_constr in user_classes:
-        nodes_info.nodes_info.update({class_constr.name:class_constr.desc})
+        nodes_info.nodes_info.update({class_constr.name: class_constr.desc})
 
     with open(file_path, "r", encoding="utf-8") as file:
         data = unescape("".join(file.read().split("\n")))
