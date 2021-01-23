@@ -1,6 +1,7 @@
 from scripts.nodes import base
 from scripts.nodes.base import ACTIVE, WAITING, INACTIVE
 from scripts.utils import utils, logger
+from xml.sax import saxutils
 import re
 
 
@@ -28,6 +29,12 @@ class NodePrintCtrl(base.Node):
             value = dict(variables)
         elif utils.program_values(value, True):
             value = utils.program_values(value)
+        elif value.endswith("$var"):
+            for var in self.variables.items():
+                if var[0].startswith(f"{self.scope}$"):
+                    if var[0][len(f"{self.scope}$"):] == value[:-4]:
+                        value = var[1]
+                        break
         else:
             value = self.get_value(0)
             value = value if value is not None else self.desc_value
@@ -104,6 +111,7 @@ class NodeInput(base.Node):
         After taking value from input, function saves it to output and changes state to ACTIVE.
         """
         pattern = r"{(?P<var>[^\{\}]+?)(?:\$(?P<type>[^\{\}]+?))?}"
+        self.desc_value = saxutils.unescape(self.desc_value)
         for match in re.finditer(pattern, self.desc_value):
             var_name = f"{self.scope}$" + match["var"]
             var_type = match["type"]
