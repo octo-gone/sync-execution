@@ -1,6 +1,7 @@
 from scripts.utils import utils, exceptions, logger
 from scripts.nodes import base, func
 from scripts import module_loader
+import random
 
 
 class NodeGen:
@@ -68,16 +69,19 @@ def run(n, w, s, limit=10 ** 5):
     :param limit: limit number of updates
     """
     create_structure(n, w, s)
-    if "run" not in map(lambda x: x.name, base.Node.nodes.values()):
+    if "run" not in map(lambda x: x.name, base.Node.nodes.values()) and \
+            "unit test" not in map(lambda x: x.name, base.Node.nodes.values()):
         logger.log_error("no 'start' node")
     logger.log_success("program started")
     for utils.iteration in range(limit):
         try:
-            for node in base.Node.nodes.values():
+            nodes = list(base.Node.nodes.values())
+            random.shuffle(nodes)
+            for node in nodes:
                 node.update(base.INACTIVE)
-            for node in base.Node.nodes.values():
+            for node in nodes:
                 node.update(base.WAITING)
-            for node in base.Node.nodes.values():
+            for node in nodes:
                 node.update(base.ACTIVE)
         except exceptions.StopSync:
             logger.log_success("program stopped via node 'stop'")
@@ -88,4 +92,6 @@ def run(n, w, s, limit=10 ** 5):
         for node in base.Node.nodes.values():
             if node.state == base.WAITING:
                 active_nodes.append(node)
+        if base.Node.ut_file is not None:
+            base.Node.ut_file.close()
         logger.log_error(f"iteration overstepped the limit\n{active_nodes}")
