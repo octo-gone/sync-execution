@@ -1,5 +1,15 @@
 # Sync ChangeLog
 All changes since version 0.6.6 are written here
+## 0.14.0 Aliases (29.01.2021)
++ Scripts updated for module loader [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/077836c566e846647ff89e8b137546f946556cfa)
++ Module loader added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/2522e17f56fd372f110672fad135d849ef39f08a)
++ Settings added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/c29d5535db65ba897522b8a00f76afe4d0613584)
++ Added aliases for nodes [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/6d5baf2a55c118db757fd170eb242bc4072516fe)
++ README version badge link improved [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/0681a2d24d8d3bb1e53cb43653772b00f7095c8d)
++ Missing node NOT added [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/e5c62623a5af482682e649daf2886e7c6338db03)
++ Matrix labeling fixed [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/7a669925c10b3ff32a0ae8d4c1d11e46fff1d458)
++ Array naming fixed [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/b3867db239e99a183d259fdd89a42de0c0610a4f)
++ Settings and readme updated [![](https://img.shields.io/badge/-chore-cea262.svg)](https://github.com/octo-gone/sync-execution/commit/f35d0fd36d2ea64678ea6f76aaf69a8069c3be8f)
 ## 0.13.1 (23.01.2021)
 + Unescape fixed [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/9c28bb1cb4d9baa4429cda05dbaa3ee5f2238c59)
 + Png-image generation fixed [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/4b57f1fd2d939ba0bc2c36ba8b24352ac3a680b5)
