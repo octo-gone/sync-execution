@@ -4,7 +4,7 @@ from scripts.nodes.base import ACTIVE, WAITING, INACTIVE
 
 
 class NodeCount16(base.Node):
-    name = "count 16"
+    aliases = ("count 16",)
     desc = {
         'inner': 'C16',
         'label': 'count 16',

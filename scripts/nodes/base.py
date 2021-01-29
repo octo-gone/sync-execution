@@ -27,6 +27,8 @@ class Node:
     variables = {}
     struct_variables = {}
     nodes = {}
+    aliases = ()
+    desc = {}
 
     def __init__(self, data):
         """
@@ -300,9 +302,9 @@ class Wire:
 
         if self.source is None and self.target is None:
             logger.log_warning("no source and target nodes found")
-        if self.source is None:
+        elif self.source is None:
             logger.log_error(f"no source node found for wire with target '{self.target.name}/{self.target.id}'")
-        if self.target is None:
+        elif self.target is None:
             logger.log_error(f"no target node found for wire with source '{self.source.name}/{self.source.id}'")
 
         self.exit = data["exitX"], data["exitY"]
