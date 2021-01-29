@@ -104,6 +104,31 @@ return_title: К узлам
 
 <img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/misc/10_join.png"/>
 
+### Unit Test
+
+**Unit Test** - узел, позволяющий создавать автоматические проверки для программы. Структура теста простая: первой 
+строкой идет разделитель, который делит последовательность ввода и последовательность вывода. Разделителем может быть символ или строка.
+После первой строки идет сам тест. Узел проверяет каждую строку и добавляет в список ввода данных (чем выше строка, тем раньше она введется в программу).
+Если строка является разделителем, то узел добавляет её в список вывода данных. 
+
+<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/misc/11_unit_test.png"/>
+
+Например, следующий тест отправит в программу два числа (2 и 3), а от программы попросит одно (6):
+
+```
+?
+2
+3
+?
+6
+```
+
+**Еще один пример:**
+
+<img src="{{site.baseurl}}/resources/docs/nodes/misc/12_unit_test_example.png"/>
+
+<img src="{{site.baseurl}}/resources/docs/nodes/misc/13_unit_test_result.png"/>
+
 
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#content
