@@ -77,7 +77,7 @@ title: Продвинутое создание узлов
 
 Часто используемые атрибуты класса:
 
-- **name** - имя узла
+- **aliases** - псевдонимы узла на диаграмме
 - **desc_value** - описание узла на диаграмме
 - **inputs** - список узлов подключенных ко входам
 - **outputs** - список узлов подключенных к выходам
@@ -94,7 +94,7 @@ title: Продвинутое создание узлов
 Базовая структура любого пользовательского узла должна выглядеть следующим образом:
 ```python
 class Node<ИмяКлассаУзла>(base.Node):
-    name = "..."  # Наименование узла
+    aliases = ("...", "...")  # Наименования узла
     desc = {...}  # Описание узла
 
     def update_waiting(self):
@@ -126,7 +126,7 @@ class Node<ИмяКлассаУзла>(base.Node):
 
 ```python
 class NodeExample1(base.Node):
-    name = "example_1"
+    aliases = ("example_1",)
 
     def update_waiting(self):
         # получение значений
@@ -147,7 +147,7 @@ class NodeExample1(base.Node):
 
 ```python
 class NodeExample1(base.Node):
-    name = "example_1"
+    aliases = ("example_1",)
 
     def update_waiting(self):
         value_0 = self.get_value(0)
@@ -167,7 +167,7 @@ class NodeExample1(base.Node):
 
 ```python
 class NodeExample1(base.Node):
-    name = "example_1"
+    aliases = ("example_1",)
 
     def update_waiting(self):
         value_0 = self.get_value(0)
@@ -195,7 +195,7 @@ class NodeExample1(base.Node):
 
 ```python
 class NodeExample2(base.Node):
-    name = "example_2"
+    aliases = ("example_2",)
 
     def update_waiting(self):
         value_0 = self.get_value(0)
@@ -211,7 +211,7 @@ class NodeExample2(base.Node):
 
 ```python
 class NodeExample2(base.Node):
-    name = "example_2"
+    aliases = ("example_2",)
 
     def update_waiting(self):
         value_0 = self.get_value(0)
@@ -231,6 +231,7 @@ class NodeInv(base.Node):
     """
     Class for node 'inv' (inverse). Node that returns number with different number sign.
     """
+    aliases = ("inv",)
 
     def update_waiting(self):
         """
@@ -263,6 +264,8 @@ class NodeInv(base.Node):
 
 ```python
 class NodePrint(base.Node):
+    aliases = ("print",)
+
     def update_waiting(self):
         value = self.get_value(0)
         value = value if value is not None else self.desc_value
@@ -279,6 +282,8 @@ class NodePrint(base.Node):
 
 ```python
 class NodeVar(base.Node):
+    aliases = ("var",)
+
     def __init__(self, data):
         super().__init__(data)
         self.value_type = None
@@ -442,7 +447,7 @@ generate_library(library_name, nodes_info, svg_save_folder, lib_save_folder)
 
 ```python
 class NodeCount16(base.Node):
-    name = "count 16"
+    aliases = ("count 16",)
     desc = {
         'inner': 'C16',
         'label': 'count 16',
@@ -525,7 +530,7 @@ class NodeCount16(base.Node):
 
 ```python
 class NodeCount16(base.Node):
-    name = "count 16"
+    aliases = ("count 16",)
     desc = {
         'inner': 'C16',
         'label': 'count 16',

@@ -13,7 +13,14 @@ return_title: К узлам
 **Bool** - ~~булочка~~ узел-конвертор, конвертирующий любое входное значение в логический эквивалент по правилу отсутствия:
 при пустой строке, нуле или None будет возвращен False, при большинстве остальных случаев будет True. 
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/logic/01_bool.png"/>
+<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/logic/00_bool.png"/>
+
+### Not
+
+**Not** - узел-инвертор, конвертирующий любое входное значение в логический эквивалент и инвертирующий его значение. Если было значение True, 
+выходное значение будет False, аналогично False - True.
+
+<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/logic/01_not.png"/>
 
 ### And
 

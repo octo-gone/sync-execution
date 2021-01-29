@@ -264,7 +264,7 @@ generate_library(library_name, nodes_info, svg_save_folder, lib_save_folder)
 > Последней строчкой `generate_base_libs` является функция обновления стандартных библиотек 
 
 [github]: https://github.com/octo-gone/sync-execution
-[advanced_creating_tutorial]:
+[advanced_creating_tutorial]: {{site.baseurl}}/tutorials/advanced-creating#content
 
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#content
