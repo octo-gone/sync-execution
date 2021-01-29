@@ -1164,6 +1164,20 @@ base_nodes_info = {
             ],
             'adds': 'Форматирует данные из структурной переменной указанной в описании Узла. Если используется второй вход, то формат происходит по значению из него. Формат имеет следующую структуру: {индекс в массиве, ключ словаря или 0}. Возможно использование спецификации - {индекс:спецификация}. Спецификация может быть следующей: [[[символ]<|>|^]ширина][.точность][f|%|e] (квадратныые скобки обозначают необязательность, вертикальная черта - возможность выбора между указанными значениями)',
         }
+    },
+    "unit test": {
+        'inner': 'Unit\nTest',
+        'label': 'unit test',
+        'inputs': (),
+        'outputs': ('ctrl',),
+        'tooltip': {
+            'label': 'Unit Test',
+            'desc': 'Создание тестов и запуск программы',
+            'outputs': [
+                ('Выход', 'Активирующий выход'),
+            ],
+            'adds': 'В описании к Узлу должно быть указаны значения входных данных, которые будет обрабатывать узел Input',
+        }
     }
 }
 not_created_nodes_info = {
@@ -1552,7 +1566,7 @@ structure_nodes_info = {
             ],
             'adds': 'В описании к Узлу должно быть указано имя переменной. Если не указать значение элемента, то Узел вернет элемент без изменения',
         }
-    },
+    }
 }
 
 nodes_info = {}
@@ -1565,7 +1579,7 @@ base_nodes_lib_order = ['run', 'stop', 'const', 'const ctrl', 'input', 'print', 
                         'greater or equal', 'less', 'less or equal', 'inc', 'dec', 'abs', 'div', 'mod', 'inv', 'trunc',
                         'round', 'for', 'counter', 'while', 'in', 'for ext', 'foreach', 'merge', 'delay',
                         'value switch', 'ctrl', 'timer', 'wait', 'type', 'get type', 'error', 'warning', 'random',
-                        'random int', 'random num', 'random seed']
+                        'random int', 'random num', 'random seed', 'unit test']
 structure_nodes_lib_order = ['length', 'array create', 'array set', 'array get', 'array get and set', 'list create',
                              'list set', 'list get', 'list get and set', 'list remove', 'dict create', 'dict insert',
                              'dict find', 'dict insert and find', 'dict remove', 'matrix create', 'matrix set',

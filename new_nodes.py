@@ -104,12 +104,12 @@ if __name__ == '__main__':
     svg_save_folder = "resources/generated/svg/"
     lib_save_folder = "resources/libraries/"
 
-    library_name = "wire"
+    library_name = "unit_testing"
     node = {
-        'inner': '~',
-        'label': 'wire',
-        'inputs': ('any',),
-        'outputs': ('any',)
+        'inner': 'UT',
+        'label': 'unit test',
+        'inputs': (),
+        'outputs': ('ctrl',)
     }
     nodes_info = [
         node
@@ -119,4 +119,4 @@ if __name__ == '__main__':
     # generate_node(node, svg_save_folder)
     # generate_function(node, svg_save_folder, lib_save_folder)
     # generate_library(library_name, nodes_info, svg_save_folder, lib_save_folder)
-    # generate_base_libs(svg_save_folder, "resources/")
+    generate_base_libs(svg_save_folder, "resources/")

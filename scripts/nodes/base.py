@@ -29,6 +29,8 @@ class Node:
     nodes = {}
     aliases = ()
     desc = {}
+    ut_send = None
+    ut_catch = None
 
     def __init__(self, data):
         """

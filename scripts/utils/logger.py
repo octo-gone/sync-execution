@@ -63,10 +63,15 @@ class Color:
         return text
 
     @classmethod
-    def colored_input(cls, prompt, fg="yellow", bg=None):
+    def colored_input(cls, prompt, fg="yellow", bg=None, fake=None):
         fg = "\33[38;5;" + str(cls.colors[fg]) + "m" if fg is not None else ""
         bg = "\33[48;5;" + str(cls.colors[bg]) + "m" if bg is not None else ""
-        value = input(prompt + fg + bg)
+        italic = "\33[3m"
+        if fake is not None:
+            print(prompt + fg + bg + italic + fake)
+            value = fake
+        else:
+            value = input(prompt + fg + bg + italic)
         print("\33[0m", end="")
         return value
 
