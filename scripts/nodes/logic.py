@@ -8,6 +8,7 @@ class NodeLogicA(base.Node):
     Class for nodes 'and', 'or', 'not and', 'not or', 'equal'.
     Operators with multiple input.
     """
+    aliases = ("and", "or", "not and", "not or", "equal")
 
     def __init__(self, data):
         """
@@ -58,6 +59,7 @@ class NodeLogicB(base.Node):
     Class for nodes 'greater', 'greater or equal', 'less', 'less or equal', 'not equal', 'xor'.
     Operators with two inputs.
     """
+    aliases = ("greater", "greater or equal", "less", "less or equal", "not equal", "xor")
 
     def update_active(self):
         """
@@ -95,6 +97,7 @@ class NodeIn(base.Node):
     Class for node 'in' or 'contains'. Node checks whether
     value is in list or in structure variable.
     """
+    aliases = ("in",)
 
     def __init__(self, data):
         """
@@ -165,6 +168,7 @@ class NodeBool(base.Node):
     """
     Class for node 'bool'. Node converts any value to boolean value.
     """
+    aliases = ("bool",)
 
     def update_active(self):
         """
@@ -191,4 +195,32 @@ class NodeBool(base.Node):
             self.set_value(False, 0)
         else:
             self.set_value(bool(self.get_value(0)), 0)
+        self.state = ACTIVE
+
+
+class NodeNot(base.Node):
+    """
+    Class for node 'not'. Node converts any value to boolean value and return inverted value.
+    """
+    aliases = ("not",)
+
+    def update_active(self):
+        """
+        Update function, runs if state is ACTIVE.
+
+        Resets node and activates next nodes.
+        """
+        self.set_active(0)
+        self.state = INACTIVE
+
+    def update_waiting(self):
+        """
+        Update function, runs if state is WAITING.
+
+        If value is True then output value will be False, else True.
+        """
+        if self.get_value(0) is None:
+            self.set_value(True, 0)
+        else:
+            self.set_value(not bool(self.get_value(0)), 0)
         self.state = ACTIVE
