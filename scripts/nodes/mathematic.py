@@ -7,6 +7,7 @@ class NodeAbs(base.Node):
     """
     Class for node 'abs'. Node that returns absolute value.
     """
+    aliases = ("abs",)
 
     def update_waiting(self):
         """
@@ -33,6 +34,7 @@ class NodeAdd(base.Node):
     """
     Class for node 'add'. Node that returns sum of input values.
     """
+    aliases = ("add",)
 
     def update_active(self):
         """
@@ -58,6 +60,7 @@ class NodeDec(base.Node):
     """
     Class for node 'dec' (decrement). Node that returns decremented value (input value - 1).
     """
+    aliases = ("dec",)
 
     def update_waiting(self):
         """
@@ -84,6 +87,7 @@ class NodeDivision(base.Node):
     Class for node 'division'. Node that returns division
     between dividend and divider (divisor).
     """
+    aliases = ("division",)
 
     def update_active(self):
         """
@@ -115,6 +119,7 @@ class NodeExp(base.Node):
     Class for node 'exp' (exponentiation/involution). Node that returns
     first value multiplied second value times.
     """
+    aliases = ("exp",)
 
     def update_active(self):
         """
@@ -141,6 +146,7 @@ class NodeInc(base.Node):
     """
     Class for node 'inc' (increment). Node that returns incremented value (input value + 1).
     """
+    aliases = ("inc",)
 
     def update_waiting(self):
         """
@@ -166,6 +172,7 @@ class NodeTrunc(base.Node):
     """
     Class for node 'trunc' (truncate). Node that returns only integer part of a number.
     """
+    aliases = ("trunc",)
 
     def update_waiting(self):
         """
@@ -191,6 +198,7 @@ class NodeInv(base.Node):
     """
     Class for node 'inv' (inverse). Node that returns number with different number sign.
     """
+    aliases = ("inv",)
 
     def update_waiting(self):
         """
@@ -216,6 +224,7 @@ class NodeMult(base.Node):
     """
     Class for node 'mult' (multiplication). Node that returns numbers multiplied by each other.
     """
+    aliases = ("mult",)
 
     def update_active(self):
         """
@@ -244,6 +253,7 @@ class NodeRound(base.Node):
     """
     Class for node 'round'. Node that returns rounded value of input number.
     """
+    aliases = ("round",)
 
     def update_active(self):
         """
@@ -274,6 +284,7 @@ class NodeSub(base.Node):
     """
     Class for node 'sub' (subtraction). Node that returns first value reduced by second value.
     """
+    aliases = ("sub",)
 
     def update_active(self):
         """
@@ -301,6 +312,7 @@ class NodeMod(base.Node):
     Class for node 'mod'. Node that returns reminder from division
     between dividend and divider (divisor).
     """
+    aliases = ("mod",)
 
     def update_active(self):
         """
@@ -332,6 +344,7 @@ class NodeDiv(base.Node):
     Class for node 'div'. Node that returns integer value from division
     between dividend and divider (divisor).
     """
+    aliases = ("div",)
 
     def update_active(self):
         """

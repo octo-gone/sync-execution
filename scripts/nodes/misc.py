@@ -9,6 +9,7 @@ class NodeValueSwitch(base.Node):
     Class for node 'value switch'. Node that allows connecting multiple nodes to single input.
     It activates next node without delay and sets value to output.
     """
+    aliases = ("value switch",)
 
     def update_waiting(self):
         """
@@ -45,6 +46,7 @@ class NodeGetType(base.Node):
     Class for node 'get type'. Node can't be activated.
     Node generates values in INACTIVE update function and saves them to output.
     """
+    aliases = ("get type",)
 
     def __init__(self, data):
         """
@@ -91,6 +93,7 @@ class NodeType(base.Node):
     """
     Class for node 'type'. Node saves to output type of input data.
     """
+    aliases = ("type",)
 
     def update_waiting(self):
         """
@@ -116,6 +119,7 @@ class NodeRandom(base.Node):
     Class for node 'random'. Basic random node that
     outputs random value in range [0, 1)
     """
+    aliases = ("random",)
 
     def update_waiting(self):
         """
@@ -141,6 +145,7 @@ class NodeRandomInt(base.Node):
     Class for node 'random int'. Random node that
     outputs random integer value in settable range.
     """
+    aliases = ("random int",)
 
     def update_waiting(self):
         """
@@ -167,6 +172,7 @@ class NodeRandomNum(base.Node):
     Class for node 'random int'. Random node that
     outputs random number value in settable range.
     """
+    aliases = ("random num",)
 
     def update_waiting(self):
         """
@@ -194,6 +200,7 @@ class NodeRandomSeed(base.Node):
     Class for node 'random int'. Special node that allows to change
     initial value of a pseudo random number generator.
     """
+    aliases = ("random seed",)
 
     def update_waiting(self):
         """
@@ -218,6 +225,7 @@ class NodeJoin(base.Node):
     """
     Class for node "join". Node return joined with specified symbol strings from structured variables.
     """
+    aliases = ("join",)
 
     def update_waiting(self):
         """
@@ -262,6 +270,7 @@ class NodeConcatenate(base.Node):
     """
     Class for node "concatenate". Node return concatenated strings.
     """
+    aliases = ("concatenate",)
 
     def update_waiting(self):
         """
@@ -287,6 +296,7 @@ class NodeFormat(base.Node):
     """
     Class for node "format". Node return formatted strings.
     """
+    aliases = ("format",)
 
     def update_waiting(self):
         """

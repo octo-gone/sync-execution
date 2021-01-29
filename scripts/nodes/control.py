@@ -8,6 +8,7 @@ class NodeRun(base.Node):
     Class for node 'run'. Head node that generates signal
     at the beginning of program.
     """
+    aliases = ("run",)
 
     def __init__(self, data):
         """
@@ -38,6 +39,7 @@ class NodeStop(base.Node):
     """
     Class for node 'stop'. Node that stops program.
     """
+    aliases = ("stop",)
 
     def update_waiting(self):
         """
@@ -62,6 +64,7 @@ class NodeWait(base.Node):
     Class for node 'wait'. Node waits all signals from
     input nodes (or at least one if variant is 'any')
     """
+    aliases = ("wait",)
 
     def __init__(self, data):
         """
@@ -118,6 +121,7 @@ class NodeMerge(base.Node):
     Class for node 'merge'. Node take value from 'value' input and
     take active signal only from 'ctrl' input.
     """
+    aliases = ("merge",)
 
     def update_active(self):
         """
@@ -152,6 +156,7 @@ class NodeCtrl(base.Node):
     Class for node 'ctrl'. Node has constant empty output_values.
     That guarantees that only signal will be taken from previous node.
     """
+    aliases = ("ctrl",)
 
     def update_active(self):
         """
@@ -177,6 +182,7 @@ class NodeDelay(base.Node):
     node reduces delay_counter. If delay_counter is equal to 0
     then node switches to ACTIVE and send signal.
     """
+    aliases = ("delay",)
 
     def __init__(self, data):
         """
@@ -231,6 +237,7 @@ class NodeTimer(base.Node):
     node updated timer counter. If activation signal was received
     from 'stop' input then timer return counter value.
     """
+    aliases = ("timer",)
 
     def __init__(self, data):
         """
@@ -282,6 +289,7 @@ class NodeError(base.Node):
     Class for node 'error'. If a signal was received, node
     will cause an error with information specified in the node description (desc_value).
     """
+    aliases = ("error",)
 
     def update_waiting(self):
         """
@@ -305,6 +313,7 @@ class NodeWarning(base.Node):
     Class for node 'warning'. If a signal was received, node
     will cause a warning with information specified in the node description (desc_value).
     """
+    aliases = ("warning",)
 
     def update_waiting(self):
         """

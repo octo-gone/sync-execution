@@ -9,6 +9,7 @@ class NodePrintCtrl(base.Node):
     """
     Class for node 'print with ctrl'. Print (output) node with subsequent activation.
     """
+    aliases = ("print ctrl",)
 
     def update_waiting(self):
         """
@@ -55,6 +56,7 @@ class NodePrint(base.Node):
     """
     Class for node 'print'. Print (output) node.
     """
+    aliases = ("print",)
 
     def update_waiting(self):
         """
@@ -95,6 +97,7 @@ class NodeInput(base.Node):
     Class for node 'input'. Input node with settable prompt for user.
     It is possible to show value from program inside of prompt by using format string.
     """
+    aliases = ("input",)
 
     def update_waiting(self):
         """

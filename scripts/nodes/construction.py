@@ -19,6 +19,7 @@ class NodeFor(base.Node):
         BOUND - waits init values for iteration (bound);
         NEXT - received signal from 'increment' input.
     """
+    aliases = ("for", )
 
     def __init__(self, data):
         """
@@ -114,6 +115,7 @@ class NodeForExt(base.Node):
         BOUND - waits init values for iteration;
         NEXT - received signal from 'increment' input.
     """
+    aliases = ("for ext",)
 
     def __init__(self, data):
         """
@@ -209,6 +211,7 @@ class NodeIf(base.Node):
     Substates:
         READY - ready to activate next node;
     """
+    aliases = ("if",)
 
     def __init__(self, data):
         """
@@ -272,6 +275,7 @@ class NodeWhile(base.Node):
         BOUND - waits condition for iteration;
         NEXT - received signal from 'next' input.
     """
+    aliases = ("while",)
 
     def __init__(self, data):
         """
@@ -345,6 +349,7 @@ class NodeCounter(base.Node):
         BOUND - waits init values for iteration;
         NEXT - received signal from 'next' input.
     """
+    aliases = ("counter",)
 
     def __init__(self, data):
         """
@@ -442,6 +447,7 @@ class NodeForeach(base.Node):
         BOUND - waits condition for iteration;
         NEXT - received signal from 'next' input.
     """
+    aliases = ("foreach",)
 
     def __init__(self, data):
         """
@@ -559,6 +565,7 @@ class NodeSplitString(base.Node):
         BOUND - waits condition for iteration;
         NEXT - received signal from 'next' input.
     """
+    aliases = ("split string",)
 
     def __init__(self, data):
         """

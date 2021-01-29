@@ -22,6 +22,7 @@ class NodeArrayCreate(base.Node):
     """
     Class for node 'array create'. Constructor of structured variable of type 'array'.
     """
+    aliases = ("array create",)
 
     def __init__(self, data):
         """
@@ -80,6 +81,7 @@ class NodeArrayGet(base.Node):
     """
     Class for node 'array get'. Node that has ability to take value from array variable.
     """
+    aliases = ("array get",)
 
     def update_waiting(self):
         """
@@ -117,6 +119,7 @@ class NodeArraySet(base.Node):
     """
     Class for node 'array set'. Node that has ability to set value to array variable.
     """
+    aliases = ("array set",)
 
     def update_waiting(self):
         """
@@ -158,6 +161,7 @@ class NodeArrayGetSet(base.Node):
     Class for node 'array get and set'. Node that has ability to take value
     from array variable and to set value to array variable.
     """
+    aliases = ("array get and set",)
 
     def update_waiting(self):
         """
@@ -206,6 +210,7 @@ class NodeListCreate(base.Node):
     """
     Class for node 'list create'. Constructor of structured variable of type 'list'.
     """
+    aliases = ("list create",)
 
     def update_waiting(self):
         """
@@ -242,6 +247,7 @@ class NodeListGet(base.Node):
     """
     Class for node 'list get'. Node that has ability to take value from list variable.
     """
+    aliases = ("list get",)
 
     def update_waiting(self):
         """
@@ -280,6 +286,7 @@ class NodeListSet(base.Node):
     """
     Class for node 'list get and set'. Node that has ability to set value to list variable.
     """
+    aliases = ("list set",)
 
     def update_waiting(self):
         """
@@ -326,6 +333,7 @@ class NodeListGetSet(base.Node):
     Class for node 'list get and set'. Node that has ability to take value
     from list variable and to set value to list variable.
     """
+    aliases = ("list get and set",)
 
     def update_waiting(self):
         """
@@ -380,6 +388,7 @@ class NodeListRemove(base.Node):
     """
     Class for node 'list remove'. Node that has ability to remove value from list variable.
     """
+    aliases = ("list remove",)
 
     def update_waiting(self):
         """
@@ -418,6 +427,7 @@ class NodeLen(base.Node):
     """
     Class for node "len" (get length). Node return length of structured variables.
     """
+    aliases = ("length",)
 
     def update_waiting(self):
         """
@@ -450,6 +460,7 @@ class NodeMatrixCreate(base.Node):
     """
     Class for node 'matrix create'. Constructor of structured variable of type 'matrix'.
     """
+    aliases = ("matrix create",)
 
     def __init__(self, data):
         """
@@ -510,6 +521,7 @@ class NodeMatrixGet(base.Node):
     """
     Class for node 'matrix get'. Node that has ability to take value from matrix variable.
     """
+    aliases = ("matrix get",)
 
     def update_waiting(self):
         """
@@ -549,6 +561,7 @@ class NodeMatrixSet(base.Node):
     """
     Class for node 'matrix set'. Node that has ability to set value to matrix variable.
     """
+    aliases = ("matrix set",)
 
     def update_waiting(self):
         """
@@ -592,6 +605,7 @@ class NodeMatrixGetSet(base.Node):
     Class for node 'matrix get and set'. Node that has ability to take value
     from matrix variable and to set value to matrix variable.
     """
+    aliases = ("matrix get and set",)
 
     def update_waiting(self):
         """
@@ -646,6 +660,7 @@ class NodeDictCreate(base.Node):
     """
     Class for node 'dict create'. Constructor of structured variable of type 'dictionary'.
     """
+    aliases = ("dict create",)
 
     def update_waiting(self):
         """
@@ -699,6 +714,7 @@ class NodeDictInsert(base.Node):
     """
     Class for node 'dict insert'. Node that has ability to insert pair into dictionary variable.
     """
+    aliases = ("dict insert",)
 
     def update_waiting(self):
         """
@@ -737,6 +753,7 @@ class NodeDictFind(base.Node):
     Class for node 'dict find'. Node that has ability to find pair and
     output value from dictionary variable.
     """
+    aliases = ("dict find",)
 
     def update_waiting(self):
         """
@@ -774,6 +791,7 @@ class NodeDictInsertFind(base.Node):
     Class for node 'dict insert and find'. Node that has ability to insert pair
     into dictionary variable and to find pair and output value from dictionary variable.
     """
+    aliases = ("dict insert and find",)
 
     def update_waiting(self):
         """
@@ -828,6 +846,7 @@ class NodeDictRemove(base.Node):
     """
     Class for node 'dict remove'. Node that has ability to remove pair from dictionary variable.
     """
+    aliases = ("dict remove",)
 
     def update_waiting(self):
         """

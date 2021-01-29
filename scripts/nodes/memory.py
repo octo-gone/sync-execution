@@ -23,6 +23,7 @@ class NodeConst(base.Node):
     node description (desc_value). It understands several
     keywords and math constants (Pi).
     """
+    aliases = ("const",)
 
     def __init__(self, data):
         """
@@ -73,12 +74,13 @@ class NodeConst(base.Node):
                 self.set_value(utils.coercion(value), 0)
 
 
-class NodeConstCtrl(NodeConst):
+class NodeConstCtrl(NodeConst, base.Node):
     """
     Class for node 'constant with ctrl'. Node with output that based on
     node description (desc_value). It understands several
     keywords and math constants (Pi). Activates by input signal.
     """
+    aliases = ("const ctrl",)
 
     def update_waiting(self):
         """
@@ -111,6 +113,7 @@ class NodeVar(base.Node):
     Class for node 'variable'. Node that manages variable with
     ability to set value to variable and get value from variable.
     """
+    aliases = ("var",)
 
     def __init__(self, data):
         """
@@ -185,6 +188,7 @@ class NodeVarGet(base.Node):
     Class for node 'variable get'. Node that manages variable with
     ability to get value from variable.
     """
+    aliases = ("var get",)
 
     def __init__(self, data):
         """
@@ -246,6 +250,7 @@ class NodeVarSet(base.Node):
     Class for node 'variable set'. Node that manages variable with
     ability to set value to variable.
     """
+    aliases = ("var set",)
 
     def __init__(self, data):
         """
