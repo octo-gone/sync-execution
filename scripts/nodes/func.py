@@ -4,7 +4,7 @@ from scripts.utils import logger
 import abc
 
 
-# TODO: not working!!!
+# TODO: not working as expected!!!
 class NodeFunction(base.Node, abc.ABC):
     """
     Class for function creation constructions. It has several class variables:
