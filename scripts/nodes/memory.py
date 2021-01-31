@@ -66,12 +66,7 @@ class NodeConst(base.Node):
         if self.value_type is not None:
             self.set_value(self.value_type(value), 0)
         else:
-            if value.startswith("'") and value.endswith("'"):
-                self.set_value(utils.Char(value[1:-1]), 0)
-            elif value.startswith('"') and value.endswith('"'):
-                self.set_value(str(value[1:-1]), 0)
-            else:
-                self.set_value(utils.coercion(value), 0)
+            self.set_value(utils.coercion(value), 0)
 
 
 class NodeConstCtrl(NodeConst, base.Node):
@@ -90,10 +85,8 @@ class NodeConstCtrl(NodeConst, base.Node):
         and saves with specified type to output.
         """
         value = self.desc_value
-        if value.startswith("'") and value.endswith("'"):
-            self.set_value(utils.Char(value[1:-1]), 0)
-        elif value.startswith('"') and value.endswith('"'):
-            self.set_value(str(value[1:-1]), 0)
+        if self.value_type is not None:
+            self.set_value(self.value_type(value), 0)
         else:
             self.set_value(utils.coercion(value), 0)
         self.state = ACTIVE
@@ -135,7 +128,7 @@ class NodeVar(base.Node):
         """
         Update function, runs if state is INACTIVE.
 
-        If variable was created then function sets value to output.
+        If variable created then function sets value to output.
         """
         var_name = f"{self.scope}$" + self.desc_value
         if var_name in self.variables:

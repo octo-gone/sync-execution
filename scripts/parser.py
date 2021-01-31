@@ -1,4 +1,5 @@
 import re
+import os
 import math
 from scripts.utils import nodes_v10 as nodes_info
 from scripts.utils import logger
@@ -131,9 +132,14 @@ def parse(file_path):
                 alias: node_class.desc
             })
 
-    with open(file_path, "r", encoding="utf-8") as file:
-        data = unescape("".join(file.read().split("\n")))
-        data = "'".join(data.split("&#39;"))
+    if os.path.exists(file_path):
+        with open(file_path, "r", encoding="utf-8") as file:
+            data = unescape("".join(file.read().split("\n")))
+            data = "'".join(data.split("&#39;"))
+    elif not file_path:
+        logger.log_error(f"no file to run")
+    else:
+        logger.log_error(f"file with name \"{file_path}\" not found")
 
     res = ""
     for diag in re.finditer(diagram_pattern, data):

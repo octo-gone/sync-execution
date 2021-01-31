@@ -93,3 +93,7 @@ def run(n, w, s, limit=10 ** 5):
             if node.state == base.WAITING:
                 active_nodes.append(node)
         logger.log_error(f"iteration overstepped the limit\n{active_nodes}")
+    if base.Node.ut_send:
+        logger.log_error("value input expected")
+    elif base.Node.ut_catch:
+        logger.log_error(f"expected value '{base.Node.ut_catch}'")
