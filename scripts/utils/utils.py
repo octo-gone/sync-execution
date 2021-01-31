@@ -4,7 +4,6 @@ import sys
 
 
 iteration = 0
-colored_input = "yellow"
 
 
 def program_values(label, check=False):

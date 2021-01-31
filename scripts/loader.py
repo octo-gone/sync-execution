@@ -1,14 +1,12 @@
-import configparser
 import importlib.util
 from scripts.utils import logger
 from scripts.nodes import base
 import json
 import os
 import inspect
+from scripts.config import config
 
 node_aliases = {}
-config = configparser.ConfigParser()
-config.read("./settings.ini")
 modules = json.loads(config.get("Sync Modules", "modules"))
 
 for module in modules:

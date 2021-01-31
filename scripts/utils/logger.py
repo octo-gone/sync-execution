@@ -1,10 +1,15 @@
 import ctypes
 from scripts.utils import utils
+from scripts.config import config
 import os
 
+show_iteration = config.get("Console", "iteration") == "yes"
+show_additional_info = config.get("Console", "additional_info") == "yes"
+colored = config.get("Console", "colored") == "yes"
+show_warning = config.get("Console", "show_warning") == "yes"
 
 # add color support for console
-if os.name == 'nt':
+if os.name == 'nt' and colored:
     kernel32 = ctypes.WinDLL('kernel32')
     hStdOut = kernel32.GetStdHandle(-11)
     mode = ctypes.c_ulong()
@@ -16,6 +21,7 @@ if os.name == 'nt':
 class Color:
     """Simple class for wrapping console coloring."""
 
+    input_color = "yellow"
     colors = {
         "red": 1,
         "green": 2,
@@ -63,37 +69,71 @@ class Color:
         return text
 
     @classmethod
-    def colored_input(cls, prompt, fg="yellow", bg=None, fake=None):
-        fg = "\33[38;5;" + str(cls.colors[fg]) + "m" if fg is not None else ""
-        bg = "\33[48;5;" + str(cls.colors[bg]) + "m" if bg is not None else ""
-        italic = "\33[3m"
-        if fake is not None:
-            print(prompt + fg + bg + italic + fake)
-            value = fake
+    def colored_input(cls, prompt, fg="yellow", bg=None, value=None):
+
+        if show_iteration:
+            prompt = f"{utils.iteration}: " + prompt
+        if colored:
+            fg = "\33[38;5;" + str(cls.colors[fg]) + "m" if fg is not None else ""
+            bg = "\33[48;5;" + str(cls.colors[bg]) + "m" if bg is not None else ""
+            italic = "\33[3m"
+            if value is not None:
+                print(prompt + fg + bg + italic + value)
+                value = value
+            else:
+                value = input(prompt + fg + bg + italic)
+            print("\33[0m", end="")
         else:
-            value = input(prompt + fg + bg + italic)
-        print("\33[0m", end="")
+            if value is not None:
+                print(prompt + value)
+            else:
+                value = input(prompt)
         return value
 
 
 def log_error(message):
     """Prints information colored with red color (error)."""
-    print(Color.colored(f"{utils.iteration}: {message}", fg="red"))
+    message = f"{message}"
+    if show_iteration:
+        message = f"{utils.iteration}: " + message
+    if colored:
+        print(Color.colored(message, fg="red"))
+    else:
+        print(message)
     input("Press ENTER to exit...")
     exit()
 
 
 def log_warning(message):
     """Prints information colored with yellow color (warning)."""
-    print(Color.colored(f"{utils.iteration}: {message}", fg="yellow"))
+    message = f"{message}"
+    if show_warning:
+        if show_iteration:
+            message = f"{utils.iteration}: " + message
+        if colored:
+            print(Color.colored(message, fg="yellow"))
+        else:
+            print(message)
 
 
 def log_success(message):
     """Prints information colored with green color (success)."""
-    print(Color.colored(f"{utils.iteration}: {message}", fg="green"))
+    message = f"{message}"
+    if show_additional_info:
+        if show_iteration:
+            message = f"{utils.iteration}: " + message
+        if colored:
+            print(Color.colored(message, fg="green"))
+        else:
+            print(message)
 
 
 def log_message(message):
     """Prints information."""
-    print(Color.colored(f"{utils.iteration}: {message}"))
-
+    message = f"{message}"
+    if show_iteration:
+        message = f"{utils.iteration}: " + message
+    if colored:
+        print(Color.colored(message))
+    else:
+        print(message)
