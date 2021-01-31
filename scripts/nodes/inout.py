@@ -39,7 +39,7 @@ class NodePrintCtrl(base.Node):
         else:
             value = self.get_value(0)
             value = value if value is not None else self.desc_value
-        print(f"{utils.iteration}:", value)
+        logger.log_message(value)
         if base.Node.ut_catch is not None:
             check_value = base.Node.ut_catch.pop(0)
             if check_value is not None and str(check_value) != str(value):
@@ -84,7 +84,7 @@ class NodePrint(base.Node):
         else:
             value = self.get_value(0)
             value = value if value is not None else self.desc_value
-        print(f"{utils.iteration}:", value)
+        logger.log_message(value)
         if base.Node.ut_catch is not None:
             check_value = base.Node.ut_catch.pop(0)
             if check_value is not None and check_value != value:
@@ -144,21 +144,13 @@ class NodeInput(base.Node):
                 prompt = self.desc_value
             else:
                 prompt = self.desc_value + " "
-        prompt = f"{utils.iteration}: " + prompt
         if base.Node.ut_send is not None:
             if not base.Node.ut_send:
                 logger.log_error("unit tests are empty")
-            if utils.colored_input is not False:
-                value = base.Node.ut_send.pop(0)
-                value = logger.Color.colored_input(prompt, utils.colored_input, fake=value)
-            else:
-                value = base.Node.ut_send.pop(0)
-                print(prompt + value)
+            value = base.Node.ut_send.pop(0)
+            value = logger.Color.colored_input(prompt, value=value)
         else:
-            if utils.colored_input is not False:
-                value = logger.Color.colored_input(prompt, utils.colored_input)
-            else:
-                value = input(prompt)
+            value = logger.Color.colored_input(prompt)
         self.set_value(utils.coercion(value), 0)
         self.state = ACTIVE
 
