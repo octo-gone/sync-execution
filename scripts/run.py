@@ -22,8 +22,8 @@ class NodeGen:
         if str(node_name).startswith("function"):
             return func.NodeFunction(data)
 
-        if node_name in module_loader.node_aliases:
-            return module_loader.node_aliases[node_name](data)
+        if node_name in loader.node_aliases:
+            return loader.node_aliases[node_name](data)
 
         logger.log_warning(f"no function node found with name '{node_name}'")
         return base.Node(data)

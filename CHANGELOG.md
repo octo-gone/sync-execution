@@ -1,7 +1,7 @@
 # Sync ChangeLog
 All changes since version 0.6.6 are written here
 ## 0.14.1 (31.01.2021)
-+ Start variation added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/44adc65b849c3d05dc5b68a40a5e42b539d2e696)
++ Node start variation added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/44adc65b849c3d05dc5b68a40a5e42b539d2e696)
 + Unit testing added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/1532910b12ad052d020551c83125d501df016f04)
 + Module_loader renamed to loader [![](https://img.shields.io/badge/-chore-cea262.svg)](https://github.com/octo-gone/sync-execution/commit/a641dede850dd6e31704d40e25a0dd6d77b54fc0)
 ## 0.14.0 Aliases (29.01.2021)
