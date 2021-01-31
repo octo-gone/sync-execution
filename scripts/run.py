@@ -1,6 +1,6 @@
 from scripts.utils import utils, exceptions, logger
 from scripts.nodes import base, func
-from scripts import module_loader
+from scripts import loader
 import random
 
 
@@ -92,6 +92,4 @@ def run(n, w, s, limit=10 ** 5):
         for node in base.Node.nodes.values():
             if node.state == base.WAITING:
                 active_nodes.append(node)
-        if base.Node.ut_file is not None:
-            base.Node.ut_file.close()
         logger.log_error(f"iteration overstepped the limit\n{active_nodes}")

@@ -4,7 +4,7 @@ from scripts.utils import nodes_v10 as nodes_info
 from scripts.utils import logger
 from scripts.utils import coder
 from scripts.constants import *
-from scripts import module_loader
+from scripts import loader
 from xml.sax.saxutils import unescape
 
 # half of distance between small connectors
@@ -125,7 +125,7 @@ def parse(file_path):
     :return: tuple (nodes, wires, scopes)
     """
 
-    for alias, node_class in module_loader.node_aliases.items():
+    for alias, node_class in loader.node_aliases.items():
         if alias not in nodes_info.nodes_info:
             nodes_info.nodes_info.update({
                 alias: node_class.desc
