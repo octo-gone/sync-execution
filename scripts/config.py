@@ -6,24 +6,18 @@ config = configparser.ConfigParser()
 
 if not os.path.exists("./settings.ini"):
     config["Sync Modules"] = {
-        "modules": json.dumps([
-            "./modules/control",
-            "./modules/inout",
-            "./modules/memory",
-            "./modules/construction",
-            "./modules/logic",
-            "./modules/misc",
-            "./modules/mathematic",
-            "./modules/struct",
-            "./modules/unit_testing",
-            "./modules/user_nodes"
-        ])
+        "folders": json.dumps([
+            "./modules",
+            "./scripts/nodes/modules"
+        ]),
+        "files": json.dumps([])
     }
     config["Console"] = {
-        "iteration": "yes",
-        "additional_info": "yes",
-        "colored": "yes",
-        "log_warning": "yes"
+        "colored_console": "yes",
+        "show_iteration": "yes",
+        "show_additional_info": "yes",
+        "show_warning": "yes",
+        "use_fileopen_dialog": "yes"
     }
     with open('./settings.ini', 'w') as configfile:
         config.write(configfile)

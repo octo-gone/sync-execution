@@ -3,9 +3,9 @@ from scripts.utils import utils
 from scripts.config import config
 import os
 
-show_iteration = config.get("Console", "iteration") == "yes"
-show_additional_info = config.get("Console", "additional_info") == "yes"
-colored = config.get("Console", "colored") == "yes"
+show_iteration = config.get("Console", "show_iteration") == "yes"
+show_additional_info = config.get("Console", "show_additional_info") == "yes"
+colored = config.get("Console", "colored_console") == "yes"
 show_warning = config.get("Console", "show_warning") == "yes"
 
 # add color support for console
@@ -101,7 +101,7 @@ def log_error(message):
     else:
         print(message)
     input("Press ENTER to exit...")
-    exit()
+    quit()
 
 
 def log_warning(message):
