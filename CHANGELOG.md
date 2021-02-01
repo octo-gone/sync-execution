@@ -1,5 +1,15 @@
 # Sync ChangeLog
 All changes since version 0.6.6 are written here
+## 0.14.2 (01.02.2021)
++ Better active nodes displaying added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/27c85303c5790b2c7482365152618ffbf46ad901)
++ Better choosing file added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/d9b8e3523e4c4c196d66398afd2061d159d78c8e)
++ Taking modules from folders added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/0594409cd303fe6b2d281524a95503c61b3c5abb)
++ Config parsing updated [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/5ca4f74505791126a9ed7efe58bf3e683ccb7e28)
++ Project restructure [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/5ce39cbf62698f2e5ee64a37ca2c4544eebc2933)
++ Minor fixes [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/a561f1bca43cd62a01f0ce9608ec784eda67f3bc)
++ Input and output using logger added [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/fa612eb44e826f4a5e149fa10e8a58d7c6251c92)
++ Wrong loader naming fixed [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/0c0e70950d133e8bbf4da3134ba7f8640a78056d)
++ Minor changes [![](https://img.shields.io/badge/-chore-cea262.svg)](https://github.com/octo-gone/sync-execution/commit/d00be7d2f0e2a05735dc91f6f07e5d1f3dcf56ea)
 ## 0.14.1 (31.01.2021)
 + Node start variation added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/44adc65b849c3d05dc5b68a40a5e42b539d2e696)
 + Unit testing added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/1532910b12ad052d020551c83125d501df016f04)
