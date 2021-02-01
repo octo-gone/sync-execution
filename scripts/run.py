@@ -91,8 +91,13 @@ def run(n, w, s, limit=10 ** 5):
         active_nodes = []
         for node in base.Node.nodes.values():
             if node.state == base.WAITING:
-                active_nodes.append(node)
-        logger.log_error(f"iteration overstepped the limit\n{active_nodes}")
+                active_nodes.append((node.name, node.id))
+        if active_nodes:
+            active_nodes = ',\n\t'.join(map(lambda x: f"{x[0]} (id: {x[1]})", active_nodes))
+            active_nodes = f"\nActive nodes:[\n\t{active_nodes}\n]"
+        else:
+            active_nodes = ""
+        logger.log_error(f"iteration overstepped the limit{active_nodes}")
     if base.Node.ut_send:
         logger.log_error("value input expected")
     elif base.Node.ut_catch:
