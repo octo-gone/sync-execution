@@ -99,6 +99,7 @@ value_pattern = r"(UserObject.*)?(?(1)label=\"(?P<value0>.*?)\"|value=\"(?P<valu
 points_pattern = r"points=(?P<points>\[[0-9.\[\], ]*?\]);"
 inputs_pattern = r"syncInputs=(?P<inputs>\[.*?\]);"
 outputs_pattern = r"syncOutputs=(?P<outputs>\[.*?\]);"
+fixed_scope_pattern = r"fixedScope=(?P<fixed_scope>.*?);"
 
 # general patterns
 x_pattern = r"<mxGeometry.*x=\"(?P<x>.*?)\""
@@ -157,7 +158,8 @@ def parse(file_path):
             "y": y_pattern,
             "width": width_pattern,
             "height": height_pattern,
-            "node_name": node_name_pattern
+            "node_name": node_name_pattern,
+            "fixed_scope": fixed_scope_pattern
         }
         node = node.group()
         if not str(re.search(patterns["node_name"], node).group("node_name")).startswith("function"):
