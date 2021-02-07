@@ -91,6 +91,13 @@ title: Продвинутое создание узлов
 для работы функции не расписывая их заново для каждого класса, а полиморфизм позволяет настроить класс под определенный
 функционал. Все измененные методы класса существовали в родительском в неком общем виде.
 
+Дополнительно для работы нужно импортировать несколько модулей:
+```python
+from scripts.nodes import base
+from scripts.utils import exceptions, logger, utils
+from scripts.nodes.base import ACTIVE, WAITING, INACTIVE
+```
+
 Базовая структура любого пользовательского узла должна выглядеть следующим образом:
 ```python
 class Node<ИмяКлассаУзла>(base.Node):
@@ -388,8 +395,13 @@ class NodeExample3(base.Node):
 node = {
     'inner': 'C16',
     'label': 'count 16',
-    'inputs': ('ctrl', 'ctrl'),
-    'outputs': ('int',),
+    'inputs': (
+        ('single', 'ctrl'),
+        ('single', 'ctrl'),
+    ),
+    'outputs': (
+        ('single', 'int'),
+    ),
     'tooltip': {
         'label': 'Count 16 (+/-)',
         'desc': 'Счетчик 16',
@@ -451,8 +463,13 @@ class NodeCount16(base.Node):
     desc = {
         'inner': 'C16',
         'label': 'count 16',
-        'inputs': ('ctrl', 'ctrl'),
-        'outputs': ('int',),
+        'inputs': (
+            ('single', 'ctrl'),
+            ('single', 'ctrl'),
+        ),
+        'outputs': (
+            ('single', 'int'),
+        ),
         'tooltip': {
             'label': 'Count 16 (+/-)',
             'desc': 'Счетчик 16',
@@ -534,8 +551,13 @@ class NodeCount16(base.Node):
     desc = {
         'inner': 'C16',
         'label': 'count 16',
-        'inputs': ('ctrl', 'ctrl'),
-        'outputs': ('int',),
+        'inputs': (
+            ('single', 'ctrl'),
+            ('single', 'ctrl'),
+        ),
+        'outputs': (
+            ('single', 'int'),
+        ),
         'tooltip': {
             'label': 'Count 16 (+/-)',
             'desc': 'Счетчик 16',
