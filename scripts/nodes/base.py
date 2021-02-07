@@ -1,16 +1,7 @@
 from abc import abstractmethod
-from scripts.utils import nodes_v10 as nodes_info
+from scripts.utils import nodes_v11 as nodes_info
 from scripts.utils import logger
 from scripts.constants import *
-
-# the limit imposed on the number of connected wires
-one_connection = TRIANGLE + ROUND + CUT_RECTANGLE + CUT_SQUARE
-unlimited_connections = RECTANGLE + SQUARE
-
-# separation by drawio connection count
-one_connector = SMALL
-seven_connectors = RECTANGLE
-five_connectors = CUT_RECTANGLE
 
 # basic states
 ACTIVE = "active"
@@ -137,34 +128,41 @@ class Node:
 
         self.actual_inputs = {}
         for i, v in enumerate(inputs_info):
-            if v in one_connector:
+            variant = v[0]
+            other = v[1:]
+            if variant == SINGLE or SMALL in other:
                 ins.append(sum(self.inputs[offset:offset+1], []))
                 self.actual_inputs[i] = tuple(range(offset, offset+1))
                 offset += 1
-            if v in seven_connectors:
-                ins.append(sum(self.inputs[offset:offset+7], []))
-                self.actual_inputs[i] = tuple(range(offset, offset+7))
-                offset += 7
-            if v in five_connectors:
-                ins.append(sum(self.inputs[offset:offset+5], []))
-                self.actual_inputs[i] = tuple(range(offset, offset+5))
-                offset += 5
+            elif variant == MULTIPLE:
+                if DIRECTED not in other:
+                    ins.append(sum(self.inputs[offset:offset+7], []))
+                    self.actual_inputs[i] = tuple(range(offset, offset+7))
+                    offset += 7
+                else:
+                    ins.append(sum(self.inputs[offset:offset+5], []))
+                    self.actual_inputs[i] = tuple(range(offset, offset+5))
+                    offset += 5
 
         self.actual_outputs = {}
         offset = 0
         for i, v in enumerate(outputs_info):
-            if v in one_connector:
+            variant = v[0]
+            other = v[1:]
+            if variant == SINGLE or SMALL in other:
                 self.actual_outputs[i] = tuple(range(offset, offset + 1))
                 offset += 1
-            if v in seven_connectors:
-                self.actual_outputs[i] = tuple(range(offset, offset + 7))
-                offset += 7
-            if v in five_connectors:
-                self.actual_outputs[i] = tuple(range(offset, offset + 5))
-                offset += 5
+            elif variant == MULTIPLE:
+                if DIRECTED not in other:
+                    self.actual_outputs[i] = tuple(range(offset, offset + 7))
+                    offset += 7
+                else:
+                    self.actual_outputs[i] = tuple(range(offset, offset + 5))
+                    offset += 5
 
         for i, v in enumerate(ins):
-            if inputs_info[i] in one_connection and len(v) > 1:
+            variant = inputs_info[i][0]
+            if variant == SINGLE and len(v) > 1:
                 logger.log_error(f"wrong input connections count in node '{self.name}/{self.id}'")
 
         self.inputs = ins
@@ -176,15 +174,18 @@ class Node:
         outs = []
         self.output_values = []
         for i in outputs_info:
-            if i in one_connector:
+            variant = i[0]
+            other = i[1:]
+            if variant == SINGLE or SMALL in other:
                 outs.append(sum(self.outputs[offset:offset + 1], []))
                 offset += 1
-            if i in seven_connectors:
-                outs.append(sum(self.outputs[offset:offset + 7], []))
-                offset += 7
-            if i in five_connectors:
-                outs.append(sum(self.outputs[offset:offset + 5], []))
-                offset += 5
+            elif variant == MULTIPLE:
+                if DIRECTED not in other:
+                    outs.append(sum(self.outputs[offset:offset + 7], []))
+                    offset += 7
+                else:
+                    outs.append(sum(self.outputs[offset:offset + 5], []))
+                    offset += 5
 
         self.outputs = outs
         self.output_values = []

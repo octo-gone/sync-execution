@@ -36,7 +36,7 @@ To execute program perform the following algorithm:
 3. Copy all (`ctrl-a` then `ctrl-c`).
 4. Go to [sync-execution][3] in **repl.it** (if file is not **script.drawio** then choose it in project). 
 You must be logged in. After creating repl use it for future working. Don't create new repls using link above, 
-use created one.
+use created one. It is possible, that repl wants command from you, then enter command `python3 main.py`.
 5. Paste with replacement (`ctrl-a` then `ctrl-v`).
 
 Just click the **Run** button at the top and the program will start.

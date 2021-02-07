@@ -1,7 +1,7 @@
 import re
 import os
 import math
-from scripts.utils import nodes_v10 as nodes_info
+from scripts.utils import nodes_v11 as nodes_info
 from scripts.utils import logger
 from scripts.utils import coder
 from scripts.constants import *
@@ -17,7 +17,7 @@ def get_ratio(values):
     sep_values = [[]]
     sep_i = 0
     for value in values:
-        if value not in ("sep",):
+        if value[0] != SEPARATOR:
             sep_values[sep_i].append(value)
         else:
             sep_i += 1
@@ -25,10 +25,10 @@ def get_ratio(values):
     sum_height = 0
     for value in sep_values:
         height = 0
-        for v in value:
-            if v in SMALL + EMPTY:
+        for variant, *v in value:
+            if variant == SINGLE or SMALL in v:
                 height += 1 / 3
-            if v in BIG:
+            else:
                 height += 2 / 3
         height += 1 / 3
         sum_height += math.ceil(height)
@@ -44,41 +44,37 @@ def get_connectors(inout):
         sep_connectors = [[]]
         sep_i = 0
         for value in inout:
-            if value not in SEPARATORS:
+            if value[0] != SEPARATOR:
                 sep_connectors[sep_i].append(value)
             else:
                 sep_i += 1
                 sep_connectors.append([])
         last_height = 0
         actual_counter = 0
-        for _, value in enumerate(sep_connectors):
+        for value in sep_connectors:
             height = 0
-            for v in value:
-                if v in SMALL + EMPTY:
+            for variant, *v in value:
+                if variant in SINGLE or SMALL in v:
                     height += 1 / 3
-                if v in BIG:
+                else:
                     height += 2 / 3
             height += 1 / 3
             offset = (math.ceil(height) - height)/2
             height = last_height
             for v in value:
+                variant = v[0]
+                other = v[1:]
                 height += 1 / 3
-
-                if v in BIG + TRIANGLE + \
-                        SQUARE + CUT_SQUARE:
-                    if v in BIG:
-                        if v in RECTANGLE:
-                            node_connectors += [offset + height + r * (ic / 2) for ic in range(-1, 6)]
-                        elif v in CUT_RECTANGLE:
+                if variant == SINGLE or variant == MULTIPLE:
+                    if variant == MULTIPLE and SMALL not in other:
+                        if DIRECTED in other:
                             node_connectors += [offset + height + r * (ic / 2) for ic in range(1, 6)]
+                        else:
+                            node_connectors += [offset + height + r * (ic / 2) for ic in range(-1, 6)]
                         height += 1 / 3
                     else:
                         node_connectors.append(offset + height)
-
-                if v in ROUND:
-                    node_connectors.append(offset + height)
-
-                if v not in EMPTY:
+                if v[0] != EMPTY:
                     label_centers.append((offset + height))
                     actual_counter += 1
             height += 0.3

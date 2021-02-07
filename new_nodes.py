@@ -1,13 +1,21 @@
-from scripts.drawer import gen
+from scripts.drawer import gen_svg
 import json
 
 example_node = {
     'len': {
-        'inputs': ('ctrl',),
-        'inputs_color': ('ctrl',),  # optional
+        'inputs': (
+            ('single', 'ctrl'),  # ('single'|'multiple', [<type>, ['small', ['directed']]])
+        ),
+        'inputs_label': (
+            'ctrl',
+        ),  # optional (used in png descriptions)
 
-        'outputs': ('int',),
-        'outputs_color': ('int',),  # optional
+        'outputs': (
+            ('single', 'int'),  # ('single'|'multiple', [<type>, ['small', ['directed']]])
+        ),
+        'outputs_label': (
+            'input 1',
+        ),  # optional (used in png descriptions)
 
         'user_symbol': '&',  # optional
         'time': '~',  # optional
@@ -52,41 +60,45 @@ def generate_library(name, nodes: list, svg_folder="resources/generated/svg/", l
     library_data = "<mxlibrary>[{}]</mxlibrary>"
     n = []
     for i, node_info in enumerate(nodes):
-        json_node, file_path, style = gen.NodeSVG(**node_info).draw_node(svg_folder)
+        json_node, file_path, style = gen_svg.NodeSVG(**node_info).draw_node(svg_folder)
         n.append(json.dumps(json_node))
 
     with open(f"{lib_folder}{name}.drawio", 'w') as file:
         file.write(library_data.format(",".join(n)))
 
 
-def generate_node(node, svg_folder="resources/generated/svg/"):
+def generate_node(n, svg_folder="resources/generated/svg/"):
     svg_folder = svg_folder if svg_folder.endswith('/') else svg_folder + '/'
-    json_node, file_path, style = gen.NodeSVG(**node).draw_node(svg_folder)
+    json_node, file_path, style = gen_svg.NodeSVG(**n).draw_node(svg_folder)
     print(f"Image saved to '{file_path}'")
     print(f"Style for draw.io: {style}")
 
 
-def generate_function(node, svg_folder="resources/generated/svg/", lib_folder="resources/libraries/"):
+def generate_function(n, svg_folder="resources/generated/svg/", lib_folder="resources/libraries/"):
     svg_folder = svg_folder if svg_folder.endswith('/') else svg_folder + '/'
     lib_folder = lib_folder if lib_folder.endswith('/') else lib_folder + '/'
 
     library_data = "<mxlibrary>[{}]</mxlibrary>"
-    n = list(map(lambda x: json.dumps(x[0]), gen.NodeFunctionSVG(**node).draw_node(svg_folder)))
-    name = node.get('label', 'test')
+    ns = list(map(lambda x: json.dumps(x[0]), gen_svg.NodeFunctionSVG(**n).draw_node(svg_folder)))
+    name = n.get('label', 'test')
     with open(f"{lib_folder}{name}.drawio", 'w') as file:
-        file.write(library_data.format(",".join(n)))
+        file.write(library_data.format(",".join(ns)))
+
+
+def generate_png_description(n):
+    from scripts.drawer import gen_png
+    gen_png.NodePNG(**n).draw_node()
 
 
 def generate_png_descriptions():
-    from scripts.drawer import old
     from scripts.utils.nodes_v10 import base_nodes_info, structure_nodes_info
 
     for n in list(base_nodes_info.values()) + list(structure_nodes_info.values()):
-        old.NodePNG(**n).draw_node()
+        generate_png_description(n)
 
 
 def generate_base_libs(svg_folder="resources/generated/svg/", lib_folder="resources/"):
-    from scripts.utils.nodes_v10 import base_nodes_info, structure_nodes_info, \
+    from scripts.utils.nodes_v11 import base_nodes_info, structure_nodes_info, \
         base_nodes_lib_order, structure_nodes_lib_order
 
     base_library = []
@@ -97,7 +109,7 @@ def generate_base_libs(svg_folder="resources/generated/svg/", lib_folder="resour
     structure_library = []
     for n in structure_nodes_lib_order:
         structure_library.append(structure_nodes_info[n])
-    generate_library("structure", structure_library, svg_folder, "resources/")
+    generate_library("structure", structure_library, svg_folder, lib_folder)
 
 
 if __name__ == '__main__':
@@ -106,15 +118,31 @@ if __name__ == '__main__':
 
     library_name = "unit_testing"
     node = {
-        'inner': 'UT',
-        'label': 'unit test',
-        'inputs': (),
-        'outputs': ('ctrl',)
+        'inner': 't',
+        'label': 'test',
+        'inputs': (
+            ('single', 'int'),
+            ('sep', 'real'),
+            ('single', 'bool'),
+            ('single', 'str'),
+        ),
+        'inputs_label': (
+            'int',
+            'bool',
+            'str',
+        ),
+        'outputs': (
+            ('single', 'any'),
+            ('single', 'ctrl'),
+            ('single', 'num'),
+            ('single', 'obj'),
+        )
     }
     nodes_info = [
         node
     ]
 
+    # generate_png_description(node)
     # generate_png_descriptions()
     # generate_node(node, svg_save_folder)
     # generate_function(node, svg_save_folder, lib_save_folder)
