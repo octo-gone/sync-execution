@@ -24,26 +24,22 @@
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     <link rel="shortcut icon" href="{{ site.baseurl }}/resources/favicon.ico" type="image/x-icon">
     <script src="{{ site.baseurl }}/assets/js/jquery-3.5.1.min.js"></script>
+    <script src="{{ site.baseurl }}/assets/js/glightbox.min.js"></script>
+    <link href="{{ site.baseurl }}/assets/css/glightbox.css" rel="stylesheet">
     <script>
         $(document).ready(function () {
             $("img").each(function (index) {
                 $(this).wrap($('<a>', {
                     href: $(this).attr("src")
-                }).addClass("lightzoom"));
+                }).addClass("lightbox"));
             })
-            $('.lightzoom').lightzoom({
-                speed: 400,
-                imgPadding: 10,
-                overlayOpacity: '0.5',
-                viewTitle: true,
-                isOverlayClickClosing: true,
-                isWindowClickClosing: true,
-                isEscClosing: true
+            const lightbox = GLightbox({
+                selector: "lightbox",
+                openEffect: "none",
+                closeEffect: "none",
             });
         })
     </script>
-    <script src="{{ site.baseurl }}/assets/js/lightzoom.js"></script>
-    <link href="{{ site.baseurl }}/assets/css/lightzoom.css" rel="stylesheet">
 </head>
 <body>
 <header class="page-no-header" role="banner">
