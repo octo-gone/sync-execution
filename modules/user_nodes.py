@@ -8,8 +8,13 @@ class NodeCount16(base.Node):
     desc = {
         'inner': 'C16',
         'label': 'count 16',
-        'inputs': ('ctrl', 'ctrl'),
-        'outputs': ('int',),
+        'inputs': (
+            ('single', 'ctrl'),
+            ('single', 'ctrl'),
+        ),
+        'outputs': (
+            ('single', 'int'),
+        ),
         'tooltip': {
             'label': 'Count 16 (+/-)',
             'desc': 'Счетчик 16',

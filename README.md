@@ -42,15 +42,16 @@ use created one. It is possible, that repl wants command from you, then enter co
 Just click the **Run** button at the top and the program will start.
 
 ## Personal Node
-If you want to create your own node, use scripts in __drawer__. 
-However, to run them you need to install __svgwrite__. 
-```
-$ pip install svgwrite
-```
-After installing run `new_node.py` with changed node specification.
-In variable `style` you will get style for Drawio, it add/removes connectors and add some special information.
+If you want to create your own node, use scripts in __drawer__. Run `new_node.py` with changed node specification.
+Script will return style for Drawio, that add/removes connectors and add some special information.
 To add node drag svg-image on Drawio's workspace and append style in this diagram block (select block and press `ctrl-e`).
-Another variant is to use Drawio library, which the script can generate.
+
+**Another variant is to use Drawio library, which the script can generate.**
+
+If you want to create PNG description, then you need to install PIL
+```
+$ pip install pillow
+```
 
 [2]: https://app.diagrams.net/?splash=0&libs=0&clibs=Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/base.drawio;Uhttps://raw.githubusercontent.com/octo-gone/sync-execution/master/resources/structure.drawio
 [3]: https://repl.it/github/octo-gone/sync-execution

@@ -90,9 +90,12 @@ def generate_png_description(n):
     gen_png.NodePNG(**n).draw_node()
 
 
-def generate_png_descriptions():
-    from scripts.utils.nodes_v10 import base_nodes_info, structure_nodes_info
+def generate_png_descriptions(ns=None):
+    from scripts.utils.nodes_v11 import base_nodes_info, structure_nodes_info
 
+    if ns:
+        for n in ns:
+            generate_png_description(n)
     for n in list(base_nodes_info.values()) + list(structure_nodes_info.values()):
         generate_png_description(n)
 
@@ -143,7 +146,7 @@ if __name__ == '__main__':
     ]
 
     # generate_png_description(node)
-    # generate_png_descriptions()
+    # generate_png_descriptions(nodes_info)
     # generate_node(node, svg_save_folder)
     # generate_function(node, svg_save_folder, lib_save_folder)
     # generate_library(library_name, nodes_info, svg_save_folder, lib_save_folder)
