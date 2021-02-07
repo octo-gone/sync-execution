@@ -1,5 +1,9 @@
 # Sync ChangeLog
 All changes since version 0.6.6 are written here
+## 0.15.0 (07.02.2021)
++ New image generators [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/df83470faaf5f12593c9ecb020aea0848635fb8b)
++ Code restructure [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/12105d7198f8b580cf726162e8c6da5ba36dceb8)
++ Node description changed [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/7621aa78f45ab502b73feeeae86794e2761b40a1)
 ## 0.14.2 (01.02.2021)
 + Better active nodes displaying added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/27c85303c5790b2c7482365152618ffbf46ad901)
 + Better choosing file added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/d9b8e3523e4c4c196d66398afd2061d159d78c8e)
