@@ -11,6 +11,13 @@ title: Sync
 
 На данный момент есть возможность просмотреть [Обучающие статьи][tutorials] и [Документацию][docs].
 
+## Для учеников ФМШ
+
+Лабораторные работы:
+
+- [Лабораторная работа 1]({{site.baseurl}}/ifmsh/lab-1)
+- [Лабораторная работа 2]({{site.baseurl}}/ifmsh/lab-2)
+
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#content
 [docs]: {{site.baseurl}}/docs#content

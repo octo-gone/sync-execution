@@ -37,14 +37,15 @@
                 selector: "lightbox",
                 openEffect: "none",
                 closeEffect: "none",
-                slideEffect: "none"
             });
         })
     </script>
 </head>
 <body>
 <header class="page-no-header" role="banner">
-    <h1 class="project-name">{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
+    {% if page.no_header != true %}
+        <h1 class="project-name">{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
+    {% endif %}
 </header>
 
 <main id="content" class="main-content" role="main">
