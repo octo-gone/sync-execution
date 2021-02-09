@@ -40,7 +40,7 @@ $section-headings-color: #c47179;
   }
 }
 
-.btn-return {
+.btn-return, .btn-download {
   display: inline-block;
   margin-bottom: 1rem;
   color: rgba($header-bg-color-secondary, 0.7);
@@ -83,6 +83,18 @@ $section-headings-color: #c47179;
       margin-top: 1rem;
       margin-left: 0;
     }
+  }
+}
+
+.btn-download {
+  color: rgba($header-bg-color, 0.8);
+  background-color: rgba($header-bg-color, 0.02);
+  border-color: rgba($header-bg-color, 0.3);
+
+  &:hover {
+    color: rgba($header-bg-color, 0.8);
+    background-color: rgba($header-bg-color, 0.08);
+    border-color: rgba($header-bg-color, 0.3);
   }
 }
 
