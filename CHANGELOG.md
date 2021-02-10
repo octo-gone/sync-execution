@@ -1,5 +1,10 @@
 # Sync ChangeLog
 All changes since version 0.6.6 are written here
+## 0.15.1 (10.02.2021)
++ File taking priority changed [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/360c7bac615470db404d9c304982c81d3e3c96ed)
++ Input auto variable taking fixed (v1) [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/0b952a38e7b0139a8a1847bc038c5c85b26b42af)
++ Escaping fixed [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/5be1e0e2e3e426e4ddeb39b9fff9911d644ed635)
++ Minor fixes [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/ff994febe7306db8a83b4f5fd7e52934fadd57c8)
 ## 0.15.0 (07.02.2021)
 + New image generators [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/df83470faaf5f12593c9ecb020aea0848635fb8b)
 + Code restructure [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/12105d7198f8b580cf726162e8c6da5ba36dceb8)
