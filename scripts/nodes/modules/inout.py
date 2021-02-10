@@ -123,7 +123,10 @@ class NodeInput(base.Node):
         """
         pattern = r"{(?P<var>[^\{\}]+?)(?:\$(?P<type>[^\{\}]+?))?}"
         self.desc_value = saxutils.unescape(self.desc_value)
-        for match in re.finditer(pattern, self.desc_value):
+        # TODO: optimize
+        match = list(re.finditer(pattern, self.desc_value))
+        while match:
+            match = match[0]
             var_name = f"{self.scope}$" + match["var"]
             var_type = match["type"]
             if var_type is not None:
@@ -138,6 +141,7 @@ class NodeInput(base.Node):
                 self.desc_value = list(self.desc_value)
                 self.desc_value[match.span()[0]:match.span()[1]] = list(str(var_value))
                 self.desc_value = "".join(self.desc_value)
+            match = list(re.finditer(pattern, self.desc_value))
         prompt = ">>> "
         if self.desc_value:
             if self.desc_value.endswith(" "):
