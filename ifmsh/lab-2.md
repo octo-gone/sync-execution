@@ -35,9 +35,10 @@ title: Лабораторная работа 2
 **до 2 баллов**  
 Требуется расписать алгоритм, где основной структурой является дерево или граф.
 
-**+ 1 балл**  
+**+1 балл**  
 Распишите синтаксис вашего алгоритма через Форму Бэкуса – Наура. 
-<a class="btn-download btn-inline" href="{{site.baseurl}}/resources/ifmsh/lab-2/02_lab_2.xlsx">Таблица</a>
+
+<a class="btn-download" href="{{site.baseurl}}/resources/ifmsh/lab-2/02_lab_2.xlsx">Таблица на +1 балл</a>
 
 ### Что дальше?
 
