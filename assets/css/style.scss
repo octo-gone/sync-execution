@@ -109,16 +109,35 @@ $section-headings-color: #c47179;
   justify-content: center;
 }
 
-.img-node {
+@for $size from 1 through 3 {
+  .img-#{$size}-h {
+    height: $size;
+  }
+}
+
+.img-small {
   @include large {
     width: 20em;
   }
 
   @include medium {
-    width: 25em;
+    width: 20em;
   }
 
   @include small {
-    width: max-content;
+    width: 300px;
+  }
+}
+
+
+@media print {
+  a[href^=http]:after {
+    content: " <" attr(href) ">";
+  }
+  .img-small {
+    height: 300px;
+  }
+  .btn-download, .btn-return, footer {
+    display: none;
   }
 }

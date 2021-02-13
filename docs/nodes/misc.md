@@ -13,53 +13,53 @@ return_title: К узлам
 **Value Switch** - узел-воронка. Используется как передатчик нескольких значений с выходов нескольких узлов на 
 вход для одного узла, например, когда требуется напечатать значения с разных веток программы через один узел Print.
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/misc/01_value_switch.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/misc/01_value_switch.png"/>
 
 ### Type
 
 **Type** - узел, определяющий тип данных со входа и возвращающий тип как объект.
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/misc/02_type.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/misc/02_type.png"/>
 
 ### Get Type
 
 **Get Type** - узел, возвращающий тип данных как объект указанный в описании и значение по умолчанию.
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/misc/03_get_type.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/misc/03_get_type.png"/>
 
 ### Random
 
 **Random** - узел, возвращающий случайное значение от 0 до 1. Для изменения последовательности генерации случайных чисел
 можно воспользоваться узлом Random Seed.
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/misc/04_random.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/misc/04_random.png"/>
 
 ### Random Int
 
 **Random Int** - узел, возвращающий случайное целое значение от указанной нижней границы до верхней границы. Для изменения 
 последовательности генерации случайных чисел можно воспользоваться узлом Random Seed.
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/misc/05_random_int.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/misc/05_random_int.png"/>
 
 ### Random Num
 
 **Random Num** - узел, возвращающий случайное значение от указанной нижней границы до верхней границы. Для изменения 
 последовательности генерации случайных чисел можно воспользоваться узлом Random Seed.
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/misc/06_random_num.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/misc/06_random_num.png"/>
 
 ### Random Seed
 
 **Random Seed** - узел, позволяющий изменить последовательность генерации случайных чисел путем изменения начального 
 состояния генератор. Для изменения нужно подать значение на вход.
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/misc/07_random_seed.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/misc/07_random_seed.png"/>
 
 ### Concatenate
 
 **Concatenate** - узел-сумматор-строк. Позволяет склеить подряд значения с входов узла.
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/misc/08_concatenate.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/misc/08_concatenate.png"/>
 
 ### Format
 
@@ -96,13 +96,13 @@ return_title: К узлам
 - **`g`** - число с плавающей точкой с автоматическим добавлением экспоненты
 - **`%`** - представление числа от 0 до 1 в виде числа от 0 до 100 со знаком "%"
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/misc/09_format.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/misc/09_format.png"/>
 
 ### Join
 
 **Join** - узел, склеивающий значения из указанной в описании структурной переменной (список или словарь). 
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/misc/10_join.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/misc/10_join.png"/>
 
 ### Unit Test
 
@@ -111,7 +111,7 @@ return_title: К узлам
 После первой строки идет сам тест. Узел проверяет каждую строку и добавляет в список ввода данных (чем выше строка, тем раньше она введется в программу).
 Если строка является разделителем, то узел добавляет её в список вывода данных. 
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/misc/11_unit_test.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/misc/11_unit_test.png"/>
 
 Например, следующий тест отправит в программу два числа (2 и 3), а от программы попросит одно (6):
 

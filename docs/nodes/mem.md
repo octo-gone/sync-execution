@@ -28,7 +28,7 @@ title: Memory
 **Constant** - узел-константа, постоянно имеет на выходе указанное в описании значение. Если указать после значения 
 через символ `$` ключевое слово типа данных, значение на выходе будет автоматически сконвертировано в соответствующий тип.
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/mem/01_constant.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/mem/01_constant.png"/>
 
 ### Constant with Ctrl
 
@@ -36,7 +36,7 @@ title: Memory
 запустить узел после себя, если сигнал был подан на вход. Если указать после значения через символ `$` ключевое слово 
 типа данных, значение на выходе будет автоматически сконвертировано в соответствующий тип.
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/mem/02_constant_with_ctrl.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/mem/02_constant_with_ctrl.png"/>
 
 ### Variable
 
@@ -44,7 +44,7 @@ title: Memory
 изменить значение переменной при подаче активного сигнала на вход со значением. Если указать после значения через символ
 `$` ключевое слово типа данных, значение на выходе будет автоматически сконвертировано в соответствующий тип.
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/mem/03_variable.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/mem/03_variable.png"/>
 
 ### Variable Get
 
@@ -52,14 +52,14 @@ title: Memory
 изменить значение переменной. Если указать после значения через символ `$` ключевое слово типа данных, значение на 
 выходе будет автоматически сконвертировано в соответствующий тип.
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/mem/04_variable_get.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/mem/04_variable_get.png"/>
 
 ### Variable Set
 
 **Variable Set** - узел-переменная, постоянно имеет значение из переменной, указанной в описании. Узел **не** позволяет 
 получить значение переменной, но позволяет изменить его при подаче активного значения на вход.
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/mem/05_variable_set.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/mem/05_variable_set.png"/>
 
 
 [index]: {{site.baseurl}}/index

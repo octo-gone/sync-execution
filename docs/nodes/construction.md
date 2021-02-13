@@ -14,7 +14,7 @@ title: Construction
 **If** - узел, представляющий логическое ветвление. При получении сигнала на управляющий вход узел проверяет значение с 
 входа условия и активирует один из соответствующих выходов.  
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/construction/01_if.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/construction/01_if.png"/>
 
 ### Counter
 
@@ -23,7 +23,7 @@ title: Construction
 увеличивает значение итерации, также значение итерации отправляется на выход. Если значение итерации больше или равно
 границе, сигнал отправляется на завершающий выход.
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/construction/02_counter.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/construction/02_counter.png"/>
 
 ### For
 
@@ -32,7 +32,7 @@ title: Construction
 увеличивает значение итерации на указанное число, также значение итерации отправляется на выход. Если значение итерации 
 больше или равно границе, сигнал отправляется на завершающий выход. 
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/construction/03_for.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/construction/03_for.png"/>
 
 ### While
 
@@ -40,7 +40,7 @@ title: Construction
 входа условия, если условие равно логической единице, то узел отправляет сигнал на выход цикла. Далее при получении 
 сигнала с логической единицей узел отправляет сигнал на выход цикла, а в ином случае отправляет на завершающий выход. 
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/construction/04_while.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/construction/04_while.png"/>
 
 ### Foreach
 
@@ -49,14 +49,14 @@ title: Construction
 на завершающий выход. Если указать в описании `any`, то узел начнет перебор после получения первого значения игнорируя
 активирующий сигнал.
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/construction/05_foreach.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/construction/05_foreach.png"/>
 
 ### For Extended
 
 **For Extended** - расширенный узел-итератор. Данный узел отличается от простого узла-итератора тем, что позволяет задать 
 начальное значение итерации. 
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/construction/06_for_extended.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/construction/06_for_extended.png"/>
 
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#content

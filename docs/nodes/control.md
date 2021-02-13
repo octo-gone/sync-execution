@@ -13,13 +13,13 @@ return_title: К узлам
 **Run** - узел, являющийся начальным для любой программы, он позволяет запустить работу всей программы. 
 До запуска обработки данный узел уже является активным. 
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/control/01_run.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/control/01_run.png"/>
 
 ### Stop
 
 **Stop** - узел, являющийся финальным для программы, он позволяет прекратить работу программы по получению сигнала. 
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/control/02_stop.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/control/02_stop.png"/>
 
 ### Wait
 
@@ -27,47 +27,47 @@ return_title: К узлам
 выходной сигнал, что позволяет подождать выполнения всех параллельных цепочек. Ожидание всех входов можно сменить
 на ожидание хотя бы одного - написав в описании `$any`, по умолчанию стоит значение `$all`. 
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/control/03_wait.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/control/03_wait.png"/>
 
 ### Merge Control
 
 **Merge Control** - узел, объединяющий сигнал и значение с разных узлов. Узел возвращает значение с сигналом только в том
 случае, если подан сигнал на управляющий вход, иначе сигнала не будет. Информация с управляющего сигнала не забирается. 
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/control/04_merge_ctrl.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/control/04_merge_ctrl.png"/>
 
 ### To Control
 
 **To Control** - узел возвращает сигнал без значения. 
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/control/05_to_ctrl.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/control/05_to_ctrl.png"/>
 
 ### Delay
 
 **Delay** - узел для задержки входящего сигнала на целое количество тактов программы. При подаче нуля отправляет сигнал на 
 следующую итерацию. 
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/control/06_delay.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/control/06_delay.png"/>
 
 ### Timer
 
 **Timer** - узел, который позволяет замерить количество пройденных тактов между запускающим и останавливающим сигналами.
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/control/07_timer.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/control/07_timer.png"/>
 
 ### Warning Message
 
 **Warning Message** - узел, возвращающий ошибку в консоль программы при получении сигнала. Можно настроить название ошибки
 изменив описание узла.
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/control/08_warning_message.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/control/08_warning_message.png"/>
 
 ### Error Message
 
 **Error Message** - узел, возвращающий ошибку в консоль программы при получении сигнала. Можно настроить название ошибки
 изменив описание узла. Узел завершает программу.
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/control/09_error_message.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/control/09_error_message.png"/>
 
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#content

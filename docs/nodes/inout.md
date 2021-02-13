@@ -17,7 +17,7 @@ return_title: К узлам
 если записать `Введите число от {min} до {max$real} >>>`, то узел попытается найти две указанные переменные, а вторую переменную дополнительно
 переведет в тип **real**. Если подсказка не была изменена, то она будет `>>>`.
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/inout/01_input.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/inout/01_input.png"/>
 
 ### Print
 
@@ -25,11 +25,11 @@ return_title: К узлам
 то пытается взять данные из описания. В описании узел понимает использование констант, а также при использовании конструкции
 `<var name>$var` узел попытается взять значение из переменной. После завершения узел вернет сигнал.
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/inout/02_print_with_ctrl.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/inout/02_print_with_ctrl.png"/>
 
 Существует аналогичный узел, но без выходного сигнала.
 
-<img class="img-node" src="{{site.baseurl}}/resources/docs/nodes/inout/03_print.png"/>
+<img class="img-small" src="{{site.baseurl}}/resources/docs/nodes/inout/03_print.png"/>
 
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#content

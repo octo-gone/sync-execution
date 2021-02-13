@@ -10,7 +10,7 @@ title: Лабораторная работа 1
 
 Всё происходит на разлинованой клетками ограниченной площади. Например, поле 5x7. Клетка поля может иметь несколько состояний: пуста, закрашена изначально и с меткой определенного цвета. Для взаимодействия с полем доступен робот, который может изменять свое положение и состояния клеток вокруг. Для решения лабораторной работы существует необходимый и достаточный набор набор инструкций, который приведен ниже:
 
-<img class="img-node" src="{{site.baseurl}}/resources/ifmsh/lab-1/01_simple.png">
+<img class="img-small" src="{{site.baseurl}}/resources/ifmsh/lab-1/01_simple.png">
 
 ### Константы:
 
@@ -66,16 +66,16 @@ title: Лабораторная работа 1
 **до 1 балла**  
 Требуется расставить красные метки так, чтоб все закрашенные изначально клетки были соеденены. Закрашенные клетки не могут быть отдалены больше, чем на 1 клетку друг от друга.
 
-<img class="img-node" src="{{site.baseurl}}/resources/ifmsh/lab-1/02_simple_solution.png">
+<img class="img-small" src="{{site.baseurl}}/resources/ifmsh/lab-1/02_simple_solution.png">
 
 **до 3 баллов**  
 Требуется сделать максимально оптимальное решение (соединяет за минимальное количество меток), с условием, что закрашенные клетки не могут быть отдалены больше, чем на 2 клетки.
 
-<img class="img-node" src="{{site.baseurl}}/resources/ifmsh/lab-1/03_hard.png">
+<img class="img-small" src="{{site.baseurl}}/resources/ifmsh/lab-1/03_hard.png">
 
 Пример решения усложненной задачи:
 
-<img class="img-node" src="{{site.baseurl}}/resources/ifmsh/lab-1/04_hard_solution.png">
+<img class="img-small" src="{{site.baseurl}}/resources/ifmsh/lab-1/04_hard_solution.png">
 
 ## Что требуется как решение?
 
