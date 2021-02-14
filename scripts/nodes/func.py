@@ -22,6 +22,7 @@ class NodeFunction(base.Node, abc.ABC):
         :param dict data: node information
         """
         super().__init__(data)
+        self.fixed_scope = data.get("fixed_scope", False)
         if self.name.startswith("function input"):
             if " ".join(self.name.split(" ")[2:]) not in self.functions:
                 self.functions[" ".join(self.name.split(" ")[2:])] = {}
@@ -103,12 +104,14 @@ class NodeFunction(base.Node, abc.ABC):
                 for node in used_nodes:
                     d = deepcopy(node.raw_data)
                     d["id"] += _id
+                    print(d)
                     new_node = node.__class__(d)
+                    print(new_node)
                     new_node.outputs = copy(node.outputs)
                     new_node.inputs = copy(node.inputs)
                     new_node.output_values = copy(node.output_values)
                     new_node.actual_inputs = copy(node.actual_inputs)
-                    new_node.scope = deepcopy(_id)
+                    new_node.scope = deepcopy(_id if not func_node.fixed_scope else func_node.fixed_scope)
                     if new_node.desc_value == '$desc':
                         new_node.desc_value = func_node.desc_value
                     new_nodes.append(new_node)

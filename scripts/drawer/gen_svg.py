@@ -89,6 +89,7 @@ def adjust_ratio(values):
 class NodeSVG:
     def __init__(self, is_function=False, **kwargs):
         self.is_function = is_function
+        self.fixed_scope = kwargs.get("fixed_scope", False)
 
         self.inputs = kwargs.get("inputs", tuple())
         self.separated_inputs = []
@@ -159,27 +160,28 @@ class NodeSVG:
                 self.inner_size -= max(len(inner[0]), len(inner[1])) - 5
 
             svg += f'<text font-weight="bold" font-size="{self.inner_size}px" font-family="Courier" ' \
-                   f'text-anchor="middle" x="{20 * self.ratio[0]}" y="{19}">{inner[0]}</text>'
+                   f'text-anchor="middle" x="{20 * self.ratio[0]}" y="{19}">{html.escape(inner[0])}</text>'
             svg += f'<text font-weight="bold" font-size="{self.inner_size}px" font-family="Courier" ' \
-                   f'text-anchor="middle" x="{20 * self.ratio[0]}" y="{25}">{inner[1]}</text>'
+                   f'text-anchor="middle" x="{20 * self.ratio[0]}" y="{25}">{html.escape(inner[1])}</text>'
         else:
             if len(inner[0]) > 5 and self.auto_inner_size:
                 self.inner_size -= len(inner[0]) - 5
             svg += f'<text font-weight="bold" font-size="{self.inner_size}px" font-family="Courier" ' \
-                   f'text-anchor="middle" x="{20 * self.ratio[0]}" y="{22}">{inner[0]}</text>'
+                   f'text-anchor="middle" x="{20 * self.ratio[0]}" y="{22}">{html.escape(inner[0])}</text>'
 
         if self.desc:
             svg += f'<text font-weight="bold" font-size="{self.desc_size}px" font-family="Courier" ' \
-                   f'text-anchor="middle" x="{20 * self.ratio[0]}" y="{62}">{self.desc}</text>'
+                   f'text-anchor="middle" x="{20 * self.ratio[0]}" y="{62}">{html.escape(self.desc)}</text>'
 
         if self.user_symbol:
             svg += f'<text font-weight="bold" font-size="{self.adds_size}px" font-family="Courier" ' \
-                   f'text-anchor="middle" x="{self.side * self.ratio[0] - 3}" y="{6}">{self.user_symbol[0]}</text>'
+                   f'text-anchor="middle" x="{self.side * self.ratio[0] - 3}" ' \
+                   f'y="{6}">{html.escape(self.user_symbol[0])}</text>'
 
         if self.time:
             svg += f'<text font-weight="bold" font-size="{self.adds_size}px" font-family="Courier" ' \
                    f'text-anchor="end" x="{self.side * self.ratio[0] - 2}" ' \
-                   f'y="{self.side * self.ratio[1] - 2}">{self.time}</text>'
+                   f'y="{self.side * self.ratio[1] - 2}">{html.escape(self.time)}</text>'
 
         svg += f'<rect fill="none" height="100%" stroke="{self.border_color}" ' \
                f'stroke-width="{2 * self.border_width}" width="100%" x="0" y="0"/>'
@@ -196,6 +198,8 @@ class NodeSVG:
                 f"fontStyle=1;syncNodeName={self.sync_name};resizable=0;"
         if self.is_function:
             style += f"syncInputs={list(self.inputs)};syncOutputs={list(self.outputs)};"
+        if self.fixed_scope:
+            style += f"fixedScope={self.fixed_scope};"
 
         svg += "</svg>"
         with open(file_path, "w") as svg_file:
