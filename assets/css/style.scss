@@ -129,6 +129,15 @@ $section-headings-color: #c47179;
   }
 }
 
+#match-3-base {
+  @include medium {
+    display: none;
+  }
+  @include small {
+    display: none;
+  }
+}
+
 
 @media print {
   a[href^=http]:after {

@@ -883,7 +883,7 @@ window.onload = function () {
 
     function resizeCanvas() {
         canvas.width = div_base.clientWidth;
-        canvas.height = div_base.clientHeight;
+        canvas.height = div_base.clientWidth * 2/3;
         level.x = div_base.clientWidth / 2 - level.tilewidth * level.columns / 2;
         level.y = div_base.clientHeight / 2 - level.tileheight * level.rows / 2;
     }
