@@ -1,0 +1,59 @@
+---
+---
+.code-editor, .code-view {
+  resize: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  white-space: pre;
+  padding: 0 5px;
+}
+
+.code-view {
+  overflow: auto;
+  pointer-events: none;
+
+  .vars {
+    color: #606c71;
+  }
+
+  .construction {
+    color: #c47179;
+    font-weight: bold;
+  }
+
+  .function-call {
+    color: #c47179;
+  }
+
+  .string {
+    color: #5a9d51;
+  }
+
+  .num {
+    color: #1e6bb8;
+  }
+
+  .types {
+    color: #1e6bb8;
+    font-weight: bold;
+  }
+}
+
+.code-editor {
+  color: transparent;
+  background: transparent;
+  border-width: 0 !important;
+  outline: none;
+  caret-color: #606c71;
+}
+
+.code {
+  border: solid 1px #c47179;
+  height: 20em;
+  position: relative;
+  width: 100%;
+}
