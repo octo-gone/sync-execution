@@ -82,7 +82,7 @@ window.onload = function () {
     var gameover = false;
 
     // Gui buttons
-    var buttons = [{x: 30, y: 240, width: 150, height: 50, text: "New Game"}];
+    var buttons = [{x: 30, y: 240, width: 150, height: 50, text: "Новая игра"}];
 
     // Initialize the game
     function init() {
@@ -169,7 +169,6 @@ window.onload = function () {
                         for (var i = 0; i < clusters.length; i++) {
                             // Add extra points for longer clusters
                             score += 100 * (clusters[i].length - 2);
-                            ;
                         }
 
                         // Clusters found, remove them
@@ -270,7 +269,7 @@ window.onload = function () {
         // Draw score
         context.fillStyle = "#000000";
         context.font = "24px Consolas";
-        drawCenterText("Score:", 30, level.y + 40, 150);
+        drawCenterText("Очки:", 30, level.y + 40, 150);
         drawCenterText(score, 30, level.y + 70, 150);
 
         // Draw buttons
@@ -300,7 +299,7 @@ window.onload = function () {
 
             context.fillStyle = "#ffffff";
             context.font = "24px Consolas";
-            drawCenterText("Game Over!", level.x, level.y + levelheight / 2 + 10, levelwidth);
+            drawCenterText("Скоро КР!", level.x, level.y + levelheight / 2 + 10, levelwidth);
         }
     }
 
@@ -319,7 +318,7 @@ window.onload = function () {
         // Draw title
         context.fillStyle = "#ffffff";
         context.font = "24px Consolas";
-        context.fillText("IFMSH Lab 3", 10, 30);
+        context.fillText("IFMSH Лабораторная работа 3", 10, 30);
 
         // Display fps
         context.fillStyle = "#ffffff";
