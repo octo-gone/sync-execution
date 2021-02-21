@@ -138,6 +138,22 @@ $section-headings-color: #c47179;
   }
 }
 
+.gif-image {
+  position: relative;
+
+  &:after {
+    content: "GIF";
+    color: white;
+    background-color: rgba(#646464, 0.3);
+    font-size: 90%;
+    padding: 3px 6px;
+    position: absolute;
+    bottom: 12px;
+    left: 6px;
+    border-radius: 5px;
+  }
+}
+
 
 @media print {
   a[href^=http]:after {
