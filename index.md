@@ -20,6 +20,7 @@ title: Sync
 - [Лабораторная работа 2]({{site.baseurl}}/ifmsh/lab-2)
 - [Лабораторная работа 3]({{site.baseurl}}/ifmsh/lab-3)
 - [Контрольная работа]({{site.baseurl}}/ifmsh/test)
+- [Лабораторная работа 4]({{site.baseurl}}/ifmsh/lab-4)
 
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#content
