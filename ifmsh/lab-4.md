@@ -126,9 +126,9 @@ AUG
 
 Input:
 3
-AUGCС
+AUGGС
 AAUGGC
-AUGGC
+AUGGCC
 
 Output:
 -1
