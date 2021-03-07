@@ -88,7 +88,7 @@ AUG CGU
 Input:
 2
 AUGC
-AAUGAC
+AAUGA
 
 Output:
 AUG
