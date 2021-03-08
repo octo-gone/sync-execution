@@ -11,7 +11,6 @@ else:
         from tkinter import Tk
         window = Tk()
         window.withdraw()
-        # window.iconbitmap('icon.ico')
         file = askopenfilename()
     else:
         file = input("Enter file name: ")
