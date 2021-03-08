@@ -1,5 +1,10 @@
 # Sync ChangeLog
 All changes since version 0.6.6 are written here
+## 0.15.2 (08.03.2021)
++ New build added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/5b5dad9c9d672f07f4826e21b67f84d1603da979)
++ Added new functionality to foreach node [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/c9728c791c175b0cedd006b5d32fdced28c2f4b9)
++ Wrong order fixed [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/97c596f1e954c53d5a6e75f2f69a35447ae9269d)
++ Additional escaping added [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/50e5ef31adb179fd40867bbb394349cb63f31e32)
 ## 0.15.1 (10.02.2021)
 + File taking priority changed [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/360c7bac615470db404d9c304982c81d3e3c96ed)
 + Input auto variable taking fixed (v1) [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/0b952a38e7b0139a8a1847bc038c5c85b26b42af)
