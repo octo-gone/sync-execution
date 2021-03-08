@@ -129,8 +129,8 @@ class NodeMerge(base.Node):
 
         Resets node and activates next nodes.
         """
-        self.set_active(0)
         self.set_value(self.get_value(1), 0)
+        self.set_active(0)
         self.state = INACTIVE
 
     def update_waiting(self):
