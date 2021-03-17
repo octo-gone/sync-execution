@@ -7,6 +7,8 @@ from scripts.utils import coder
 from scripts.constants import *
 from scripts import loader
 from xml.sax.saxutils import unescape
+from copy import copy
+
 
 # half of distance between small connectors
 r = 1/6
@@ -115,6 +117,10 @@ entryY_pattern = r"entryY=(?P<entryY>\d*\.?\d*)"
 source_pattern = r"source=\"(?P<source>.*?)\""
 target_pattern = r"target=\"(?P<target>.*?)\""
 
+# error styles
+node_error = "strokeWidth=4;imageBorder=#FF0000;"
+wire_error = "strokeWidth=4;strokeColor=#FF0000;"
+
 
 def parse(file_path):
     """
@@ -139,8 +145,14 @@ def parse(file_path):
         logger.log_error(f"file with name \"{file_path}\" not found")
 
     res = ""
+    remove_data = []
     for diag in re.finditer(diagram_pattern, data):
+        remove_data.append((diag['diagram'], coder.from_library(diag['diagram'])))
         res += coder.from_library(diag['diagram'])
+
+    return_data = copy(data)
+    for d in remove_data:
+        return_data = return_data.replace(d[0], d[1])
 
     data = res
     if not data:
@@ -245,13 +257,28 @@ def parse(file_path):
             else:
                 patterns[key] = None
 
-        for key in ["exitX", "exitY", "entryX", "entryY"]:
+        nodes_ids = dict(map(lambda x: (x["id"], x["node_name"]), nodes))
+        connected = True
+        for key in ["exitY", "entryY"]:
             if patterns[key] is None:
-                logger.log_error(f"wrong connected wire found with source '{patterns['source']}' "
-                                 f"and target '{patterns['target']}'")
-            patterns[key] = round(float(patterns[key]), 5)
+                if patterns['source'] in nodes_ids:
+                    logger.log_error(f"wrong connected wire found from node "
+                                     f"'{nodes_ids[patterns['source']]}/{patterns['source']}'")
+                elif patterns['target'] in nodes_ids:
+                    logger.log_error(f"wrong connected wire found to node "
+                                     f"'{nodes_ids[patterns['target']]}/{patterns['target']}'")
+                else:
+                    logger.log_error(f"unconnected wire found")
+                connected = False
+            if connected:
+                patterns[key] = round(float(patterns[key]), 5)
 
-        wires.append(patterns)
+        for key in ["exitX", "entryX"]:
+            if patterns[key] is not None:
+                patterns[key] = round(float(patterns[key]), 5)
+
+        if connected:
+            wires.append(patterns)
 
     scopes = []
     for scope in re.findall(scope_pattern, data):
@@ -271,5 +298,8 @@ def parse(file_path):
                 patterns[key] = None
 
         scopes.append(patterns)
+
+    with open(file_path, "w", encoding="utf-8") as file:
+        file.write(return_data)
 
     return nodes, wires, scopes

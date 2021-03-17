@@ -1,6 +1,7 @@
 from scripts.nodes import base
 from scripts.nodes.base import ACTIVE, WAITING, INACTIVE
 from scripts.utils import utils, logger
+import random
 
 
 READY = "ready"
@@ -533,6 +534,7 @@ class NodeForeach(base.Node):
                     if value is not None:
                         self.values.append(value)
                 self.bound = len(self.values)
+                random.shuffle(self.values)
             if self.bound is not None and self.start:
                 self.sub_state = READY
         if self.sub_state == READY:
