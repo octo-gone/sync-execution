@@ -16,14 +16,14 @@ title: Sync
 
 Лабораторные работы:
 
-- [Лабораторная работа 1]({{site.baseurl}}/ifmsh/lab-1)
-- [Лабораторная работа 2]({{site.baseurl}}/ifmsh/lab-2)
-- [Лабораторная работа 3]({{site.baseurl}}/ifmsh/lab-3)
+- [Лабораторная работа 1]({{site.baseurl}}/ifmsh/lab-1) - Мосты между клетками
+- [Лабораторная работа 2]({{site.baseurl}}/ifmsh/lab-2) - Проверка отрывков
+- [Лабораторная работа 3]({{site.baseurl}}/ifmsh/lab-3) - Три в ряд
 - [Контрольная работа]({{site.baseurl}}/ifmsh/test)
-- [Лабораторная работа 4]({{site.baseurl}}/ifmsh/lab-4)
-- [Лабораторная работа 5]({{site.baseurl}}/ifmsh/lab-5)
-- [Лабораторная работа 6]({{site.baseurl}}/ifmsh/lab-6)
-- [Лабораторная работа 7]({{site.baseurl}}/ifmsh/lab-7)
+- [Лабораторная работа 4]({{site.baseurl}}/ifmsh/lab-4) - Цепочки в генетическом коде
+- [Лабораторная работа 5]({{site.baseurl}}/ifmsh/lab-5) - ГПСЧ
+- [Лабораторная работа 6]({{site.baseurl}}/ifmsh/lab-6) - Придумай лабу сам
+- [Лабораторная работа 7]({{site.baseurl}}/ifmsh/lab-7) - API
 
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#content
