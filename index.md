@@ -24,6 +24,7 @@ title: Sync
 - [Лабораторная работа 5]({{site.baseurl}}/ifmsh/lab-5) - ГПСЧ
 - [Лабораторная работа 6]({{site.baseurl}}/ifmsh/lab-6) - Придумай лабу сам
 - [Лабораторная работа 7]({{site.baseurl}}/ifmsh/lab-7) - API
+- [Экзамен]({{site.baseurl}}/ifmsh/exam)
 
 [index]: {{site.baseurl}}/index
 [tutorials]: {{site.baseurl}}/tutorials#content
