@@ -1,5 +1,8 @@
 # Sync ChangeLog
 All changes since version 0.6.6 are written here
+## 0.15.3 Project Closing (22.05.2021)
++ Project closed [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/425e71a768212b9359bdeb746ffcc68c0df8dc9a)
++ Parser and foreach updated [![](https://img.shields.io/badge/-fix-orange.svg)](https://github.com/octo-gone/sync-execution/commit/0ba765fa7a6b5d551e61f945d8a30cd544134c3d)
 ## 0.15.2 (08.03.2021)
 + New build added [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/5b5dad9c9d672f07f4826e21b67f84d1603da979)
 + Added new functionality to foreach node [![](https://img.shields.io/badge/-new-green.svg)](https://github.com/octo-gone/sync-execution/commit/c9728c791c175b0cedd006b5d32fdced28c2f4b9)
