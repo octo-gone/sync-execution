@@ -3,6 +3,8 @@
 [![version badge](https://img.shields.io/badge/Version-0.15.2-daa520.svg)](https://github.com/octo-gone/sync-execution/blob/master/CHANGELOG.md)  
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python_3.8.3-1f425f.svg)](https://www.python.org/)
 
+### Project Closed! :(
+
 ### About
 __sync-execution__ is a python program that can run an algorithmic language __sync__ (code name).  
 The language itself is a kind of notation that allows you to visualize algorithms and logical schemes. 
